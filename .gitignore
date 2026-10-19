@@ -1,0 +1,24 @@
+# 依賴與建置產物
+node_modules/
+dist/
+.astro/
+.vercel/
+.sanity/
+apps/studio/dist/
+
+# 機密：絕不 commit
+.env
+.env.*
+!.env.example
+
+# 測試產物
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+coverage/
+
+# 系統檔
+.DS_Store
+Thumbs.db
+*.log

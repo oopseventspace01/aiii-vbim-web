@@ -1,0 +1,46 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* 讓 Tailwind class（如 bg-bg、text-cyan、rounded-lg）對應到 tokens */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-cyan: var(--cyan);
+  --color-blue: var(--blue);
+  --color-green: var(--green);
+  --color-amber: var(--amber);
+}
+
+/* 圓角 tokens（SPEC 第 4 節）：直接覆寫 Tailwind 的 --radius-*，也會輸出成 CSS 變數 */
+@theme {
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --radius-pill: 999px;
+
+  /* 字型檔於 P2 載入；先設定字型堆疊 */
+  --font-display: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
+  --font-sans: 'Noto Sans TC', system-ui, sans-serif;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

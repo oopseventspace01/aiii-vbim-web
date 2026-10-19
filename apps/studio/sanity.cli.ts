@@ -1,0 +1,9 @@
+import { defineCliConfig } from 'sanity/cli';
+import '../../scripts/load-root-env.mjs';
+
+export default defineCliConfig({
+  api: {
+    projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'missing-project-id',
+    dataset: process.env.SANITY_STUDIO_DATASET || 'production',
+  },
+});

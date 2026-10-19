@@ -1,0 +1,38 @@
+/*
+ * Design tokens — SPEC.md 第 4 節（延用現有官網色系）
+ * 改顏色只改這裡；Tailwind 透過 global.css 的 @theme 讀取這些變數。
+ */
+:root {
+  /* 背景與面板 */
+  --bg: #06101a;
+  --bg-2: #0a1724;
+  --panel: #0d1d2b;
+  --panel-2: #102334;
+
+  /* 文字 */
+  --text: #f7fbff;
+  --text-2: #c9d6e3;
+  --muted: #9fb0c3;
+
+  /* 線條 */
+  --line: rgba(255, 255, 255, 0.1);
+
+  /* 強調色 */
+  --cyan: #51d7ff;
+  --blue: #438eff;
+  --green: #68f0ad;
+  --amber: #ffb454;
+
+  /* 圓角（--radius-lg 24px／--radius-md 18px／--radius-pill 999px）定義在 global.css 的 @theme，
+     因為 Tailwind 本身就用 --radius-* 這組名稱 */
+
+  /* 版面 */
+  --max: 1240px;
+  --section-y: 64px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --section-y: 104px;
+  }
+}
