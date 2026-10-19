@@ -15,6 +15,7 @@ export default [
       '**/playwright-report/**',
       '**/test-results/**',
       'docs/reference/**',
+      'design/**',
     ],
   },
   js.configs.recommended,

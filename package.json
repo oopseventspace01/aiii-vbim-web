@@ -19,9 +19,11 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "npm run typecheck -w apps/web && npm run typecheck -w apps/studio",
-    "test": "npm run test -w apps/web",
-    "test:e2e": "npm run test:e2e -w apps/web",
-    "check": "npm run lint && npm run format:check && npm run typecheck && npm run test && npm run build && npm run studio:build"
+    "test": "npm run test -w apps/web && npm run test -w apps/studio",
+    "test:e2e": "npm run test:e2e -w apps/web && npm run test:e2e -w apps/studio",
+    "check": "npm run lint && npm run format:check && npm run typecheck && npm run test && npm run build && npm run studio:build",
+    "seed": "npm run seed -w apps/studio",
+    "seed:force": "npm run seed:force -w apps/studio"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

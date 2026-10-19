@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>Aiii Edge AI 地端 AI</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="edge" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">EDGE AI APPLIANCE + AI AGENT</div>
+<h1 style="margin: 0; font-size: clamp(2.3rem, 4.6vw, 3.8rem); line-height: 1.15; font-weight: 900">地端 AI 完整解決方案</h1>
+<p style="margin: 0; font-size: 1.3rem; font-weight: 700">讓 AI 不只看見資料，更能理解場域並協助決策。</p>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">醫療、製造、關鍵基礎設施與大型企業，常有低延遲、網路韌性與資料敏感的需求。Aiii Edge AI 把推論、文件問答與 AI Agent 部署在企業現場，直接結合 VBIM 的空間、設備、影像與能源資料。</p>
+<a href="Contact.dc.html" style="align-self: flex-start; background: #2160e8; color: #ffffff; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">預約地端 AI 評估 →</a>
+</div>
+<div style="flex: 1.1 1 500px; min-width: 0"><img src="../assets/edge.jpg" alt="地端 AI 智慧園區示意：Smart Building、Smart Campus、Sustainable Future" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</header>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 72px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<sc-for list="{{five}}" as="f" hint-placeholder-count="5">
+<div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 900; font-size: 18px">{{f.t}}</span><span style="font-size: 14px; color: #34425e">{{f.d}}</span></div>
+</sc-for>
+</section>
+
+<section style="background: #0c1a33; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #8fb6ff; font-weight: 600">AI-READY BUILDING · DESIGN-IN</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">不是完工後加裝 AI，<br>而是在規劃初期就設計進建築</h2><p style="margin: 0; color: #cfdcf0">Aiii VBIM 把 AI 帶進建築：在設計階段就把 AI 運算、記憶體、儲存、網路與散熱一起規劃進去，形成可 Design-In 的 AI-Ready Building Solution。</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{stack}}" as="s" hint-placeholder-count="5">
+<div style="display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: center; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; padding: 16px 20px">
+<span style="font-weight: 900; flex: 0 1 180px; color: #8fb6ff">{{s.l}}</span>
+<span style="font-size: 15px; color: #eef3ff; flex: 1 1 360px">{{s.d}}</span>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="font-size: 14px; color: #aebdd6; margin-right: 6px; align-self: center">Design-In 項目</span>
+<sc-for list="{{design}}" as="d" hint-placeholder-count="6"><span style="background: #ffffff; color: #0c1a33; border-radius: 10px; padding: 8px 14px; font-weight: 900; font-size: 14px">{{d}}</span></sc-for>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">地端 AI 能做什麼</h2>
+<div style="overflow-x: auto; border: 1px solid #dce6f2; border-radius: 18px">
+<table style="width: 100%; min-width: 720px; border-collapse: collapse; font-size: 15px">
+<thead><tr style="background: #0c1a33; color: #ffffff; text-align: left"><th scope="col" style="padding: 14px 18px">能力</th><th scope="col" style="padding: 14px 18px">用途</th><th scope="col" style="padding: 14px 18px">價值</th></tr></thead>
+<tbody>
+<sc-for list="{{caps}}" as="c" hint-placeholder-count="5">
+<tr style="border-top: 1px solid #dce6f2"><th scope="row" style="padding: 14px 18px; text-align: left; font-family: 'Space Grotesk', sans-serif">{{c.n}}</th><td style="padding: 14px 18px; color: #34425e">{{c.u}}</td><td style="padding: 14px 18px; font-weight: 700; color: #1647b8">{{c.v}}</td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">四種部署型態</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px">
+<sc-for list="{{forms}}" as="f" hint-placeholder-count="4">
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px">{{f.n}}</span><span style="color: #2160e8; font-weight: 900; font-size: 14px">{{f.s}}</span><span style="color: #34425e; font-size: 15px">{{f.d}}</span></div>
+</sc-for>
+</div>
+<h3 style="margin: 24px 0 0; font-size: 1.4rem; font-weight: 900">地端 AI 基礎設施</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px">
+<sc-for list="{{infra}}" as="p" hint-placeholder-count="4">
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 900">{{p.t}}</span><span style="color: #34425e; font-size: 15px">{{p.d}}</span></div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; background: #2160e8; color: #ffffff; border-radius: 28px; padding: 40px">
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: clamp(1.5rem, 2.6vw, 2.1rem); font-weight: 900">你的資料，適合在哪裡運算？</span><span style="color: #eef3ff">評估資料類型、法規要求與建議的部署型態。</span></div>
+<a href="Contact.dc.html" style="background: #ffffff; color: #1647b8; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">預約評估 →</a>
+</div>
+</section>
+
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      five: [
+        { t: 'On-Premise AI PC／GPU Server', d: '地端運算硬體' },
+        { t: 'AI Vision', d: 'PPE、入侵、火煙、跌倒、車流辨識' },
+        { t: 'AI Agent', d: 'Energy／Facility／Security／ESG' },
+        { t: '即時推論・低延遲・資料主權', d: '安全可控的 AI 運算' },
+        { t: '整合 PMIS／BIM／VMS／EMS', d: '打通資料與場域' }
+      ],
+      stack: [
+        { l: '應用', d: 'BIM 問答・影像 AI・能源預測・AI Agent' },
+        { l: 'Aiii VBIM', d: 'PMIS・Digital Twin・VMS・AIoT・Energy Data' },
+        { l: 'AI 平台', d: 'Local LLM・RAG・Vision AI・Private AI' },
+        { l: 'AI 基礎設施', d: 'AI Memory・Enterprise SSD・Edge AI Server' },
+        { l: '基礎', d: 'GPU・CPU・XPU・DRAM・NVMe・UPS・Cooling' }
+      ],
+      design: ['AI Room', 'Edge AI Node', 'Private AI Storage', 'Fiber／Network', 'UPS／Cooling', 'Cybersecurity'],
+      caps: [
+        { n: 'Local AI Vision', u: 'PPE、火煙、跌倒、入侵、人流、異常行為', v: '低延遲，減少雲端頻寬' },
+        { n: 'Local LLM / RAG', u: '工程文件、SOP、設備手冊、維修紀錄問答', v: '企業資料不必離場' },
+        { n: 'AI Agent', u: 'Energy／Facility／Engineering／Security Agent', v: '跨系統查詢與自動流程' },
+        { n: 'Edge Analytics', u: '影像、感測、PLC 資料即時分析', v: '斷網仍可運作' },
+        { n: 'Model Management', u: '模型版本、場域部署、更新與監控', v: '可營運、可維護、可擴充' }
+      ],
+      forms: [
+        { n: 'Edge AI Box', s: '單棟／單區域部署', d: '適合單一建築、門診、工地與分點。' },
+        { n: 'Edge AI Server', s: '大型工廠、醫院、商場', d: '承載影像 AI、文件問答與 Agent。' },
+        { n: 'GPU Cluster', s: '算力中心、大型企業', d: 'AI Factory Node，支援多模型多場域。' },
+        { n: 'Hybrid', s: 'Edge 即時推論 + 雲端集中管理', d: '現場即時運算，私有雲或公有雲統一治理。' }
+      ],
+      infra: [
+        { t: 'Edge AI Compute', d: 'AI PC、AI Workstation、Edge Server' },
+        { t: 'AI Memory', d: '階層式 AI Memory 架構' },
+        { t: 'AI Storage', d: 'NVMe、Enterprise SSD' },
+        { t: 'Private AI Infrastructure', d: 'Local LLM、RAG、Vision AI、AI Agent' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

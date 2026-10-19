@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>6th-Generation Smart Building Aiii VBIM</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="vbim" lang="en" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 500px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">ARTIFICIAL INTELLIGENCE INTEGRATED VIRTUAL BIM</div>
+<h1 style="margin: 0; font-size: clamp(2.4rem, 4.8vw, 4rem); line-height: 1.12; font-weight: 900">6th-Generation Smart Building<br><span style="color: #2160e8">Aiii VBIM</span></h1>
+<p style="margin: 0; font-size: 1.25rem; font-weight: 700">Taking Taiwan’s capital, technology and management know-how across borders — to manage global assets from one super command center.</p>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">Xingyan International Development brought together experts in construction engineering, BIM, AI, video recognition, IoT, cloud and big data, investing years of R&amp;D into a new-generation digital twin management platform. From design, construction and commissioning to handover and operations, it turns buildings into smart assets that sense, analyze and manage.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="https://apps.apple.com/tw/app/aiii-vbim/id6781813710" style="background: #0c1a33; color: #ffffff; text-decoration: none; font-weight: 700; padding: 12px 22px; border-radius: 14px; min-height: 48px; box-sizing: border-box; display: inline-flex; flex-direction: column; justify-content: center; line-height: 1.2"><span style="font-size: 11px; color: #aebdd6">Download on the</span><span>App Store</span></a>
+<a href="https://play.google.com/store/apps/details?id=ai.aiii.vbim" style="background: #0c1a33; color: #ffffff; text-decoration: none; font-weight: 700; padding: 12px 22px; border-radius: 14px; min-height: 48px; box-sizing: border-box; display: inline-flex; flex-direction: column; justify-content: center; line-height: 1.2"><span style="font-size: 11px; color: #aebdd6">Get it on</span><span>Google Play</span></a>
+<a href="en-Contact.dc.html" style="background: #2160e8; color: #ffffff; text-decoration: none; font-weight: 700; padding: 12px 24px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Book a Demo →</a>
+</div>
+</div>
+<div style="flex: 1 1 480px; min-width: 0"><img src="../assets/city.jpg" alt="A smart city with the building at its core" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</header>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">SIX CORE VALUES</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">Six core values</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px"><sc-for list="{{pillars}}" as="p" hint-placeholder-count="6"><div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">{{p.no}}</span><span style="font-weight: 900; font-size: 22px">{{p.t}}</span><span style="font-size: 15px; color: #34425e">{{p.d}}</span></div></sc-for></div>
+</section>
+
+<section style="background: #0c1a33; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; gap: 10px"><sc-for list="{{down}}" as="d" hint-placeholder-count="5"><span style="flex: 1 1 160px; text-align: center; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); border-radius: 14px; padding: 14px; font-size: clamp(1.05rem, 1.6vw, 1.25rem); font-weight: 900">{{d}}</span></sc-for></div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px"><sc-for list="{{up}}" as="u" hint-placeholder-count="5"><span style="flex: 1 1 160px; text-align: center; background: #2160e8; border-radius: 14px; padding: 14px; font-size: clamp(1.05rem, 1.6vw, 1.25rem); font-weight: 900">{{u}}</span></sc-for></div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">FROM DESIGN TO OPERATIONS</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">Not another system — making all your data truly connect</h2><p style="margin: 0; color: #34425e">Traditional building workflows split design, drawings, construction, video, equipment and operations into separate systems. Aiii VBIM reintegrates them so every stage can be tracked, understood and carried forward — building a complete digital asset.</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px"><sc-for list="{{stages}}" as="s" hint-placeholder-count="5"><div style="border-top: 4px solid #2160e8; background: #f3f7fc; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 900; font-size: 19px">{{s.t}}</span><span style="font-size: 14px; color: #34425e">{{s.d}}</span></div></sc-for></div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">COMPETITIVE EDGE</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">Traditional BIM manages models. Aiii VBIM manages the real world.</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px"><sc-for list="{{edge}}" as="e" hint-placeholder-count="4"><div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 900; font-size: 19px">{{e.t}}</span><span style="font-size: 15px; color: #34425e">{{e.d}}</span></div></sc-for></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px">
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 900; color: #5a6a85">Traditional BIM / project management</span><sc-for list="{{old}}" as="o" hint-placeholder-count="5"><span style="font-size: 15px; color: #34425e">— {{o}}</span></sc-for></div>
+<div style="background: #2160e8; color: #ffffff; border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 900; color: #dbe7ff">The Aiii VBIM integrated platform</span><sc-for list="{{neu}}" as="n" hint-placeholder-count="5"><span style="font-size: 15px; font-weight: 700">✓ {{n}}</span></sc-for></div>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">PRODUCT FAMILY &amp; TEAM</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">Product family and development team</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px"><sc-for list="{{family}}" as="f" hint-placeholder-count="3"><div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; color: #1647b8">{{f.n}}</span><span style="font-weight: 900">{{f.t}}</span><span style="font-size: 15px; color: #34425e">{{f.d}}</span></div></sc-for></div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; background: #0c1a33; color: #ffffff; border-radius: 24px; padding: 32px">
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #8fb6ff; font-weight: 700">Co-developed by</span><span style="font-size: 20px; font-weight: 900">Xingyan International × Xingchuang Technology × YIHHUII Construction</span><span style="color: #cfdcf0; font-size: 15px">A team of experts in construction engineering, BIM, AI, video recognition, IoT, cloud and big data.</span></div>
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #8fb6ff; font-weight: 700">The Starlight Program</span><span style="font-size: 20px; font-weight: 900">Open collaboration for smarter cities</span><span style="color: #cfdcf0; font-size: 15px">Bringing together partners from construction, healthcare, energy, technology and regenerative medicine — Yi-Yao Regenerative has joined the Aiii VBIM international strategic partner ecosystem.</span></div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">IN THE FIELD</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">Real screens, real sites</h2><p style="margin: 0; color: #34425e">Not renderings — these are photos and screenshots of Aiii VBIM in use.</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 18px">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src="../assets/real-demo.jpg" alt="Aiii VBIM live system demo" loading="lazy" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-radius: 20px"><figcaption style="font-size: 14px; color: #5a6a85">Aiii VBIM live system demo</figcaption></figure>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src="../assets/real-screens.jpg" alt="Actual system view: CCTV feeds mapped onto 2D floor plans" loading="lazy" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-radius: 20px; background: #0c1a33"><figcaption style="font-size: 14px; color: #5a6a85">Actual system view: CCTV feeds mapped onto 2D floor plans</figcaption></figure>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px 104px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px"><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">In the media</h2><a href="en-News.dc.html" style="font-weight: 700; text-decoration: none">All coverage →</a></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px"><sc-for list="{{media}}" as="m" hint-placeholder-count="3"><a href="{{m.href}}" style="text-decoration: none; color: #0c1a33; background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column"><span style="display: block; aspect-ratio: 16 / 10; background: #e8f0fe; overflow: hidden"><img src="{{m.img}}" alt="" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block"></span><span style="padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #2160e8; font-weight: 700">{{m.src}} · {{m.date}}</span><span style="font-weight: 900; font-size: 18px">{{m.t}}</span><span style="font-weight: 700; color: #2160e8; font-size: 14px">Read the story (Chinese) ↗</span></span></a></sc-for></div>
+</div>
+</section>
+
+<dc-import name="Footer" lang="en" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      pillars: [
+        { no: '01', t: 'Remote', d: 'No need to be on site — HQ sees the live status of every site, plant and building.' },
+        { no: '02', t: 'Multi-site', d: 'Sites across cities and countries, managed with one standard on one platform.' },
+        { no: '03', t: 'Data Intelligence', d: 'Equipment, energy, video and engineering data connected live — from monitoring to prediction and control.' },
+        { no: '04', t: '360° God’s-Eye View', d: 'Eyes (video), nerves (sensors), brain (AI) and hub (VBIM) — understand the whole building at a glance.' },
+        { no: '05', t: 'Super Command Center', d: 'From global, site, building, floor and space down to each asset — everything on one screen.' },
+        { no: '06', t: 'Trustworthy AI', d: 'Documents, drawings and site video recorded on-chain; AI agents act only within granted authority — traceable and revocable.' }
+      ],
+      down: ['Reduce cost', 'Reduce waste', 'Reduce energy', 'Reduce errors', 'Reduce risk'],
+      up: ['Increase efficiency', 'Increase quality', 'Increase transparency', 'Increase safety', 'Increase trust'],
+      stages: [
+        { t: 'Design', d: 'Drawing cleanup, error checks, model collaboration, version and design review' },
+        { t: 'Build', d: 'Schedule, quality, safety, materials, video and the construction model in sync' },
+        { t: 'Inspect', d: 'Defects, re-inspection, asset handover, as-builts and e-sign-off' },
+        { t: 'Operate', d: 'Equipment, maintenance, VMS, AIoT, energy and ESG in real time' },
+        { t: 'Asset', d: 'Warranty, common areas, repairs, owners’ associations and building history' }
+      ],
+      edge: [
+        { t: 'One-stop integration', d: 'BIM + PMIS + CCTV/VMS + AI + AIoT + digital twin — no more data scattered across tools.' },
+        { t: 'Compliance & traceability', d: 'E-signatures, full audit trails and on-chain records reduce disputes and distortion.' },
+        { t: 'Operational efficiency', d: 'Automated workflows, early warnings and visual management across teams and sites.' },
+        { t: 'A lasting digital asset', d: 'The model keeps serving equipment, maintenance, renovation and asset management after handover.' }
+      ],
+      old: ['Models stop at design or construction', 'Documents, video and equipment managed separately', 'Information breaks at handover', 'Sites hard to compare consistently', 'Management relies on manual work'],
+      neu: ['Full lifecycle from design to operations', 'BIM, PMIS, VMS and AIoT on one platform', 'Commissioning data flows into facility management', 'Remote, multi-site, cross-border management', 'A god’s-eye view with data-driven control'],
+      family: [
+        { n: 'Aiii VBIM', t: '6th-generation smart building platform', d: 'The core platform for BIM, PMIS, digital twin, video, AIoT, energy and AI.' },
+        { n: 'Aiii RMS', t: 'Total smart healthcare management', d: 'Beds, scheduling, space, medical equipment and campus operations.' },
+        { n: 'Aiii MMS', t: 'Smart retail management', d: 'POS, footfall, parking, tenants, video and equipment data in one view.' }
+      ],
+      media: [
+        { src: 'Yahoo News', date: '2026.06', t: 'Digital twins reshape the future of buildings — Aiii VBIM leads a new era', img: '../assets/world.jpg', href: 'https://tw.news.yahoo.com/%E6%95%B8%E4%BD%8D%E5%AD%BF%E7%94%9F%E9%87%8D%E5%A1%91%E5%BB%BA%E7%AF%89%E6%9C%AA%E4%BE%86-aiii-vbim%E5%BC%95%E9%A0%98%E6%96%B0%E6%99%82%E4%BB%A3-031454152.html' },
+        { src: 'Office of the President, R.O.C.', date: '2026', t: 'Aiii VBIM joins the Asia-Pacific regenerative medicine delegation at the Presidential Office', img: '../assets/news-president.jpg', href: 'https://www.president.gov.tw/NEWS/40132' },
+        { src: 'Premier Media', date: '2025.12', t: 'Aiii VBIM and Aiii RMS at Healthcare+ Expo Taiwan 2025', img: '../assets/news-medtech.jpg', href: 'https://www.premiermedia.com.tw/2025120506-2/' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

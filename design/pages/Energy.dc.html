@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>Aiii VBIM 能源 × 空調潔淨</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="energy" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">GRID + SOLAR + WIND + ESS + COMPUTE CENTER</div>
+<h1 style="margin: 0; font-size: clamp(2.3rem, 4.6vw, 3.8rem); line-height: 1.15; font-weight: 900">智慧能源管理</h1>
+<p style="margin: 0; font-size: 1.3rem; font-weight: 700">風力、太陽能、儲能與算力中心的整合智控</p>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">不只是電表 Dashboard，而是建立完整能源拓樸：台電 → 變電 → 配電 → UPS／發電機 → 太陽能／風電／儲能 → 空調、產線、資料中心等負載。從供電到用電，建立全域能源可視化與智慧優化。</p>
+</div>
+<div style="flex: 1.1 1 500px; min-width: 0"><img src="../assets/energy.jpg" alt="智慧能源示意：風力發電、太陽能、儲能 ESS、台電重電、用電負載與算力中心" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</header>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 72px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px">
+<sc-for list="{{feat}}" as="f" hint-placeholder-count="5">
+<div style="border-top: 4px solid #2160e8; background: #f3f7fc; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 900; font-size: 18px">{{f.t}}</span><span style="font-size: 14px; color: #34425e">{{f.d}}</span></div>
+</sc-for>
+</section>
+
+<section style="background: #0c1a33; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #8fb6ff; font-weight: 600">ENERGY CLOSED LOOP</div>
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">從 ESG 報表，升級為能源閉環</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+<sc-for list="{{loop}}" as="l" hint-placeholder-count="8"><span style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 12px; padding: 10px 16px; font-weight: 900; font-size: 17px">{{l}}</span></sc-for>
+</div>
+<p style="margin: 0; color: #cfdcf0; max-width: 860px">AI 不只回答「用了多少電」，而要回答「為什麼增加、可以怎麼降、降了多少、是否影響生產與舒適」。能源 Agent 把能源資料與氣象、生產排程、人流、租戶與設備狀態交叉分析，產生可執行的節能策略。</p>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">管理範圍</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px">
+<sc-for list="{{scope}}" as="s" hint-placeholder-count="6"><div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 900">{{s.t}}</span><span style="font-size: 14px; color: #34425e">{{s.d}}</span></div></sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px">
+<div style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #2160e8; font-weight: 700">市場趨勢</span><span style="font-weight: 900; font-size: 18px">全球電力需求 2026–2030 平均年增約 3.6%</span><span style="font-size: 13px; color: #5a6a85">資料來源：IEA《Electricity 2026》</span></div>
+<div style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #2160e8; font-weight: 700">市場趨勢</span><span style="font-weight: 900; font-size: 18px">資料中心用電至 2030 年約 945 TWh，接近 2025 年兩倍</span><span style="font-size: 13px; color: #5a6a85">資料來源：IEA《Energy and AI》</span></div>
+<div style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #2160e8; font-weight: 700">市場趨勢</span><span style="font-weight: 900; font-size: 18px">2025–2030 全球再生能源新增約 4,600 GW，太陽能占近八成</span><span style="font-size: 13px; color: #5a6a85">資料來源：IEA《Renewables 2025》</span></div>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">HVAC AI + CLEAN ENVIRONMENT</div>
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">中央空調節能 × 潔淨系統</h2>
+<p style="margin: 0; font-size: 1.15rem; font-weight: 700">把空調控制與潔淨環境管理，轉化為可計算、可優化的營運能力。</p>
+<p style="margin: 0; color: #34425e">由設計、Control Box、控制邏輯、施工、維護到運轉，形成 HVAC Total Solution。以 BIM 空間關係對應冰水主機、冷卻水塔、泵浦、AHU、MAU、FCU、VAV 與感測器，建立可視化、可計算的 HVAC 數位孿生。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-weight: 900">
+<span style="background: #2160e8; color: #ffffff; border-radius: 10px; padding: 8px 14px">監看</span><span aria-hidden="true" style="color: #2160e8">→</span>
+<span style="background: #2160e8; color: #ffffff; border-radius: 10px; padding: 8px 14px">分析</span><span aria-hidden="true" style="color: #2160e8">→</span>
+<span style="background: #2160e8; color: #ffffff; border-radius: 10px; padding: 8px 14px">預測</span><span aria-hidden="true" style="color: #2160e8">→</span>
+<span style="background: #2160e8; color: #ffffff; border-radius: 10px; padding: 8px 14px">控制</span>
+</div>
+</div>
+<div style="flex: 1 1 440px; min-width: 0"><img src="../assets/hvac.jpg" alt="中央空調與潔淨系統剖面示意：冰水主機、冷卻水塔、AHU／FCU、溫濕度壓差感測、潔淨空間" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">AI Chiller Optimization</h2><p style="margin: 0; color: #34425e">氣象 + 人流 + 區域負載 + 生產條件 + 歷史運轉 + 電價 → 主機台數、供水溫度、泵浦／風機頻率與排程最佳化。</p></div>
+<div style="overflow-x: auto; border: 1px solid #dce6f2; border-radius: 18px">
+<table style="width: 100%; min-width: 680px; border-collapse: collapse; font-size: 15px">
+<thead><tr style="background: #0c1a33; color: #ffffff; text-align: left"><th scope="col" style="padding: 14px 18px">監控面向</th><th scope="col" style="padding: 14px 18px">關鍵指標</th></tr></thead>
+<tbody>
+<sc-for list="{{hvac}}" as="h" hint-placeholder-count="5"><tr style="border-top: 1px solid #dce6f2"><th scope="row" style="padding: 14px 18px; text-align: left">{{h.t}}</th><td style="padding: 14px 18px; color: #34425e">{{h.k}}</td></tr></sc-for>
+</tbody>
+</table>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 12px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">AIII CLEAN</div>
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">潔淨環境管理</h2>
+<p style="margin: 0; color: #34425e">針對半導體、生技、製藥、醫院手術室、ICU 與實驗室。異常發生時，可從空間直接追到 AHU、風管、濾網、感測器與維修紀錄。</p>
+</div>
+<div style="flex: 1.3 1 480px; display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start">
+<sc-for list="{{clean}}" as="c" hint-placeholder-count="8"><span style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; padding: 10px 16px; font-weight: 700">{{c}}</span></sc-for>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; background: #2160e8; color: #ffffff; border-radius: 28px; padding: 40px">
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: clamp(1.5rem, 2.6vw, 2.1rem); font-weight: 900">從一個明確的節能痛點開始</span><span style="color: #eef3ff">先從能源或空調切入，驗證成效後再擴展到 Aiii VBIM 全平台。</span></div>
+<a href="Contact.dc.html" style="background: #ffffff; color: #1647b8; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">預約能源／空調評估 →</a>
+</div>
+</section>
+
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      feat: [
+        { t: '即時用電與需量', d: 'kW／kWh、需量、契約容量、功率因數與電力品質' },
+        { t: '再生能源調度', d: '太陽能、風力發電效率與發電預測' },
+        { t: '儲能協同', d: 'SOC／SOH、PCS／BMS、充放電與削峰填谷' },
+        { t: '算力中心能效', d: 'PUE、Rack、PDU、UPS 與冷卻熱管理' },
+        { t: 'ESG／碳排管理', d: '碳排資料、能源績效基線與報表' }
+      ],
+      loop: ['發電', '儲能', '配電', '用電', '預測', '調度', '安全', '維護'],
+      scope: [
+        { t: '重電／高低壓', d: '高低壓盤、變壓器、ATS、斷路器、UPS、柴油發電機、PDU' },
+        { t: '電力品質', d: '電壓、電流、功率因數、諧波與異常耗能偵測' },
+        { t: '能耗歸屬', d: '分區、樓層、產線、租戶、設備級能耗' },
+        { t: '再生能源與儲能', d: '太陽能、風力、儲能 SOC／SOH、逆變器效率' },
+        { t: '電費與需量', d: '電費預測、尖峰移轉、需量反應' },
+        { t: '建築師規劃重點', d: '電力機房、儲能空間、太陽能介面、電表點位、通訊線路、AI Edge Node、維修動線' }
+      ],
+      hvac: [
+        { t: '冰水系統', k: 'kW/RT、COP、供回水溫差、流量、壓差、主機負載率' },
+        { t: '冷卻水', k: '進出水溫、Approach、冷卻塔效率、風機頻率' },
+        { t: '空氣側', k: 'AHU／PAHU、風量、靜壓、送回風溫濕度、VAV' },
+        { t: '空間品質', k: '溫度、濕度、CO₂、PM2.5、VOC、人流與舒適度' },
+        { t: '設備健康', k: '振動、電流、運轉時數、異常趨勢、維修履歷' }
+      ],
+      clean: ['溫濕度', '壓差', '粒子', 'VOC', 'ACH 換氣次數', 'HEPA／FFU', 'CO₂', '空調鏈追溯']
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>Aiii VBIM 五大領域</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="solutions" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">FIVE KEY SECTORS</div>
+<h1 style="margin: 0; font-size: clamp(2.3rem, 4.6vw, 3.8rem); line-height: 1.15; font-weight: 900">以建築為核心，延伸五大應用場域</h1>
+<p style="margin: 0; color: #34425e; font-size: 1.1rem; max-width: 820px">先以智慧建築建立 BIM、PMIS、影像、AIoT、設備與能源的完整數位底座，再向醫院、商場、工廠、辦公與能源延伸。每個場域都從一個明確痛點切入，驗證成效後再擴展到全平台。</p>
+</div>
+</header>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 64px 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div role="tablist" aria-label="選擇場域" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+<sc-if value="{{t.on}}" hint-placeholder-val="{{false}}"><button type="button" role="tab" aria-selected="true" onClick="{{t.pick}}" style="min-height: 48px; padding: 10px 24px; border-radius: 999px; font-family: inherit; font-size: 17px; font-weight: 900; cursor: pointer; background: #2160e8; color: #ffffff; border: 1px solid #2160e8">{{t.label}}</button></sc-if>
+<sc-if value="{{t.off}}" hint-placeholder-val="{{true}}"><button type="button" role="tab" aria-selected="false" onClick="{{t.pick}}" style="min-height: 48px; padding: 10px 24px; border-radius: 999px; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer; background: #ffffff; color: #0c1a33; border: 1px solid #c9d8f0">{{t.label}}</button></sc-if>
+</sc-for>
+</div>
+<div role="tabpanel" style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; gap: 28px; background: #0c1a33; color: #ffffff; border-radius: 28px; padding: 40px">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Space Grotesk', sans-serif; color: #8fb6ff; font-size: 15px; font-weight: 600">{{cur.en}}</span>
+<span style="font-size: clamp(1.8rem, 3.2vw, 2.6rem); font-weight: 900; line-height: 1.2">{{cur.title}}</span>
+<span style="font-size: 1.1rem; color: #cfdcf0">{{cur.tagline}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px"><sc-for list="{{cur.keys}}" as="k" hint-placeholder-count="4"><span style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; padding: 4px 14px; font-size: 14px; font-weight: 700">{{k}}</span></sc-for></div>
+</div>
+<div style="flex: 1 1 360px; min-width: 0; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; color: #ffcf8a; font-weight: 700">現場痛點</span>
+<span style="font-size: 16px; color: #eef3ff">{{cur.pain}}</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
+<div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-weight: 900; font-size: 19px">整合範圍</span>
+<sc-for list="{{cur.points}}" as="p" hint-placeholder-count="5"><div style="display: flex; gap: 10px; font-size: 15px"><span aria-hidden="true" style="color: #2160e8; font-weight: 900">✓</span><span>{{p}}</span></div></sc-for>
+</div>
+<div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-weight: 900; font-size: 19px">可量化指標</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{cur.kpis}}" as="k" hint-placeholder-count="5"><span style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 10px; padding: 6px 12px; font-size: 14px; font-weight: 700">{{k}}</span></sc-for></div>
+<span style="font-size: 14px; color: #5a6a85">每個案場導入前建立基準值，導入後持續追蹤成效。</span>
+</div>
+<div style="background: #2160e8; color: #ffffff; border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 700; color: #dbe7ff">第一個可導入模組</span>
+<span style="font-weight: 700; font-size: 21px; font-family: 'Space Grotesk', sans-serif">{{cur.first}}</span>
+<span style="font-size: 15px; color: #eef3ff">Land &amp; Expand：從一個明確痛點切入，再擴展至 Aiii VBIM 全平台。</span>
+<a href="Contact.dc.html" style="margin-top: auto; align-self: flex-start; background: #ffffff; color: #1647b8; text-decoration: none; font-weight: 700; padding: 12px 22px; border-radius: 999px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">預約這個場域的 Demo →</a>
+</div>
+</div>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">PRODUCTIZED SOLUTIONS</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">三大產品化方案</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
+<sc-for list="{{products}}" as="p" hint-placeholder-count="3">
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 10px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; color: #1647b8">{{p.n}}</span><span style="font-weight: 900">{{p.who}}</span><span style="font-size: 15px; color: #34425e">{{p.d}}</span></div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">FOR ARCHITECTS · AI-READY BUILDING DESIGN-IN</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">建築師，是 AI-Ready Building 的第一入口</h2><p style="margin: 0; color: #34425e">不是完工後再加裝 AI，而是在規劃初期，就把 AI、能源、空調、影像、AIoT、網路、UPS、機房與維護需求寫進圖面與規範。</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px">
+<div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-weight: 900; color: #5a6a85">一般導入</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-weight: 700"><span>建築完成</span><span aria-hidden="true" style="color: #5a6a85">→</span><span>IT 進場</span><span aria-hidden="true" style="color: #5a6a85">→</span><span>加裝 AI</span><span aria-hidden="true" style="color: #5a6a85">→</span><span style="color: #b4441c">整合困難</span></div>
+</div>
+<div style="background: #2160e8; color: #ffffff; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-weight: 900; color: #dbe7ff">Aiii VBIM 2.0 導入</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-weight: 700"><span>Concept 規劃</span><span aria-hidden="true">→</span><span>SD／DD 設計</span><span aria-hidden="true">→</span><span>CD 施工圖</span><span aria-hidden="true">→</span><span>施工 PMIS</span><span aria-hidden="true">→</span><span>驗收 Commission</span><span aria-hidden="true">→</span><span>營運 AI 智控</span></div>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px">
+<sc-for list="{{value}}" as="v" hint-placeholder-count="5"><div style="border: 1px solid #c9d8f0; border-radius: 14px; padding: 16px; text-align: center; font-weight: 900">{{v}}</div></sc-for>
+</div>
+<p style="margin: 0; color: #34425e">對建築師的價值：可畫進圖面、可寫進規範、可納入預算、可協調機電、可交付業主。</p>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 0 24px 104px">
+<div style="display: flex; flex-wrap: wrap; gap: 32px; background: #0c1a33; color: #ffffff; border-radius: 28px; padding: 44px">
+<div style="flex: 1 1 440px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Space Grotesk', sans-serif; color: #8fb6ff; font-weight: 600; letter-spacing: 0.14em; font-size: 14px">HIGH-VALUE SCENARIO</span>
+<span style="font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 900">跨國設廠：一套標準，複製到每一座廠</span>
+<span style="color: #cfdcf0">跨國設廠是設計、施工、供應鏈、設備、驗收、營運與總部治理的長週期問題。同一套企業標準可複製到 Arizona、Texas、Japan、Singapore、Malaysia、Vietnam 或 Europe，總部看的是同一套 KPI、資料結構與權限模型。</span>
+</div>
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 8px; justify-content: center">
+<sc-for list="{{global}}" as="g" hint-placeholder-count="6"><div style="display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.14); padding: 8px 0; font-size: 15px"><span style="font-weight: 700">{{g.p}}</span><span style="color: #aebdd6; text-align: right">{{g.o}}</span></div></sc-for>
+</div>
+</div>
+</section>
+
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4600}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { i: 0 }; }
+  renderVals() {
+    const S = [
+      { label: '醫院', en: 'Smart Healthcare', title: '全院一張圖的智慧升級', tagline: '建築、設備、照護環境與多院區，在同一張圖上管理。', keys: ['病房', '設備', '醫療氣體'], pain: '病床、醫療設備、空調、醫療氣體與保全各自一套系統；多院區資料分散，生命安全事件難以即時定位。', first: 'VBIM + HVAC + VMS + Edge AI', points: ['HIS／病床／排程與空間串接', 'MRI、CT、呼吸器、監護設備等醫材資產', '跌倒、緊急事件、保全、消防等生命安全', '電力、UPS、空調、醫療氣體、給排水、潔淨環境', '多棟、多院區 Command Center'], kpis: ['MTTR', '非計畫停機', '事件回應時間', 'kWh', 'COP'] },
+      { label: '商場', en: 'Smart Retail', title: '從看營收到看整個場域', tagline: '人流、交易、影像與設備資料連動。', keys: ['POS', '人流', '停車', '租戶'], pain: '只看營收，看不到人流、空調負載與租戶能耗之間的關係，跨店也難以比較。', first: 'VMS + HVAC + Energy', points: ['POS + 人流 + VMS + 停車 + 租戶 + 空調 + 能源', '樓層、品牌、活動的人流、交易、轉換率與坪效', '租戶能耗、公共區域能耗、空調負載聯動', 'AI 分析：人流 × 活動 × 天氣 × 銷售 × 能源'], kpis: ['坪效', '轉換率', '公共區域 kWh', '停車周轉', '工單 SLA'] },
+      { label: '工廠', en: 'Smart Manufacturing', title: '跨國工廠上帝視角', tagline: '把工廠的人、機、料、法、環與能源放進同一個空間資料模型。', keys: ['設備', '稼動率', '工安', '庫存'], pain: '各廠區使用不同顧問、不同表單、不同系統，總部無法用同一套 KPI 比較稼動、能耗與工安。', first: 'PMIS + Digital Twin + Energy', points: ['ERP／MES／SCADA／PLC／WMS 串接', '設備稼動率 OEE、產能、停機與預防維護', '產線別、設備別、產品別能耗與碳排', '潔淨室、環境、安全與影像', '跨國工廠 Benchmark 與總部上帝視角'], kpis: ['OEE', 'MTBF', '單位產出能耗', 'PPE 違規', '事故率'] },
+      { label: '辦公', en: 'Smart Office', title: '設計到物業不斷鏈', tagline: '竣工模型直接成為營運數位孿生。', keys: ['空間', '設備', '能源', '維運'], pain: '完工交付後資料斷裂，物業與管委會要重新建立一套設備、保固與維修資料。', first: 'BIM／PMIS + FM 資產管理', points: ['竣工模型轉為營運數位孿生', '保固、修繕、公設與完整建築履歷', '空調與照明節能排程', '門禁、影像與設備告警整合'], kpis: ['工單處理時間', '文件查找時間', 'kWh', '人力巡檢時間'] },
+      { label: '能源', en: 'Smart Energy', title: '從供電到用電的全域能源智控', tagline: '把發電、儲能、負載與冷卻整合成多場站營運平台。', keys: ['風力', '太陽能', '儲能', '算力中心'], pain: 'AI 伺服器拉高電力密度，冷卻與配電成為瓶頸；太陽能、風電與儲能多場站難以統一維運。', first: 'Energy + Thermal + Edge AI', points: ['Solar PV：Module、String、Inverter、PR、日照', 'Wind：Turbine、Gearbox、振動、風速', 'ESS：BMS、PCS、SOC、SOH、Cell Temperature', '資料中心：Rack、PDU、UPS、Cooling、PUE', 'Peak Shaving、Demand Response、發電預測'], kpis: ['PUE', 'kW Demand', 'PR 發電效率', 'SOH', 'kW/Rack'] }
+    ];
+    const i = this.state.i;
+    return {
+      cur: S[i],
+      tabs: S.map((s, k) => ({ label: s.label, on: k === i, off: k !== i, pick: () => this.setState({ i: k }) })),
+      products: [
+        { n: 'Aiii VBIM AI Factory', who: '科技廠／半導體／跨國設廠', d: 'BIM、PMIS、廠務、能源、重電、HVAC、潔淨室、VMS、AIoT、Local AI。' },
+        { n: 'Aiii VBIM AI Hospital', who: '新建醫院／舊院改造／醫療園區', d: '建築、機電、空調、醫療氣體、設備、能源、消防、安全、維修、VMS。' },
+        { n: 'Aiii VBIM AI Building', who: '商辦／商場／飯店／園區', d: '遠距、多點、數據智控、能源、HVAC、影像、AIoT、Edge AI。' }
+      ],
+      value: ['01 BIM／PMIS', '02 Energy', '03 HVAC', '04 Vision', '05 AIoT', '06 Edge AI'],
+      global: [
+        { p: 'Pre-Design', o: '企業標準模板／資料室' },
+        { p: 'Design', o: 'CDE + BIM Coordination' },
+        { p: 'Construction', o: 'PMIS + VMS + Mobile' },
+        { p: 'Commissioning', o: '數位驗收 + Asset Handover' },
+        { p: 'Operation', o: 'Digital Twin + EMS + AI' },
+        { p: 'HQ Governance', o: 'Global Command Center' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

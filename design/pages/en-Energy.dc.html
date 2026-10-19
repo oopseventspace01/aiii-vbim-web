@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Aiii VBIM Energy &amp; HVAC</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="energy" lang="en" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">GRID + SOLAR + WIND + ESS + COMPUTE CENTER</div>
+<h1 style="margin: 0; font-size: clamp(2.3rem, 4.6vw, 3.8rem); line-height: 1.15; font-weight: 900">Smart Energy Management</h1>
+<p style="margin: 0; font-size: 1.3rem; font-weight: 700">Integrated control of wind, solar, storage and compute centers</p>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">More than a meter dashboard — a complete energy topology: grid → substation → distribution → UPS / generators → solar / wind / storage → HVAC, production lines and data center loads. Full visibility and optimization from supply to demand.</p>
+</div>
+<div style="flex: 1.1 1 500px; min-width: 0"><img src="../assets/energy.jpg" alt="Smart energy: wind, solar, ESS storage, grid, building loads and compute center" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</header>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 72px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px">
+<sc-for list="{{feat}}" as="f" hint-placeholder-count="5"><div style="border-top: 4px solid #2160e8; background: #f3f7fc; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 900; font-size: 18px">{{f.t}}</span><span style="font-size: 14px; color: #34425e">{{f.d}}</span></div></sc-for>
+</section>
+
+<section style="background: #0c1a33; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #8fb6ff; font-weight: 600">ENERGY CLOSED LOOP</div>
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">From ESG reports to a closed energy loop</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><sc-for list="{{loop}}" as="l" hint-placeholder-count="8"><span style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 12px; padding: 10px 16px; font-weight: 900; font-size: 17px">{{l}}</span></sc-for></div>
+<p style="margin: 0; color: #cfdcf0; max-width: 860px">AI shouldn’t just answer “how much did we use?” — it should answer why it rose, how to cut it, how much was saved and whether production or comfort was affected. The Energy Agent cross-analyzes energy data with weather, production schedules, footfall, tenants and equipment status to produce actionable savings strategies.</p>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">What we manage</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px"><sc-for list="{{scope}}" as="s" hint-placeholder-count="6"><div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 900">{{s.t}}</span><span style="font-size: 14px; color: #34425e">{{s.d}}</span></div></sc-for></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px">
+<div style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #2160e8; font-weight: 700">Market trend</span><span style="font-weight: 900; font-size: 18px">Global electricity demand to grow ~3.6% a year, 2026–2030</span><span style="font-size: 13px; color: #5a6a85">Source: IEA, Electricity 2026</span></div>
+<div style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #2160e8; font-weight: 700">Market trend</span><span style="font-weight: 900; font-size: 18px">Data center electricity use near 945 TWh by 2030 — almost double 2025</span><span style="font-size: 13px; color: #5a6a85">Source: IEA, Energy and AI</span></div>
+<div style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #2160e8; font-weight: 700">Market trend</span><span style="font-weight: 900; font-size: 18px">~4,600 GW of new renewables 2025–2030, nearly 80% solar</span><span style="font-size: 13px; color: #5a6a85">Source: IEA, Renewables 2025</span></div>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">HVAC AI + CLEAN ENVIRONMENT</div>
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">HVAC Efficiency × Clean Systems</h2>
+<p style="margin: 0; font-size: 1.15rem; font-weight: 700">Turning HVAC control and cleanroom management into measurable, optimizable operations.</p>
+<p style="margin: 0; color: #34425e">From design, control boxes and control logic to construction, maintenance and operation — an HVAC Total Solution. Using BIM spatial relationships, we map chillers, cooling towers, pumps, AHUs, MAUs, FCUs, VAVs and sensors into a visual, computable HVAC digital twin.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-weight: 900"><span style="background: #2160e8; color: #ffffff; border-radius: 10px; padding: 8px 14px">Monitor</span><span aria-hidden="true" style="color: #2160e8">→</span><span style="background: #2160e8; color: #ffffff; border-radius: 10px; padding: 8px 14px">Analyze</span><span aria-hidden="true" style="color: #2160e8">→</span><span style="background: #2160e8; color: #ffffff; border-radius: 10px; padding: 8px 14px">Predict</span><span aria-hidden="true" style="color: #2160e8">→</span><span style="background: #2160e8; color: #ffffff; border-radius: 10px; padding: 8px 14px">Control</span></div>
+</div>
+<div style="flex: 1 1 440px; min-width: 0"><img src="../assets/hvac.jpg" alt="HVAC and clean system cutaway: chillers, cooling tower, AHU/FCU, sensors and clean space" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">AI Chiller Optimization</h2><p style="margin: 0; color: #34425e">Weather + footfall + zone load + production conditions + operating history + tariffs → optimal chiller count, supply water temperature, pump/fan speeds and schedules.</p></div>
+<div style="overflow-x: auto; border: 1px solid #dce6f2; border-radius: 18px">
+<table style="width: 100%; min-width: 680px; border-collapse: collapse; font-size: 15px">
+<thead><tr style="background: #0c1a33; color: #ffffff; text-align: left"><th scope="col" style="padding: 14px 18px">What we monitor</th><th scope="col" style="padding: 14px 18px">Key metrics</th></tr></thead>
+<tbody><sc-for list="{{hvac}}" as="h" hint-placeholder-count="5"><tr style="border-top: 1px solid #dce6f2"><th scope="row" style="padding: 14px 18px; text-align: left">{{h.t}}</th><td style="padding: 14px 18px; color: #34425e">{{h.k}}</td></tr></sc-for></tbody>
+</table>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 12px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">AIII CLEAN</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">Clean environment management</h2><p style="margin: 0; color: #34425e">For semiconductors, biotech, pharma, operating rooms, ICUs and labs. When an anomaly occurs, trace it straight from the space to the AHU, ductwork, filters, sensors and maintenance records.</p></div>
+<div style="flex: 1.3 1 480px; display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start"><sc-for list="{{clean}}" as="c" hint-placeholder-count="8"><span style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; padding: 10px 16px; font-weight: 700">{{c}}</span></sc-for></div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; background: #2160e8; color: #ffffff; border-radius: 28px; padding: 40px"><div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: clamp(1.5rem, 2.6vw, 2.1rem); font-weight: 900">Start with one clear savings opportunity</span><span style="color: #eef3ff">Begin with energy or HVAC, prove the value, then expand to the full Aiii VBIM platform.</span></div><a href="en-Contact.dc.html" style="background: #ffffff; color: #1647b8; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Request an energy / HVAC assessment →</a></div>
+</section>
+
+<dc-import name="Footer" lang="en" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      feat: [
+        { t: 'Live usage & demand', d: 'kW/kWh, demand, contract capacity, power factor and power quality' },
+        { t: 'Renewable dispatch', d: 'Solar and wind efficiency and generation forecasting' },
+        { t: 'Storage coordination', d: 'SOC/SOH, PCS/BMS, charge/discharge and peak shaving' },
+        { t: 'Compute center efficiency', d: 'PUE, racks, PDUs, UPS and cooling' },
+        { t: 'ESG / carbon', d: 'Carbon data, energy baselines and reporting' }
+      ],
+      loop: ['Generate', 'Store', 'Distribute', 'Consume', 'Predict', 'Dispatch', 'Secure', 'Maintain'],
+      scope: [
+        { t: 'Power / HV-LV', d: 'Switchgear, transformers, ATS, breakers, UPS, diesel generators, PDUs' },
+        { t: 'Power quality', d: 'Voltage, current, power factor, harmonics and abnormal consumption' },
+        { t: 'Energy allocation', d: 'By zone, floor, line, tenant and asset' },
+        { t: 'Renewables & storage', d: 'Solar, wind, storage SOC/SOH and inverter efficiency' },
+        { t: 'Tariffs & demand', d: 'Bill forecasting, peak shifting and demand response' },
+        { t: 'For architects', d: 'Power rooms, storage space, solar interfaces, meter points, comms routes, AI edge nodes and maintenance access' }
+      ],
+      hvac: [
+        { t: 'Chilled water', k: 'kW/RT, COP, supply/return ΔT, flow, pressure differential, chiller load' },
+        { t: 'Condenser water', k: 'Inlet/outlet temperature, approach, cooling tower efficiency, fan speed' },
+        { t: 'Air side', k: 'AHU/PAHU, airflow, static pressure, supply/return temperature and humidity, VAV' },
+        { t: 'Indoor quality', k: 'Temperature, humidity, CO₂, PM2.5, VOC, occupancy and comfort' },
+        { t: 'Equipment health', k: 'Vibration, current, run hours, anomaly trends, maintenance history' }
+      ],
+      clean: ['Temperature & humidity', 'Pressure differential', 'Particles', 'VOC', 'ACH', 'HEPA / FFU', 'CO₂', 'Air-chain traceability']
+    };
+  }
+}
+</script>
+</body>
+</html>

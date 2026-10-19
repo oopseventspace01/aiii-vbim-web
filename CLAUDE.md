@@ -8,6 +8,12 @@
 - 我是程式新手：每完成一步，用白話說明「做了什麼、為什麼、我要怎麼確認」，指令要能直接複製貼上。
 - 不要一次貼超過 50 行程式碼到對話裡；程式碼寫進檔案。
 
+## 設計稿
+- `design/pages/` 是已定稿的版面與中英文案（讀法見 SPEC.md 第 0.1 節）。版面、配色、文案以設計稿為準，**文案逐字保留**，不要自行改寫或增刪。
+- 導覽列固定在頂部＋全站「回到頂部」按鈕（SPEC 3.1）。
+- 預約表單的題目來自 `docs/需求表/`，先做 SPEC 6.4 步驟 A 的分析並等我確認，才可以改表單。
+- 網站任何地方都不可出現：WSP、群聯 Phison（含 aiDAPTIV／Pascari）、長庚醫院、台塑集團、台泥、三菱重工、大金、Panasonic、東元。
+
 ## 工作規則
 1. **一次只做一個階段**（SPEC.md 第 12 節 P0～P8）。每個階段開始前先列出計畫，完成後停下來回報：做了什麼、怎麼測試、下一步是什麼。等我說「繼續」才往下。
 2. 每個階段都要跑兩層測試：單步檢查（該功能本身）＋ E2E（整體流程）。
@@ -30,7 +36,8 @@
 - 開發網站：`npm run dev` → http://localhost:4321
 - 開發 Studio：`npm run studio` → http://localhost:3333
 - 單元測試：`npm test`
-- E2E 測試：`npm run test:e2e`
+- E2E 測試：`npm run test:e2e`（網站 Playwright＋Sanity 內容檢查，需要 .env）
+- 匯入種子資料：`npm run seed`（只新增不存在的文件；`npm run seed:force` 會覆蓋）
 - 全部檢查（同 CI）：`npm run check`
 - 環境變數：只有根目錄一個 `.env`（從 `.env.example` 複製），網站與 Studio 共用
 - Node 版本：24 LTS（`.nvmrc`；本機用 nvm 管理）

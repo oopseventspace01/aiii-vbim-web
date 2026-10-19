@@ -22,3 +22,7 @@ coverage/
 .DS_Store
 Thumbs.db
 *.log
+
+# 業主需求表原始檔（內部文件，repo 為公開，不上傳）
+docs/需求表/*
+!docs/需求表/README.md

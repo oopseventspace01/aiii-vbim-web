@@ -1,26 +1,27 @@
 @import 'tailwindcss';
 @import './tokens.css';
 
-/* 讓 Tailwind class（如 bg-bg、text-cyan、rounded-lg）對應到 tokens */
+/* 讓 Tailwind class（如 bg-bg-2、text-navy、bg-blue）對應到 tokens */
 @theme inline {
   --color-bg: var(--bg);
   --color-bg-2: var(--bg-2);
-  --color-panel: var(--panel);
-  --color-panel-2: var(--panel-2);
-  --color-text: var(--text);
+  --color-navy: var(--navy);
   --color-text-2: var(--text-2);
   --color-muted: var(--muted);
   --color-line: var(--line);
-  --color-cyan: var(--cyan);
+  --color-line-2: var(--line-2);
   --color-blue: var(--blue);
-  --color-green: var(--green);
-  --color-amber: var(--amber);
+  --color-blue-dark: var(--blue-dark);
+  --color-blue-soft: var(--blue-soft);
+  --color-blue-on-navy: var(--blue-on-navy);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
 }
 
 /* 圓角 tokens（SPEC 第 4 節）：直接覆寫 Tailwind 的 --radius-*，也會輸出成 CSS 變數 */
 @theme {
-  --radius-lg: 24px;
-  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-md: 22px;
   --radius-pill: 999px;
 
   /* 字型檔於 P2 載入；先設定字型堆疊 */
@@ -30,7 +31,7 @@
 
 html {
   background: var(--bg);
-  color: var(--text);
+  color: var(--navy);
   font-family: var(--font-sans);
 }
 

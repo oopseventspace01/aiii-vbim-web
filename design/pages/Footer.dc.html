@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>頁尾 Footer</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<footer style="background: #0c1a33; color: #ffffff; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif">
+<div style="max-width: 1280px; margin: 0 auto; padding: 56px 24px 28px; display: flex; flex-direction: column; gap: 36px">
+<div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between">
+<div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 12px">
+<div style="align-self: flex-start; background: #ffffff; border-radius: 14px; padding: 10px 14px"><img src="../assets/logo.png" alt="Aiii VBIM" style="height: 38px; width: auto; display: block"></div>
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 15px; color: #cfdcf0">AI-Powered Physical World Operating System</span>
+<span style="font-size: 14px; color: #aebdd6">{{tagline}}</span>
+<div style="display: flex; flex-direction: column; gap: 2px; font-size: 14px; color: #cfdcf0; margin-top: 4px"><span style="font-weight: 700; color: #ffffff">{{company}}</span><span>{{address}}</span><span>Tel: +886-2-2712-3339</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px"><a href="https://apps.apple.com/tw/app/aiii-vbim/id6781813710" style="border: 1px solid rgba(255,255,255,0.3); color: #ffffff; text-decoration: none; border-radius: 10px; padding: 8px 14px; font-size: 13px; font-weight: 700; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">App Store</a><a href="https://play.google.com/store/apps/details?id=ai.aiii.vbim" style="border: 1px solid rgba(255,255,255,0.3); color: #ffffff; text-decoration: none; border-radius: 10px; padding: 8px 14px; font-size: 13px; font-weight: 700; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">Google Play</a></div>
+</div>
+<div style="flex: 2 1 560px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; font-size: 14px">
+<sc-for list="{{cols}}" as="c" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="color: #8fb6ff; font-size: 13px; font-weight: 700">{{c.h}}</span>
+<sc-for list="{{c.links}}" as="l" hint-placeholder-count="3"><a href="{{l.href}}" style="color: #ffffff; text-decoration: none">{{l.t}}</a></sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="border-top: 1px solid rgba(255,255,255,0.14); padding-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px; color: #aebdd6">
+<span>{{copyright}}</span>
+<span>{{motto}}</span>
+</div>
+</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"lang":{"editor":"enum","options":["zh","en"],"default":"zh"},"$preview":{"width":1440,"height":420}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const en = (this.props.lang ?? 'zh') === 'en';
+    const p = en ? 'en-' : '';
+    const L = (t, f) => ({ t, href: p + f + '.dc.html' });
+    return {
+      tagline: en ? 'Data-driven buildings for a more efficient, more sustainable physical world.' : '以數據驅動建築，創造更高效、更永續的實體世界。',
+      company: en ? 'Xingyan International Development Co., Ltd. / YIHHUII Co., Ltd.' : '星宴國際開發股份有限公司／星賀建設股份有限公司',
+      address: en ? '15F, No. 100, Dunhua N. Rd., Songshan Dist., Taipei City' : '台北市松山區敦化北路 100 號 15 樓',
+      copyright: en ? '© 2026 Xingyan International Development Co., Ltd. / YIHHUII Co., Ltd. · aiiivbim.com' : '© 2026 星宴國際開發股份有限公司／星賀建設股份有限公司 · aiiivbim.com',
+      motto: en ? 'Remote × Multi-site × Data Intelligence × Edge AI' : '遠距 × 多點 × 數據智控 × 地端 AI',
+      cols: en ? [
+        { h: 'Platform', links: [L('Aiii VBIM', 'VBIM'), L('Platform OS', 'Platform'), L('Energy & HVAC', 'Energy'), L('Edge AI', 'EdgeAI')] },
+        { h: 'Sectors', links: [L('Hospitals · Retail', 'Solutions'), L('Factories · Offices', 'Solutions'), L('Energy · Data Centers', 'Solutions')] },
+        { h: 'Ecosystem', links: [L('Become a Partner', 'Partners'), L('VBIM Academy', 'Academy'), L('Cases', 'Cases')] },
+        { h: 'Company', links: [L('About', 'About'), L('News', 'News'), L('Contact', 'Contact')] }
+      ] : [
+        { h: '平台', links: [L('Aiii VBIM', 'VBIM'), L('平台 OS', 'Platform'), L('能源 × 空調', 'Energy'), L('地端 AI', 'EdgeAI')] },
+        { h: '五大領域', links: [L('醫院・商場', 'Solutions'), L('工廠・辦公', 'Solutions'), L('能源・算力中心', 'Solutions')] },
+        { h: '生態系', links: [L('成為夥伴', 'Partners'), L('認證學院', 'Academy'), L('案例', 'Cases')] },
+        { h: '公司', links: [L('關於我們', 'About'), L('最新消息', 'News'), L('聯絡我們', 'Contact')] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

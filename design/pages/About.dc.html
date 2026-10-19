@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>關於 Aiii VBIM</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="about" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">ABOUT · CREATE VALUE, CUT COST</div>
+<h1 style="margin: 0; font-size: clamp(2.1rem, 4vw, 3.3rem); line-height: 1.25; font-weight: 900">讓每一個空間、設備、能源與事件，都能被 AI 理解、管理、預測與控制</h1>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">從一棟建築，到一座工廠，再到全球企業。Aiii VBIM 以建築與空間為核心，整合工程、設備、能源、影像與地端 AI，打造跨國、遠距、多點、數據智控的企業營運平台。</p>
+</div>
+<div style="flex: 1 1 420px; min-width: 0"><img src="../assets/hero-building.jpg" alt="Aiii VBIM 建築數位孿生示意" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</header>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 340px"><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">我們看見的問題</h2></div>
+<div style="flex: 1.6 1 520px; display: flex; flex-direction: column; gap: 16px; font-size: 1.05rem; color: #34425e">
+<p style="margin: 0">企業數位轉型真正困難的地方，不是沒有資料，而是資料分散在不同系統、不同承包商、不同場域與不同時間階段。</p>
+<p style="margin: 0">多數系統只管理一個專業：BMS 管設備、EMS 管能源、VMS 管影像、DCIM 管資料中心、MES 管產線、HIS 管醫療資訊。</p>
+<p style="margin: 0; color: #0c1a33; font-weight: 900">Aiii VBIM 的任務，是建立一個實體世界共同資料層，把所有資料放回真實世界的建築、樓層、空間與設備之中。</p>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">SCALABLE BUSINESS MODEL</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">從單次建置，走向長期維運與訂閱</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px">
+<sc-for list="{{biz}}" as="b" hint-placeholder-count="5">
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 900; font-size: 18px">{{b.t}}</span><span style="font-size: 14px; color: #34425e">{{b.d}}</span></div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">PLAN OBJECTIVES</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">聚焦標竿場域、產品整合與市場擴張</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px">
+<sc-for list="{{goals}}" as="g" hint-placeholder-count="5">
+<div style="border-top: 4px solid #2160e8; background: #f3f7fc; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 900; font-size: 18px">{{g.t}}</span><span style="font-size: 14px; color: #34425e">{{g.d}}</span></div>
+</sc-for>
+</div>
+</section>
+
+<section style="background: #0c1a33; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #8fb6ff; font-weight: 600">MARKET OPPORTUNITY</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">從建築管理平台，走向企業實體世界 OS</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px">
+<sc-for list="{{market}}" as="m" hint-placeholder-count="5">
+<div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; padding: 20px; font-weight: 900; font-size: 17px">{{m}}</div>
+</sc-for>
+</div>
+<p style="margin: 0; color: #cfdcf0; font-size: 1.05rem">Aiii VBIM 2.0 可從新建案延伸到既有場域升級，形成長期維運與訂閱型收入。</p>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 340px"><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">里程碑</h2></div>
+<div style="flex: 1.6 1 520px; display: flex; flex-direction: column; border-left: 3px solid #c9d8f0; padding-left: 4px">
+<sc-for list="{{miles}}" as="m" hint-placeholder-count="3">
+<div style="padding: 0 0 28px 24px; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">{{m.d}}</span><span style="font-weight: 900; font-size: 19px">{{m.t}}</span><span style="color: #34425e; font-size: 15px">{{m.x}}</span></div>
+</sc-for>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 0 24px 104px">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; background: #2160e8; color: #ffffff; border-radius: 28px; padding: 40px">
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: clamp(1.5rem, 2.6vw, 2.1rem); font-weight: 900">以數據驅動建築，創造更高效、更永續的實體世界</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px"><a href="Contact.dc.html" style="background: #ffffff; color: #1647b8; text-decoration: none; font-weight: 700; padding: 13px 24px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">聯絡我們</a><a href="Partners.dc.html" style="border: 1px solid #ffffff; color: #ffffff; text-decoration: none; font-weight: 700; padding: 13px 24px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">成為夥伴</a></div>
+</div>
+</section>
+
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      biz: [
+        { t: '軟體授權／SaaS', d: '雲端平台／私有化部署' },
+        { t: 'SI 整合專案', d: 'PMIS／BIM／VMS／EMS 整合落地' },
+        { t: '能源與空調解決方案', d: '節能、潔淨、能源管理服務' },
+        { t: '地端 AI 硬體', d: 'AI PC／GPU Server／Edge Appliance' },
+        { t: '維運與訂閱服務', d: 'AI Agent／維護／分析／持續優化' }
+      ],
+      goals: [
+        { t: '打造五大領域標竿案', d: '醫院、商場、工廠、辦公、能源' },
+        { t: '整合三大核心能力', d: '能源管理、HVAC 潔淨、地端 AI' },
+        { t: '建立可複製標準方案', d: '從新建案延伸到既有場域升級' },
+        { t: '形成長期收入模型', d: '軟體、硬體、工程、維運、訂閱' },
+        { t: '擴大合作生態系', d: '建築、機電、能源、AI 與 SI 夥伴' }
+      ],
+      market: ['跨國設廠與多據點管理需求升高', '能源成本與 ESG 壓力持續增加', '資料中心與算力中心快速擴張', '醫療與製造場域加速數位轉型', 'Edge AI、在地部署與資安需求提升'],
+      miles: [
+        { d: '2026.09', t: 'Aiii VBIM 2.0 發表', x: 'AI-Powered Physical World Operating System：從 BIM／PMIS 升級為企業實體世界營運 OS。' },        { d: '2025.12', t: '亮相 2025 台灣醫療科技展', x: 'Aiii VBIM 與 Aiii RMS 於南港展覽館展出智慧醫院完整生態系。' },
+        { d: '2025.11', t: 'Aiii VBIM 系統說明會暨繁星計劃', x: '於茹曦酒店 OOPS 發表，分享開放合作理念。' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

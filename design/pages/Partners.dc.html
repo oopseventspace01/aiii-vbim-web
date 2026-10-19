@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>Aiii VBIM 生態夥伴</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="partners" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">AN OPEN ECOSYSTEM FOR A SMARTER PHYSICAL WORLD</div>
+<h1 style="margin: 0; font-family: 'Space Grotesk', 'Noto Sans TC', sans-serif; font-size: clamp(2.4rem, 4.8vw, 4rem); line-height: 1.08; font-weight: 700">Build on Aiii VBIM</h1>
+<p style="margin: 0; font-size: 1.3rem; font-weight: 900">你的設備、技術與服務，都可以接進 Aiii VBIM</p>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">Aiii VBIM 不必製造所有設備，而是成為設備、系統與服務的共同作業系統。任何能源設備、空調系統、AI Edge、攝影機與感測器，都能透過標準介面納入 Aiii VBIM，出現在每一個導入的場域。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#apply" style="background: #2160e8; color: #ffffff; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">申請成為夥伴 →</a>
+<a href="Academy.dc.html" style="border: 1px solid #c9d8f0; color: #0c1a33; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">了解認證學院</a>
+</div>
+</div>
+<div style="flex: 1 1 440px; min-width: 0"><img src="../assets/ecosystem.jpg" alt="Aiii VBIM 平台生態系示意" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</header>
+
+<div style="height: 32px"></div>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">從專案外包，升級為產品生態系</h2><p style="margin: 0; color: #34425e">Aiii VBIM 掌握平台、資料模型與解決方案；專業硬體與設備由生態系夥伴提供，透過標準介面納入。</p></div>
+<div style="overflow-x: auto; border: 1px solid #dce6f2; border-radius: 18px; background: #ffffff">
+<table style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 15px">
+<thead><tr style="background: #0c1a33; color: #ffffff; text-align: left"><th scope="col" style="padding: 14px 18px">夥伴類型</th><th scope="col" style="padding: 14px 18px">可整合內容</th><th scope="col" style="padding: 14px 18px">合作模式</th></tr></thead>
+<tbody>
+<sc-for list="{{types}}" as="t" hint-placeholder-count="7"><tr style="border-top: 1px solid #dce6f2"><th scope="row" style="padding: 14px 18px; text-align: left">{{t.n}}</th><td style="padding: 14px 18px; color: #34425e">{{t.c}}</td><td style="padding: 14px 18px; font-weight: 700; color: #1647b8">{{t.m}}</td></tr></sc-for>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">五種加入方式</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<sc-for list="{{tiers}}" as="r" hint-placeholder-count="5">
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; color: #1647b8">{{r.n}}</span><span style="font-weight: 900">{{r.who}}</span><span style="font-size: 14px; color: #34425e">{{r.what}}</span></div>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; background: #2160e8; color: #ffffff; border-radius: 24px; padding: 32px; margin-top: 12px">
+<div style="flex: 1 1 400px; display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #dbe7ff; font-weight: 700">SPECIFICATION CHANNEL</span><span style="font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 900">讓你的產品被寫進建築規範</span><span style="color: #eef3ff">Aiii VBIM 連結建築師、工程顧問、機電顧問、PMC、業主、營造與物業的決策鏈，讓設備與 AI 基礎建設在設計階段就被列入規範與設備表。</span></div>
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 8px; justify-content: center; font-weight: 700">
+<span>設計收入 ＋ 工程收入 ＋ 硬體收入 ＋ SaaS ＋ 維運收入</span>
+</div>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">加入流程</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<div style="border-top: 4px solid #2160e8; background: #ffffff; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">01</span><span style="font-weight: 900; font-size: 18px">線上申請</span><span style="color: #34425e; font-size: 15px">填寫公司與技術資料</span></div>
+<div style="border-top: 4px solid #2160e8; background: #ffffff; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">02</span><span style="font-weight: 900; font-size: 18px">技術對接</span><span style="color: #34425e; font-size: 15px">Partner Integration API、設備資料標準、協定確認</span></div>
+<div style="border-top: 4px solid #2160e8; background: #ffffff; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">03</span><span style="font-weight: 900; font-size: 18px">POC 驗證</span><span style="color: #34425e; font-size: 15px">在示範場域共同驗證</span></div>
+<div style="border-top: 4px solid #2160e8; background: #ffffff; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">04</span><span style="font-weight: 900; font-size: 18px">共同上市</span><span style="color: #34425e; font-size: 15px">列入生態系，共同提案與銷售</span></div>
+</div>
+</div>
+</section>
+
+<section id="apply" style="max-width: 1280px; margin: 0 auto; padding: 96px 24px 104px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">APPLY</div>
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">申請成為生態夥伴</h2>
+<p style="margin: 0; color: #34425e">送出後，我們會與你聯繫並安排技術對接會議。</p>
+</div>
+<form onSubmit="{{submit}}" style="flex: 1.4 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 14px; background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 24px; padding: 28px">
+<sc-if value="{{sent}}" hint-placeholder-val="{{false}}"><div role="status" style="background: #e6f6ef; border: 1px solid #2f9e6e; color: #145c3e; border-radius: 14px; padding: 14px 16px; font-weight: 700">申請已送出，我們會盡快與你聯繫。</div></sc-if>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">公司名稱 *<input type="text" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">夥伴類型 *<select required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; font-family: inherit"><option value="">請選擇</option><option>重電／機電</option><option>HVAC／ESCO</option><option>能源廠商</option><option>AI 硬體</option><option>資安／Identity</option><option>SI／MSP</option><option>工程顧問／建築師</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">聯絡人 *<input type="text" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Email *<input type="email" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">電話<input type="tel" style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">公司網站<input type="url" style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">想接入的產品或技術 *<textarea rows="4" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; font-family: inherit; resize: vertical"></textarea></label>
+<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: #34425e"><input type="checkbox" required style="width: 20px; height: 20px; margin-top: 2px">我同意依隱私權政策處理我提供的資料</label>
+<button type="submit" style="align-self: flex-start; background: #2160e8; color: #ffffff; border: 0; font-weight: 700; font-size: 16px; padding: 12px 28px; border-radius: 999px; min-height: 48px; cursor: pointer; font-family: inherit">送出申請</button>
+</form>
+</section>
+
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4400}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sent: false }; }
+  renderVals() {
+    return {
+      sent: this.state.sent,
+      submit: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ sent: true }); },
+      types: [
+        { n: '重電／機電', c: '變壓器、盤體、UPS、發電機', m: '共同標案／產品包' },
+        { n: 'HVAC／ESCO', c: '冰水主機、AHU、節能控制', m: '節能方案／績效分潤' },
+        { n: '能源廠商', c: '太陽能、風電、儲能、PCS／BMS', m: '能源平台整合' },
+        { n: 'AI 硬體', c: 'Edge AI、GPU、AI Server', m: 'Aiii Edge AI Appliance' },
+        { n: '資安／Identity', c: 'Zero Trust、IAM、SOC', m: '企業治理方案' },
+        { n: 'SI／MSP', c: '系統整合、維運', m: '授權代理／共同導入' },
+        { n: '工程顧問／建築師', c: '設計、BIM、跨國建廠', m: '指定平台／專案合作' }
+      ],
+      tiers: [
+        { n: 'Technology Partner', who: '軟硬體廠商', what: '技術與產品透過標準介面整合進 Aiii VBIM' },
+        { n: 'Solution Partner', who: '垂直產業方案商', what: '共同打造醫療、製造、能源、商場等產業方案' },
+        { n: 'SI Partner', who: '系統整合商、工程公司', what: '專案導入、系統整合與維運服務' },
+        { n: 'Certified Partner', who: '工程師、顧問、培訓單位', what: '完成 VBIM 認證，承接導入與維運專案' },
+        { n: 'POC Partner', who: '業主、研究單位', what: '共同驗證新的產業場景' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

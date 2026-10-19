@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>Aiii VBIM 案例與場域經驗</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="cases" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">CASES &amp; EXPERIENCE</div>
+<h1 style="margin: 0; font-size: clamp(2.3rem, 4.6vw, 3.8rem); line-height: 1.15; font-weight: 900">實績與示範場景</h1>
+<p style="margin: 0; color: #34425e; font-size: 1.1rem; max-width: 820px">從智慧醫院、跨國設廠到淨零建築，Aiii VBIM 已在多個產業場域與公開活動中展示成果。</p>
+</div>
+</header>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px">
+<sc-for list="{{cases}}" as="c" hint-placeholder-count="3">
+<article style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column">
+<img src="{{c.img}}" alt="{{c.alt}}" style="width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block">
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; color: #2160e8; font-weight: 700">{{c.scene}}</span>
+<span style="font-weight: 900; font-size: 24px">{{c.name}}</span>
+<span style="font-size: 15px; color: #34425e">{{c.d}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{c.tags}}" as="t" hint-placeholder-count="3"><span style="background: #e8f0fe; color: #1647b8; border-radius: 8px; padding: 3px 10px; font-size: 13px; font-weight: 700">{{t}}</span></sc-for></div>
+</div>
+</article>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; background: #0c1a33; color: #ffffff; border-radius: 24px; padding: 32px">
+<div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #8fb6ff; font-weight: 700">導入方法</span><span style="font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 900">Land &amp; Expand</span><span style="color: #cfdcf0">先從能源、影像、PMIS 或空調一個明確痛點切入，驗證成效後再擴展到 Aiii VBIM 全平台。</span></div>
+<div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #8fb6ff; font-weight: 700">隨身管理</span><span style="font-size: 18px; font-weight: 900">Aiii VBIM App</span><span style="color: #cfdcf0">iOS 與 Android 皆可下載，現場與總部即時同步。</span></div>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">STANDARD SCENARIOS</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">六個標準示範場景</h2><p style="margin: 0; color: #34425e">以真實系統操作示範，看 Aiii VBIM 如何處理這些情境。</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px">
+<sc-for list="{{demos}}" as="d" hint-placeholder-count="6">
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">{{d.no}}</span><span style="font-weight: 900; font-size: 19px">{{d.t}}</span><span style="font-size: 15px; color: #34425e">{{d.d}}</span></div>
+</sc-for>
+</div>
+<a href="Contact.dc.html" style="align-self: flex-start; background: #2160e8; color: #ffffff; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">預約實機示範 →</a>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px 104px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">我們如何衡量成效</h2><p style="margin: 0; color: #34425e">價值不在好看的 Dashboard，而在可衡量的成果。每個案場導入前建立基準值，導入後持續追蹤。</p></div>
+<div style="overflow-x: auto; border: 1px solid #dce6f2; border-radius: 18px">
+<table style="width: 100%; min-width: 680px; border-collapse: collapse; font-size: 15px">
+<thead><tr style="background: #0c1a33; color: #ffffff; text-align: left"><th scope="col" style="padding: 14px 18px">價值面</th><th scope="col" style="padding: 14px 18px">可量化 KPI</th></tr></thead>
+<tbody>
+<sc-for list="{{kpi}}" as="k" hint-placeholder-count="6"><tr style="border-top: 1px solid #dce6f2"><th scope="row" style="padding: 14px 18px; text-align: left">{{k.t}}</th><td style="padding: 14px 18px; color: #34425e">{{k.k}}</td></tr></sc-for>
+</tbody>
+</table>
+</div>
+</section>
+
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      cases: [
+        { scene: '智慧醫療 · 2025.12', name: '2025 台灣醫療科技展', d: 'Aiii VBIM 第六代智慧建築平台與 Aiii RMS 智慧醫療管理系統，於南港展覽館展出智慧醫院完整生態系。', tags: ['智慧醫院', 'RMS', '生態系'], img: '../assets/hvac.jpg', alt: '中央空調與醫療場域示意' },
+        { scene: '跨國設廠 · 2025', name: '從台灣到亞利桑那', d: '協助企業面對跨國設廠的資訊分散與工程透明度挑戰，用一個平台管理海外據點。', tags: ['跨國設廠', 'PMIS', '戰情室'], img: '../assets/world.jpg', alt: '全球據點連線示意' },
+        { scene: '淨零建築 · 2025.09', name: '智慧節能減碳創新技術推廣', d: '參與內政部建築研究所主辦的推廣活動，與產官學研共同推動近零碳建築。', tags: ['淨零', '節能', 'ESG'], img: '../assets/energy.jpg', alt: '智慧能源示意' }
+      ],
+      demos: [
+        { no: '01', t: '全球工廠上帝視角', d: '台灣、越南、美國三廠即時比較能源、稼動、告警與工安。' },
+        { no: '02', t: '中央空調節能', d: '即時 kW/RT、主機負載與 AI 最佳化建議，直接顯示節能前後差異。' },
+        { no: '03', t: '潔淨室異常', d: '3F Zone B 壓差異常，自動定位 AHU、風管、感測器與維修歷史。' },
+        { no: '04', t: '資料中心 Hot Spot', d: '由機櫃溫度異常追到冷卻、PDU 與 GPU 負載。' },
+        { no: '05', t: 'AI Vision 工安', d: '未戴安全帽事件直接落在 BIM 空間，建立工單並通知主管。' },
+        { no: '06', t: '能源 Agent', d: '直接問：「哪一個廠昨天用電異常？原因是什麼？可節省多少？」' }
+      ],
+      kpi: [
+        { t: '工程', k: 'RFI 處理時間、缺失關閉時間、工期偏差、文件查找時間' },
+        { t: '設備', k: 'MTBF、MTTR、非計畫停機、預測維護命中率' },
+        { t: '能源', k: 'kWh、kW Demand、kW/RT、PUE、單位產出能耗' },
+        { t: '空調', k: 'COP、kW/RT、舒適度達標率、異常時間' },
+        { t: '安全', k: 'AI 事件偵測、回應時間、PPE 違規、事故率' },
+        { t: '營運', k: '工單 SLA、人力巡檢時間、跨站 Benchmark、遠端處理率' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

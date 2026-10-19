@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>第六代智慧建築 Aiii VBIM</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="vbim" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 500px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">ARTIFICIAL INTELLIGENCE INTEGRATED VIRTUAL BIM</div>
+<h1 style="margin: 0; font-size: clamp(2.4rem, 4.8vw, 4rem); line-height: 1.12; font-weight: 900">第六代智慧建築<br><span style="color: #2160e8">Aiii VBIM</span></h1>
+<p style="margin: 0; font-size: 1.25rem; font-weight: 700">讓台灣的資金、技術與管理經驗跨越國界，掌握全球資產，打造超級戰情室。</p>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">星宴國際開發集結建築工程、BIM 技術、AI 人工智慧、影像辨識、物聯網、雲端平台及大數據分析等領域專家，歷時多年投入研發，打造新世代數位孿生管理平台。從設計、施工、驗收、交付到營運，讓建築成為具有感知、分析與管理能力的智慧資產。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="https://apps.apple.com/tw/app/aiii-vbim/id6781813710" style="background: #0c1a33; color: #ffffff; text-decoration: none; font-weight: 700; padding: 12px 22px; border-radius: 14px; min-height: 48px; box-sizing: border-box; display: inline-flex; flex-direction: column; justify-content: center; line-height: 1.2"><span style="font-size: 11px; color: #aebdd6">下載</span><span>App Store</span></a>
+<a href="https://play.google.com/store/apps/details?id=ai.aiii.vbim" style="background: #0c1a33; color: #ffffff; text-decoration: none; font-weight: 700; padding: 12px 22px; border-radius: 14px; min-height: 48px; box-sizing: border-box; display: inline-flex; flex-direction: column; justify-content: center; line-height: 1.2"><span style="font-size: 11px; color: #aebdd6">下載</span><span>Google Play</span></a>
+<a href="Contact.dc.html" style="background: #2160e8; color: #ffffff; text-decoration: none; font-weight: 700; padding: 12px 24px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">預約 Demo →</a>
+</div>
+</div>
+<div style="flex: 1 1 480px; min-width: 0"><img src="../assets/city.jpg" alt="以建築為核心的智慧城市示意" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</header>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">SIX CORE VALUES</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">六大核心價值</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px">
+<sc-for list="{{pillars}}" as="p" hint-placeholder-count="6">
+<div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">{{p.no}}</span><span style="font-weight: 900; font-size: 22px">{{p.t}}</span><span style="font-size: 15px; color: #34425e">{{p.d}}</span></div>
+</sc-for>
+</div>
+</section>
+
+<section style="background: #0c1a33; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; gap: 10px"><sc-for list="{{down}}" as="d" hint-placeholder-count="5"><span style="flex: 1 1 140px; text-align: center; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); border-radius: 14px; padding: 14px; font-size: clamp(1.1rem, 1.8vw, 1.4rem); font-weight: 900">{{d}}</span></sc-for></div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px"><sc-for list="{{up}}" as="u" hint-placeholder-count="5"><span style="flex: 1 1 140px; text-align: center; background: #2160e8; border-radius: 14px; padding: 14px; font-size: clamp(1.1rem, 1.8vw, 1.4rem); font-weight: 900">{{u}}</span></sc-for></div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">FROM DESIGN TO OPERATIONS</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">不是再增加一套系統，而是讓所有資料真正接得起來</h2><p style="margin: 0; color: #34425e">原有建築流程把設計、圖說、施工、影像、設備與營運拆成不同系統。Aiii VBIM 把這些資訊重新整合，讓每一個階段都能被追蹤、被理解、被延續，最後形成完整的建築數位資產。</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+<sc-for list="{{stages}}" as="s" hint-placeholder-count="5"><div style="border-top: 4px solid #2160e8; background: #f3f7fc; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: #5a6a85; font-weight: 600">{{s.en}}</span><span style="font-weight: 900; font-size: 19px">{{s.zh}}</span><span style="font-size: 14px; color: #34425e">{{s.d}}</span></div></sc-for>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">COMPETITIVE EDGE</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">傳統 BIM 管模型，Aiii VBIM 管整個真實世界</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px">
+<sc-for list="{{edge}}" as="e" hint-placeholder-count="4"><div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 900; font-size: 19px">{{e.t}}</span><span style="font-size: 15px; color: #34425e">{{e.d}}</span></div></sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px">
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 900; color: #5a6a85">傳統 BIM／傳統工程管理</span><sc-for list="{{old}}" as="o" hint-placeholder-count="5"><span style="font-size: 15px; color: #34425e">— {{o}}</span></sc-for></div>
+<div style="background: #2160e8; color: #ffffff; border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 900; color: #dbe7ff">Aiii VBIM 綜合智慧平台</span><sc-for list="{{neu}}" as="n" hint-placeholder-count="5"><span style="font-size: 15px; font-weight: 700">✓ {{n}}</span></sc-for></div>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">PRODUCT FAMILY &amp; TEAM</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">產品家族與研發團隊</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px">
+<sc-for list="{{family}}" as="f" hint-placeholder-count="3"><div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; color: #1647b8">{{f.n}}</span><span style="font-weight: 900">{{f.t}}</span><span style="font-size: 15px; color: #34425e">{{f.d}}</span></div></sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; background: #0c1a33; color: #ffffff; border-radius: 24px; padding: 32px">
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #8fb6ff; font-weight: 700">共同開發</span><span style="font-size: 20px; font-weight: 900">星宴國際開發 × 星創科技 × 星賀建設</span><span style="color: #cfdcf0; font-size: 15px">集結建築工程、BIM、AI、影像辨識、物聯網、雲端與大數據專家團隊。</span></div>
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #8fb6ff; font-weight: 700">繁星計劃</span><span style="font-size: 20px; font-weight: 900">開放合作，共創智慧城市</span><span style="color: #cfdcf0; font-size: 15px">匯聚建築、醫療、能源、科技與再生產業夥伴，一曜再生已加入 Aiii VBIM 國際戰略合作夥伴生態系。</span></div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">IN THE FIELD</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">真實畫面，真實場域</h2><p style="margin: 0; color: #34425e">不是示意圖——以下是 Aiii VBIM 實際運作的現場照片與系統畫面。</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 18px">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src="../assets/real-demo.jpg" alt="Aiii VBIM 系統實機展示" loading="lazy" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-radius: 20px"><figcaption style="font-size: 14px; color: #5a6a85">Aiii VBIM 系統實機展示</figcaption></figure>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><img src="../assets/real-screens.jpg" alt="系統實際畫面：CCTV 影像對位 2D 平面圖" loading="lazy" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-radius: 20px; background: #0c1a33"><figcaption style="font-size: 14px; color: #5a6a85">系統實際畫面：CCTV 影像對位 2D 平面圖</figcaption></figure>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px 104px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px"><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">媒體報導</h2><a href="News.dc.html" style="font-weight: 700; text-decoration: none">看全部報導 →</a></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px">
+<sc-for list="{{media}}" as="m" hint-placeholder-count="3"><a href="{{m.href}}" style="text-decoration: none; color: #0c1a33; background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column"><span style="display: block; aspect-ratio: 16 / 10; background: #e8f0fe; overflow: hidden"><img src="{{m.img}}" alt="" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block"></span><span style="padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #2160e8; font-weight: 700">{{m.src}} · {{m.date}}</span><span style="font-weight: 900; font-size: 18px">{{m.t}}</span><span style="font-weight: 700; color: #2160e8; font-size: 14px">閱讀報導 ↗</span></span></a></sc-for>
+</div>
+</div>
+</section>
+
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      pillars: [
+        { no: '01', t: '遠距', d: '不必親臨現場，總部即可掌握每一個工地、廠區與建築的即時狀態。' },
+        { no: '02', t: '多點', d: '跨城市、跨國家的多個據點，用同一套標準、同一個平台管理。' },
+        { no: '03', t: '數據智控', d: '設備、能源、影像與工程資料即時串接，從監看走向預測與控制。' },
+        { no: '04', t: '360° 上帝視角', d: '天（影像）、地（感測）、腦（AI）、中樞（VBIM），一眼看懂整棟建築。' },
+        { no: '05', t: '超級戰情室', d: '從全球、據點、建築、樓層、空間到設備，一個畫面掌握全局。' },
+        { no: '06', t: 'AI 可信', d: '文件、圖面與施工影像上鏈留痕；AI 代理依授權行事，可追溯、可撤銷。' }
+      ],
+      down: ['降成本', '降耗損', '降能耗', '降錯誤', '降風險'],
+      up: ['升效率', '升品質', '升透明', '升安全', '升信任'],
+      stages: [
+        { en: 'DESIGN', zh: '設計', d: '智慧清圖、錯誤排查、模型協作、版本與設計審查' },
+        { en: 'BUILD', zh: '施工', d: '進度、品質、工安、材料、影像與施工模型同步' },
+        { en: 'INSPECT', zh: '驗收', d: '缺失、複驗、設備點交、竣工圖與線上簽核' },
+        { en: 'OPERATE', zh: '營運', d: '設備、維保、VMS、AIoT、能源與 ESG 即時管理' },
+        { en: 'ASSET', zh: '資產管理', d: '保固、公設、修繕、管委會與完整建築履歷' }
+      ],
+      edge: [
+        { t: '一站式整合', d: 'BIM + PMIS + CCTV/VMS + AI + AIoT + 數位孿生，不再讓資料散落在不同工具。' },
+        { t: '合法合規與追溯', d: '線上簽署、完整稽核軌跡與上鏈留痕，降低工程爭議與資訊失真。' },
+        { t: '提升營運效率', d: '流程自動化、異常預警、視覺化管理，提升跨部門與跨據點效率。' },
+        { t: '數位資產永續', d: '完工後模型持續服務設備、維修、改建與資產管理，BIM 不再是一次性成果。' }
+      ],
+      old: ['模型多停留在設計或施工階段', '文件、影像、設備分散管理', '完工交付後資訊斷裂', '不同據點難以統一比較', '管理多仰賴人工作業'],
+      neu: ['設計到營運全生命週期', 'BIM、PMIS、VMS、AIoT 同平台整合', '驗收資料直接延續到物業與營運', '支援遠距、多點、跨國管理', '建立上帝視角數據智控'],
+      family: [
+        { n: 'Aiii VBIM', t: '第六代智慧建築平台', d: 'BIM、PMIS、數位孿生、影像、AIoT、能源與 AI 的核心平台。' },
+        { n: 'Aiii RMS', t: '全方位智慧醫療管理系統', d: '病床、排程、空間、醫療設備與院區營運管理。' },
+        { n: 'Aiii MMS', t: '智慧商場管理系統', d: 'POS、人流、停車、租戶、影像與設備資料整合。' }
+      ],
+      media: [
+        { src: 'Yahoo News', date: '2026.06', t: '數位孿生重塑建築未來　Aiii VBIM 引領新時代', img: '../assets/world.jpg', href: 'https://tw.news.yahoo.com/%E6%95%B8%E4%BD%8D%E5%AD%BF%E7%94%9F%E9%87%8D%E5%A1%91%E5%BB%BA%E7%AF%89%E6%9C%AA%E4%BE%86-aiii-vbim%E5%BC%95%E9%A0%98%E6%96%B0%E6%99%82%E4%BB%A3-031454152.html' },
+        { src: '中華民國總統府', date: '2026', t: '星宴國際 Aiii VBIM 隨亞太再生醫學會拜會總統府', img: '../assets/news-president.jpg', href: 'https://www.president.gov.tw/NEWS/40132' },
+        { src: '頂尖傳媒', date: '2025.12', t: 'Aiii VBIM 與 Aiii RMS 亮相 2025 台灣醫療科技展', img: '../assets/news-medtech.jpg', href: 'https://www.premiermedia.com.tw/2025120506-2/' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

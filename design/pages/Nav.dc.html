@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>導覽列 Navigation</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}html{scroll-behavior:smooth}.vb-links{scrollbar-width:none}.vb-links::-webkit-scrollbar{display:none}
+.vb-top{opacity:1}
+@supports (animation-timeline: scroll()){.vb-top{opacity:0;pointer-events:none;animation:vbTop linear both;animation-timeline:scroll(root);animation-range:300px 420px}}
+@keyframes vbTop{to{opacity:1;pointer-events:auto}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+.vb-burger{display:none}
+@media (max-width:1023px){.vb-desk{display:none !important}.vb-burger{display:flex !important}.vb-top{right:16px !important;bottom:calc(16px + env(safe-area-inset-bottom)) !important}}</style>
+</helmet>
+<div aria-hidden="true" style="height: 72px"></div>
+<nav aria-label="{{navLabel}}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 72px; box-sizing: border-box; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid #dce6f2; box-shadow: 0 4px 18px rgba(12,26,51,0.06); color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 24px; height: 100%; display: flex; flex-wrap: nowrap; align-items: center; gap: 16px">
+<a href="{{homeHref}}" aria-label="Aiii VBIM" style="display: flex; align-items: center; flex: none"><img src="../assets/logo.png" alt="Aiii VBIM" style="height: 40px; width: auto; display: block"></a>
+<div class="vb-links vb-desk" style="display: flex; flex-wrap: nowrap; gap: 0 2px; flex: 1 1 auto; min-width: 0; overflow-x: auto; white-space: nowrap; font-size: 15px">
+<sc-for list="{{links}}" as="l" hint-placeholder-count="9">
+<sc-if value="{{l.on}}" hint-placeholder-val="{{false}}">
+<a href="{{l.href}}" aria-current="page" style="color: #2160e8; text-decoration: none; padding: 10px 10px; font-weight: 700; border-bottom: 2px solid #2160e8">{{l.label}}</a>
+</sc-if>
+<sc-if value="{{l.off}}" hint-placeholder-val="{{true}}">
+<a href="{{l.href}}" style="color: #34425e; text-decoration: none; padding: 10px 10px; border-bottom: 2px solid transparent">{{l.label}}</a>
+</sc-if>
+</sc-for>
+</div>
+<div class="vb-desk" style="display: flex; align-items: center; gap: 10px; flex: none">
+<div role="group" aria-label="Language" style="display: flex; border: 1px solid #dce6f2; border-radius: 999px; overflow: hidden; font-size: 13px; font-family: 'Space Grotesk', sans-serif">
+<sc-if value="{{isZh}}" hint-placeholder-val="{{true}}">
+<span aria-current="true" lang="zh-Hant" style="padding: 8px 12px; background: #e8f0fe; color: #2160e8; font-weight: 600">中文</span>
+<a href="{{enHref}}" lang="en" style="padding: 8px 12px; color: #34425e; text-decoration: none">EN</a>
+</sc-if>
+<sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">
+<a href="{{zhHref}}" lang="zh-Hant" style="padding: 8px 12px; color: #34425e; text-decoration: none">中文</a>
+<span aria-current="true" lang="en" style="padding: 8px 12px; background: #e8f0fe; color: #2160e8; font-weight: 600">EN</span>
+</sc-if>
+</div>
+<a href="{{ctaHref}}" style="background: #2160e8; color: #ffffff; font-weight: 700; padding: 10px 20px; border-radius: 999px; text-decoration: none; font-size: 15px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">{{ctaLabel}}</a>
+</div>
+<button type="button" class="vb-burger" onClick="{{toggle}}" aria-expanded="{{openStr}}" aria-controls="vb-menu" aria-label="{{menuLabel}}" style="margin-left: auto; width: 48px; height: 48px; border-radius: 12px; border: 1px solid #dce6f2; background: #ffffff; color: #0c1a33; font-size: 22px; cursor: pointer; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif">{{burgerIcon}}</button>
+</div>
+</nav>
+<sc-if value="{{open}}" hint-placeholder-val="{{false}}">
+<div id="vb-menu" class="vb-burger" style="position: fixed; top: 72px; left: 0; right: 0; bottom: 0; z-index: 49; background: #ffffff; overflow-y: auto; flex-direction: column; padding: 8px 20px calc(24px + env(safe-area-inset-bottom)); box-sizing: border-box; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif">
+<sc-for list="{{links}}" as="l" hint-placeholder-count="10">
+<sc-if value="{{l.on}}" hint-placeholder-val="{{false}}"><a href="{{l.href}}" aria-current="page" style="display: block; padding: 16px 4px; border-bottom: 1px solid #edf2f9; color: #2160e8; font-weight: 900; font-size: 18px; text-decoration: none">{{l.label}}</a></sc-if>
+<sc-if value="{{l.off}}" hint-placeholder-val="{{true}}"><a href="{{l.href}}" style="display: block; padding: 16px 4px; border-bottom: 1px solid #edf2f9; color: #0c1a33; font-weight: 700; font-size: 18px; text-decoration: none">{{l.label}}</a></sc-if>
+</sc-for>
+<div style="display: flex; gap: 10px; align-items: center; padding-top: 20px">
+<a href="{{zhHref}}" lang="zh-Hant" style="flex: 1; text-align: center; padding: 12px; border: 1px solid #dce6f2; border-radius: 12px; color: #0c1a33; text-decoration: none; font-weight: 700">中文</a>
+<a href="{{enHref}}" lang="en" style="flex: 1; text-align: center; padding: 12px; border: 1px solid #dce6f2; border-radius: 12px; color: #0c1a33; text-decoration: none; font-weight: 700; font-family: 'Space Grotesk', sans-serif">EN</a>
+</div>
+<a href="{{ctaHref}}" style="margin-top: 14px; display: flex; justify-content: center; align-items: center; min-height: 52px; background: #2160e8; color: #ffffff; border-radius: 999px; text-decoration: none; font-weight: 900; font-size: 17px">{{ctaLabel}}</a>
+</div>
+</sc-if>
+<button type="button" class="vb-top" onClick="{{toTop}}" aria-label="{{topLabel}}" title="{{topLabel}}" style="position: fixed; right: 24px; bottom: 24px; z-index: 50; width: 52px; height: 52px; border-radius: 999px; border: none; background: #2160e8; color: #ffffff; font-size: 22px; font-weight: 900; cursor: pointer; box-shadow: 0 8px 24px rgba(33,96,232,0.35); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif">↑</button>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"active":{"editor":"enum","options":["home","vbim","platform","solutions","energy","edge","cases","partners","academy","news","about","contact"],"default":"home"},"lang":{"editor":"enum","options":["zh","en"],"default":"zh"},"$preview":{"width":1440,"height":72}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { open: false }; }
+  renderVals() {
+    const a = this.props.active ?? 'home';
+    const en = (this.props.lang ?? 'zh') === 'en';
+    const FILES = { home: 'Main', vbim: 'VBIM', platform: 'Platform', solutions: 'Solutions', energy: 'Energy', edge: 'EdgeAI', cases: 'Cases', partners: 'Partners', academy: 'Academy', news: 'News', about: 'About', contact: 'Contact' };
+    const p = en ? 'en-' : '';
+    const L = [
+      ['vbim', 'VBIM', 'VBIM'],
+      ['platform', '平台 OS', 'Platform'],
+      ['solutions', '五大領域', 'Sectors'],
+      ['energy', '能源 × 空調', 'Energy & HVAC'],
+      ['edge', '地端 AI', 'Edge AI'],
+      ['cases', '案例', 'Cases'],
+      ['partners', '生態夥伴', 'Partners'],
+      ['academy', '認證學院', 'Academy'],
+      ['news', '最新消息', 'News'],
+      ['about', '關於我們', 'About']
+    ];
+    const f = FILES[a] || 'Main';
+    return {
+      navLabel: en ? 'Main navigation' : '主選單',
+      isZh: !en, isEn: en,
+      homeHref: p + 'Main.dc.html',
+      zhHref: f + '.dc.html',
+      enHref: 'en-' + f + '.dc.html',
+      ctaHref: p + 'Contact.dc.html',
+      ctaLabel: en ? 'Book a Demo' : '預約 Demo',
+      open: this.state.open,
+      openStr: this.state.open ? 'true' : 'false',
+      burgerIcon: this.state.open ? '✕' : '☰',
+      menuLabel: this.state.open ? (en ? 'Close menu' : '關閉選單') : (en ? 'Open menu' : '開啟選單'),
+      toggle: () => this.setState({ open: !this.state.open }),
+      topLabel: en ? 'Back to top' : '回到頂部',
+      toTop: () => { try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); } },
+      links: L.map(([k, zh, eng]) => ({ label: en ? eng : zh, href: p + FILES[k] + '.dc.html', on: k === a, off: k !== a }))
+    };
+  }
+}
+</script>
+</body>
+</html>

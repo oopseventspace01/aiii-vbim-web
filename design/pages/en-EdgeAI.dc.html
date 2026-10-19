@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Aiii VBIM Edge AI</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="edge" lang="en" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">EDGE AI APPLIANCE + AI AGENT</div>
+<h1 style="margin: 0; font-size: clamp(2.3rem, 4.6vw, 3.8rem); line-height: 1.15; font-weight: 900">A complete Edge AI solution</h1>
+<p style="margin: 0; font-size: 1.3rem; font-weight: 700">AI that doesn’t just see the data — it understands your site and helps you decide.</p>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">Healthcare, manufacturing, critical infrastructure and large enterprises often need low latency, network resilience and protection for sensitive data. Aiii Edge AI deploys inference, document Q&amp;A and AI agents on-site, directly connected to VBIM’s spatial, equipment, video and energy data.</p>
+<a href="en-Contact.dc.html" style="align-self: flex-start; background: #2160e8; color: #ffffff; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Request an Edge AI assessment →</a>
+</div>
+<div style="flex: 1.1 1 500px; min-width: 0"><img src="../assets/edge.jpg" alt="Edge AI for a smart campus" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</header>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 72px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<sc-for list="{{five}}" as="f" hint-placeholder-count="5"><div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 900; font-size: 18px">{{f.t}}</span><span style="font-size: 14px; color: #34425e">{{f.d}}</span></div></sc-for>
+</section>
+
+<section style="background: #0c1a33; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #8fb6ff; font-weight: 600">AI-READY BUILDING · DESIGN-IN</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">Don’t bolt AI on after handover —<br>design it in from the start</h2><p style="margin: 0; color: #cfdcf0">Aiii VBIM brings AI into the building — planning AI compute, memory, storage, networking and cooling from the design stage, for an AI-Ready Building solution that can be designed in.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><sc-for list="{{stack}}" as="s" hint-placeholder-count="5"><div style="display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: center; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; padding: 16px 20px"><span style="font-weight: 900; flex: 0 1 180px; color: #8fb6ff">{{s.l}}</span><span style="font-size: 15px; color: #eef3ff; flex: 1 1 360px">{{s.d}}</span></div></sc-for></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span style="font-size: 14px; color: #aebdd6; margin-right: 6px; align-self: center">Design-in items</span><sc-for list="{{design}}" as="d" hint-placeholder-count="6"><span style="background: #ffffff; color: #0c1a33; border-radius: 10px; padding: 8px 14px; font-weight: 900; font-size: 14px">{{d}}</span></sc-for></div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">What Edge AI can do</h2>
+<div style="overflow-x: auto; border: 1px solid #dce6f2; border-radius: 18px">
+<table style="width: 100%; min-width: 720px; border-collapse: collapse; font-size: 15px">
+<thead><tr style="background: #0c1a33; color: #ffffff; text-align: left"><th scope="col" style="padding: 14px 18px">Capability</th><th scope="col" style="padding: 14px 18px">Use</th><th scope="col" style="padding: 14px 18px">Value</th></tr></thead>
+<tbody><sc-for list="{{caps}}" as="c" hint-placeholder-count="5"><tr style="border-top: 1px solid #dce6f2"><th scope="row" style="padding: 14px 18px; text-align: left; font-family: 'Space Grotesk', sans-serif">{{c.n}}</th><td style="padding: 14px 18px; color: #34425e">{{c.u}}</td><td style="padding: 14px 18px; font-weight: 700; color: #1647b8">{{c.v}}</td></tr></sc-for></tbody>
+</table>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">Four deployment options</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px"><sc-for list="{{forms}}" as="f" hint-placeholder-count="4"><div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px">{{f.n}}</span><span style="color: #2160e8; font-weight: 900; font-size: 14px">{{f.s}}</span><span style="color: #34425e; font-size: 15px">{{f.d}}</span></div></sc-for></div>
+<h3 style="margin: 24px 0 0; font-size: 1.4rem; font-weight: 900">Edge AI infrastructure</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px"><sc-for list="{{infra}}" as="p" hint-placeholder-count="4"><div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 900">{{p.t}}</span><span style="color: #34425e; font-size: 15px">{{p.d}}</span></div></sc-for></div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; background: #2160e8; color: #ffffff; border-radius: 28px; padding: 40px"><div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: clamp(1.5rem, 2.6vw, 2.1rem); font-weight: 900">Where should your data be processed?</span><span style="color: #eef3ff">We assess your data types, compliance needs and the right deployment model.</span></div><a href="en-Contact.dc.html" style="background: #ffffff; color: #1647b8; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Request an assessment →</a></div>
+</section>
+
+<dc-import name="Footer" lang="en" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      five: [
+        { t: 'On-premise AI PC / GPU Server', d: 'On-site compute hardware' },
+        { t: 'AI Vision', d: 'PPE, intrusion, smoke & fire, falls, vehicle recognition' },
+        { t: 'AI Agent', d: 'Energy / Facility / Security / ESG' },
+        { t: 'Real-time · low latency · data sovereignty', d: 'Secure, controllable AI compute' },
+        { t: 'Integrated with PMIS / BIM / VMS / EMS', d: 'Data and site, connected' }
+      ],
+      stack: [
+        { l: 'Applications', d: 'BIM Q&A · video AI · energy forecasting · AI agents' },
+        { l: 'Aiii VBIM', d: 'PMIS · Digital Twin · VMS · AIoT · Energy Data' },
+        { l: 'AI Platform', d: 'Local LLM · RAG · Vision AI · Private AI' },
+        { l: 'AI Infrastructure', d: 'AI Memory · Enterprise SSD · Edge AI Server' },
+        { l: 'Foundation', d: 'GPU · CPU · XPU · DRAM · NVMe · UPS · Cooling' }
+      ],
+      design: ['AI Room', 'Edge AI Node', 'Private AI Storage', 'Fiber / Network', 'UPS / Cooling', 'Cybersecurity'],
+      caps: [
+        { n: 'Local AI Vision', u: 'PPE, smoke & fire, falls, intrusion, footfall, abnormal behavior', v: 'Low latency, less cloud bandwidth' },
+        { n: 'Local LLM / RAG', u: 'Q&A over engineering documents, SOPs, manuals and maintenance logs', v: 'Enterprise data stays on-site' },
+        { n: 'AI Agent', u: 'Energy / Facility / Engineering / Security agents', v: 'Cross-system queries and automated workflows' },
+        { n: 'Edge Analytics', u: 'Real-time analysis of video, sensor and PLC data', v: 'Keeps running offline' },
+        { n: 'Model Management', u: 'Model versions, site deployment, updates and monitoring', v: 'Operable, maintainable, scalable' }
+      ],
+      forms: [
+        { n: 'Edge AI Box', s: 'Single building or zone', d: 'For individual buildings, clinics, sites and branches.' },
+        { n: 'Edge AI Server', s: 'Large factories, hospitals, malls', d: 'Runs video AI, document Q&A and agents.' },
+        { n: 'GPU Cluster', s: 'Compute centers, large enterprises', d: 'An AI Factory node for many models and sites.' },
+        { n: 'Hybrid', s: 'Edge inference + central cloud management', d: 'Real-time on-site compute, unified governance in private or public cloud.' }
+      ],
+      infra: [
+        { t: 'Edge AI Compute', d: 'AI PCs, AI workstations, edge servers' },
+        { t: 'AI Memory', d: 'Tiered AI memory architecture' },
+        { t: 'AI Storage', d: 'NVMe, enterprise SSD' },
+        { t: 'Private AI Infrastructure', d: 'Local LLM, RAG, Vision AI, AI agents' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

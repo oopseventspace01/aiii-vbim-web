@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>Aiii VBIM 平台 OS</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="platform" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">PLATFORM · PHYSICAL WORLD OS</div>
+<h1 style="margin: 0; font-size: clamp(2.3rem, 4.6vw, 3.8rem); line-height: 1.15; font-weight: 900">Aiii VBIM 平台 OS</h1>
+<p style="margin: 0; font-size: 1.3rem; font-weight: 700">把建築資料、設備與 AI 基礎建設，整合為可營運的建築作業系統。</p>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">企業數位轉型最難的不是沒有資料，而是資料分散在不同系統、不同承包商、不同場域與不同時間階段。Aiii VBIM 建立實體世界共同資料層，讓圖說、BIM、工程文件、設備台帳、影像、感測、能源、維修與 AI，都落在同一個空間與資產架構中。</p>
+</div>
+<div style="flex: 1 1 460px; min-width: 0"><img src="../assets/city.jpg" alt="以建築為核心的城市示意" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</header>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">五個核心能力</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<sc-for list="{{caps}}" as="c" hint-placeholder-count="5">
+<div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">{{c.no}}</span><span style="font-weight: 900; font-size: 20px">{{c.t}}</span><span style="font-size: 15px; color: #34425e">{{c.d}}</span></div>
+</sc-for>
+</div>
+</section>
+
+<section style="background: #0c1a33; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 14px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #8fb6ff; font-weight: 600">ARCHITECTURE</div>
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">五層整合架構</h2>
+<p style="margin: 0; color: #cfdcf0">不是單一軟體，而是把建築資料、感知、設備、AI 運算與管理整合為一個可營運的系統。</p>
+<p style="margin: 0; color: #cfdcf0; font-family: 'Space Grotesk', sans-serif">2D → 3D BIM → PMIS → Digital Twin → Private AI</p>
+</div>
+<div style="flex: 2 1 560px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{layers}}" as="l" hint-placeholder-count="5">
+<div style="display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: center; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 16px; padding: 16px 20px">
+<span style="font-family: 'Space Grotesk', sans-serif; background: #8fb6ff; color: #0c1a33; border-radius: 8px; padding: 2px 10px; font-weight: 700; font-size: 14px">{{l.no}}</span>
+<span style="font-weight: 900; flex: 0 1 160px">{{l.n}}</span>
+<span style="font-size: 15px; color: #cfdcf0; flex: 1 1 280px">{{l.d}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">LIFECYCLE</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">從設計開始，一路管理到營運</h2><p style="margin: 0; color: #34425e">這是 Aiii VBIM 與傳統 BIM 最大的差異：模型不在完工後封存，而是持續進入驗收、交付、物業與設備管理，成為長期可用的數位資產。</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px">
+<sc-for list="{{life}}" as="s" hint-placeholder-count="6">
+<div style="border-top: 4px solid #2160e8; background: #f3f7fc; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: #5a6a85; font-weight: 600">{{s.en}}</span><span style="font-weight: 900; font-size: 19px">{{s.zh}}</span><span style="font-size: 14px; color: #34425e">{{s.d}}</span></div>
+</sc-for>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 14px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">FULL-CYCLE PMIS</div>
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">不只管理施工，<br>而是管理整個工程生命週期</h2>
+<p style="margin: 0; color: #34425e">把分散在業主、建築師、工程顧問、營造、監造驗收與物業端的資訊，拉回同一個平台。</p>
+<p style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #1647b8">One Project · One Platform · One Version of Truth</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{roles}}" as="r" hint-placeholder-count="6"><span style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 10px; padding: 6px 12px; font-size: 14px; font-weight: 700">{{r}}</span></sc-for>
+</div>
+</div>
+<div style="flex: 1.3 1 480px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px">
+<sc-for list="{{pmis}}" as="p" hint-placeholder-count="8"><div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 14px; padding: 16px 18px; display: flex; gap: 10px; align-items: center; font-weight: 700"><span aria-hidden="true" style="color: #2160e8">✓</span>{{p}}</div></sc-for>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">四大智慧核心能力</h2><p style="margin: 0; color: #34425e">整合影像、文件、數位孿生與上鏈，從現場到資料追溯都可視、可追蹤、可延續。</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px">
+<sc-for list="{{four}}" as="f" hint-placeholder-count="4">
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 900; font-size: 20px">{{f.t}}</span><span style="font-size: 15px; color: #34425e">{{f.d}}</span><span style="font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: #1647b8; font-weight: 600">{{f.tags}}</span></div>
+</sc-for>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">AIOT × DIGITAL TWIN</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">人、物、天、地、線：<br>工程與營運的全域數位座標</h2><p style="margin: 0; color: #34425e">Aiii VBIM 不只管理空間，更管理時間。當人、物、空間、設備、管線、工程清單與進度全部數位化，系統不只告訴你「現在發生什麼」，更能提前看見「接下來會發生什麼」。</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px">
+<sc-for list="{{dims}}" as="d" hint-placeholder-count="5">
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 36px; font-weight: 900; color: #2160e8; line-height: 1">{{d.k}}</span><span style="font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: #5a6a85; font-weight: 600">{{d.en}}</span><span style="font-size: 14px; color: #34425e">{{d.d}}</span></div>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+<sc-for list="{{axes}}" as="a" hint-placeholder-count="7"><span style="background: #0c1a33; color: #ffffff; border-radius: 10px; padding: 8px 14px; font-size: 14px; font-weight: 700">{{a}}</span></sc-for>
+<span style="font-family: 'Space Grotesk', sans-serif; color: #1647b8; font-weight: 700; margin-left: 8px">TIME → PREDICT → NEXT ACTION</span>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">不同角色，看到的是同一個真實專案</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px">
+<sc-for list="{{personas}}" as="p" hint-placeholder-count="4">
+<div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 900; font-size: 19px">{{p.t}}</span><span style="font-size: 15px; color: #34425e">{{p.d}}</span></div>
+</sc-for>
+</div>
+<div style="overflow-x: auto; border: 1px solid #dce6f2; border-radius: 18px; margin-top: 12px">
+<table style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 15px">
+<thead><tr style="background: #0c1a33; color: #ffffff; text-align: left"><th scope="col" style="padding: 14px 18px">類型</th><th scope="col" style="padding: 14px 18px">強項</th><th scope="col" style="padding: 14px 18px">常見限制</th><th scope="col" style="padding: 14px 18px; color: #8fb6ff">Aiii VBIM 的差異</th></tr></thead>
+<tbody>
+<sc-for list="{{cmp}}" as="r" hint-placeholder-count="6">
+<tr style="border-top: 1px solid #dce6f2"><th scope="row" style="padding: 14px 18px; text-align: left">{{r.t}}</th><td style="padding: 14px 18px; color: #34425e">{{r.s}}</td><td style="padding: 14px 18px; color: #5a6a85">{{r.l}}</td><td style="padding: 14px 18px; font-weight: 700; color: #1647b8">{{r.v}}</td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 0 24px 104px">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; background: #2160e8; color: #ffffff; border-radius: 28px; padding: 40px">
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: clamp(1.5rem, 2.6vw, 2.1rem); font-weight: 900">看看 Aiii VBIM 在你的場域怎麼運作</span><span style="color: #eef3ff">用你的場域情境，實際操作一次。</span></div>
+<a href="Contact.dc.html" style="background: #ffffff; color: #1647b8; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">預約 Demo →</a>
+</div>
+</section>
+
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      caps: [
+        { no: '01', t: '空間化', d: '所有資料都能回到建築、樓層、區域、設備與資產。' },
+        { no: '02', t: '全生命週期', d: '設計、施工、驗收、營運不再斷鏈。' },
+        { no: '03', t: '多系統融合', d: '連接 ERP、MES、HIS、SCADA、PLC、BMS、EMS、VMS 與 IoT。' },
+        { no: '04', t: '遠距多點', d: '單一總部管理多園區、多城市與跨國據點。' },
+        { no: '05', t: 'AI 智控', d: '從顯示數據升級為預測、最佳化、事件處理與閉環控制。' }
+      ],
+      layers: [
+        { no: '05', n: '管理層', d: '遠距、多點、數據智控、360° Dashboard' },
+        { no: '04', n: 'AI 運算層', d: 'Edge AI、Local AI、AI Storage、Private AI' },
+        { no: '03', n: '設備層', d: '重電、HVAC、儲能、太陽能、機電與現場設備' },
+        { no: '02', n: '感知層', d: '攝影機、VMS、AIoT Sensor、電表、水表、環境感測' },
+        { no: '01', n: '建築資料層', d: '2D、3D BIM、PMIS、工程文件、設備履歷' }
+      ],
+      life: [
+        { en: 'PLAN', zh: '規劃', d: '基地、法規、需求與企業標準' },
+        { en: 'DESIGN', zh: '設計', d: '智慧清圖、錯誤排查、模型協作、版本審查' },
+        { en: 'BUILD', zh: '施工', d: '進度、品質、工安、材料、影像同步管理' },
+        { en: 'INSPECT', zh: '驗收', d: '缺失、複驗、設備點交、竣工圖、線上簽核' },
+        { en: 'OPERATE', zh: '營運', d: '設備、維保、VMS、AIoT、能源與 ESG' },
+        { en: 'ASSET', zh: '資產維護', d: '保固、公設、修繕、管委會與建築履歷' }
+      ],
+      roles: ['業主 Developer', '建築師 Architect', '工程顧問 Consultant', '營造 Contractor', '監造驗收 Inspector', '物業管委會 FM'],
+      pmis: ['圖說與版本管理', 'RFI／Submittal／簽核', '進度與成本追蹤', '品質／工安／缺失', '現場影像與紀錄', '材料與設備點交', '竣工資料與模型', '保固／維修／資產履歷'],
+      four: [
+        { t: '即時影像辨識整合', d: '整合 CCTV、Aiii MMS 與 AI 影像辨識，提升施工安全、庫存盤點與營運透明度。', tags: 'CCTV · Aiii MMS · AI Vision' },
+        { t: '數位化文件管理', d: '送審、簽署、查驗與各階段文件線上化，降低錯誤並形成可追溯的稽核軌跡。', tags: 'e-Sign · Audit · PMIS' },
+        { t: '實現數位孿生', d: '建築模型與現場設備、影像、AIoT 感測同步，讓虛擬模型持續反映真實建築。', tags: 'Digital Twin · AIoT · FM' },
+        { t: '全流程上鏈追溯', d: '重要文件、數據、圖面與施工影像建立時間戳記，強化真實、透明與可信。', tags: 'Blockchain · Traceability · Trust' }
+      ],
+      dims: [
+        { k: '人', en: 'PEOPLE', d: '人員、工班、承包商、使用者、權限與作業紀錄' },
+        { k: '物', en: 'ASSET', d: '設備、材料、資產、機具、庫存與維修履歷' },
+        { k: '天', en: 'SPACE', d: '建築空間、樓層、上方設備、機電系統與環境條件' },
+        { k: '地', en: 'GROUND', d: '基地、地下空間、基礎、停車、地下設備與管線' },
+        { k: '線', en: 'MEP', d: '電力、給排水、消防、空調、弱電、網路與 MEP 管線' }
+      ],
+      axes: ['2D 圖面', '3D BIM', 'BOQ 工程清單', 'Asset 設備細項', 'Time 施工進度', 'QA/QC 驗收', 'FM 維運'],
+      personas: [
+        { t: '建築師事務所', d: '雲端協作清圖、錯誤排查、模型審查與版本控制，降低設計資訊落差。' },
+        { t: '營造／開發商', d: '透明掌握施工進度、品質、工安、文件與交付，強化業主與現場協同。' },
+        { t: '工廠／醫院', d: '從建置到營運串接設備、影像、能源與企業系統，支援多據點遠距管理。' },
+        { t: '物業／管委會', d: '保固、維修、公設、設備與住戶服務延續完工資料，不必重建一套系統。' }
+      ],
+      cmp: [
+        { t: 'BIM / CDE', s: '設計與工程資料', l: '營運數據與控制不足', v: '工程資料延伸至營運' },
+        { t: 'BMS / EMS', s: '設備與能源', l: '缺少 3D 與工程生命週期', v: 'BIM + 資產 + 能源' },
+        { t: 'VMS / AI Vision', s: '影像事件', l: '缺少設備、能源與工程脈絡', v: '影像事件落到空間與工單' },
+        { t: 'MES / ERP', s: '生產與企業流程', l: '不理解建築與 OT 空間', v: 'IT × OT × 空間' },
+        { t: 'DCIM', s: '資料中心設備', l: '場景較垂直', v: '跨資料中心、建築與能源' },
+        { t: '單一 AI 平台', s: '模型與資料分析', l: '缺乏實體世界脈絡', v: 'AI + 數位孿生 + 控制' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

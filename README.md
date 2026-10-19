@@ -19,12 +19,13 @@ scripts/       共用小工具（讀取根目錄 .env）
 
 ## 常用指令
 
-| 指令               | 用途                                        |
-| ------------------ | ------------------------------------------- |
-| `npm run dev`      | 啟動網站開發伺服器（http://localhost:4321） |
-| `npm run studio`   | 啟動 Sanity Studio（http://localhost:3333） |
-| `npm test`         | 單元測試（Vitest）                          |
-| `npm run test:e2e` | E2E 測試（Playwright）                      |
-| `npm run lint`     | 程式碼檢查                                  |
-| `npm run format`   | 自動排版                                    |
-| `npm run check`    | 全部檢查（與 CI 相同，E2E 除外）            |
+| 指令               | 用途                                             |
+| ------------------ | ------------------------------------------------ |
+| `npm run dev`      | 啟動網站開發伺服器（http://localhost:4321）      |
+| `npm run studio`   | 啟動 Sanity Studio（http://localhost:3333）      |
+| `npm test`         | 單元測試（Vitest）                               |
+| `npm run test:e2e` | E2E 測試（Playwright）                           |
+| `npm run seed`     | 匯入種子資料到 Sanity（需先 `npx sanity login`） |
+| `npm run lint`     | 程式碼檢查                                       |
+| `npm run format`   | 自動排版                                         |
+| `npm run check`    | 全部檢查（與 CI 相同，E2E 除外）                 |

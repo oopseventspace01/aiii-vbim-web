@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>VBIM Academy</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="academy" lang="en" hint-size="100%,72px"></dc-import>
+
+<header style="background: #2160e8; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 80px 24px 72px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end">
+<div style="flex: 1 1 560px; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; font-weight: 700; color: #dbe7ff">VBIM ACADEMY</div>
+<h1 style="margin: 0; font-size: clamp(2.4rem, 4.8vw, 4rem); line-height: 1.1; font-weight: 900">VBIM Certification Academy</h1>
+<p style="margin: 0; font-size: 1.3rem; font-weight: 700">Train → Assess → Certify → Match</p>
+<p style="margin: 0; font-size: 1.05rem; color: #eef3ff; max-width: 680px">AI-Ready Buildings need people who understand buildings, equipment and AI. VBIM Academy develops engineers and partners who can bring BIM, energy, HVAC, video, AIoT and Edge AI to life on real sites.</p>
+</div>
+<a href="#register" style="background: #ffffff; color: #1647b8; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Register interest →</a>
+</div>
+</header>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">Four steps to certification</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px"><sc-for list="{{steps}}" as="s" hint-placeholder-count="4"><div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-size: 30px; font-weight: 700">{{s.no}}</span><span style="font-weight: 900; font-size: 20px">{{s.t}}</span><span style="color: #34425e; font-size: 15px">{{s.d}}</span></div></sc-for></div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">CURRICULUM</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">Six course modules</h2><p style="margin: 0; color: #34425e">Mapped to the full Aiii VBIM 2.0 capability set — from building data all the way to Edge AI.</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px"><sc-for list="{{mods}}" as="m" hint-placeholder-count="6"><div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><div style="display: flex; align-items: baseline; gap: 12px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">{{m.no}}</span><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px">{{m.en}}</span></div><span style="font-weight: 900; font-size: 17px">{{m.t}}</span><span style="font-size: 15px; color: #34425e">{{m.d}}</span></div></sc-for></div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">Who it’s for</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px"><sc-for list="{{tracks}}" as="t" hint-placeholder-count="3"><div style="background: #0c1a33; color: #ffffff; border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 10px"><span style="font-family: 'Space Grotesk', sans-serif; color: #8fb6ff; font-weight: 600">{{t.en}}</span><span style="font-size: 22px; font-weight: 900">{{t.t}}</span><span style="color: #cfdcf0; font-size: 15px">{{t.d}}</span><span style="font-size: 14px; font-weight: 700; border-top: 1px solid rgba(255,255,255,0.16); padding-top: 10px">Key modules: {{t.focus}}</span></div></sc-for></div>
+</section>
+
+<section id="register" style="background: #f3f7fc; border-top: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px 104px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 14px"><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">Register for the first cohort</h2><p style="margin: 0; color: #34425e">We’ll notify you as soon as enrollment opens. Companies and organizations registering as a group can sign up here too.</p></div>
+<form onSubmit="{{submit}}" style="flex: 1.4 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 14px; background: #ffffff; border: 1px solid #dce6f2; border-radius: 24px; padding: 28px">
+<sc-if value="{{sent}}" hint-placeholder-val="{{false}}"><div role="status" style="background: #e6f6ef; border: 1px solid #2f9e6e; color: #145c3e; border-radius: 14px; padding: 14px 16px; font-weight: 700">You’re registered — we’ll let you know when enrollment opens.</div></sc-if>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Name *<input type="text" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Email *<input type="email" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Organization<input type="text" style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Role<select style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; font-family: inherit"><option>Architect / designer</option><option>Engineering / MEP consultant</option><option>Contractor / engineer</option><option>System integration / IT</option><option>Facility / property management</option><option>Student</option><option>Other</option></select></label>
+</div>
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 18px"><legend style="font-size: 14px; color: #34425e; font-weight: 700; margin-bottom: 8px">Modules of interest (select any)</legend><sc-for list="{{mods}}" as="m" hint-placeholder-count="6"><label style="display: flex; gap: 8px; align-items: center; font-size: 15px"><input type="checkbox" style="width: 20px; height: 20px">{{m.en}}</label></sc-for></fieldset>
+<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: #34425e"><input type="checkbox" required style="width: 20px; height: 20px; margin-top: 2px">I agree to the processing of my data under the privacy policy</label>
+<button type="submit" style="align-self: flex-start; background: #2160e8; color: #ffffff; border: 0; font-weight: 700; font-size: 16px; padding: 12px 28px; border-radius: 999px; min-height: 48px; cursor: pointer; font-family: inherit">Register</button>
+</form>
+</div>
+</section>
+
+<dc-import name="Footer" lang="en" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3800}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sent: false }; }
+  renderVals() {
+    return {
+      sent: this.state.sent,
+      submit: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ sent: true }); },
+      steps: [
+        { no: '01', t: 'Train', d: 'Aiii VBIM platform, system integration and hands-on Edge AI' },
+        { no: '02', t: 'Assess', d: 'Practical tasks plus real-site scenario validation' },
+        { no: '03', t: 'Certify', d: 'Become a VBIM Certified Engineer or Certified Partner' },
+        { no: '04', t: 'Match', d: 'Join the certified talent pool and take on deployment and O&M projects' }
+      ],
+      mods: [
+        { no: '01', en: 'BIM / PMIS', t: 'Building data & project management', d: '2D → 3D → construction → commissioning: drawing versions, RFIs, approvals and as-builts.' },
+        { no: '02', en: 'Energy', t: 'Smart energy management', d: 'Power, HV equipment, storage and solar; demand management and the energy loop.' },
+        { no: '03', en: 'HVAC', t: 'HVAC efficiency & clean environments', d: 'Chillers, cooling towers, AHUs, kW/RT, COP and cleanroom control.' },
+        { no: '04', en: 'Vision', t: 'Video & Vision AI', d: 'Cameras, VMS and AI recognition — events placed in BIM space and work orders.' },
+        { no: '05', en: 'AIoT', t: 'Equipment & sensor integration', d: 'Equipment, sensors, meters, controllers and data standards.' },
+        { no: '06', en: 'Edge AI', t: 'Edge AI & Private AI', d: 'Local LLM, RAG, AI agents, storage and design-in planning.' }
+      ],
+      tracks: [
+        { en: 'DESIGN', t: 'Architects & consultants', d: 'Write AI, energy, HVAC and video into drawings and specs from the earliest stage.', focus: 'BIM/PMIS · HVAC · Edge AI' },
+        { en: 'DELIVERY', t: 'Engineers & integrators', d: 'Deliver Aiii VBIM deployments, equipment integration and on-site setup.', focus: 'AIoT · Vision · Energy' },
+        { en: 'OPERATION', t: 'Facility & property teams', d: 'Run equipment, energy and maintenance with the digital twin and command center.', focus: 'Energy · HVAC · BIM/PMIS' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Aiii VBIM Platform OS</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="platform" lang="en" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">PLATFORM · PHYSICAL WORLD OS</div>
+<h1 style="margin: 0; font-size: clamp(2.3rem, 4.6vw, 3.8rem); line-height: 1.15; font-weight: 900">The Aiii VBIM Platform OS</h1>
+<p style="margin: 0; font-size: 1.3rem; font-weight: 700">Building data, equipment and AI infrastructure — integrated into one operable building OS.</p>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">The hardest part of digital transformation isn’t a lack of data — it’s data scattered across systems, contractors, sites and project phases. Aiii VBIM creates a shared data layer for the physical world, placing drawings, BIM, engineering documents, asset registers, video, sensors, energy, maintenance and AI into one spatial and asset structure.</p>
+</div>
+<div style="flex: 1 1 460px; min-width: 0"><img src="../assets/city.jpg" alt="A city with the building at its core" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</header>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">Five core capabilities</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<sc-for list="{{caps}}" as="c" hint-placeholder-count="5"><div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">{{c.no}}</span><span style="font-weight: 900; font-size: 20px">{{c.t}}</span><span style="font-size: 15px; color: #34425e">{{c.d}}</span></div></sc-for>
+</div>
+</section>
+
+<section style="background: #0c1a33; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 14px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #8fb6ff; font-weight: 600">ARCHITECTURE</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">A five-layer integrated architecture</h2><p style="margin: 0; color: #cfdcf0">Not a single piece of software, but building data, sensing, equipment, AI compute and management combined into one operable system.</p><p style="margin: 0; color: #cfdcf0; font-family: 'Space Grotesk', sans-serif">2D → 3D BIM → PMIS → Digital Twin → Private AI</p></div>
+<div style="flex: 2 1 560px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{layers}}" as="l" hint-placeholder-count="5"><div style="display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: center; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 16px; padding: 16px 20px"><span style="font-family: 'Space Grotesk', sans-serif; background: #8fb6ff; color: #0c1a33; border-radius: 8px; padding: 2px 10px; font-weight: 700; font-size: 14px">{{l.no}}</span><span style="font-weight: 900; flex: 0 1 200px">{{l.n}}</span><span style="font-size: 15px; color: #cfdcf0; flex: 1 1 280px">{{l.d}}</span></div></sc-for>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">LIFECYCLE</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">From design all the way to operations</h2><p style="margin: 0; color: #34425e">This is the biggest difference from traditional BIM: the model isn’t archived at handover. It carries on into commissioning, facility and asset management as a long-lived digital asset.</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px">
+<sc-for list="{{life}}" as="s" hint-placeholder-count="6"><div style="border-top: 4px solid #2160e8; background: #f3f7fc; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 900; font-size: 19px">{{s.t}}</span><span style="font-size: 14px; color: #34425e">{{s.d}}</span></div></sc-for>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 14px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">FULL-CYCLE PMIS</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">Manage the entire project lifecycle, not just construction</h2><p style="margin: 0; color: #34425e">Information scattered across owners, architects, consultants, contractors, inspectors and facility teams — brought back onto one platform.</p><p style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #1647b8">One Project · One Platform · One Version of Truth</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{roles}}" as="r" hint-placeholder-count="6"><span style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 10px; padding: 6px 12px; font-size: 14px; font-weight: 700">{{r}}</span></sc-for></div>
+</div>
+<div style="flex: 1.3 1 480px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px">
+<sc-for list="{{pmis}}" as="p" hint-placeholder-count="8"><div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 14px; padding: 16px 18px; display: flex; gap: 10px; align-items: center; font-weight: 700"><span aria-hidden="true" style="color: #2160e8">✓</span>{{p}}</div></sc-for>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px"><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">Four intelligent core capabilities</h2><p style="margin: 0; color: #34425e">Video, documents, the digital twin and blockchain — traceable from the field to the record.</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px">
+<sc-for list="{{four}}" as="f" hint-placeholder-count="4"><div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 900; font-size: 20px">{{f.t}}</span><span style="font-size: 15px; color: #34425e">{{f.d}}</span><span style="font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: #1647b8; font-weight: 600">{{f.tags}}</span></div></sc-for>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">AIOT × DIGITAL TWIN</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">People, Assets, Space, Ground, MEP:<br>a full digital coordinate system</h2><p style="margin: 0; color: #34425e">Aiii VBIM manages not only space, but time. Once people, assets, spaces, equipment, piping, bills of quantities and schedules are digitized, the system tells you not just what is happening now — but what will happen next.</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px">
+<sc-for list="{{dims}}" as="d" hint-placeholder-count="5"><div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; color: #2160e8">{{d.k}}</span><span style="font-size: 14px; color: #34425e">{{d.d}}</span></div></sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><sc-for list="{{axes}}" as="a" hint-placeholder-count="7"><span style="background: #0c1a33; color: #ffffff; border-radius: 10px; padding: 8px 14px; font-size: 14px; font-weight: 700">{{a}}</span></sc-for><span style="font-family: 'Space Grotesk', sans-serif; color: #1647b8; font-weight: 700; margin-left: 8px">TIME → PREDICT → NEXT ACTION</span></div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900">Different roles, one true project</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px">
+<sc-for list="{{personas}}" as="p" hint-placeholder-count="4"><div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 900; font-size: 19px">{{p.t}}</span><span style="font-size: 15px; color: #34425e">{{p.d}}</span></div></sc-for>
+</div>
+<div style="overflow-x: auto; border: 1px solid #dce6f2; border-radius: 18px; margin-top: 12px">
+<table style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 15px">
+<thead><tr style="background: #0c1a33; color: #ffffff; text-align: left"><th scope="col" style="padding: 14px 18px">Category</th><th scope="col" style="padding: 14px 18px">Strength</th><th scope="col" style="padding: 14px 18px">Typical limitation</th><th scope="col" style="padding: 14px 18px; color: #8fb6ff">How Aiii VBIM differs</th></tr></thead>
+<tbody><sc-for list="{{cmp}}" as="r" hint-placeholder-count="6"><tr style="border-top: 1px solid #dce6f2"><th scope="row" style="padding: 14px 18px; text-align: left">{{r.t}}</th><td style="padding: 14px 18px; color: #34425e">{{r.s}}</td><td style="padding: 14px 18px; color: #5a6a85">{{r.l}}</td><td style="padding: 14px 18px; font-weight: 700; color: #1647b8">{{r.v}}</td></tr></sc-for></tbody>
+</table>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 0 24px 104px">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; background: #2160e8; color: #ffffff; border-radius: 28px; padding: 40px"><div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: clamp(1.5rem, 2.6vw, 2.1rem); font-weight: 900">See how Aiii VBIM works on your site</span><span style="color: #eef3ff">Walk through it with your own scenario.</span></div><a href="en-Contact.dc.html" style="background: #ffffff; color: #1647b8; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Book a Demo →</a></div>
+</section>
+
+<dc-import name="Footer" lang="en" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      caps: [
+        { no: '01', t: 'Spatial', d: 'Every data point maps back to a building, floor, zone, asset or system.' },
+        { no: '02', t: 'Full lifecycle', d: 'Design, construction, commissioning and operations — no more broken handovers.' },
+        { no: '03', t: 'Multi-system', d: 'Connects ERP, MES, HIS, SCADA, PLC, BMS, EMS, VMS and IoT.' },
+        { no: '04', t: 'Remote multi-site', d: 'One HQ managing many campuses, cities and countries.' },
+        { no: '05', t: 'AI control', d: 'From displaying data to prediction, optimization, event handling and closed-loop control.' }
+      ],
+      layers: [
+        { no: '05', n: 'Management', d: 'Remote, multi-site, data intelligence, 360° dashboard' },
+        { no: '04', n: 'AI Compute', d: 'Edge AI, Local AI, AI Storage, Private AI' },
+        { no: '03', n: 'Equipment', d: 'Power, HVAC, storage, solar, MEP and field equipment' },
+        { no: '02', n: 'Sensing', d: 'Cameras, VMS, AIoT sensors, power and water meters, environment sensors' },
+        { no: '01', n: 'Building Data', d: '2D, 3D BIM, PMIS, engineering documents, asset history' }
+      ],
+      life: [
+        { t: 'Plan', d: 'Site, regulations, requirements and corporate standards' },
+        { t: 'Design', d: 'Drawing cleanup, clash checks, model collaboration, reviews' },
+        { t: 'Build', d: 'Schedule, quality, safety, materials and site video in sync' },
+        { t: 'Inspect', d: 'Defects, re-inspection, asset handover, as-builts, e-sign-off' },
+        { t: 'Operate', d: 'Equipment, maintenance, VMS, AIoT, energy and ESG' },
+        { t: 'Maintain', d: 'Warranty, common areas, repairs and building history' }
+      ],
+      roles: ['Developer', 'Architect', 'Consultant', 'Contractor', 'Inspector', 'Facility Manager'],
+      pmis: ['Drawing & version control', 'RFI / Submittal / Approvals', 'Schedule & cost tracking', 'Quality / safety / defects', 'Site video & records', 'Material & asset handover', 'As-built data & models', 'Warranty / repair / asset history'],
+      four: [
+        { t: 'Live video recognition', d: 'CCTV, Aiii MMS and AI vision combined to improve site safety, inventory checks and operational transparency.', tags: 'CCTV · Aiii MMS · AI Vision' },
+        { t: 'Digital document control', d: 'Submissions, signatures and inspections online at every stage — fewer errors, a complete audit trail.', tags: 'e-Sign · Audit · PMIS' },
+        { t: 'A living digital twin', d: 'The building model synced with field equipment, video and AIoT sensors, always reflecting the real building.', tags: 'Digital Twin · AIoT · FM' },
+        { t: 'End-to-end blockchain traceability', d: 'Time-stamped key documents, data, drawings and site video for truth, transparency and trust.', tags: 'Blockchain · Traceability · Trust' }
+      ],
+      dims: [
+        { k: 'People', d: 'Staff, crews, contractors, users, permissions and work records' },
+        { k: 'Assets', d: 'Equipment, materials, tools, inventory and maintenance history' },
+        { k: 'Space', d: 'Building spaces, floors, overhead systems, MEP and environment' },
+        { k: 'Ground', d: 'Site, basements, foundations, parking, underground utilities' },
+        { k: 'MEP', d: 'Power, plumbing, fire, HVAC, low-voltage and network lines' }
+      ],
+      axes: ['2D drawings', '3D BIM', 'BOQ', 'Asset details', 'Schedule', 'QA/QC', 'FM'],
+      personas: [
+        { t: 'Architecture firms', d: 'Cloud drawing review, error checks, model review and version control to close design gaps.' },
+        { t: 'Contractors & developers', d: 'Transparent schedule, quality, safety, documents and handover for owners and site teams.' },
+        { t: 'Factories & hospitals', d: 'Equipment, video, energy and enterprise systems connected from build to operations, across sites.' },
+        { t: 'Facility & property managers', d: 'Warranty, repairs, common areas and resident services built on as-built data — no new system needed.' }
+      ],
+      cmp: [
+        { t: 'BIM / CDE', s: 'Design & engineering data', l: 'Little operational data or control', v: 'Engineering data extended into operations' },
+        { t: 'BMS / EMS', s: 'Equipment & energy', l: 'No 3D or project lifecycle', v: 'BIM + assets + energy' },
+        { t: 'VMS / AI Vision', s: 'Video events', l: 'No equipment, energy or project context', v: 'Video events placed in space and work orders' },
+        { t: 'MES / ERP', s: 'Production & business processes', l: 'Don’t understand building or OT space', v: 'IT × OT × spatial' },
+        { t: 'DCIM', s: 'Data center equipment', l: 'Narrow, vertical scope', v: 'Across data centers, buildings and energy' },
+        { t: 'Standalone AI', s: 'Models & analytics', l: 'No physical-world context', v: 'AI + digital twin + control' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

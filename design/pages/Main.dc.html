@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>Aiii VBIM 2.0 首頁</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="home" hint-size="100%,72px"></dc-import>
+
+<!-- HERO -->
+<header style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 500px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">AIII VBIM 2.0 · AI-POWERED PHYSICAL WORLD OS</div>
+<h1 style="margin: 0; font-family: 'Space Grotesk', 'Noto Sans TC', sans-serif; font-size: clamp(2.6rem, 5.2vw, 4.6rem); line-height: 1.04; font-weight: 700; letter-spacing: -0.02em">One OS.<br>Every Building.<br><span style="color: #2160e8">Every System.</span></h1>
+<p style="margin: 0; font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 900">從 BIM／PMIS 升級為企業實體世界營運 OS</p>
+<p style="margin: 0; font-size: 1.05rem; color: #34425e; max-width: 580px">以建築為核心，串聯設計、施工、設備、能源、空調、影像與地端 AI，延伸醫院、商場、工廠、辦公與能源五大領域。讓管理者看得到、看得懂、可預測、可控制、可優化。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{pillars}}" as="p" hint-placeholder-count="6"><span style="background: #ffffff; border: 1px solid #c9d8f0; color: #1647b8; border-radius: 999px; padding: 5px 14px; font-size: 14px; font-weight: 700">{{p}}</span></sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 6px">
+<a href="Contact.dc.html" style="display: flex; flex-direction: column; gap: 2px; background: #2160e8; color: #ffffff; text-decoration: none; border-radius: 18px; padding: 16px 20px">
+<span style="font-size: 13px; color: #dbe7ff">我是業主／企業</span>
+<span style="font-size: 18px; font-weight: 700">預約導入 Demo →</span>
+</a>
+<a href="Partners.dc.html" style="display: flex; flex-direction: column; gap: 2px; background: #ffffff; color: #0c1a33; text-decoration: none; border-radius: 18px; padding: 16px 20px; border: 1px solid #c9d8f0">
+<span style="font-size: 13px; color: #5a6a85">我是設備商／SI／技術夥伴</span>
+<span style="font-size: 18px; font-weight: 700">加入生態系 →</span>
+</a>
+</div>
+</div>
+<div style="flex: 1 1 520px; min-width: 0">
+<img src="../assets/hero-building.jpg" alt="Aiii VBIM 建築數位孿生示意：建築本體、數位孿生、營運管理、AI 智慧決策四層" style="width: 100%; height: auto; display: block; border-radius: 28px; mix-blend-mode: multiply">
+</div>
+</div>
+</header>
+
+<!-- PROOF -->
+<section aria-label="信任背書" style="border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 28px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5a6a85">全生命週期</span><span style="font-size: 17px; font-weight: 700">設計 → 施工 → 驗收 → 營運</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5a6a85">跨國多點</span><span style="font-size: 17px; font-weight: 700">一個平台管理全球據點</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5a6a85">地端 AI</span><span style="font-size: 17px; font-weight: 700">資料不離場，AI 照樣聰明</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #5a6a85">隨身管理</span><span style="font-size: 17px; font-weight: 700">Aiii VBIM App（iOS・Android）</span></div>
+</div>
+</section>
+
+<!-- POSITIONING -->
+<section style="max-width: 1280px; margin: 0 auto; padding: 104px 24px; display: flex; flex-direction: column; gap: 36px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 820px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">EVOLVE FROM TOOLS TO AN INTELLIGENT OPERATING SYSTEM</div>
+<h2 style="margin: 0; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.2; font-weight: 900">核心定位：不是再多一套系統，<br>而是讓所有系統接得起來</h2>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">BMS 管設備、EMS 管能源、VMS 管影像，每套系統各管一塊。Aiii VBIM 以 BIM／數位孿生與 PMIS 為空間主索引，把每一筆資料放回「哪一棟、哪一層、哪一個空間、哪一台設備」。</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+<sc-for list="{{stack}}" as="s" hint-placeholder-count="5">
+<div style="background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">{{s.no}}</span>
+<span style="font-weight: 900; font-size: 18px">{{s.t}}</span>
+<span style="font-size: 14px; color: #5a6a85">{{s.d}}</span>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: #0c1a33; color: #ffffff; border-radius: 22px; padding: 20px 26px">
+<sc-for list="{{verbs}}" as="v" hint-placeholder-count="5">
+<span style="font-size: clamp(1.05rem, 1.8vw, 1.35rem); font-weight: 900; flex: 1 1 120px; text-align: center">{{v.t}}</span>
+<sc-if value="{{v.arrow}}" hint-placeholder-val="{{true}}"><span aria-hidden="true" style="color: #8fb6ff">→</span></sc-if>
+</sc-for>
+</div>
+</section>
+
+<!-- CORE CAPABILITIES -->
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 104px 24px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 820px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">CORE CAPABILITIES</div>
+<h2 style="margin: 0; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.2; font-weight: 900">從空間、設備到營運的三大能力模組</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px">
+<a href="Energy.dc.html" style="text-decoration: none; color: #0c1a33; background: #ffffff; border: 1px solid #dce6f2; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column">
+<img src="../assets/energy.jpg" alt="智慧能源管理示意：風力、太陽能、儲能、台電重電與算力中心" style="width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block">
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 900; font-size: 21px">智慧能源管理</span><span style="color: #5a6a85; font-size: 15px">風力、太陽能、儲能與算力中心的整合智控。從供電到用電，建立全域能源可視化與智慧優化。</span><span style="font-weight: 700; color: #2160e8">了解能源管理 →</span></div>
+</a>
+<a href="Energy.dc.html" style="text-decoration: none; color: #0c1a33; background: #ffffff; border: 1px solid #dce6f2; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column">
+<img src="../assets/hvac.jpg" alt="中央空調與潔淨系統示意：冰水主機、冷卻水塔、AHU、感測器與潔淨空間" style="width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block">
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 900; font-size: 21px">中央空調節能 × 潔淨</span><span style="color: #5a6a85; font-size: 15px">把空調控制與潔淨環境管理，轉化為可計算、可優化的營運能力。kW/RT、COP 效率優化，兼顧舒適、安全與節能。</span><span style="font-weight: 700; color: #2160e8">了解空調潔淨 →</span></div>
+</a>
+<a href="EdgeAI.dc.html" style="text-decoration: none; color: #0c1a33; background: #ffffff; border: 1px solid #dce6f2; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column">
+<img src="../assets/edge.jpg" alt="地端 AI 解決方案示意：智慧園區與 Edge AI" style="width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block">
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 900; font-size: 21px">地端 AI 解決方案</span><span style="color: #5a6a85; font-size: 15px">Edge AI Appliance + AI Agent。即時推論、低延遲、資料主權，讓 AI 不只看見資料，更能理解場域並協助決策。</span><span style="font-weight: 700; color: #2160e8">了解地端 AI →</span></div>
+</a>
+</div>
+</div>
+</section>
+
+<!-- FIVE SECTORS -->
+<section style="max-width: 1280px; margin: 0 auto; padding: 104px 24px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 760px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">FIVE KEY SECTORS</div>
+<h2 style="margin: 0; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.2; font-weight: 900">以建築為核心，延伸五大應用場域</h2>
+</div>
+<a href="Solutions.dc.html" style="font-weight: 700; text-decoration: none">看五大領域方案 →</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px">
+<sc-for list="{{sectors}}" as="s" hint-placeholder-count="5">
+<a href="Solutions.dc.html" style="text-decoration: none; color: #0c1a33; background: #ffffff; border: 1px solid #dce6f2; border-radius: 22px; padding: 26px 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: #2160e8; font-weight: 700">{{s.en}}</span>
+<span style="font-weight: 900; font-size: 24px">{{s.zh}}</span>
+<span style="font-size: 14px; color: #5a6a85">{{s.items}}</span>
+</a>
+</sc-for>
+</div>
+<p style="margin: 0; color: #34425e">以數據串聯空間、設備與人，驅動更高效、更永續的建築與城市。</p>
+</section>
+
+<!-- SKY EARTH BRAIN -->
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 104px 24px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 820px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">360° GOD'S-EYE VIEW</div>
+<h2 style="margin: 0; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.2; font-weight: 900">天・地・腦・中樞：<br>建築的 360° 上帝視角</h2>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">用一套業主、建築師與顧問都聽得懂的語言，把影像、感測、設備、AI 與營運管理交代清楚。</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<sc-for list="{{seb}}" as="s" hint-placeholder-count="5">
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 40px; font-weight: 900; color: #2160e8; line-height: 1">{{s.k}}</span>
+<span style="font-weight: 900; font-size: 18px">{{s.role}}</span>
+<span style="font-size: 14px; color: #34425e; font-weight: 700">{{s.sys}}</span>
+<span style="font-size: 14px; color: #5a6a85">{{s.d}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- COMMAND CENTER -->
+<section style="background: #0c1a33; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 104px 24px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 14px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #8fb6ff; font-weight: 600">GLOBAL COMMAND CENTER</div>
+<h2 style="margin: 0; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.2; font-weight: 900">遠距多點數據智控</h2>
+<p style="margin: 0; color: #cfdcf0; font-size: 1.05rem">讓總部即時掌握全球據點的工程、設備、能源與營運狀態。</p>
+</div>
+<div style="flex: 1.2 1 480px; min-width: 0; background: #ffffff; border-radius: 24px; padding: 12px"><img src="../assets/world.jpg" alt="全球據點連線示意：北美、歐洲、中東、亞洲、大洋洲、非洲與南美" style="width: 100%; height: auto; display: block; border-radius: 16px"></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; font-family: 'Space Grotesk', sans-serif; font-size: 14px">
+<sc-for list="{{path}}" as="p" hint-placeholder-count="7">
+<span style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.16); border-radius: 10px; padding: 8px 14px; display: flex; flex-direction: column; align-items: center; min-width: 84px"><span style="font-weight: 600">{{p.en}}</span><span style="font-family: 'Noto Sans TC', sans-serif; font-size: 12px; color: #aebdd6">{{p.zh}}</span></span>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px">
+<div style="border-top: 2px solid #8fb6ff; padding-top: 14px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 900; font-size: 18px">跨國設廠／多廠區管理</span><span style="color: #aebdd6; font-size: 14px">統一平台・彈性擴展</span></div>
+<div style="border-top: 2px solid #8fb6ff; padding-top: 14px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 900; font-size: 18px">即時儀表板／事件告警</span><span style="color: #aebdd6; font-size: 14px">數據可視・快速應變</span></div>
+<div style="border-top: 2px solid #8fb6ff; padding-top: 14px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 900; font-size: 18px">遠距協同／派工維運</span><span style="color: #aebdd6; font-size: 14px">跨域合作・提升效率</span></div>
+<div style="border-top: 2px solid #8fb6ff; padding-top: 14px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 900; font-size: 18px">管理層上帝視角</span><span style="color: #aebdd6; font-size: 14px">全域洞察・精準決策</span></div>
+</div>
+</div>
+</section>
+
+<!-- ECOSYSTEM -->
+<section style="max-width: 1280px; margin: 0 auto; padding: 104px 24px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">AN OPEN ECOSYSTEM</div>
+<h2 style="margin: 0; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.2; font-weight: 900">平台生態系</h2>
+<p style="margin: 0; font-size: 1.15rem; font-weight: 700">以 Aiii VBIM 為核心，串聯工程、設備、能源與 AI。</p>
+<p style="margin: 0; color: #34425e">PMIS、數位孿生、影像 AI、能源、空調、潔淨、Edge AI、資安與 AI Agent，全部接進同一個平台。設備商、工程商、能源、AI、資安與 SI 夥伴，都可以把自己的技術接進 Aiii VBIM。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px">
+<a href="Partners.dc.html" style="background: #2160e8; color: #ffffff; text-decoration: none; font-weight: 700; padding: 13px 24px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">成為生態夥伴 →</a>
+<a href="Platform.dc.html" style="border: 1px solid #c9d8f0; color: #0c1a33; text-decoration: none; font-weight: 700; padding: 13px 24px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">看平台架構</a>
+</div>
+</div>
+<div style="flex: 1 1 460px; min-width: 0"><img src="../assets/ecosystem.jpg" alt="Aiii VBIM 平台生態系：PMIS、數位孿生、VMS／AI Vision、能源、暖通空調、潔淨系統、Edge AI、資安、AI Agent 環繞核心平台" style="width: 100%; height: auto; display: block; border-radius: 24px"></div>
+</section>
+
+<!-- ACADEMY TEASER -->
+<section style="max-width: 1280px; margin: 0 auto; padding: 0 24px 104px">
+<div style="display: flex; flex-wrap: wrap; gap: 32px; background: #2160e8; color: #ffffff; border-radius: 28px; padding: 44px">
+<div style="flex: 1 1 440px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.14em; color: #dbe7ff">VBIM ACADEMY</span>
+<span style="font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 900; line-height: 1.25">VBIM 認證學院</span>
+<span style="font-size: 16px; color: #eef3ff">培訓、考核、認證、媒合。成為 VBIM 認證工程師或認證夥伴，承接智慧建築、能源、空調與地端 AI 專案。</span>
+</div>
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 10px; justify-content: center">
+<span style="font-weight: 700">六大課程模組：BIM／PMIS・Energy・HVAC・Vision・AIoT・Edge AI</span>
+<a href="Academy.dc.html" style="align-self: flex-start; background: #ffffff; color: #1647b8; text-decoration: none; font-weight: 700; padding: 13px 24px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">登記首期招生 →</a>
+</div>
+</div>
+</section>
+
+<!-- NEWS -->
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px"><h2 style="margin: 0; font-size: 1.8rem; font-weight: 900">最新消息</h2><a href="News.dc.html" style="font-weight: 700; text-decoration: none">看全部 →</a></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
+<sc-for list="{{news}}" as="n" hint-placeholder-count="3">
+<a href="News.dc.html" style="text-decoration: none; color: #0c1a33; background: #ffffff; border: 1px solid #dce6f2; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column">
+<img src="{{n.img}}" alt="{{n.alt}}" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block">
+<div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: #2160e8; font-weight: 700">{{n.cat}} · {{n.date}}</span><span style="font-weight: 900; font-size: 18px">{{n.t}}</span></div>
+</a>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 720px">
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 3.2vw, 2.6rem); font-weight: 700; line-height: 1.15">From Data to a Better Physical World.</span>
+<span style="color: #34425e; font-size: 1.05rem">告訴我們你的場域與挑戰，我們用 Aiii VBIM 實際示範給你看。</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="Contact.dc.html" style="background: #2160e8; color: #ffffff; text-decoration: none; font-weight: 700; padding: 14px 28px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">預約 Demo</a>
+<a href="Partners.dc.html" style="border: 1px solid #c9d8f0; color: #0c1a33; text-decoration: none; font-weight: 700; padding: 14px 28px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">成為夥伴</a>
+</div>
+</section>
+
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":7400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const verbs = ['看得到', '看得懂', '可預測', '可控制', '可優化'];
+    return {
+      pillars: ['遠距', '多點', '數據智控', '360° 上帝視角', '超級戰情室', 'AI 可信'],
+      stack: [
+        { no: '01', t: '2D／3D／BIM', d: '建築資訊模型與設計協作' },
+        { no: '02', t: 'PMIS 工程管理', d: '專案、進度、成本、品質' },
+        { no: '03', t: 'VMS／AIoT 數據整合', d: '設備、感測、影像、平台' },
+        { no: '04', t: '能源／空調／潔淨', d: 'Energy・HVAC・Clean System' },
+        { no: '05', t: 'Edge AI／AI Agent／Command Center', d: '邊緣智能、智能代理、營運中樞' }
+      ],
+      verbs: verbs.map((t, i) => ({ t, arrow: i < verbs.length - 1 })),
+      sectors: [
+        { en: 'HOSPITAL', zh: '醫院', items: '病房・設備・醫療氣體' },
+        { en: 'RETAIL', zh: '商場', items: 'POS・人流・停車・租戶' },
+        { en: 'FACTORY', zh: '工廠', items: '設備・稼動率・工安・庫存' },
+        { en: 'OFFICE', zh: '辦公', items: '空間・設備・能源・維運' },
+        { en: 'ENERGY', zh: '能源', items: '風力・太陽能・儲能・算力中心' }
+      ],
+      seb: [
+        { k: '天', role: '建築的眼睛', sys: 'Camera・VMS・Vision AI', d: '看見人、車、設備、安全與異常' },
+        { k: '地', role: '建築的神經', sys: 'AIoT・Sensor・Meter・Controller', d: '感知電、水、溫度、壓力、振動與設備狀態' },
+        { k: '腦', role: '建築的大腦', sys: 'Edge AI・Local AI', d: '分析、判斷、預測、RAG、Agent、Vision AI' },
+        { k: '中樞', role: '建築作業系統', sys: 'Aiii VBIM', d: '360° 上帝視角管理平台' },
+        { k: '身體', role: '機電與能源設備', sys: 'Building・Equipment', d: '重電、HVAC、儲能、太陽能與現場設備' }
+      ],
+      path: [
+        { en: 'Global', zh: '全球' }, { en: 'Site', zh: '據點' }, { en: 'Building', zh: '建築' }, { en: 'Floor', zh: '樓層' },
+        { en: 'Space', zh: '空間' }, { en: 'Asset', zh: '資產' }, { en: 'Sensor', zh: '感測器' }
+      ],
+      news: [
+        { cat: '產品發表', date: '2026', t: 'Global Command Center：遠距多點數據智控', img: '../assets/world.jpg', alt: '全球據點連線示意' },
+        { cat: '產品發表', date: '2026.09', t: 'Aiii VBIM 2.0：AI-Powered Physical World Operating System', img: '../assets/hero-building.jpg', alt: 'Aiii VBIM 2.0 建築示意' },
+        { cat: '媒體報導', date: '2026.06', t: '數位孿生重塑建築未來　Aiii VBIM 引領新時代', img: '../assets/edge.jpg', alt: '智慧園區示意' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

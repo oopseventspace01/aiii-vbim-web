@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Aiii VBIM Partners</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="partners" lang="en" hint-size="100%,72px"></dc-import>
+
+<header style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">AN OPEN ECOSYSTEM FOR A SMARTER PHYSICAL WORLD</div>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.4rem, 4.8vw, 4rem); line-height: 1.08; font-weight: 700">Build on Aiii VBIM</h1>
+<p style="margin: 0; font-size: 1.3rem; font-weight: 900">Your equipment, technology and services can all connect to Aiii VBIM</p>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">Aiii VBIM doesn’t build every device — it becomes the shared operating system for them. Energy equipment, HVAC systems, AI edge hardware, cameras and sensors connect through standard interfaces and show up in every site that deploys VBIM.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px"><a href="#apply" style="background: #2160e8; color: #ffffff; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Apply to partner →</a><a href="en-Academy.dc.html" style="border: 1px solid #c9d8f0; color: #0c1a33; text-decoration: none; font-weight: 700; padding: 14px 26px; border-radius: 999px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">VBIM Academy</a></div>
+</div>
+<div style="flex: 1 1 440px; min-width: 0"><img src="../assets/ecosystem.jpg" alt="The Aiii VBIM platform ecosystem" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
+</div>
+</header>
+
+<div style="height: 32px"></div>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">From project subcontracting to a product ecosystem</h2><p style="margin: 0; color: #34425e">Aiii VBIM owns the platform, data model and solutions; specialist hardware and equipment come from ecosystem partners through standard interfaces.</p></div>
+<div style="overflow-x: auto; border: 1px solid #dce6f2; border-radius: 18px; background: #ffffff">
+<table style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 15px">
+<thead><tr style="background: #0c1a33; color: #ffffff; text-align: left"><th scope="col" style="padding: 14px 18px">Partner type</th><th scope="col" style="padding: 14px 18px">What integrates</th><th scope="col" style="padding: 14px 18px">How we work together</th></tr></thead>
+<tbody><sc-for list="{{types}}" as="t" hint-placeholder-count="7"><tr style="border-top: 1px solid #dce6f2"><th scope="row" style="padding: 14px 18px; text-align: left">{{t.n}}</th><td style="padding: 14px 18px; color: #34425e">{{t.c}}</td><td style="padding: 14px 18px; font-weight: 700; color: #1647b8">{{t.m}}</td></tr></sc-for></tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">Five ways to join</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px"><sc-for list="{{tiers}}" as="r" hint-placeholder-count="5"><div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; color: #1647b8">{{r.n}}</span><span style="font-weight: 900">{{r.who}}</span><span style="font-size: 14px; color: #34425e">{{r.what}}</span></div></sc-for></div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; background: #2160e8; color: #ffffff; border-radius: 24px; padding: 32px; margin-top: 12px">
+<div style="flex: 1 1 400px; display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #dbe7ff; font-weight: 700">SPECIFICATION CHANNEL</span><span style="font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 900">Get your product written into building specs</span><span style="color: #eef3ff">Aiii VBIM connects the decision chain — architects, engineering and MEP consultants, PMCs, owners, contractors and facility managers — so equipment and AI infrastructure are specified at the design stage.</span></div>
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; justify-content: center; font-weight: 700">Design + construction + hardware + SaaS + O&amp;M revenue</div>
+</div>
+</section>
+
+<section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">How to join</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<div style="border-top: 4px solid #2160e8; background: #ffffff; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">01</span><span style="font-weight: 900; font-size: 18px">Apply online</span><span style="color: #34425e; font-size: 15px">Share your company and technology details</span></div>
+<div style="border-top: 4px solid #2160e8; background: #ffffff; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">02</span><span style="font-weight: 900; font-size: 18px">Technical integration</span><span style="color: #34425e; font-size: 15px">Partner Integration API, device data standards and protocols</span></div>
+<div style="border-top: 4px solid #2160e8; background: #ffffff; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">03</span><span style="font-weight: 900; font-size: 18px">POC validation</span><span style="color: #34425e; font-size: 15px">Validate together at a demonstration site</span></div>
+<div style="border-top: 4px solid #2160e8; background: #ffffff; border-radius: 0 0 18px 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; color: #2160e8; font-weight: 700">04</span><span style="font-weight: 900; font-size: 18px">Go to market together</span><span style="color: #34425e; font-size: 15px">Joint proposals and sales across the ecosystem</span></div>
+</div>
+</div>
+</section>
+
+<section id="apply" style="max-width: 1280px; margin: 0 auto; padding: 96px 24px 104px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 14px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">APPLY</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 900">Apply to become a partner</h2><p style="margin: 0; color: #34425e">We’ll get in touch to set up a technical integration meeting.</p></div>
+<form onSubmit="{{submit}}" style="flex: 1.4 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 14px; background: #f3f7fc; border: 1px solid #dce6f2; border-radius: 24px; padding: 28px">
+<sc-if value="{{sent}}" hint-placeholder-val="{{false}}"><div role="status" style="background: #e6f6ef; border: 1px solid #2f9e6e; color: #145c3e; border-radius: 14px; padding: 14px 16px; font-weight: 700">Application received — we’ll be in touch shortly.</div></sc-if>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Company *<input type="text" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Partner type *<select required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; font-family: inherit"><option value="">Select</option><option>Power / MEP</option><option>HVAC / ESCO</option><option>Energy</option><option>AI hardware</option><option>Security / Identity</option><option>SI / MSP</option><option>Consultant / Architect</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Contact name *<input type="text" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Email *<input type="email" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Phone<input type="tel" style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Website<input type="url" style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Product or technology to integrate *<textarea rows="4" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; font-family: inherit; resize: vertical"></textarea></label>
+<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: #34425e"><input type="checkbox" required style="width: 20px; height: 20px; margin-top: 2px">I agree to the processing of my data under the privacy policy</label>
+<button type="submit" style="align-self: flex-start; background: #2160e8; color: #ffffff; border: 0; font-weight: 700; font-size: 16px; padding: 12px 28px; border-radius: 999px; min-height: 48px; cursor: pointer; font-family: inherit">Submit application</button>
+</form>
+</section>
+
+<dc-import name="Footer" lang="en" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4400}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sent: false }; }
+  renderVals() {
+    return {
+      sent: this.state.sent,
+      submit: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ sent: true }); },
+      types: [
+        { n: 'Power / MEP', c: 'Transformers, switchgear, UPS, generators', m: 'Joint bids / product bundles' },
+        { n: 'HVAC / ESCO', c: 'Chillers, AHUs, energy-saving controls', m: 'Efficiency programs / performance sharing' },
+        { n: 'Energy', c: 'Solar, wind, storage, PCS/BMS', m: 'Energy platform integration' },
+        { n: 'AI hardware', c: 'Edge AI, GPUs, AI servers', m: 'Aiii Edge AI Appliance' },
+        { n: 'Security / Identity', c: 'Zero Trust, IAM, SOC', m: 'Enterprise governance solutions' },
+        { n: 'SI / MSP', c: 'System integration, operations', m: 'Authorized resale / joint delivery' },
+        { n: 'Consultants / Architects', c: 'Design, BIM, global plant builds', m: 'Specified platform / project collaboration' }
+      ],
+      tiers: [
+        { n: 'Technology Partner', who: 'Hardware & software vendors', what: 'Integrate products into Aiii VBIM through standard interfaces' },
+        { n: 'Solution Partner', who: 'Vertical solution providers', what: 'Co-build healthcare, manufacturing, energy and retail solutions' },
+        { n: 'SI Partner', who: 'Integrators & engineering firms', what: 'Deployment, integration and operations services' },
+        { n: 'Certified Partner', who: 'Engineers, consultants, trainers', what: 'Complete VBIM certification and deliver projects' },
+        { n: 'POC Partner', who: 'Owners & research institutions', what: 'Validate new industry scenarios together' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

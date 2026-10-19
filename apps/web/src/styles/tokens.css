@@ -1,33 +1,36 @@
 /*
- * Design tokens — SPEC.md 第 4 節（延用現有官網色系）
+ * Design tokens — SPEC.md 第 4 節（v1.1 起：Aiii VBIM 2.0 白底藍色系）
  * 改顏色只改這裡；Tailwind 透過 global.css 的 @theme 讀取這些變數。
  */
 :root {
-  /* 背景與面板 */
-  --bg: #06101a;
-  --bg-2: #0a1724;
-  --panel: #0d1d2b;
-  --panel-2: #102334;
+  /* 背景 */
+  --bg: #ffffff;
+  --bg-2: #f3f7fc;
 
-  /* 文字 */
-  --text: #f7fbff;
-  --text-2: #c9d6e3;
-  --muted: #9fb0c3;
+  /* 文字與深色區塊 */
+  --navy: #0c1a33;
+  --text-2: #34425e;
+  --muted: #5a6a85;
 
   /* 線條 */
-  --line: rgba(255, 255, 255, 0.1);
+  --line: #dce6f2;
+  --line-2: #c9d8f0;
 
-  /* 強調色 */
-  --cyan: #51d7ff;
-  --blue: #438eff;
-  --green: #68f0ad;
-  --amber: #ffb454;
+  /* 品牌藍 */
+  --blue: #2160e8;
+  --blue-dark: #1647b8;
+  --blue-soft: #e8f0fe;
+  --blue-on-navy: #8fb6ff;
 
-  /* 圓角（--radius-lg 24px／--radius-md 18px／--radius-pill 999px）定義在 global.css 的 @theme，
+  /* 狀態 */
+  --success: #2f9e6e;
+  --success-bg: #e6f6ef;
+
+  /* 圓角（--radius-lg 28px／--radius-md 22px／--radius-pill 999px）定義在 global.css 的 @theme，
      因為 Tailwind 本身就用 --radius-* 這組名稱 */
 
   /* 版面 */
-  --max: 1240px;
+  --max: 1280px;
   --section-y: 64px;
 }
 

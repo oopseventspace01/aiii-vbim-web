@@ -5,18 +5,20 @@ import { describe, expect, it } from 'vitest';
 const css = readFileSync(new URL('../../src/styles/tokens.css', import.meta.url), 'utf-8');
 
 const specColors: Record<string, string> = {
-  '--bg': '#06101a',
-  '--bg-2': '#0a1724',
-  '--panel': '#0d1d2b',
-  '--panel-2': '#102334',
-  '--text': '#f7fbff',
-  '--text-2': '#c9d6e3',
-  '--muted': '#9fb0c3',
-  '--cyan': '#51d7ff',
-  '--blue': '#438eff',
-  '--green': '#68f0ad',
-  '--amber': '#ffb454',
-  '--max': '1240px',
+  '--bg': '#ffffff',
+  '--bg-2': '#f3f7fc',
+  '--navy': '#0c1a33',
+  '--text-2': '#34425e',
+  '--muted': '#5a6a85',
+  '--line': '#dce6f2',
+  '--line-2': '#c9d8f0',
+  '--blue': '#2160e8',
+  '--blue-dark': '#1647b8',
+  '--blue-soft': '#e8f0fe',
+  '--blue-on-navy': '#8fb6ff',
+  '--success': '#2f9e6e',
+  '--success-bg': '#e6f6ef',
+  '--max': '1280px',
 };
 
 describe('design tokens', () => {

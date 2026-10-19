@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>聯絡 Aiii VBIM</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ffffff}a{color:#2160e8}a:hover{color:#1647b8}</style>
+</helmet>
+<div style="background: #ffffff; color: #0c1a33; font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; line-height: 1.6">
+<dc-import name="Nav" active="contact" hint-size="100%,72px"></dc-import>
+
+<section style="background: #f3f7fc">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 24px 104px; display: flex; flex-wrap: wrap; gap: 56px">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">CONTACT</div>
+<h1 style="margin: 0; font-size: clamp(2.2rem, 4.4vw, 3.4rem); line-height: 1.2; font-weight: 900">告訴我們你是誰、<br>想解決什麼</h1>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">不論是導入評估、場域 Demo、夥伴合作或認證課程，我們都會由對應的團隊與你聯繫。</p>
+<div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px">
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 18px; padding: 18px 20px; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 900">導入評估與 Demo</span><span style="font-size: 14px; color: #34425e">醫院、商場、工廠、辦公、能源與資料中心</span></div>
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 18px; padding: 18px 20px; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 900">生態夥伴合作</span><span style="font-size: 14px; color: #34425e">重電、空調、能源、AI 硬體、資安、SI 與工程顧問</span></div>
+<div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 18px; padding: 18px 20px; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 900">VBIM 認證學院</span><span style="font-size: 14px; color: #34425e">個人報名與企業團體培訓</span></div>
+<div style="background: #0c1a33; color: #ffffff; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 4px; font-size: 15px"><span style="font-weight: 900">星宴國際開發股份有限公司／星賀建設股份有限公司</span><span style="color: #cfdcf0">台北市松山區敦化北路 100 號 15 樓</span><a href="tel:+886227123339" style="color: #8fb6ff; font-weight: 700; text-decoration: none">02-2712-3339</a></div>
+</div>
+</div>
+
+<form onSubmit="{{submit}}" style="flex: 1.5 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px; background: #ffffff; border: 1px solid #dce6f2; border-radius: 28px; padding: 32px">
+<sc-if value="{{sent}}" hint-placeholder-val="{{false}}"><div role="status" style="background: #e6f6ef; border: 1px solid #2f9e6e; color: #145c3e; border-radius: 14px; padding: 14px 16px; font-weight: 700">已收到！我們會盡快與你聯繫，並寄一封確認信到你的信箱。</div></sc-if>
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px">
+<legend style="font-size: 14px; color: #34425e; font-weight: 700; margin-bottom: 8px">我是 *</legend>
+<sc-for list="{{roles}}" as="r" hint-placeholder-count="3">
+<sc-if value="{{r.on}}" hint-placeholder-val="{{false}}"><button type="button" aria-pressed="true" onClick="{{r.pick}}" style="min-height: 44px; padding: 10px 16px; border-radius: 12px; font-size: 15px; cursor: pointer; font-family: inherit; background: #2160e8; color: #ffffff; border: 1px solid #2160e8; font-weight: 900">{{r.label}}</button></sc-if>
+<sc-if value="{{r.off}}" hint-placeholder-val="{{true}}"><button type="button" aria-pressed="false" onClick="{{r.pick}}" style="min-height: 44px; padding: 10px 16px; border-radius: 12px; font-size: 15px; cursor: pointer; font-family: inherit; background: #ffffff; color: #0c1a33; border: 1px solid #c9d8f0; font-weight: 700">{{r.label}}</button></sc-if>
+</sc-for>
+</fieldset>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<sc-if value="{{needCompany}}" hint-placeholder-val="{{true}}"><label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">公司名稱 *<input type="text" style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label></sc-if>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">姓名 *<input type="text" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">Email *<input type="email" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">電話<input type="tel" style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; box-sizing: border-box"></label>
+<sc-if value="{{isOwner}}" hint-placeholder-val="{{true}}"><label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">場域類型<select style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; font-family: inherit"><option>醫院／醫療園區</option><option>商場／零售</option><option>工廠／科技廠</option><option>辦公／商辦</option><option>能源／資料中心</option><option>建築師事務所</option><option>其他</option></select></label></sc-if>
+<sc-if value="{{isPartner}}" hint-placeholder-val="{{false}}"><label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">夥伴類型<select style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; font-family: inherit"><option>重電／機電</option><option>HVAC／ESCO</option><option>能源廠商</option><option>AI 硬體</option><option>資安／Identity</option><option>SI／MSP</option><option>工程顧問／建築師</option></select></label></sc-if>
+<sc-if value="{{isTalent}}" hint-placeholder-val="{{false}}"><label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">有興趣的模組<select style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; min-height: 44px; font-family: inherit"><option>BIM／PMIS</option><option>Energy</option><option>HVAC</option><option>Vision</option><option>AIoT</option><option>Edge AI</option></select></label></sc-if>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #34425e; font-weight: 700">{{msgLabel}} *<textarea rows="5" required style="background: #ffffff; border: 1px solid #c9d8f0; border-radius: 12px; color: #0c1a33; padding: 12px 14px; font-size: 15px; font-family: inherit; resize: vertical"></textarea></label>
+<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: #34425e"><input type="checkbox" required style="width: 20px; height: 20px; margin-top: 2px">我同意依隱私權政策處理我提供的資料</label>
+<button type="submit" style="align-self: flex-start; background: #2160e8; color: #ffffff; border: 0; font-weight: 700; font-size: 16px; padding: 12px 32px; border-radius: 999px; min-height: 48px; cursor: pointer; font-family: inherit">送出</button>
+</form>
+</div>
+</section>
+
+<dc-import name="Footer" hint-size="100%,320px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { role: 0, sent: false }; }
+  renderVals() {
+    const R = ['業主／企業', '設備商／SI／技術夥伴', '想取得認證的人才'];
+    const MSG = ['想解決的問題', '想接入的產品或技術', '想了解的內容'];
+    const r = this.state.role;
+    return {
+      roles: R.map((label, i) => ({ label, on: i === r, off: i !== r, pick: () => this.setState({ role: i }) })),
+      isOwner: r === 0, isPartner: r === 1, isTalent: r === 2, needCompany: r !== 2,
+      msgLabel: MSG[r],
+      sent: this.state.sent,
+      submit: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ sent: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
