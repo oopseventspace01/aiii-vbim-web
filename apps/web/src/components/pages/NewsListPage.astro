@@ -1,0 +1,176 @@
+---
+// /news 列表（design/pages/News.dc.html 版面＋SPEC 3.8 分類篩選、每頁 12 則）
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+import PageHero from '../blocks/PageHero.astro';
+import MediaFigure from '../blocks/MediaFigure.astro';
+import NewsGrid from '../blocks/NewsGrid.astro';
+import { NEWS_COPY } from '../../content/pages/news';
+import { localizePath, type Locale } from '../../lib/i18n';
+import { categoryLabel, newsDateLabel, newsLink } from '../../lib/news';
+import { imageUrl } from '../../lib/sanity';
+import { toImage, toNewsCard, type NewsCardData } from '../../lib/home-data';
+import {
+  availableCategories,
+  newsListPath,
+  pageSlice,
+  pickFeatured,
+  totalPages,
+  type NewsCategory,
+  type NewsEntry,
+} from '../../lib/news-data';
+
+interface Props {
+  locale: Locale;
+  entries: NewsEntry[];
+  category: NewsCategory | null;
+  page: number;
+}
+
+const { locale, entries, category, page } = Astro.props;
+const copy = NEWS_COPY[locale];
+const ui = copy.ui;
+const L = (path: string) => localizePath(path, locale);
+
+// 「全部」第一頁最上方顯示置頂精選，列表中不重複出現
+const featured = category === null ? pickFeatured(entries) : undefined;
+const pool =
+  category === null
+    ? entries.filter((n) => n !== featured)
+    : entries.filter((n) => n.category === category);
+const pages = totalPages(pool.length);
+const cards = pageSlice(pool, page)
+  .map((n) => toNewsCard(n, locale))
+  .filter((n): n is NewsCardData => Boolean(n));
+const categories = availableCategories(entries);
+const featuredLink = featured
+  ? newsLink(
+      {
+        category: featured.category ?? undefined,
+        externalUrl: featured.externalUrl ?? undefined,
+        internalPath: featured.internalPath ?? undefined,
+        slug: featured.slug ?? undefined,
+      },
+      locale,
+    )
+  : undefined;
+const featuredCover = featured ? toImage(featured.cover, featured.title ?? '') : undefined;
+const listTitle = category ? categoryLabel(category, locale) : ui.all;
+const pageTitle = [
+  ui.metaTitle,
+  category ? listTitle : '',
+  page > 1 ? ui.pageLabel(page, pages) : '',
+]
+  .filter(Boolean)
+  .join(' · ');
+---
+
+<BaseLayout title={pageTitle} description={copy.lead} locale={locale} active="news">
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} lead={copy.lead} />
+
+  {featured && featuredLink && page === 1 && (
+    <Section spacing="none" class="pt-14" label={featured.title ?? ''}>
+      <article
+        class="flex flex-wrap items-center gap-8 overflow-hidden rounded-lg border border-line bg-white p-6 md:p-8"
+        data-news-featured
+      >
+        {featuredCover && (
+          <div class="min-w-0 flex-[1_1_420px]">
+            <MediaFigure
+              src={imageUrl(featuredCover.source, 1280)}
+              alt={featuredCover.alt}
+              width={featuredCover.width}
+              height={featuredCover.height}
+              blend
+              eager
+            />
+          </div>
+        )}
+        <div class="flex min-w-0 flex-[1_1_380px] flex-col gap-3">
+          <span class="text-sm font-bold text-blue">
+            {categoryLabel(featured.category ?? undefined, locale)} ·{' '}
+            {newsDateLabel(featured.displayDate, featured.publishedAt)}
+          </span>
+          <h2 class="m-0 text-[clamp(1.6rem,2.8vw,2.2rem)] leading-[1.25] font-black">
+            {featured.title}
+          </h2>
+          {featured.excerpt && <p class="m-0 text-text-2">{featured.excerpt}</p>}
+          <Button href={featuredLink.href} external={featuredLink.external} class="self-start">
+            {ui.learnMore}
+          </Button>
+        </div>
+      </article>
+    </Section>
+  )}
+
+  <Section labelledby="news-list">
+    <div class="flex flex-col gap-6">
+      <div class="flex flex-wrap items-baseline justify-between gap-3">
+        <h2 id="news-list" class="m-0 text-[1.8rem] font-black">
+          {listTitle}
+        </h2>
+        {copy.mediaNote && (category === 'media' || category === null) && (
+          <p class="m-0 text-sm text-muted">{copy.mediaNote}</p>
+        )}
+      </div>
+
+      <nav aria-label={ui.filterLabel}>
+        <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+          {[null, ...categories].map((c) => {
+            const on = c === category;
+            return (
+              <li>
+                <a
+                  href={L(newsListPath(c))}
+                  aria-current={on ? 'page' : undefined}
+                  class:list={[
+                    'inline-flex min-h-11 items-center rounded-pill border px-5 font-bold no-underline',
+                    on
+                      ? 'border-blue bg-blue text-white hover:text-white'
+                      : 'border-line-2 bg-white text-navy hover:border-blue',
+                  ]}
+                >
+                  {c ? categoryLabel(c, locale) : ui.all}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      <NewsGrid
+        items={cards}
+        locale={locale}
+        labelledby="news-list"
+        emptyText={ui.empty}
+        showExcerpt
+      />
+
+      {pages > 1 && (
+        <nav
+          aria-label={ui.paginationLabel}
+          class="flex flex-wrap items-center justify-between gap-3 pt-4"
+        >
+          {page > 1 ? (
+            <Button href={L(newsListPath(category, page - 1))} variant="outline">
+              {ui.prev}
+            </Button>
+          ) : (
+            <span />
+          )}
+          <span class="text-sm text-muted" aria-current="page">
+            {ui.pageLabel(page, pages)}
+          </span>
+          {page < pages ? (
+            <Button href={L(newsListPath(category, page + 1))} variant="outline">
+              {ui.next}
+            </Button>
+          ) : (
+            <span />
+          )}
+        </nav>
+      )}
+    </div>
+  </Section>
+</BaseLayout>

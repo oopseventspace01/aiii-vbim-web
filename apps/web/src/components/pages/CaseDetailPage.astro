@@ -1,0 +1,116 @@
+---
+// /cases/[slug] 案例內頁（SPEC 3.5）：案名、場域、客戶（可匿名）、痛點、導入模組、成果數字、照片集
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../ui/Section.astro';
+import Pill from '../ui/Pill.astro';
+import ComingSoonNotice from '../ui/ComingSoonNotice.astro';
+import MediaFigure from '../blocks/MediaFigure.astro';
+import RichText from '../rich/RichText.astro';
+import { CASES_COPY } from '../../content/pages/cases';
+import { localizePath, type Locale } from '../../lib/i18n';
+import { imageUrl } from '../../lib/sanity';
+import { toImage, type ImageRef } from '../../lib/home-data';
+import type { CaseEntry } from '../../lib/cms-pages';
+
+interface Props {
+  locale: Locale;
+  entry: CaseEntry;
+}
+
+const { locale, entry } = Astro.props;
+const ui = CASES_COPY[locale].ui;
+const L = (path: string) => localizePath(path, locale);
+const photos = (entry.gallery ?? [])
+  .map((g) => toImage(g, entry.title ?? ''))
+  .filter((g): g is ImageRef => Boolean(g));
+const results = (entry.results ?? []).filter((r) => r.metric && r.value);
+---
+
+<BaseLayout
+  title={entry.title ?? ui.metaTitle}
+  description={entry.pain ?? undefined}
+  locale={locale}
+  active="cases"
+>
+  <ComingSoonNotice show={locale === 'en' && entry.fallback} />
+  <article lang={entry.fallback ? (entry.language ?? undefined) : undefined}>
+    <header class="border-b border-line bg-bg-2">
+      <div class="container-site flex max-w-[960px] flex-col gap-4 py-12 md:py-16">
+        <a href={L('/cases')} class="self-start font-bold no-underline">
+          {ui.back}
+        </a>
+        {entry.solution?.name && (
+          <p class="m-0 text-sm font-bold text-blue">{entry.solution.name}</p>
+        )}
+        <h1 class="m-0 text-[clamp(1.9rem,3.6vw,2.8rem)] leading-[1.25] font-black">
+          {entry.title}
+        </h1>
+        {entry.clientDisplayName && (
+          <p class="m-0 text-text-2">
+            {ui.client}
+            {locale === 'en' ? ': ' : '：'}
+            {entry.clientDisplayName}
+          </p>
+        )}
+      </div>
+    </header>
+
+    <div class="container-site flex max-w-[960px] flex-col gap-8 py-12">
+      {entry.pain && <p class="lead m-0 text-[1.15rem]">{entry.pain}</p>}
+
+      {(entry.modules?.length ?? 0) > 0 && (
+        <section aria-labelledby="case-modules" class="flex flex-col gap-3">
+          <h2 id="case-modules" class="m-0 text-lg font-black">
+            {ui.modules}
+          </h2>
+          <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+            {entry.modules!.map((m) => (
+              <li>
+                <Pill>{m}</Pill>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {results.length > 0 && (
+        <section aria-labelledby="case-results" class="flex flex-col gap-3">
+          <h2 id="case-results" class="m-0 text-lg font-black">
+            {ui.results}
+          </h2>
+          <dl class="m-0 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3">
+            {results.map((r) => (
+              <div class="rounded-md border border-line bg-bg-2 p-5">
+                <dt class="text-sm text-muted">{r.metric}</dt>
+                <dd class="m-0 text-2xl font-black text-blue-dark">{r.value}</dd>
+                {r.note && <dd class="m-0 text-xs text-muted">{r.note}</dd>}
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
+
+      {entry.body && entry.body.length > 0 && <RichText value={entry.body} />}
+    </div>
+  </article>
+
+  {photos.length > 0 && (
+    <Section tone="soft" labelledby="case-gallery">
+      <div class="flex flex-col gap-6">
+        <h2 id="case-gallery" class="m-0 text-[1.6rem] font-black">
+          {ui.gallery}
+        </h2>
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] gap-4">
+          {photos.map((p) => (
+            <MediaFigure
+              src={imageUrl(p.source, 1280)}
+              alt={p.alt}
+              width={p.width}
+              height={p.height}
+            />
+          ))}
+        </div>
+      </div>
+    </Section>
+  )}
+</BaseLayout>

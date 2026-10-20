@@ -105,3 +105,46 @@ export const HERO_COPY = {
     ],
   },
 } as const;
+
+/** [MOCK] 內文範例：測試段落、標題、清單、連結、YouTube、按鈕的呈現 */
+export const MOCK_RICH_TEXT = [
+  {
+    _type: 'block',
+    _key: 'b1',
+    style: 'h2',
+    markDefs: [],
+    children: [{ _type: 'span', _key: 's1', text: '[MOCK] 內文大標題', marks: [] }],
+  },
+  {
+    _type: 'block',
+    _key: 'b2',
+    style: 'normal',
+    markDefs: [{ _key: 'l1', _type: 'link', href: 'https://example.com/' }],
+    children: [
+      { _type: 'span', _key: 's2', text: '[MOCK] 段落文字，含 ', marks: [] },
+      { _type: 'span', _key: 's3', text: '粗體', marks: ['strong'] },
+      { _type: 'span', _key: 's4', text: ' 與 ', marks: [] },
+      { _type: 'span', _key: 's5', text: '外部連結', marks: ['l1'] },
+    ],
+  },
+  {
+    _type: 'block',
+    _key: 'b3',
+    style: 'normal',
+    listItem: 'bullet',
+    level: 1,
+    markDefs: [],
+    children: [{ _type: 'span', _key: 's6', text: '[MOCK] 清單項目一', marks: [] }],
+  },
+  {
+    _type: 'block',
+    _key: 'b4',
+    style: 'normal',
+    listItem: 'bullet',
+    level: 1,
+    markDefs: [],
+    children: [{ _type: 'span', _key: 's7', text: '[MOCK] 清單項目二', marks: [] }],
+  },
+  { _type: 'youtube', _key: 'y1', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },
+  { _type: 'ctaButton', _key: 'c1', label: '[MOCK] 內文按鈕', url: '/contact' },
+];

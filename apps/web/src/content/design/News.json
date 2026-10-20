@@ -1,0 +1,336 @@
+{
+  "zh-Hant": {
+    "updates": [
+      {
+        "cat": "產品發表",
+        "date": "2026",
+        "t": "地端 AI 完整解決方案：Edge AI Appliance + AI Agent",
+        "d": "即時推論、低延遲、資料主權，讓 AI 理解場域並協助決策。",
+        "img": "../assets/edge.jpg",
+        "alt": "地端 AI 智慧園區示意",
+        "href": "EdgeAI.dc.html"
+      },
+      {
+        "cat": "產品發表",
+        "date": "2026",
+        "t": "三大核心能力：能源管理、中央空調節能 × 潔淨、地端 AI",
+        "d": "以建築為核心，串聯設備、能源與 AI。",
+        "img": "../assets/energy.jpg",
+        "alt": "智慧能源管理示意",
+        "href": "Energy.dc.html"
+      },
+      {
+        "cat": "產品發表",
+        "date": "2026",
+        "t": "Global Command Center：遠距多點數據智控",
+        "d": "從全球一路看到感測器，總部即時掌握每一個據點。",
+        "img": "../assets/world.jpg",
+        "alt": "全球據點連線示意",
+        "href": "VBIM.dc.html"
+      }
+    ],
+    "filters": [
+      {
+        "label": "全部",
+        "on": true,
+        "off": false
+      },
+      {
+        "label": "2026",
+        "on": false,
+        "off": true
+      },
+      {
+        "label": "2025",
+        "on": false,
+        "off": true
+      }
+    ],
+    "shown": [
+      {
+        "y": "2026",
+        "src": "頂尖傳媒",
+        "date": "2026.10",
+        "t": "OpenAI Codex 官方 DevDay 登場 OOPS　白天 Coding、晚上 Networking 打造 AI 人才交流聚落",
+        "d": "串聯工程師、開發者、AI 人才、創業者與科技產業人士的高密度知識交流場景。",
+        "img": "../assets/news-codex.jpg",
+        "href": "https://www.premiermedia.com.tw/2026100706-2/"
+      },
+      {
+        "y": "2026",
+        "src": "建築新聞",
+        "date": "2026",
+        "t": "AI 驅動建築全生命週期　智慧人居聚焦建築產業新商機",
+        "d": "從都市更新、數位孿生、BIM 到智慧綠建築，探討 AI 如何串聯規劃、設計、施工與營運。",
+        "img": "../assets/news-archi.jpg",
+        "href": "https://www.archi.net.tw/tw/news/news-detail-790.html"
+      },
+      {
+        "y": "2026",
+        "src": "Yahoo News",
+        "date": "2026.06",
+        "t": "數位孿生重塑建築未來　Aiii VBIM 引領新時代",
+        "d": "未來建築的競爭關鍵，是透過數據持續經營，讓建築成為具有感知、分析與管理能力的智慧資產。",
+        "img": "../assets/world.jpg",
+        "href": "https://tw.news.yahoo.com/%E6%95%B8%E4%BD%8D%E5%AD%BF%E7%94%9F%E9%87%8D%E5%A1%91%E5%BB%BA%E7%AF%89%E6%9C%AA%E4%BE%86-aiii-vbim%E5%BC%95%E9%A0%98%E6%96%B0%E6%99%82%E4%BB%A3-031454152.html"
+      },
+      {
+        "y": "2026",
+        "src": "中華民國總統府",
+        "date": "2026",
+        "t": "星宴國際 Aiii VBIM 隨亞太再生醫學會拜會總統府",
+        "d": "參與再生醫療產業交流，見證臺灣再生醫療邁向制度化與法制化的新時代。",
+        "img": "../assets/news-president.jpg",
+        "href": "https://www.president.gov.tw/NEWS/40132"
+      },
+      {
+        "y": "2026",
+        "src": "ETtoday 財經雲",
+        "date": "2026.06",
+        "t": "一曜再生打進輝達生態圈　攻人源外泌體市場",
+        "d": "COMPUTEX 期間國際生技創新交流活動，一曜再生正式加入 Aiii VBIM 國際戰略合作夥伴生態系。",
+        "img": "../assets/news-ettoday.jpg",
+        "href": "https://finance.ettoday.net/news/3178283"
+      },
+      {
+        "y": "2026",
+        "src": "Yahoo News",
+        "date": "2026",
+        "t": "星宴國際開發打造 Aiii VBIM 數位孿生平台",
+        "d": "讓台灣的資金、技術與管理經驗跨越國界，掌握全球資產，打造超級戰情室。",
+        "img": "../assets/news-yahoo-star.jpg",
+        "href": "https://tw.news.yahoo.com/%E6%98%9F%E5%AE%B4%E5%9C%8B%E9%9A%9B%E9%96%8B%E7%99%BC%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%E6%89%93%E9%80%A0-aiii-vbim-%E6%95%B8%E4%BD%8D%E5%AD%BF%E7%94%9F%E5%B9%B3%E5%8F%B0-054733615.html"
+      },
+      {
+        "y": "2025",
+        "src": "頂尖傳媒",
+        "date": "2025.12",
+        "t": "Aiii VBIM 與 Aiii RMS 亮相 2025 台灣醫療科技展",
+        "d": "星宴國際 × 星創科技 × 星賀建設共同開發，攜手一曜再生醫學、遠傳電信展現智慧醫院完整生態系。",
+        "img": "../assets/news-medtech.jpg",
+        "href": "https://www.premiermedia.com.tw/2025120506-2/"
+      },
+      {
+        "y": "2025",
+        "src": "頂尖傳媒",
+        "date": "2025.11",
+        "t": "Aiii VBIM 系統說明會暨繁星計劃展示活動圓滿成功",
+        "d": "匯聚建築、醫療、能源、科技與再生產業領袖，分享繁星計劃的開放合作理念。",
+        "img": "../assets/news-fanxing.jpg",
+        "href": "https://www.premiermedia.com.tw/2025110303-2/"
+      },
+      {
+        "y": "2025",
+        "src": "內政部建築研究所",
+        "date": "2025.09",
+        "t": "智慧節能減碳創新技術宣導推廣活動",
+        "d": "公私協力領航近零碳建築發展，產官學研共同推動淨零轉型。",
+        "img": "../assets/news-abri.jpg",
+        "href": "https://www.abri.gov.tw/News_Content.aspx?n=752&sms=9451&s=331397"
+      },
+      {
+        "y": "2025",
+        "src": "經濟日報",
+        "date": "2025.09",
+        "t": "智慧節能減碳推廣活動登場　產官學研齊聚共探淨零建築新未來",
+        "d": "交流淨零建築最新技術、挑戰與實務解方，分享標竿案例與應用經驗。",
+        "img": "../assets/news-udn-netzero.jpg",
+        "href": "https://money.udn.com/money/story/5635/8986412"
+      },
+      {
+        "y": "2025",
+        "src": "經濟日報",
+        "date": "2025",
+        "t": "川普促投資美國成趨勢　靠一系統輕鬆擴國設廠",
+        "d": "赴美設廠成為趨勢，Aiii VBIM 協助企業克服跨國設廠的管理難題。",
+        "img": "../assets/news-udn-trump.jpg",
+        "href": "https://money.udn.com/money/story/5612/8939306"
+      },
+      {
+        "y": "2025",
+        "src": "頂尖傳媒",
+        "date": "2025.09",
+        "t": "AI 時代新契機！從台灣到亞利桑那　第六代 Aiii VBIM 引領產業跨域升級",
+        "d": "從工廠製造到倉儲、物流與供應鏈，帶動新一波產業聚落與投資機會。",
+        "img": "../assets/news-arizona.jpg",
+        "href": "https://www.premiermedia.com.tw/2025090103-2/"
+      },
+      {
+        "y": "2025",
+        "src": "Yahoo News／PChome",
+        "date": "2025.08",
+        "t": "智慧建築迎戰川普關稅衝擊　V-BIM 系統打造跨國設廠全方位解決方案",
+        "d": "智慧建築技術正成為跨國企業設廠的關鍵助力。",
+        "img": "../assets/news-pchome.jpg",
+        "href": "https://news.pchome.com.tw/living/mypeople/20250813/index-75507426251284219009.html"
+      }
+    ]
+  },
+  "en": {
+    "updates": [
+      {
+        "cat": "Product",
+        "date": "2026",
+        "t": "A complete Edge AI solution: Edge AI Appliance + AI Agent",
+        "d": "Real-time inference, low latency and data sovereignty — AI that understands your site.",
+        "img": "../assets/edge.jpg",
+        "alt": "Edge AI smart campus",
+        "href": "en-EdgeAI.dc.html"
+      },
+      {
+        "cat": "Product",
+        "date": "2026",
+        "t": "Three core capabilities: energy, HVAC × clean environments, Edge AI",
+        "d": "With the building at the core, equipment, energy and AI connect.",
+        "img": "../assets/energy.jpg",
+        "alt": "Smart energy management",
+        "href": "en-Energy.dc.html"
+      },
+      {
+        "cat": "Product",
+        "date": "2026",
+        "t": "Global Command Center: remote, multi-site, data-driven control",
+        "d": "From global view down to each sensor — HQ sees every site in real time.",
+        "img": "../assets/world.jpg",
+        "alt": "Global sites connected",
+        "href": "en-VBIM.dc.html"
+      }
+    ],
+    "filters": [
+      {
+        "label": "All",
+        "on": true,
+        "off": false
+      },
+      {
+        "label": "2026",
+        "on": false,
+        "off": true
+      },
+      {
+        "label": "2025",
+        "on": false,
+        "off": true
+      }
+    ],
+    "shown": [
+      {
+        "y": "2026",
+        "src": "Premier Media",
+        "date": "2026.10",
+        "t": "OpenAI Codex DevDay comes to OOPS — coding by day, networking by night",
+        "d": "A dense knowledge-exchange scene connecting engineers, developers, AI talent, founders and tech leaders.",
+        "img": "../assets/news-codex.jpg",
+        "href": "https://www.premiermedia.com.tw/2026100706-2/"
+      },
+      {
+        "y": "2026",
+        "src": "Archi News",
+        "date": "2026",
+        "t": "AI across the building lifecycle: new business in smart living",
+        "d": "From urban renewal, digital twins and BIM to smart green buildings — how AI connects planning, design, construction and operations.",
+        "img": "../assets/news-archi.jpg",
+        "href": "https://www.archi.net.tw/tw/news/news-detail-790.html"
+      },
+      {
+        "y": "2026",
+        "src": "Yahoo News",
+        "date": "2026.06",
+        "t": "Digital twins reshape the future of buildings — Aiii VBIM leads a new era",
+        "d": "The edge in future construction is running buildings on data, making them smart assets that sense, analyze and manage.",
+        "img": "../assets/world.jpg",
+        "href": "https://tw.news.yahoo.com/%E6%95%B8%E4%BD%8D%E5%AD%BF%E7%94%9F%E9%87%8D%E5%A1%91%E5%BB%BA%E7%AF%89%E6%9C%AA%E4%BE%86-aiii-vbim%E5%BC%95%E9%A0%98%E6%96%B0%E6%99%82%E4%BB%A3-031454152.html"
+      },
+      {
+        "y": "2026",
+        "src": "Office of the President, R.O.C.",
+        "date": "2026",
+        "t": "Aiii VBIM joins the Asia-Pacific regenerative medicine delegation at the Presidential Office",
+        "d": "Part of an industry exchange as Taiwan’s regenerative medicine enters a new regulatory era.",
+        "img": "../assets/news-president.jpg",
+        "href": "https://www.president.gov.tw/NEWS/40132"
+      },
+      {
+        "y": "2026",
+        "src": "ETtoday Finance",
+        "date": "2026.06",
+        "t": "Yi-Yao Regenerative enters the NVIDIA ecosystem",
+        "d": "At a COMPUTEX biotech innovation event, Yi-Yao Regenerative joined the Aiii VBIM international strategic partner ecosystem.",
+        "img": "../assets/news-ettoday.jpg",
+        "href": "https://finance.ettoday.net/news/3178283"
+      },
+      {
+        "y": "2026",
+        "src": "Yahoo News",
+        "date": "2026",
+        "t": "Xingyan International builds the Aiii VBIM digital twin platform",
+        "d": "Taking Taiwan’s capital, technology and management know-how global — with a super command center for worldwide assets.",
+        "img": "../assets/news-yahoo-star.jpg",
+        "href": "https://tw.news.yahoo.com/%E6%98%9F%E5%AE%B4%E5%9C%8B%E9%9A%9B%E9%96%8B%E7%99%BC%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%E6%89%93%E9%80%A0-aiii-vbim-%E6%95%B8%E4%BD%8D%E5%AD%BF%E7%94%9F%E5%B9%B3%E5%8F%B0-054733615.html"
+      },
+      {
+        "y": "2025",
+        "src": "Premier Media",
+        "date": "2025.12",
+        "t": "Aiii VBIM and Aiii RMS at Healthcare+ Expo Taiwan 2025",
+        "d": "Co-developed by Xingyan International, Xingchuang Technology and YIHHUII Construction, showcasing a complete smart hospital ecosystem.",
+        "img": "../assets/news-medtech.jpg",
+        "href": "https://www.premiermedia.com.tw/2025120506-2/"
+      },
+      {
+        "y": "2025",
+        "src": "Premier Media",
+        "date": "2025.11",
+        "t": "Aiii VBIM launch event and Starlight Program showcase",
+        "d": "Leaders from construction, healthcare, energy, technology and regenerative medicine gathered to share the program’s open-collaboration vision.",
+        "img": "../assets/news-fanxing.jpg",
+        "href": "https://www.premiermedia.com.tw/2025110303-2/"
+      },
+      {
+        "y": "2025",
+        "src": "Architecture & Building Research Institute, MOI",
+        "date": "2025.09",
+        "t": "Smart energy-saving and carbon-reduction innovation showcase",
+        "d": "Public–private partnership leading near-zero-carbon building development.",
+        "img": "../assets/news-abri.jpg",
+        "href": "https://www.abri.gov.tw/News_Content.aspx?n=752&sms=9451&s=331397"
+      },
+      {
+        "y": "2025",
+        "src": "Economic Daily News",
+        "date": "2025.09",
+        "t": "Industry, government and academia explore the future of net-zero buildings",
+        "d": "Sharing the latest net-zero building technologies, challenges, solutions and flagship cases.",
+        "img": "../assets/news-udn-netzero.jpg",
+        "href": "https://money.udn.com/money/story/5635/8986412"
+      },
+      {
+        "y": "2025",
+        "src": "Economic Daily News",
+        "date": "2025",
+        "t": "Investing in the US: one system to make overseas plant build-outs easier",
+        "d": "As US plant build-outs become a trend, Aiii VBIM helps companies manage cross-border construction.",
+        "img": "../assets/news-udn-trump.jpg",
+        "href": "https://money.udn.com/money/story/5612/8939306"
+      },
+      {
+        "y": "2025",
+        "src": "Premier Media",
+        "date": "2025.09",
+        "t": "From Taiwan to Arizona: 6th-gen Aiii VBIM drives cross-industry upgrades",
+        "d": "From manufacturing to warehousing, logistics and supply chains — a new wave of industry clusters and investment.",
+        "img": "../assets/news-arizona.jpg",
+        "href": "https://www.premiermedia.com.tw/2025090103-2/"
+      },
+      {
+        "y": "2025",
+        "src": "Yahoo News / PChome",
+        "date": "2025.08",
+        "t": "Smart buildings vs. tariff shocks: V-BIM for cross-border plant build-outs",
+        "d": "Smart building technology is becoming a key enabler for multinational plant construction.",
+        "img": "../assets/news-pchome.jpg",
+        "href": "https://news.pchome.com.tw/living/mypeople/20250813/index-75507426251284219009.html"
+      }
+    ]
+  }
+}

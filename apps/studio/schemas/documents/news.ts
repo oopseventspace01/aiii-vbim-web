@@ -82,6 +82,13 @@ export const news = defineType({
       validation: (rule) => rule.custom(internalPathRule),
     }),
     defineField({
+      name: 'featured',
+      title: '置頂精選',
+      description: '勾選後顯示在「最新消息」頁最上方的大卡片（同時勾選多則時，顯示最新的一則）。',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
       name: 'publishedAt',
       title: '發布時間',
       description: '設定未來時間的話，到時間後網站重新建置時才會顯示。',

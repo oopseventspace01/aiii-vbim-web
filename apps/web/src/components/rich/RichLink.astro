@@ -1,0 +1,16 @@
+---
+// 內文連結：外部網址開新分頁
+import { isExternalUrl } from '../../lib/rich-text';
+
+const { node } = Astro.props as { node: { markDef?: { href?: string } } };
+const href = node.markDef?.href ?? '#';
+const external = isExternalUrl(href);
+---
+
+<a
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+>
+  <slot />
+</a>

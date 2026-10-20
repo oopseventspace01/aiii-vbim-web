@@ -1,0 +1,119 @@
+---
+// /news/[slug] 消息內頁（SPEC 3.8）：標題、日期、封面、內文、活動資訊、相關消息 3 則
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+import ComingSoonNotice from '../ui/ComingSoonNotice.astro';
+import MediaFigure from '../blocks/MediaFigure.astro';
+import NewsGrid from '../blocks/NewsGrid.astro';
+import RichText from '../rich/RichText.astro';
+import { NEWS_COPY } from '../../content/pages/news';
+import { localizePath, type Locale } from '../../lib/i18n';
+import { categoryLabel, newsDateLabel } from '../../lib/news';
+import { imageUrl } from '../../lib/sanity';
+import { toImage, toNewsCard, type NewsCardData } from '../../lib/home-data';
+import { relatedNews, type NewsEntry } from '../../lib/news-data';
+import { isExternalUrl } from '../../lib/rich-text';
+
+interface Props {
+  locale: Locale;
+  entry: NewsEntry;
+  entries: NewsEntry[];
+}
+
+const { locale, entry, entries } = Astro.props;
+const ui = NEWS_COPY[locale].ui;
+const L = (path: string) => localizePath(path, locale);
+const cover = toImage(entry.cover, entry.title ?? '');
+const related = relatedNews(entries, entry)
+  .map((n) => toNewsCard(n, locale))
+  .filter((n): n is NewsCardData => Boolean(n));
+const dateFmt = new Intl.DateTimeFormat(locale === 'en' ? 'en-US' : 'zh-TW', {
+  dateStyle: 'long',
+  timeStyle: 'short',
+  timeZone: 'Asia/Taipei',
+});
+const isEvent = entry.category === 'event';
+// 顯示中文版時，內容語言標示為中文
+const contentLang = entry.fallback ? (entry.language ?? undefined) : undefined;
+---
+
+<BaseLayout
+  title={entry.seo?.metaTitle || entry.title || ui.metaTitle}
+  description={entry.seo?.metaDescription || entry.excerpt || undefined}
+  locale={locale}
+  active="news"
+  noindex={Boolean(entry.seo?.noIndex)}
+>
+  <ComingSoonNotice show={locale === 'en' && entry.fallback} />
+
+  <article lang={contentLang} data-news-detail>
+    <header class="border-b border-line bg-bg-2">
+      <div class="container-site flex max-w-[960px] flex-col gap-4 py-12 md:py-16">
+        <a href={L('/news')} class="self-start font-bold no-underline">
+          {ui.back}
+        </a>
+        <p class="m-0 text-sm font-bold text-blue">
+          {categoryLabel(entry.category ?? undefined, locale)} ·{' '}
+          {newsDateLabel(entry.displayDate, entry.publishedAt)}
+        </p>
+        <h1 class="m-0 text-[clamp(1.9rem,3.6vw,2.8rem)] leading-[1.25] font-black">
+          {entry.title}
+        </h1>
+        {entry.excerpt && <p class="lead m-0">{entry.excerpt}</p>}
+      </div>
+    </header>
+
+    <div class="container-site flex max-w-[960px] flex-col gap-8 py-12">
+      {cover && (
+        <MediaFigure
+          src={imageUrl(cover.source, 1600)}
+          alt={cover.alt}
+          width={cover.width}
+          height={cover.height}
+          eager
+          sizes="(min-width: 960px) 912px, 100vw"
+        />
+      )}
+
+      {isEvent && (entry.eventDate || entry.eventLocation || entry.registerUrl) && (
+        <dl class="m-0 grid gap-4 rounded-md border border-line bg-bg-2 p-6 sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
+          {entry.eventDate && (
+            <div>
+              <dt class="text-sm text-muted">{ui.eventDate}</dt>
+              <dd class="m-0 font-bold">
+                <time datetime={entry.eventDate}>{dateFmt.format(new Date(entry.eventDate))}</time>
+              </dd>
+            </div>
+          )}
+          {entry.eventLocation && (
+            <div>
+              <dt class="text-sm text-muted">{ui.eventLocation}</dt>
+              <dd class="m-0 font-bold">{entry.eventLocation}</dd>
+            </div>
+          )}
+          {entry.registerUrl && (
+            <div class="flex items-center">
+              <Button href={entry.registerUrl} external={isExternalUrl(entry.registerUrl)}>
+                {ui.register}
+              </Button>
+            </div>
+          )}
+        </dl>
+      )}
+
+      {entry.body && entry.body.length > 0 && <RichText value={entry.body} />}
+    </div>
+  </article>
+
+  {related.length > 0 && (
+    <Section tone="soft" labelledby="news-related">
+      <div class="flex flex-col gap-6">
+        <h2 id="news-related" class="m-0 text-[1.6rem] font-black">
+          {ui.related}
+        </h2>
+        <NewsGrid items={related} locale={locale} labelledby="news-related" emptyText="" />
+      </div>
+    </Section>
+  )}
+</BaseLayout>

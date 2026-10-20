@@ -1,0 +1,136 @@
+{
+  "zh-Hant": {
+    "sent": false,
+    "types": [
+      {
+        "n": "重電／機電",
+        "c": "變壓器、盤體、UPS、發電機",
+        "m": "共同標案／產品包"
+      },
+      {
+        "n": "HVAC／ESCO",
+        "c": "冰水主機、AHU、節能控制",
+        "m": "節能方案／績效分潤"
+      },
+      {
+        "n": "能源廠商",
+        "c": "太陽能、風電、儲能、PCS／BMS",
+        "m": "能源平台整合"
+      },
+      {
+        "n": "AI 硬體",
+        "c": "Edge AI、GPU、AI Server",
+        "m": "Aiii Edge AI Appliance"
+      },
+      {
+        "n": "資安／Identity",
+        "c": "Zero Trust、IAM、SOC",
+        "m": "企業治理方案"
+      },
+      {
+        "n": "SI／MSP",
+        "c": "系統整合、維運",
+        "m": "授權代理／共同導入"
+      },
+      {
+        "n": "工程顧問／建築師",
+        "c": "設計、BIM、跨國建廠",
+        "m": "指定平台／專案合作"
+      }
+    ],
+    "tiers": [
+      {
+        "n": "Technology Partner",
+        "who": "軟硬體廠商",
+        "what": "技術與產品透過標準介面整合進 Aiii VBIM"
+      },
+      {
+        "n": "Solution Partner",
+        "who": "垂直產業方案商",
+        "what": "共同打造醫療、製造、能源、商場等產業方案"
+      },
+      {
+        "n": "SI Partner",
+        "who": "系統整合商、工程公司",
+        "what": "專案導入、系統整合與維運服務"
+      },
+      {
+        "n": "Certified Partner",
+        "who": "工程師、顧問、培訓單位",
+        "what": "完成 VBIM 認證，承接導入與維運專案"
+      },
+      {
+        "n": "POC Partner",
+        "who": "業主、研究單位",
+        "what": "共同驗證新的產業場景"
+      }
+    ]
+  },
+  "en": {
+    "sent": false,
+    "types": [
+      {
+        "n": "Power / MEP",
+        "c": "Transformers, switchgear, UPS, generators",
+        "m": "Joint bids / product bundles"
+      },
+      {
+        "n": "HVAC / ESCO",
+        "c": "Chillers, AHUs, energy-saving controls",
+        "m": "Efficiency programs / performance sharing"
+      },
+      {
+        "n": "Energy",
+        "c": "Solar, wind, storage, PCS/BMS",
+        "m": "Energy platform integration"
+      },
+      {
+        "n": "AI hardware",
+        "c": "Edge AI, GPUs, AI servers",
+        "m": "Aiii Edge AI Appliance"
+      },
+      {
+        "n": "Security / Identity",
+        "c": "Zero Trust, IAM, SOC",
+        "m": "Enterprise governance solutions"
+      },
+      {
+        "n": "SI / MSP",
+        "c": "System integration, operations",
+        "m": "Authorized resale / joint delivery"
+      },
+      {
+        "n": "Consultants / Architects",
+        "c": "Design, BIM, global plant builds",
+        "m": "Specified platform / project collaboration"
+      }
+    ],
+    "tiers": [
+      {
+        "n": "Technology Partner",
+        "who": "Hardware & software vendors",
+        "what": "Integrate products into Aiii VBIM through standard interfaces"
+      },
+      {
+        "n": "Solution Partner",
+        "who": "Vertical solution providers",
+        "what": "Co-build healthcare, manufacturing, energy and retail solutions"
+      },
+      {
+        "n": "SI Partner",
+        "who": "Integrators & engineering firms",
+        "what": "Deployment, integration and operations services"
+      },
+      {
+        "n": "Certified Partner",
+        "who": "Engineers, consultants, trainers",
+        "what": "Complete VBIM certification and deliver projects"
+      },
+      {
+        "n": "POC Partner",
+        "who": "Owners & research institutions",
+        "what": "Validate new industry scenarios together"
+      }
+    ]
+  }
+}

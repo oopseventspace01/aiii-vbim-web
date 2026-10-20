@@ -1,0 +1,143 @@
+---
+// /cases（design/pages/Cases.dc.html）：實績與示範場景；後台「公開顯示」的案例另外列在「導入案例」
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Button from '../ui/Button.astro';
+import Pill from '../ui/Pill.astro';
+import PageHero from '../blocks/PageHero.astro';
+import CompareTable from '../blocks/CompareTable.astro';
+import InfoCard from '../cards/InfoCard.astro';
+import hvac from '../../assets/illustrations/hvac.jpg';
+import world from '../../assets/illustrations/world.jpg';
+import energy from '../../assets/illustrations/energy.jpg';
+import design from '../../content/design/Cases.json';
+import { CASES_COPY } from '../../content/pages/cases';
+import { localizePath, type Locale } from '../../lib/i18n';
+import type { CaseEntry } from '../../lib/cms-pages';
+
+interface Props {
+  locale: Locale;
+  cmsCases: CaseEntry[];
+}
+
+const { locale, cmsCases } = Astro.props;
+const copy = CASES_COPY[locale];
+const data = design[locale] as {
+  cases: { scene: string; name: string; d: string; tags: string[]; img: string; alt: string }[];
+  demos: { no: string; t: string; d: string }[];
+  kpi: { t: string; k: string }[];
+};
+const L = (path: string) => localizePath(path, locale);
+const IMAGES: Record<string, typeof hvac> = {
+  'hvac.jpg': hvac,
+  'world.jpg': world,
+  'energy.jpg': energy,
+};
+const imageOf = (path: string) => IMAGES[path.split('/').pop() ?? ''] ?? world;
+---
+
+<BaseLayout title={copy.ui.metaTitle} description={copy.lead} locale={locale} active="cases">
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} lead={copy.lead} />
+
+  <!-- 公開活動與示範成果（設計稿） -->
+  <Section label={copy.title}>
+    <div class="flex flex-col gap-6">
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-4 p-0">
+        {data.cases.map((c) => (
+          <li class="flex">
+            <article class="flex w-full flex-col overflow-hidden rounded-md border border-line bg-white">
+              <Image
+                src={imageOf(c.img)}
+                alt={c.alt}
+                widths={[400, 640, 800]}
+                sizes="(min-width: 1024px) 400px, 100vw"
+                class="block aspect-[16/10] w-full object-cover"
+              />
+              <div class="flex flex-col gap-2 p-6">
+                <span class="text-[13px] font-bold text-blue">{c.scene}</span>
+                <h2 class="m-0 text-xl font-black">{c.name}</h2>
+                <p class="m-0 text-[15px] text-text-2">{c.d}</p>
+                <ul class="mt-1 flex list-none flex-wrap gap-2 p-0">
+                  {c.tags.map((t) => (
+                    <li>
+                      <Pill tone="soft">{t}</Pill>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          </li>
+        ))}
+      </ul>
+      <div class="flex flex-wrap gap-6 rounded-lg bg-navy p-8 text-white">
+        {[copy.approach, copy.app].map((b) => (
+          <div class="flex flex-[1_1_320px] flex-col gap-1.5">
+            <span class="text-[13px] font-bold text-blue-on-navy">{b.label}</span>
+            <span class="text-xl font-black">{b.title}</span>
+            <span class="text-[15px] text-[#cfdcf0]">{b.text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <!-- 後台公開的導入案例（有勾選「公開顯示」才會出現） -->
+  {cmsCases.length > 0 && (
+    <Section labelledby="cases-cms" class="pt-0">
+      <div class="flex flex-col gap-6" data-cms-cases>
+        <SectionHeader id="cases-cms" title={copy.ui.cmsTitle} />
+        <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-4 p-0">
+          {cmsCases.map((c) => (
+            <li class="flex">
+              <InfoCard
+                kicker={c.solution?.name ?? undefined}
+                title={c.title ?? ''}
+                subtitle={c.clientDisplayName ?? undefined}
+                text={c.pain ?? undefined}
+                href={L(`/cases/${c.slug}`)}
+                class="w-full"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Section>
+  )}
+
+  <!-- 六個標準示範場景 -->
+  <Section tone="soft" labelledby="cases-demos">
+    <div class="flex flex-col gap-7">
+      <SectionHeader
+        id="cases-demos"
+        eyebrow={copy.demos.eyebrow}
+        title={copy.demos.title}
+        lead={copy.demos.lead}
+      />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-3.5 p-0">
+        {data.demos.map((d) => (
+          <li class="flex">
+            <InfoCard kicker={d.no} title={d.t} text={d.d} class="w-full" />
+          </li>
+        ))}
+      </ul>
+      <Button href={L('/contact')} class="self-start">
+        {copy.demos.cta}
+      </Button>
+    </div>
+  </Section>
+
+  <!-- 我們如何衡量成效 -->
+  <Section labelledby="cases-kpi">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="cases-kpi" title={copy.kpi.title} lead={copy.kpi.lead} />
+      <CompareTable
+        caption={copy.kpi.title}
+        columns={copy.kpi.columns.map((label) => ({ label }))}
+        rows={data.kpi.map((k) => ({ head: k.t, cells: [k.k] }))}
+        minWidth={520}
+      />
+    </div>
+  </Section>
+</BaseLayout>

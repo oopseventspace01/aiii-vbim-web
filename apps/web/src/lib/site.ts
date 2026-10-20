@@ -1,6 +1,7 @@
 // 全站共用資料（頁尾公司資訊）：同一次建置只向 Sanity 查一次
 import { sanityClient } from './sanity';
-import { LATEST_MEDIA_QUERY, SETTINGS_QUERY } from './queries';
+import { ALL_NEWS_QUERY, LATEST_MEDIA_QUERY, SETTINGS_QUERY } from './queries';
+import type { RawNewsFull } from './news-data';
 import {
   toFooterInfo,
   toNewsCard,
@@ -31,4 +32,12 @@ export async function getLatestMedia(locale: Locale, count: number): Promise<New
     .map((n) => toNewsCard(n, locale))
     .filter((n): n is NewsCardData => Boolean(n))
     .slice(0, count);
+}
+
+let allNews: Promise<RawNewsFull[]> | undefined;
+
+/** 所有已發布消息（兩種語言）：同一次建置只查一次 */
+export function getAllNews(): Promise<RawNewsFull[]> {
+  allNews ??= sanityClient().fetch<RawNewsFull[]>(ALL_NEWS_QUERY);
+  return allNews;
 }

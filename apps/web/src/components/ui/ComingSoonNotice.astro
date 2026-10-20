@@ -1,0 +1,16 @@
+---
+// 英文版尚未提供時的提示（SPEC 第 2 節：顯示中文版並在頁首提示 English version coming soon）
+interface Props {
+  show: boolean;
+}
+
+const { show } = Astro.props;
+---
+
+{show && (
+  <div role="note" lang="en" class="border-b border-line bg-blue-soft" data-coming-soon>
+    <p class="container-site m-0 py-3 text-sm font-bold text-blue-dark">
+      English version coming soon — showing the Chinese version for now.
+    </p>
+  </div>
+)}

@@ -1,0 +1,162 @@
+---
+// /partners（design/pages/Partners.dc.html）：夥伴類型、五種加入方式、規範通路、加入流程、申請表（P5）
+// 夥伴招募海報圖內為中文，只在中文頁顯示（P4 決定④）；Logo 牆只顯示後台「Logo 已取得授權」的夥伴
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Button from '../ui/Button.astro';
+import PageHero from '../blocks/PageHero.astro';
+import MediaFigure from '../blocks/MediaFigure.astro';
+import CompareTable from '../blocks/CompareTable.astro';
+import LogoWall from '../blocks/LogoWall.astro';
+import FormPending from '../blocks/FormPending.astro';
+import ecosystem from '../../assets/illustrations/ecosystem.jpg';
+import posterMedical from '../../assets/reference/partner-medical-equipment.jpg';
+import posterTool from '../../assets/reference/partner-tool-equipment.jpg';
+import design from '../../content/design/Partners.json';
+import { PARTNERS_COPY } from '../../content/pages/partners';
+import { localizePath, type Locale } from '../../lib/i18n';
+import { getFooterInfo } from '../../lib/site';
+import { getApprovedPartners } from '../../lib/cms-pages';
+import { imageUrl } from '../../lib/sanity';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = PARTNERS_COPY[locale];
+const data = design[locale] as {
+  types: { n: string; c: string; m: string }[];
+  tiers: { n: string; who: string; what: string }[];
+};
+const L = (path: string) => localizePath(path, locale);
+const footer = await getFooterInfo(locale);
+const partners = await getApprovedPartners(locale);
+const logos = partners.map((p) => ({
+  name: p.name,
+  src: p.logo?.asset ? imageUrl(p.logo, 320) : undefined,
+  href: p.website,
+}));
+const posters =
+  locale === 'zh-Hant'
+    ? [
+        { src: posterMedical, alt: copy.ui.posterAlt.medical },
+        { src: posterTool, alt: copy.ui.posterAlt.tool },
+      ]
+    : [];
+---
+
+<BaseLayout title={copy.ui.metaTitle} description={copy.subtitle} locale={locale} active="partners">
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} lead={copy.body}>
+    <div class="flex flex-wrap gap-3">
+      <Button href="#apply">{copy.apply}</Button>
+      <Button href={L('/academy')} variant="outline">
+        {copy.academy}
+      </Button>
+    </div>
+    <MediaFigure slot="media" src={ecosystem} alt={copy.heroAlt} eager />
+  </PageHero>
+
+  <!-- 夥伴類型 -->
+  <Section tone="soft" labelledby="pt-types">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="pt-types" title={copy.types.title} lead={copy.types.lead} />
+      <CompareTable
+        caption={copy.types.title}
+        columns={copy.types.columns.map((label) => ({ label }))}
+        rows={data.types.map((t) => ({ head: t.n, cells: [t.c, t.m] }))}
+      />
+    </div>
+  </Section>
+
+  <!-- 招募海報（中文頁） -->
+  {posters.length > 0 && (
+    <Section labelledby="pt-posters">
+      <div class="flex flex-col gap-7" data-partner-posters>
+        <SectionHeader id="pt-posters" title={copy.ui.postersTitle} />
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] gap-5">
+          {posters.map((p) => (
+            <Image
+              src={p.src}
+              alt={p.alt}
+              widths={[400, 640, 900]}
+              sizes="(min-width: 1024px) 600px, 100vw"
+              class="h-auto w-full rounded-lg border border-line"
+            />
+          ))}
+        </div>
+      </div>
+    </Section>
+  )}
+
+  <!-- 五種加入方式＋規範通路 -->
+  <Section labelledby="pt-tiers" class={posters.length > 0 ? 'pt-0' : undefined}>
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="pt-tiers" title={copy.tiers.title} />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-3 p-0">
+        {data.tiers.map((r) => (
+          <li class="flex flex-col gap-1.5 rounded-md border border-line bg-white p-6">
+            <span class="font-display text-lg font-bold text-blue-dark">{r.n}</span>
+            <span class="font-black">{r.who}</span>
+            <span class="text-sm text-text-2">{r.what}</span>
+          </li>
+        ))}
+      </ul>
+      <div class="flex flex-wrap items-center gap-6 rounded-lg bg-blue p-8 text-white md:p-10">
+        <div class="flex min-w-0 flex-[2_1_460px] flex-col gap-2">
+          <span class="font-display text-sm font-bold tracking-[0.14em] text-[#eef3ff]">
+            {copy.spec.eyebrow}
+          </span>
+          <h2 class="m-0 text-[clamp(1.5rem,2.6vw,2.1rem)] leading-[1.25] font-black">
+            {copy.spec.title}
+          </h2>
+          <p class="m-0 text-[#eef3ff]">{copy.spec.text}</p>
+        </div>
+        <p class="m-0 flex-[1_1_260px] rounded-[16px] bg-blue-dark p-5 text-lg font-black">
+          {copy.spec.revenue}
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- 後台已授權的夥伴 Logo（沒有時不顯示這個區塊） -->
+  {logos.length > 0 && (
+    <Section labelledby="pt-logos" class="pt-0">
+      <div class="flex flex-col gap-6">
+        <SectionHeader id="pt-logos" title={copy.ui.logosTitle} />
+        <LogoWall logos={logos} label={copy.ui.logosTitle} emptyText="" />
+      </div>
+    </Section>
+  )}
+
+  <!-- 加入流程 -->
+  <Section tone="soft" labelledby="pt-process">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="pt-process" title={copy.process.title} />
+      <ol class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-3 p-0">
+        {copy.process.steps.map((s) => (
+          <li class="flex flex-col gap-1.5 rounded-md border border-line bg-white p-6">
+            <span class="font-display font-bold text-blue">{s.no}</span>
+            <span class="text-lg font-black">{s.t}</span>
+            <span class="text-sm text-text-2">{s.d}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <!-- 申請表（P5 接上） -->
+  <Section id="apply" labelledby="pt-apply">
+    <div class="flex max-w-[820px] flex-col gap-6">
+      <SectionHeader
+        id="pt-apply"
+        eyebrow={copy.form.eyebrow}
+        title={copy.form.title}
+        lead={copy.form.lead}
+      />
+      <FormPending locale={locale} info={footer} />
+    </div>
+  </Section>
+</BaseLayout>

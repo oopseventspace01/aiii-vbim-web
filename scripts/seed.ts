@@ -153,6 +153,7 @@ async function buildProductNews(): Promise<Doc[]> {
         slug: { _type: 'slug', current: item.key },
         category: 'product',
         internalPath: item.internalPath,
+        featured: item.featured ?? false,
         publishedAt: dates[i],
         displayDate: item.date,
         cover: image(coverId, text.alt),

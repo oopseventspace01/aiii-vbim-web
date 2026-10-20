@@ -11,7 +11,19 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const PAGES_DIR = `${root}design/pages`;
 const OUT_DIR = `${root}apps/web/src/content/design`;
 
-export const PAGES = ['VBIM', 'Platform', 'Solutions', 'Energy', 'EdgeAI', 'About'];
+export const PAGES = [
+  'VBIM',
+  'Platform',
+  'Solutions',
+  'Energy',
+  'EdgeAI',
+  'About',
+  'News',
+  'Cases',
+  'Partners',
+  'Academy',
+  'Contact',
+];
 
 /** 執行一個設計稿的 renderVals()，state 可指定（例如分頁索引） */
 function render(html, state) {

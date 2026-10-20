@@ -1,0 +1,15 @@
+---
+// 內文按鈕
+import Button from '../ui/Button.astro';
+import { isExternalUrl } from '../../lib/rich-text';
+
+const { node } = Astro.props as { node: { label?: string; url?: string } };
+---
+
+{node.label && node.url && (
+  <p class="my-8">
+    <Button href={node.url} external={isExternalUrl(node.url)}>
+      {node.label}
+    </Button>
+  </p>
+)}

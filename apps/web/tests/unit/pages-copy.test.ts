@@ -8,6 +8,11 @@ import { SOLUTIONS_COPY } from '../../src/content/pages/solutions';
 import { ENERGY_COPY } from '../../src/content/pages/energy';
 import { EDGE_COPY } from '../../src/content/pages/edge-ai';
 import { ABOUT_COPY } from '../../src/content/pages/about';
+import { NEWS_COPY } from '../../src/content/pages/news';
+import { CASES_COPY } from '../../src/content/pages/cases';
+import { PARTNERS_COPY } from '../../src/content/pages/partners';
+import { ACADEMY_COPY } from '../../src/content/pages/academy';
+import { CONTACT_COPY } from '../../src/content/pages/contact';
 
 const designFile = (name: string) =>
   readFileSync(new URL(`../../../../design/pages/${name}.dc.html`, import.meta.url), 'utf-8')
@@ -18,7 +23,15 @@ const designFile = (name: string) =>
 const textOnly = (html: string) => html.replace(/<[^>]+>/g, '');
 
 // 程式另外加的欄位（頁面標題、無障礙標籤、圖片說明），設計稿沒有對應文字，不比對
-const NOT_IN_DESIGN = new Set(['metaTitle', 'caption', 'downUpLabel', 'tabsLabel', 'dashboardAlt']);
+// 慣例：程式另外加的介面文字一律放在 ui 底下
+const NOT_IN_DESIGN = new Set([
+  'metaTitle',
+  'caption',
+  'downUpLabel',
+  'tabsLabel',
+  'dashboardAlt',
+  'ui',
+]);
 
 function strings(value: unknown, key = ''): string[] {
   if (NOT_IN_DESIGN.has(key)) return [];
@@ -36,6 +49,11 @@ const PAGE_COPY = {
   Energy: ENERGY_COPY,
   EdgeAI: EDGE_COPY,
   About: ABOUT_COPY,
+  News: NEWS_COPY,
+  Cases: CASES_COPY,
+  Partners: PARTNERS_COPY,
+  Academy: ACADEMY_COPY,
+  Contact: CONTACT_COPY,
 };
 
 describe('設計稿資料（content/design/*.json）與設計稿同步', () => {

@@ -27,7 +27,10 @@ export function sanityClient(): SanityClient {
 }
 
 /** Sanity 圖片網址：自動輸出 WebP／AVIF 並依需要裁切尺寸 */
-export function imageUrl(source: { asset?: { _id?: string; url?: string } | null }, width: number) {
+export function imageUrl(
+  source: { asset?: { _id?: string; _ref?: string; url?: string } | null },
+  width: number,
+) {
   return createImageUrlBuilder(sanityClient())
     .image(source)
     .width(width)

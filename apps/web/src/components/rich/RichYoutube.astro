@@ -1,0 +1,20 @@
+---
+// 內文 YouTube 影片：使用 youtube-nocookie（不先放追蹤 Cookie），不自動播放
+import { youtubeId } from '../../lib/rich-text';
+
+const { node } = Astro.props as { node: { url?: string } };
+const id = node.url ? youtubeId(node.url) : undefined;
+---
+
+{id && (
+  <div class="my-8 aspect-video overflow-hidden rounded-md bg-navy">
+    <iframe
+      class="h-full w-full"
+      src={`https://www.youtube-nocookie.com/embed/${id}`}
+      title="YouTube"
+      loading="lazy"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    />
+  </div>
+)}

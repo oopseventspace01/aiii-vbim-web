@@ -336,6 +336,8 @@ export interface ProductNewsSeed {
   /** 站內連結（v1.4 產品發表） */
   internalPath: string;
   cover: string;
+  /** 消息頁置頂精選（P4 決定②） */
+  featured?: boolean;
   zh: { title: string; excerpt: string; alt: string };
   en: { title: string; excerpt: string; alt: string };
 }
@@ -389,6 +391,25 @@ export const PRODUCT_NEWS: ProductNewsSeed[] = [
       title: 'Global Command Center: remote, multi-site, data-driven control',
       excerpt: 'From global view down to each sensor — HQ sees every site in real time.',
       alt: 'Global sites connected',
+    },
+  },
+  {
+    key: 'aiii-vbim-2',
+    date: '2026.09',
+    internalPath: '/platform',
+    cover: 'hero-building.jpg',
+    featured: true,
+    zh: {
+      title: 'Aiii VBIM 2.0：AI-Powered Physical World Operating System',
+      excerpt:
+        'Aiii VBIM 從建築與工程管理平台，升級為實體世界企業營運 OS。以 BIM／PMIS 為核心，整合能源、中央空調、潔淨、地端 AI 與資安，延伸醫院、商場、工廠、辦公與能源五大領域。',
+      alt: 'Aiii VBIM 2.0 建築數位孿生示意',
+    },
+    en: {
+      title: 'Aiii VBIM 2.0: AI-Powered Physical World Operating System',
+      excerpt:
+        'Aiii VBIM evolves from a building and project management platform into an operating system for the enterprise’s physical world — with BIM/PMIS at its core and energy, HVAC, clean environments, Edge AI and cybersecurity built in.',
+      alt: 'Aiii VBIM 2.0 digital twin building',
     },
   },
 ];

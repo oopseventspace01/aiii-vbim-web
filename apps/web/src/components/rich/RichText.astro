@@ -1,0 +1,22 @@
+---
+// 後台內文（Portable Text）轉網頁：段落、H2/H3、引言、清單、圖片、YouTube、按鈕、連結
+import { PortableText } from 'astro-portabletext';
+import RichImage from './RichImage.astro';
+import RichYoutube from './RichYoutube.astro';
+import RichButton from './RichButton.astro';
+import RichLink from './RichLink.astro';
+
+interface Props {
+  value: unknown[];
+}
+
+const { value } = Astro.props;
+const components = {
+  type: { image: RichImage, youtube: RichYoutube, ctaButton: RichButton },
+  mark: { link: RichLink },
+};
+---
+
+<div class="rich-text">
+  <PortableText value={value as never} components={components} />
+</div>

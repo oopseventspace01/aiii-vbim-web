@@ -1,0 +1,168 @@
+{
+  "zh-Hant": {
+    "sent": false,
+    "steps": [
+      {
+        "no": "01",
+        "t": "培訓",
+        "d": "Aiii VBIM 平台操作、系統整合與地端 AI 實作"
+      },
+      {
+        "no": "02",
+        "t": "考核",
+        "d": "實作題加上真實場域情境驗證"
+      },
+      {
+        "no": "03",
+        "t": "認證",
+        "d": "取得 VBIM 認證，成為認證工程師或認證夥伴"
+      },
+      {
+        "no": "04",
+        "t": "媒合",
+        "d": "進入認證人才庫，承接導入與維運專案"
+      }
+    ],
+    "mods": [
+      {
+        "no": "01",
+        "en": "BIM／PMIS",
+        "zh": "建築資料與工程管理",
+        "d": "2D → 3D → 施工 → 驗收，圖說版本、RFI、送審簽核與竣工資料。"
+      },
+      {
+        "no": "02",
+        "en": "Energy",
+        "zh": "智慧能源管理",
+        "d": "電力、重電、儲能、太陽能，需量管理與能源閉環。"
+      },
+      {
+        "no": "03",
+        "en": "HVAC",
+        "zh": "中央空調節能與潔淨環境",
+        "d": "冰水主機、冷卻水塔、AHU、kW/RT、COP 與潔淨控制。"
+      },
+      {
+        "no": "04",
+        "en": "Vision",
+        "zh": "影像與 Vision AI",
+        "d": "Camera、VMS、AI 影像辨識，事件落到 BIM 空間與工單。"
+      },
+      {
+        "no": "05",
+        "en": "AIoT",
+        "zh": "設備與感測整合",
+        "d": "設備、Sensor、Meter、Controller 與資料標準。"
+      },
+      {
+        "no": "06",
+        "en": "Edge AI",
+        "zh": "地端 AI 與 Private AI",
+        "d": "Local LLM、RAG、AI Agent、Storage 與 Design-In 規劃。"
+      }
+    ],
+    "tracks": [
+      {
+        "en": "DESIGN",
+        "zh": "建築師與顧問",
+        "d": "在規劃初期把 AI、能源、空調與影像寫進圖面與規範。",
+        "focus": "BIM／PMIS・HVAC・Edge AI"
+      },
+      {
+        "en": "DELIVERY",
+        "zh": "工程師與系統整合商",
+        "d": "承接 Aiii VBIM 導入、設備整合與現場部署。",
+        "focus": "AIoT・Vision・Energy"
+      },
+      {
+        "en": "OPERATION",
+        "zh": "物業與設施管理",
+        "d": "用數位孿生與戰情室管理設備、能源與維運。",
+        "focus": "Energy・HVAC・BIM／PMIS"
+      }
+    ]
+  },
+  "en": {
+    "sent": false,
+    "steps": [
+      {
+        "no": "01",
+        "t": "Train",
+        "d": "Aiii VBIM platform, system integration and hands-on Edge AI"
+      },
+      {
+        "no": "02",
+        "t": "Assess",
+        "d": "Practical tasks plus real-site scenario validation"
+      },
+      {
+        "no": "03",
+        "t": "Certify",
+        "d": "Become a VBIM Certified Engineer or Certified Partner"
+      },
+      {
+        "no": "04",
+        "t": "Match",
+        "d": "Join the certified talent pool and take on deployment and O&M projects"
+      }
+    ],
+    "mods": [
+      {
+        "no": "01",
+        "en": "BIM / PMIS",
+        "t": "Building data & project management",
+        "d": "2D → 3D → construction → commissioning: drawing versions, RFIs, approvals and as-builts."
+      },
+      {
+        "no": "02",
+        "en": "Energy",
+        "t": "Smart energy management",
+        "d": "Power, HV equipment, storage and solar; demand management and the energy loop."
+      },
+      {
+        "no": "03",
+        "en": "HVAC",
+        "t": "HVAC efficiency & clean environments",
+        "d": "Chillers, cooling towers, AHUs, kW/RT, COP and cleanroom control."
+      },
+      {
+        "no": "04",
+        "en": "Vision",
+        "t": "Video & Vision AI",
+        "d": "Cameras, VMS and AI recognition — events placed in BIM space and work orders."
+      },
+      {
+        "no": "05",
+        "en": "AIoT",
+        "t": "Equipment & sensor integration",
+        "d": "Equipment, sensors, meters, controllers and data standards."
+      },
+      {
+        "no": "06",
+        "en": "Edge AI",
+        "t": "Edge AI & Private AI",
+        "d": "Local LLM, RAG, AI agents, storage and design-in planning."
+      }
+    ],
+    "tracks": [
+      {
+        "en": "DESIGN",
+        "t": "Architects & consultants",
+        "d": "Write AI, energy, HVAC and video into drawings and specs from the earliest stage.",
+        "focus": "BIM/PMIS · HVAC · Edge AI"
+      },
+      {
+        "en": "DELIVERY",
+        "t": "Engineers & integrators",
+        "d": "Deliver Aiii VBIM deployments, equipment integration and on-site setup.",
+        "focus": "AIoT · Vision · Energy"
+      },
+      {
+        "en": "OPERATION",
+        "t": "Facility & property teams",
+        "d": "Run equipment, energy and maintenance with the digital twin and command center.",
+        "focus": "Energy · HVAC · BIM/PMIS"
+      }
+    ]
+  }
+}

@@ -1,0 +1,94 @@
+---
+// /contact（design/pages/Contact.dc.html）：左側說明與公司資訊（後台），右側表單（P5 接上）
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../ui/Button.astro';
+import FormPending from '../blocks/FormPending.astro';
+import { CONTACT_COPY } from '../../content/pages/contact';
+import type { Locale } from '../../lib/i18n';
+import { getFooterInfo } from '../../lib/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = CONTACT_COPY[locale];
+const info = await getFooterInfo(locale);
+const lines = copy.title.split('\n');
+const tel = info.phone.replace(/[^+\d]/g, '');
+---
+
+<BaseLayout title={copy.ui.metaTitle} description={copy.lead} locale={locale} active="contact">
+  <section class="border-b border-line bg-bg-2" aria-labelledby="contact-title">
+    <div class="container-site flex flex-wrap items-start gap-10 py-14 md:py-[88px]">
+      <div class="flex min-w-0 flex-[1_1_420px] flex-col gap-5">
+        <p class="eyebrow m-0">{copy.eyebrow}</p>
+        <h1
+          id="contact-title"
+          class="m-0 text-[clamp(2.2rem,4.4vw,3.4rem)] leading-[1.15] font-black"
+        >
+          {lines.map((line, i) => (i < lines.length - 1 ? [line, <br />] : line))}
+        </h1>
+        <p class="lead m-0">{copy.lead}</p>
+        <ul class="m-0 flex list-none flex-col gap-3 p-0">
+          {copy.cards.map((c) => (
+            <li class="flex flex-col gap-0.5 rounded-[18px] border border-line bg-white px-5 py-4">
+              <span class="font-black">{c.t}</span>
+              <span class="text-sm text-muted">{c.d}</span>
+            </li>
+          ))}
+        </ul>
+        <address
+          class="flex flex-col gap-1 rounded-[18px] bg-navy px-5 py-5 text-white not-italic"
+          data-company-info
+        >
+          <span class="font-black">{info.companyName}</span>
+          <span class="text-sm text-[#cfdcf0]">{info.address}</span>
+          <a href={`tel:${tel}`} class="font-bold text-blue-on-navy no-underline hover:text-white">
+            {info.phone}
+          </a>
+          {info.email && (
+            <a
+              href={`mailto:${info.email}`}
+              class="font-bold text-blue-on-navy no-underline hover:text-white"
+            >
+              {info.email}
+            </a>
+          )}
+        </address>
+      </div>
+
+      <div class="flex min-w-0 flex-[1_1_440px] flex-col gap-5">
+        <h2 class="m-0 text-xl font-black">{copy.ui.formTitle}</h2>
+        <FormPending locale={locale} info={info} showLine={!info.lineOfficialUrl} />
+        {info.lineOfficialUrl && (
+          <div
+            class="flex flex-wrap items-center gap-5 rounded-md border border-line bg-white p-6"
+            data-line-oa
+          >
+            {info.lineQrCode && (
+              <Image
+                src={info.lineQrCode.url}
+                alt={copy.ui.lineQrAlt}
+                width={160}
+                height={160}
+                class="h-32 w-32 rounded-lg border border-line"
+              />
+            )}
+            <div class="flex flex-col gap-3">
+              <h3 class="m-0 text-lg font-black">{copy.ui.lineTitle}</h3>
+              <Button
+                href={info.lineOfficialUrl}
+                external
+                newTabLabel={locale === 'en' ? '(opens in a new tab)' : '（另開新視窗）'}
+              >
+                {copy.ui.lineButton}
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+// 最新消息：列表、分類、分頁、內頁都由這個檔案產生（網址規則見 lib/news-data.ts）
+import NewsListPage from '../../components/pages/NewsListPage.astro';
+import NewsDetailPage from '../../components/pages/NewsDetailPage.astro';
+import { newsStaticPaths, type NewsPageProps } from '../../lib/news-route';
+
+export function getStaticPaths() {
+  return newsStaticPaths('zh-Hant');
+}
+
+const { route, entries } = Astro.props as NewsPageProps;
+const entry = route.kind === 'detail' ? entries.find((n) => n.slug === route.slug) : undefined;
+---
+
+{route.kind === 'list' ? (
+  <NewsListPage locale="zh-Hant" entries={entries} category={route.category} page={route.page} />
+) : (
+  entry && <NewsDetailPage locale="zh-Hant" entry={entry} entries={entries} />
+)}

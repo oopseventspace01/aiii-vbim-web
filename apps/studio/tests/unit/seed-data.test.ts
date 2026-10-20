@@ -127,8 +127,9 @@ describe('禁用名稱檢查', () => {
 });
 
 describe('產品發表種子資料（v1.4）', () => {
-  it('共 3 則，站內連結與封面有效', () => {
-    expect(PRODUCT_NEWS).toHaveLength(3);
+  it('共 4 則（含精選 Aiii VBIM 2.0），站內連結與封面有效', () => {
+    expect(PRODUCT_NEWS).toHaveLength(4);
+    expect(PRODUCT_NEWS.filter((n) => n.featured)).toHaveLength(1);
     for (const n of PRODUCT_NEWS) {
       expect(n.internalPath).toMatch(/^\/[a-z-]+$/);
       expect(existsSync(assetPath(n.cover)), n.cover).toBe(true);

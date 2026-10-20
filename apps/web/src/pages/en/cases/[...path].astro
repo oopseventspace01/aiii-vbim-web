@@ -1,0 +1,18 @@
+---
+// 案例：列表（/cases）＋後台「公開顯示」案例的內頁（/cases/{網址代稱}）
+import CasesPage from '../../../components/pages/CasesPage.astro';
+import CaseDetailPage from '../../../components/pages/CaseDetailPage.astro';
+import { getPublicCases, pickCases, type CaseEntry } from '../../../lib/cms-pages';
+
+export async function getStaticPaths() {
+  const cases = pickCases(await getPublicCases(), 'en');
+  return [
+    { params: { path: undefined }, props: { cases, entry: undefined } },
+    ...cases.map((entry) => ({ params: { path: entry.slug! }, props: { cases, entry } })),
+  ];
+}
+
+const { cases, entry } = Astro.props as { cases: CaseEntry[]; entry?: CaseEntry };
+---
+
+{entry ? <CaseDetailPage locale="en" entry={entry} /> : <CasesPage locale="en" cmsCases={cases} />}

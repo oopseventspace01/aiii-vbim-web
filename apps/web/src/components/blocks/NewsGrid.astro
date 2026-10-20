@@ -10,9 +10,11 @@ interface Props {
   locale: Locale;
   labelledby?: string;
   emptyText: string;
+  /** 顯示摘要（最新消息頁） */
+  showExcerpt?: boolean;
 }
 
-const { items, locale, labelledby, emptyText } = Astro.props;
+const { items, locale, labelledby, emptyText, showExcerpt = false } = Astro.props;
 ---
 
 {items.length === 0 ? (
@@ -32,6 +34,7 @@ const { items, locale, labelledby, emptyText } = Astro.props;
           category={n.category}
           source={n.source}
           dateLabel={n.dateLabel}
+          excerpt={showExcerpt ? n.excerpt : undefined}
           cover={
             n.cover
               ? {

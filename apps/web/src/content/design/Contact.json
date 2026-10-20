@@ -1,0 +1,52 @@
+{
+  "zh-Hant": {
+    "roles": [
+      {
+        "label": "業主／企業",
+        "on": true,
+        "off": false
+      },
+      {
+        "label": "設備商／SI／技術夥伴",
+        "on": false,
+        "off": true
+      },
+      {
+        "label": "想取得認證的人才",
+        "on": false,
+        "off": true
+      }
+    ],
+    "isOwner": true,
+    "isPartner": false,
+    "isTalent": false,
+    "needCompany": true,
+    "msgLabel": "想解決的問題",
+    "sent": false
+  },
+  "en": {
+    "roles": [
+      {
+        "label": "Owner / enterprise",
+        "on": true,
+        "off": false
+      },
+      {
+        "label": "Vendor / SI / tech partner",
+        "on": false,
+        "off": true
+      },
+      {
+        "label": "Professional seeking certification",
+        "on": false,
+        "off": true
+      }
+    ],
+    "isOwner": true,
+    "isPartner": false,
+    "isTalent": false,
+    "needCompany": true,
+    "msgLabel": "What would you like to solve?",
+    "sent": false
+  }
+}

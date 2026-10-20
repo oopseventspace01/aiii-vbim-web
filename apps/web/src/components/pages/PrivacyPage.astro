@@ -1,0 +1,55 @@
+---
+// /privacy 隱私權政策：內容由後台「一般頁」（網址代稱 privacy）維護（SPEC 3.9）。
+// 業主審閱草稿（docs/privacy-policy-draft.md）並放進後台之前，顯示「制定中」說明與聯絡方式。
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../ui/Button.astro';
+import ComingSoonNotice from '../ui/ComingSoonNotice.astro';
+import RichText from '../rich/RichText.astro';
+import type { Locale } from '../../lib/i18n';
+import { getCmsPage } from '../../lib/cms-pages';
+import { getFooterInfo } from '../../lib/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = await getCmsPage('privacy', locale);
+const info = await getFooterInfo(locale);
+const zh = locale === 'zh-Hant';
+const title = page?.title ?? (zh ? '隱私權政策' : 'Privacy Policy');
+---
+
+<BaseLayout
+  title={page?.seo?.metaTitle || title}
+  description={page?.seo?.metaDescription}
+  locale={locale}
+  noindex={!page || Boolean(page.seo?.noIndex)}
+>
+  <ComingSoonNotice show={locale === 'en' && Boolean(page?.fallback)} />
+  <article
+    class="container-site max-w-[860px] py-14 md:py-20"
+    lang={page?.fallback ? page.language : undefined}
+  >
+    <h1 class="m-0 mb-8 text-[clamp(2rem,4vw,3rem)] font-black">{title}</h1>
+    {page?.body && page.body.length > 0 ? (
+      <RichText value={page.body} />
+    ) : (
+      <div
+        class="flex flex-col gap-4 rounded-md border border-line bg-bg-2 p-6"
+        data-privacy-pending
+      >
+        <p class="m-0 text-text-2">
+          {zh
+            ? '本網站的隱私權政策正在制定中。若對個人資料的蒐集與使用有任何疑問，歡迎與我們聯繫。'
+            : 'Our privacy policy is being finalized. If you have any questions about how personal data is collected or used, please contact us.'}
+        </p>
+        {info.email && (
+          <Button href={`mailto:${info.email}`} class="self-start">
+            {info.email}
+          </Button>
+        )}
+      </div>
+    )}
+  </article>
+</BaseLayout>

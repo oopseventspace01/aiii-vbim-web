@@ -1,0 +1,24 @@
+---
+// 內文圖片：從 Sanity 圖片編號推算尺寸，輸出最佳化圖片
+import { Image } from 'astro:assets';
+import { imageUrl } from '../../lib/sanity';
+import { dimensionsFromRef } from '../../lib/rich-text';
+
+const { node } = Astro.props as { node: { asset?: { _ref?: string }; alt?: string } };
+const ref = node.asset?._ref;
+const size = ref ? dimensionsFromRef(ref) : undefined;
+---
+
+{ref && size && (
+  <figure class="my-8">
+    <Image
+      src={imageUrl(node, 1600)}
+      alt={node.alt ?? ''}
+      width={size.width}
+      height={size.height}
+      widths={[480, 800, 1200]}
+      sizes="(min-width: 860px) 820px, 100vw"
+      class="h-auto w-full rounded-md"
+    />
+  </figure>
+)}

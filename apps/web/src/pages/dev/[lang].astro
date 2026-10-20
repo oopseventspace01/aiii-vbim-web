@@ -26,7 +26,8 @@ import energy from '../../assets/illustrations/energy.jpg';
 import { localizePath, type Locale } from '../../lib/i18n';
 import { newsLink } from '../../lib/news';
 import { UI } from '../../i18n/ui';
-import { HERO_COPY, MOCK_NEWS, MOCK_PARTNERS } from '../../mocks/showcase';
+import { HERO_COPY, MOCK_NEWS, MOCK_PARTNERS, MOCK_RICH_TEXT } from '../../mocks/showcase';
+import RichText from '../../components/rich/RichText.astro';
 
 export function getStaticPaths() {
   if (import.meta.env.PROD) return [];
@@ -246,6 +247,13 @@ const L = (path: string) => localizePath(path, locale);
         primary={{ label: t.cta, href: L('/contact') }}
         secondary={{ label: '[MOCK]', href: L('/partners') }}
       />
+    </div>
+  </Section>
+
+  <Section labelledby="sc-rich">
+    <div class="flex max-w-[860px] flex-col gap-6" data-rich-demo>
+      <SectionHeader id="sc-rich" eyebrow="COMPONENTS · RICH TEXT" title="RichText" />
+      <RichText value={MOCK_RICH_TEXT} />
     </div>
   </Section>
 

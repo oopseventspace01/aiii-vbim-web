@@ -68,6 +68,7 @@ export interface NewsCardData {
   category: string;
   source?: string;
   dateLabel: string;
+  excerpt?: string;
   cover?: ImageRef;
 }
 
@@ -104,6 +105,7 @@ export function toNewsCard(raw: RawNews, locale: Locale): NewsCardData | undefin
     category: raw.category ?? 'news',
     source: text(raw.source) || undefined,
     dateLabel: newsDateLabel(raw.displayDate, raw.publishedAt),
+    excerpt: text(raw.excerpt) || undefined,
     cover: toImage(raw.cover, title),
   };
 }
@@ -130,6 +132,12 @@ export function toFooterInfo(
     appStoreUrl: pick(raw?.appStoreUrl, fallback.appStoreUrl),
     googlePlayUrl: pick(raw?.googlePlayUrl, fallback.googlePlayUrl),
     lineOfficialUrl: pick(raw?.lineOfficialUrl, fallback.lineOfficialUrl),
+    lineQrCode: (() => {
+      const img = toImage(raw?.lineQrCode, 'LINE QR Code');
+      return img?.source.asset?.url
+        ? { url: img.source.asset.url, alt: img.alt, width: img.width, height: img.height }
+        : undefined;
+    })(),
     socialLinks: (raw?.socialLinks ?? [])
       .map((s) => ({ platform: text(s.platform), url: text(s.url) }))
       .filter((s) => s.platform && s.url),

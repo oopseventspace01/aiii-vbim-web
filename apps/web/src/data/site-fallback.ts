@@ -11,6 +11,8 @@ export interface FooterInfo {
   appStoreUrl?: string;
   googlePlayUrl?: string;
   lineOfficialUrl?: string;
+  /** LINE 官方帳號 QR Code（後台上傳後才有） */
+  lineQrCode?: { url: string; alt: string; width: number; height: number };
   socialLinks?: { platform: string; url: string }[];
 }
 
