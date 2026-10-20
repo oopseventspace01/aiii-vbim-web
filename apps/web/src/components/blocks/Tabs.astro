@@ -1,0 +1,84 @@
+---
+// 分頁切換（SPEC 3.1 第 6 項：五大場域 Tabs，需支援鍵盤操作）
+// 用法：<Tabs tabs={[{id:'hospital',label:'醫院'}]}><div slot="panel-hospital">…</div></Tabs>
+// 鍵盤：← → 切換、Home／End 到第一個／最後一個（WAI-ARIA Tabs 模式）
+interface Props {
+  tabs: { id: string; label: string }[];
+  label: string;
+  /** 預設選取的分頁 id */
+  initial?: string;
+}
+
+const { tabs, label, initial = tabs[0]?.id } = Astro.props;
+const uid = `tabs-${Math.random().toString(36).slice(2, 8)}`;
+const panels = await Promise.all(tabs.map((tab) => Astro.slots.render(`panel-${tab.id}`)));
+---
+
+<div class="flex flex-col gap-6" data-tabs>
+  <div role="tablist" aria-label={label} class="flex flex-wrap gap-2">
+    {tabs.map((tab) => {
+      const selected = tab.id === initial;
+      return (
+        <button
+          type="button"
+          role="tab"
+          id={`${uid}-tab-${tab.id}`}
+          aria-controls={`${uid}-panel-${tab.id}`}
+          aria-selected={selected ? 'true' : 'false'}
+          tabindex={selected ? 0 : -1}
+          class="min-h-12 cursor-pointer rounded-pill border border-line-2 bg-white px-6 py-2.5 text-[17px] font-bold text-navy aria-selected:border-blue aria-selected:bg-blue aria-selected:font-black aria-selected:text-white"
+        >
+          {tab.label}
+        </button>
+      );
+    })}
+  </div>
+  {tabs.map((tab, i) => (
+    <div
+      role="tabpanel"
+      id={`${uid}-panel-${tab.id}`}
+      aria-labelledby={`${uid}-tab-${tab.id}`}
+      tabindex="0"
+      hidden={tab.id !== initial}
+      set:html={panels[i]}
+    />
+  ))}
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-tabs]')) {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+
+    const select = (next: HTMLButtonElement, focus = true) => {
+      for (const tab of tabs) {
+        const on = tab === next;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        const panel = document.getElementById(tab.getAttribute('aria-controls') ?? '');
+        if (panel) panel.hidden = !on;
+      }
+      if (focus) next.focus();
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => select(tab, false));
+      tab.addEventListener('keydown', (event) => {
+        const last = tabs.length - 1;
+        const target =
+          event.key === 'ArrowRight'
+            ? tabs[index === last ? 0 : index + 1]
+            : event.key === 'ArrowLeft'
+              ? tabs[index === 0 ? last : index - 1]
+              : event.key === 'Home'
+                ? tabs[0]
+                : event.key === 'End'
+                  ? tabs[last]
+                  : undefined;
+        if (target) {
+          event.preventDefault();
+          select(target);
+        }
+      });
+    });
+  }
+</script>

@@ -1,0 +1,22 @@
+---
+// 背書條（SPEC 3.1 第 3 項）：4 格，內容由後台「全站設定 → 背書項目」提供
+interface Props {
+  items: { label: string; value: string }[];
+  label: string;
+}
+
+const { items, label } = Astro.props;
+---
+
+<section aria-label={label} class="border-y border-line bg-white">
+  <div class="container-site">
+    <dl class="m-0 grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-6 py-7">
+      {items.slice(0, 4).map((item) => (
+        <div class="flex flex-col gap-0.5">
+          <dt class="text-[13px] text-muted">{item.label}</dt>
+          <dd class="m-0 text-[17px] font-bold">{item.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

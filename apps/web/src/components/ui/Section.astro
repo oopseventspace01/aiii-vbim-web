@@ -1,0 +1,47 @@
+---
+// 區塊外框：背景色調＋內容寬度＋上下間距（SPEC 第 4 節：桌機 104px／手機 64px）
+interface Props {
+  tone?: 'white' | 'soft' | 'navy';
+  /** 上下間距：normal＝SPEC 標準；compact＝背書條等窄區塊；none＝自行控制 */
+  spacing?: 'normal' | 'compact' | 'none';
+  id?: string;
+  /** 沒有可見標題時，提供給螢幕閱讀器的區塊名稱 */
+  label?: string;
+  labelledby?: string;
+  bordered?: boolean;
+  class?: string;
+}
+
+const {
+  tone = 'white',
+  spacing = 'normal',
+  id,
+  label,
+  labelledby,
+  bordered = tone === 'soft',
+  class: className,
+} = Astro.props;
+
+const tones = {
+  white: 'bg-white text-navy',
+  soft: 'bg-bg-2 text-navy',
+  navy: 'bg-navy text-white',
+};
+const spacings = {
+  normal: 'py-(--section-y)',
+  compact: 'py-7',
+  none: '',
+};
+---
+
+<section
+  id={id}
+  aria-label={label}
+  aria-labelledby={labelledby}
+  data-tone={tone}
+  class:list={[tones[tone], bordered && 'border-y border-line']}
+>
+  <div class:list={['container-site', spacings[spacing], className]}>
+    <slot />
+  </div>
+</section>

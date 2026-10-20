@@ -1,0 +1,75 @@
+---
+// 首頁 Hero（design/pages/Main.dc.html）：左文右圖；最後一行標題用品牌藍
+// 右側內容放 slot="media"（插圖或影片區）
+import Pill from '../ui/Pill.astro';
+
+interface Entry {
+  /** 小字：我是業主／企業 */
+  label: string;
+  /** 大字：預約導入 Demo →（照設計稿原文） */
+  title: string;
+  href: string;
+  primary?: boolean;
+}
+
+interface Props {
+  eyebrow: string;
+  titleLines: string[];
+  subtitle: string;
+  body: string;
+  pills?: string[];
+  entries?: Entry[];
+}
+
+const { eyebrow, titleLines, subtitle, body, pills = [], entries = [] } = Astro.props;
+const last = titleLines.length - 1;
+---
+
+<header class="bg-bg-2">
+  <div class="container-site flex flex-wrap items-center gap-10 pt-12 pb-14 md:pt-[72px]">
+    <div class="flex min-w-0 flex-[1_1_500px] flex-col gap-5">
+      <p class="eyebrow m-0">{eyebrow}</p>
+      <h1 class="m-0 font-display text-[clamp(2.6rem,5.2vw,4.6rem)] leading-[1.04] font-bold tracking-[-0.02em]">
+        {titleLines.map((line, i) => (
+          <>
+            <span class:list={['block', i === last && 'text-blue']}>{line}</span>
+          </>
+        ))}
+      </h1>
+      <p class="m-0 text-[clamp(1.25rem,2vw,1.6rem)] font-black">{subtitle}</p>
+      <p class="lead max-w-[580px]">{body}</p>
+      {pills.length > 0 && (
+        <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+          {pills.map((p) => (
+            <li>
+              <Pill>{p}</Pill>
+            </li>
+          ))}
+        </ul>
+      )}
+      {entries.length > 0 && (
+        <div class="mt-1.5 grid grid-cols-[repeat(auto-fit,minmax(230px,1fr))] gap-3">
+          {entries.map((e) => (
+            <a
+              href={e.href}
+              class:list={[
+                'flex flex-col gap-0.5 rounded-[18px] px-5 py-4 no-underline transition-colors',
+                e.primary
+                  ? 'bg-blue text-white hover:bg-blue-dark hover:text-white'
+                  : 'border border-line-2 bg-white text-navy hover:border-blue hover:text-navy',
+              ]}
+            >
+              <span class:list={['text-[13px]', e.primary ? 'text-[#eef3ff]' : 'text-muted']}>
+                {e.label}
+              </span>
+              <span class="text-lg font-bold">{e.title}</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+    <div class="min-w-0 flex-[1_1_520px]">
+      <slot name="media" />
+    </div>
+  </div>
+</header>

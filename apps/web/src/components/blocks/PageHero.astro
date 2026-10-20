@@ -1,0 +1,32 @@
+---
+// 內頁開場（各頁 header：淺藍底、英文小標、H1、說明）；右側可放 slot="media"
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+}
+
+const { eyebrow, title, lead } = Astro.props;
+const lines = title.split('\n');
+const hasMedia = Astro.slots.has('media');
+---
+
+<header class="border-b border-line bg-bg-2">
+  <div class="container-site flex flex-wrap items-center gap-10 py-14 md:py-[88px]">
+    <div
+      class:list={['flex min-w-0 flex-col gap-4', hasMedia ? 'flex-[1_1_460px]' : 'max-w-[880px]']}
+    >
+      {eyebrow && <p class="eyebrow m-0">{eyebrow}</p>}
+      <h1 class="m-0 text-[clamp(2.2rem,4.4vw,3.6rem)] leading-[1.15] font-black">
+        {lines.map((line, i) => (i < lines.length - 1 ? [line, <br />] : line))}
+      </h1>
+      {lead && <p class="lead max-w-[820px] text-[1.1rem]">{lead}</p>}
+      <slot />
+    </div>
+    {hasMedia && (
+      <div class="min-w-0 flex-[1_1_440px]">
+        <slot name="media" />
+      </div>
+    )}
+  </div>
+</header>

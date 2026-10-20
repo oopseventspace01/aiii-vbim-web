@@ -1,0 +1,71 @@
+---
+// 插圖／截圖框
+//  blend：插圖放在淺藍區塊時融入背景（mix-blend-mode: multiply，SPEC 第 4 節）
+//  framed：深藍區塊上加白色外框（戰情室世界地圖）
+//  mockup：未上傳真實截圖時標示「示意畫面」（SPEC 3.1 第 7 項）
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata | string;
+  alt: string;
+  width?: number;
+  height?: number;
+  blend?: boolean;
+  framed?: boolean;
+  mockupLabel?: string;
+  caption?: string;
+  eager?: boolean;
+  sizes?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  blend = false,
+  framed = false,
+  mockupLabel,
+  caption,
+  eager = false,
+  sizes = '(min-width: 1024px) 620px, 100vw',
+} = Astro.props;
+const imgClass = [
+  'block h-auto w-full',
+  framed ? 'rounded-2xl' : 'rounded-lg',
+  blend && 'blend-multiply',
+];
+---
+
+<figure class:list={['relative m-0', framed && 'rounded-[24px] bg-white p-3']}>
+  {typeof src === 'string' ? (
+    <Image
+      src={src}
+      alt={alt}
+      width={width ?? 1600}
+      height={height ?? 1000}
+      widths={[480, 760, 1040, 1280]}
+      sizes={sizes}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : undefined}
+      class:list={imgClass}
+    />
+  ) : (
+    <Image
+      src={src}
+      alt={alt}
+      widths={[480, 760, 1040, 1280]}
+      sizes={sizes}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : undefined}
+      class:list={imgClass}
+    />
+  )}
+  {mockupLabel && (
+    <span class="absolute top-4 left-4 rounded-pill bg-navy/85 px-3 py-1 text-xs font-bold text-white">
+      {mockupLabel}
+    </span>
+  )}
+  {caption && <figcaption class="mt-2 text-sm text-muted">{caption}</figcaption>}
+</figure>

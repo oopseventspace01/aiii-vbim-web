@@ -1,0 +1,47 @@
+---
+// 區塊標題組：英文小標（eyebrow）＋大標＋說明＋右側連結
+// title 可用 \n 換行（對應設計稿的 <br>）
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  id?: string;
+  level?: 'h1' | 'h2';
+  tone?: 'light' | 'dark';
+  action?: { label: string; href: string };
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  lead,
+  id,
+  level = 'h2',
+  tone = 'light',
+  action,
+  class: className,
+} = Astro.props;
+const lines = title.split('\n');
+const Heading = level;
+const dark = tone === 'dark';
+---
+
+<div class:list={['flex flex-wrap items-end justify-between gap-4', className]}>
+  <div class="flex max-w-[820px] flex-col gap-3">
+    {eyebrow && <p class:list={['eyebrow m-0', dark && 'text-blue-on-navy']}>{eyebrow}</p>}
+    <Heading id={id} class="heading-section">
+      {lines.map((line, i) => (i < lines.length - 1 ? [line, <br />] : line))}
+    </Heading>
+    {lead && <p class:list={['lead', dark && 'text-[#cfdcf0]']}>{lead}</p>}
+  </div>
+  {action && (
+    <a
+      href={action.href}
+      class:list={['font-bold no-underline', dark ? 'text-blue-on-navy' : 'text-blue']}
+    >
+      {action.label}
+    </a>
+  )}
+</div>

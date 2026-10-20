@@ -1,0 +1,64 @@
+---
+// 夥伴 Logo 牆（SPEC 3.1 第 10 項、3.6）：只會收到後台「Logo 已取得授權」的夥伴。
+// 沒有任何夥伴時顯示 emptyText，不留空白區塊。
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Logo {
+  name: string;
+  src?: ImageMetadata | string;
+  href?: string;
+}
+
+interface Props {
+  logos: Logo[];
+  label: string;
+  emptyText: string;
+}
+
+const { logos, label, emptyText } = Astro.props;
+---
+
+{logos.length === 0 ? (
+  <p class="m-0 rounded-md border border-dashed border-line-2 bg-bg-2 p-6 text-center text-muted">
+    {emptyText}
+  </p>
+) : (
+  <ul
+    aria-label={label}
+    class="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-3 p-0"
+  >
+    {logos.map((logo) => {
+      const Tag = logo.href ? 'a' : 'div';
+      return (
+        <li>
+          <Tag
+            href={logo.href}
+            target={logo.href ? '_blank' : undefined}
+            rel={logo.href ? 'noopener noreferrer' : undefined}
+            class="flex h-24 items-center justify-center rounded-[18px] border border-line bg-white p-4 text-center font-bold text-navy no-underline"
+          >
+            {typeof logo.src === 'string' ? (
+              <Image
+                src={logo.src}
+                alt={logo.name}
+                width={160}
+                height={64}
+                class="max-h-14 w-auto object-contain"
+              />
+            ) : logo.src ? (
+              <Image
+                src={logo.src}
+                alt={logo.name}
+                height={64}
+                class="max-h-14 w-auto object-contain"
+              />
+            ) : (
+              <span>{logo.name}</span>
+            )}
+          </Tag>
+        </li>
+      );
+    })}
+  </ul>
+)}

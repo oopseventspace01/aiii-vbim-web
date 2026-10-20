@@ -1,24 +1,67 @@
 ---
+// 全站共用版型：導覽列（sticky）→ 主要內容 → 頁尾 → 回到頂部按鈕
+import { Font } from 'astro:assets';
 import '../styles/global.css';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import SiteFooter from '../components/layout/SiteFooter.astro';
+import BackToTop from '../components/layout/BackToTop.astro';
+import { HTML_LANG, getLocaleFromPath, switchLocalePath, type Locale } from '../lib/i18n';
+import { UI, type NavKey } from '../i18n/ui';
+import { FOOTER_FALLBACK, type FooterInfo } from '../data/site-fallback';
 
 interface Props {
   title: string;
   description?: string;
-  lang?: 'zh-Hant' | 'en';
+  /** 目前所在的導覽項目（加上 aria-current） */
+  active?: NavKey;
+  /** 不指定時依網址判斷 */
+  locale?: Locale;
+  /** 語言切換的目標網址；不指定時自動換成另一語言的同一路徑 */
+  alternates?: Partial<Record<Locale, string>>;
+  footer?: FooterInfo;
+  noindex?: boolean;
 }
 
-const { title, description, lang = 'zh-Hant' } = Astro.props;
+const {
+  title,
+  description,
+  active,
+  locale = getLocaleFromPath(Astro.url.pathname),
+  alternates: alternatesProp = {},
+  footer,
+  noindex = false,
+} = Astro.props;
+
+const alternates: Record<Locale, string> = {
+  'zh-Hant': alternatesProp['zh-Hant'] ?? switchLocalePath(Astro.url.pathname, 'zh-Hant'),
+  en: alternatesProp.en ?? switchLocalePath(Astro.url.pathname, 'en'),
+};
+const t = UI[locale];
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={HTML_LANG[locale]}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <Font cssVariable="--font-space-grotesk" preload />
   </head>
   <body class="min-h-screen bg-bg text-navy antialiased">
-    <slot />
+    <a
+      href="#main"
+      data-skip-link
+      class="sr-only z-[60] rounded-pill bg-blue px-5 py-3 font-bold text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+    >
+      {t.skipToContent}
+    </a>
+    <SiteHeader locale={locale} active={active} alternates={alternates} />
+    <main id="main" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
+    <SiteFooter locale={locale} info={footer ?? FOOTER_FALLBACK[locale]} />
+    <BackToTop locale={locale} />
   </body>
 </html>

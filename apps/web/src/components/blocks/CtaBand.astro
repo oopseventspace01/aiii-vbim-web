@@ -1,0 +1,81 @@
+---
+// 行動呼籲區塊
+//  plain：白底，大標＋說明＋按鈕（首頁結尾 From Data to a Better Physical World.）
+//  accent：品牌藍圓角大卡（各頁結尾「看看 Aiii VBIM 在你的場域怎麼運作」、認證學院預告）
+import Button from '../ui/Button.astro';
+
+interface Action {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  variant?: 'plain' | 'accent';
+  eyebrow?: string;
+  title: string;
+  text?: string;
+  primary?: Action;
+  secondary?: Action;
+  /** 標題是英文時用 Space Grotesk */
+  displayFont?: boolean;
+}
+
+const {
+  variant = 'plain',
+  eyebrow,
+  title,
+  text,
+  primary,
+  secondary,
+  displayFont = false,
+} = Astro.props;
+const accent = variant === 'accent';
+---
+
+<div
+  class:list={[
+    'flex flex-wrap items-center justify-between gap-6',
+    accent && 'rounded-lg bg-blue p-8 text-white md:p-11',
+  ]}
+>
+  <div class="flex max-w-[720px] flex-col gap-2">
+    {eyebrow && (
+      <span
+        class:list={[
+          'font-display text-sm font-bold tracking-[0.14em]',
+          accent ? 'text-[#eef3ff]' : 'text-blue',
+        ]}
+      >
+        {eyebrow}
+      </span>
+    )}
+    <h2
+      class:list={[
+        'm-0 leading-[1.2]',
+        displayFont
+          ? 'font-display text-[clamp(1.8rem,3.2vw,2.6rem)] font-bold'
+          : 'text-[clamp(1.5rem,2.6vw,2.1rem)] font-black',
+      ]}
+    >
+      {title}
+    </h2>
+    {text && (
+      <p class:list={['m-0 text-[1.05rem]', accent ? 'text-[#eef3ff]' : 'text-text-2']}>{text}</p>
+    )}
+    <slot />
+  </div>
+  {(primary || secondary) && (
+    <div class="flex flex-wrap gap-3">
+      {primary && (
+        <Button href={primary.href} variant={accent ? 'white' : 'primary'} size="lg">
+          {primary.label}
+        </Button>
+      )}
+      {secondary && (
+        <Button href={secondary.href} variant={accent ? 'outline-light' : 'outline'} size="lg">
+          {secondary.label}
+        </Button>
+      )}
+    </div>
+  )}
+</div>

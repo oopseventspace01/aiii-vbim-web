@@ -1,0 +1,19 @@
+---
+// 標籤（設計稿：白底藍框的關鍵字膠囊；深色區塊用半透明白）
+interface Props {
+  tone?: 'light' | 'dark' | 'soft';
+}
+
+const { tone = 'light' } = Astro.props;
+const tones = {
+  light: 'border border-line-2 bg-white text-blue-dark',
+  soft: 'border border-line bg-bg-2 text-blue-dark',
+  dark: 'border border-white/20 bg-white/10 text-white',
+};
+---
+
+<span
+  class:list={['inline-flex items-center rounded-pill px-3.5 py-1 text-sm font-bold', tones[tone]]}
+>
+  <slot />
+</span>

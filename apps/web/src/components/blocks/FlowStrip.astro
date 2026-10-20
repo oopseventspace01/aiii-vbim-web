@@ -1,0 +1,34 @@
+---
+// 流程條：深藍底、步驟間以箭頭連接（設計稿：看得到 → 看得懂 → … → 可優化）
+// highlight：強調某一格（SPEC 3.1 第 4 項：OS 流程第 3 格強調色）
+interface Props {
+  steps: string[];
+  label: string;
+  highlight?: number;
+}
+
+const { steps, label, highlight } = Astro.props;
+---
+
+<ol
+  aria-label={label}
+  class="m-0 flex list-none flex-wrap items-center gap-2.5 rounded-md bg-navy px-[26px] py-5 text-white"
+>
+  {steps.map((step, i) => (
+    <>
+      <li
+        class:list={[
+          'flex-[1_1_120px] text-center text-[clamp(1.05rem,1.8vw,1.35rem)] font-black',
+          highlight === i && 'rounded-xl bg-blue px-3 py-2',
+        ]}
+      >
+        {step}
+      </li>
+      {i < steps.length - 1 && (
+        <li aria-hidden="true" class="text-blue-on-navy">
+          →
+        </li>
+      )}
+    </>
+  ))}
+</ol>

@@ -1,0 +1,246 @@
+---
+// 導覽列（SPEC 3.1、design/pages/Nav.dc.html）
+// 桌機：sticky 固定頂部、連結過多時橫向捲動；< 1024px：Logo＋漢堡按鈕，展開全幅白色面板。
+import { Image } from 'astro:assets';
+import logo from '../../assets/brand/logo.png';
+import Icon from '../ui/Icon.astro';
+import { localizePath, type Locale } from '../../lib/i18n';
+import { CONTACT_PATH, NAV_ITEMS, UI, type NavKey } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  active?: NavKey;
+  /** 語言切換目標網址 */
+  alternates: Record<Locale, string>;
+}
+
+const { locale, active, alternates } = Astro.props;
+const t = UI[locale];
+const links = NAV_ITEMS.map((item) => ({
+  ...item,
+  href: localizePath(item.path, locale),
+  current: item.key === active,
+}));
+const homeHref = localizePath('/', locale);
+const ctaHref = localizePath(CONTACT_PATH, locale);
+---
+
+<header
+  class="sticky top-0 z-50 h-[72px] border-b border-line bg-white/94 shadow-[0_4px_18px_rgba(12,26,51,0.06)] backdrop-blur-[10px]"
+  data-site-header
+>
+  <nav aria-label={t.navLabel} class="container-site flex h-full flex-nowrap items-center gap-4">
+    <a href={homeHref} class="flex flex-none items-center" aria-label="Aiii VBIM">
+      <Image src={logo} alt="Aiii VBIM" height={40} class="block h-10 w-auto" loading="eager" />
+    </a>
+
+    <ul class="nav-scroll hidden min-w-0 flex-auto list-none flex-nowrap gap-x-0.5 overflow-x-auto p-0 text-[15px] whitespace-nowrap lg:flex">
+      {links.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            aria-current={l.current ? 'page' : undefined}
+            class:list={[
+              'block border-b-2 px-2.5 py-2.5 no-underline',
+              l.current
+                ? 'border-blue font-bold text-blue'
+                : 'border-transparent text-text-2 hover:text-blue',
+            ]}
+          >
+            {l.label[locale]}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="hidden flex-none items-center gap-2.5 lg:flex">
+      <div
+        role="group"
+        aria-label={t.langLabel}
+        class="flex overflow-hidden rounded-pill border border-line font-display text-[13px]"
+      >
+        {locale === 'zh-Hant' ? (
+          <span
+            aria-current="true"
+            lang="zh-Hant"
+            class="bg-blue-soft px-3 py-2 font-semibold text-blue"
+          >
+            中文
+          </span>
+        ) : (
+          <a
+            href={alternates['zh-Hant']}
+            lang="zh-Hant"
+            hreflang="zh-Hant"
+            class="px-3 py-2 text-text-2 no-underline"
+          >
+            中文
+          </a>
+        )}
+        {locale === 'en' ? (
+          <span
+            aria-current="true"
+            lang="en"
+            class="bg-blue-soft px-3 py-2 font-semibold text-blue"
+          >
+            EN
+          </span>
+        ) : (
+          <a
+            href={alternates.en}
+            lang="en"
+            hreflang="en"
+            class="px-3 py-2 text-text-2 no-underline"
+          >
+            EN
+          </a>
+        )}
+      </div>
+      <a
+        href={ctaHref}
+        class="inline-flex min-h-11 items-center rounded-pill bg-blue px-5 py-2.5 text-[15px] font-bold text-white no-underline hover:bg-blue-dark hover:text-white"
+      >
+        {t.cta}
+      </a>
+    </div>
+
+    <button
+      type="button"
+      class="ml-auto flex h-12 w-12 items-center justify-center rounded-xl border border-line bg-white text-navy lg:hidden"
+      aria-expanded="false"
+      aria-controls="site-menu"
+      aria-label={t.openMenu}
+      data-label-open={t.openMenu}
+      data-label-close={t.closeMenu}
+      data-menu-toggle
+    >
+      <span data-icon-open>
+        <Icon name="menu" size={24} />
+      </span>
+      <span data-icon-close hidden>
+        <Icon name="close" size={24} />
+      </span>
+    </button>
+  </nav>
+
+  <div
+    id="site-menu"
+    hidden
+    class="fixed inset-x-0 top-[72px] bottom-0 z-[49] flex flex-col overflow-y-auto overscroll-contain bg-white px-5 pt-2 pb-[calc(24px+env(safe-area-inset-bottom))] lg:hidden"
+    data-menu-panel
+  >
+    <ul class="m-0 list-none p-0">
+      {links.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            aria-current={l.current ? 'page' : undefined}
+            class:list={[
+              'block min-h-12 border-b border-[#edf2f9] px-1 py-4 text-lg no-underline',
+              l.current ? 'font-black text-blue' : 'font-bold text-navy',
+            ]}
+          >
+            {l.label[locale]}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="flex items-center gap-2.5 pt-5" role="group" aria-label={t.langLabel}>
+      <a
+        href={alternates['zh-Hant']}
+        lang="zh-Hant"
+        hreflang="zh-Hant"
+        aria-current={locale === 'zh-Hant' ? 'true' : undefined}
+        class="flex-1 rounded-xl border border-line p-3 text-center font-bold text-navy no-underline"
+      >
+        中文
+      </a>
+      <a
+        href={alternates.en}
+        lang="en"
+        hreflang="en"
+        aria-current={locale === 'en' ? 'true' : undefined}
+        class="flex-1 rounded-xl border border-line p-3 text-center font-display font-bold text-navy no-underline"
+      >
+        EN
+      </a>
+    </div>
+    <a
+      href={ctaHref}
+      class="mt-3.5 flex min-h-[52px] items-center justify-center rounded-pill bg-blue text-[17px] font-black text-white no-underline hover:text-white"
+    >
+      {t.cta}
+    </a>
+  </div>
+</header>
+
+<style>
+  .nav-scroll {
+    scrollbar-width: none;
+  }
+  .nav-scroll::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  // 手機選單：開關、Esc 關閉、焦點留在選單內、開啟時鎖住背景捲動
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const panel = document.querySelector<HTMLElement>('[data-menu-panel]');
+
+  if (toggle && panel) {
+    const iconOpen = toggle.querySelector<HTMLElement>('[data-icon-open]');
+    const iconClose = toggle.querySelector<HTMLElement>('[data-icon-close]');
+    const desktop = window.matchMedia('(min-width: 1024px)');
+
+    const focusables = () => [
+      toggle,
+      ...panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'),
+    ];
+
+    const setOpen = (open: boolean, restoreFocus = true) => {
+      panel.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute(
+        'aria-label',
+        (open ? toggle.dataset.labelClose : toggle.dataset.labelOpen) ?? '',
+      );
+      if (iconOpen) iconOpen.hidden = open;
+      if (iconClose) iconClose.hidden = !open;
+      document.documentElement.style.overflow = open ? 'hidden' : '';
+      if (open) panel.querySelector<HTMLElement>('a[href]')?.focus();
+      else if (restoreFocus) toggle.focus();
+    };
+
+    toggle.addEventListener('click', () => setOpen(Boolean(panel.hidden)));
+
+    panel.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) setOpen(false, false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (panel.hidden) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (event.key === 'Tab') {
+        const items = focusables();
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }
+    });
+
+    desktop.addEventListener('change', (event) => {
+      if (event.matches && !panel.hidden) setOpen(false, false);
+    });
+  }
+</script>

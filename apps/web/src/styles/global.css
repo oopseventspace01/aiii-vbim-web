@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+/* 中文字型（可變字重 100–900）：依 unicode-range 分段，瀏覽器只下載頁面用到的字 */
+@import '@fontsource-variable/noto-sans-tc';
 @import './tokens.css';
 
 /* 讓 Tailwind class（如 bg-bg-2、text-navy、bg-blue）對應到 tokens */
@@ -24,15 +26,72 @@
   --radius-md: 22px;
   --radius-pill: 999px;
 
-  /* 字型檔於 P2 載入；先設定字型堆疊 */
-  --font-display: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif;
-  --font-sans: 'Noto Sans TC', system-ui, sans-serif;
+  /* 字型由 astro.config.mjs 的 fonts 設定自行託管，這裡接上 Astro 產生的 CSS 變數 */
+  --font-display:
+    var(--font-space-grotesk), 'Noto Sans TC Variable', 'PingFang TC', 'Microsoft JhengHei',
+    sans-serif;
+  --font-sans: 'Noto Sans TC Variable', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
 }
 
-html {
-  background: var(--bg);
-  color: var(--navy);
-  font-family: var(--font-sans);
+/* 基本樣式放在 base 層，Tailwind 的 class（例如 text-white）才能覆蓋 */
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--navy);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* 錨點跳轉時不要被固定導覽列（72px）蓋住（SPEC 3.1） */
+  [id] {
+    scroll-margin-top: 80px;
+  }
+
+  a {
+    color: var(--blue);
+  }
+  a:hover {
+    color: var(--blue-dark);
+  }
+
+  /* 鍵盤操作時清楚的焦點框 */
+  :focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 2px;
+  }
+}
+
+/* 設計稿反覆出現的文字樣式 */
+@layer components {
+  .container-site {
+    max-width: var(--max);
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+  .eyebrow {
+    font-family: var(--font-display);
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+    color: var(--blue);
+  }
+  .heading-section {
+    margin: 0;
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    line-height: 1.2;
+    font-weight: 900;
+  }
+  .lead {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--text-2);
+  }
+  /* 插圖底色接近白色，放在淺色區塊時融入背景（SPEC 第 4 節） */
+  .blend-multiply {
+    mix-blend-mode: multiply;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

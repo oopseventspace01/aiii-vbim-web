@@ -1,0 +1,18 @@
+---
+// 導覽路徑（SPEC 3.1 第 7 項：Global › Country › Site › … › Sensor）；用在深藍戰情室區塊
+interface Props {
+  items: { en: string; zh?: string }[];
+  label: string;
+}
+
+const { items, label } = Astro.props;
+---
+
+<ol aria-label={label} class="m-0 flex list-none flex-wrap gap-1.5 p-0 font-display text-sm">
+  {items.map((item) => (
+    <li class="flex min-w-[84px] flex-col items-center rounded-[10px] border border-white/16 bg-white/8 px-3.5 py-2">
+      <span class="font-semibold">{item.en}</span>
+      {item.zh && <span class="font-sans text-xs text-[#aebdd6]">{item.zh}</span>}
+    </li>
+  ))}
+</ol>

@@ -1,0 +1,63 @@
+---
+// 資訊卡：編號／英文小字＋標題＋說明（設計稿的 01–05 堆疊、五大場域、天地腦中樞卡）
+interface Props {
+  kicker?: string;
+  /** 大字的 kicker（天・地・腦） */
+  kickerLarge?: boolean;
+  title: string;
+  /** 次標（例如系統名稱，粗體） */
+  subtitle?: string;
+  text?: string;
+  tone?: 'soft' | 'white' | 'line-top';
+  href?: string;
+  class?: string;
+}
+
+const {
+  kicker,
+  kickerLarge = false,
+  title,
+  subtitle,
+  text,
+  tone = 'white',
+  href,
+  class: className,
+} = Astro.props;
+const Tag = href ? 'a' : 'div';
+const tones = {
+  soft: 'rounded-[20px] border border-line bg-bg-2 p-[22px]',
+  white: 'rounded-md border border-line bg-white p-6',
+  // 深色區塊上的上框線樣式（戰情室四欄）
+  'line-top': 'border-t-2 border-blue-on-navy pt-3.5',
+};
+---
+
+<Tag
+  href={href}
+  class:list={[
+    'flex flex-col gap-1.5',
+    tones[tone],
+    href && 'text-inherit no-underline transition-colors hover:border-blue',
+    className,
+  ]}
+>
+  {kicker && (
+    <span
+      class:list={[
+        kickerLarge
+          ? 'text-[40px] leading-none font-black text-blue'
+          : 'font-display text-[13px] font-bold text-blue',
+      ]}
+    >
+      {kicker}
+    </span>
+  )}
+  <span class:list={['font-black', kickerLarge ? 'text-lg' : 'text-lg']}>{title}</span>
+  {subtitle && <span class="text-sm font-bold text-text-2">{subtitle}</span>}
+  {text && (
+    <span class:list={['text-sm', tone === 'line-top' ? 'text-[#aebdd6]' : 'text-muted']}>
+      {text}
+    </span>
+  )}
+  <slot />
+</Tag>

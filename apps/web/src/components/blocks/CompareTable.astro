@@ -1,0 +1,56 @@
+---
+// 比較表（平台頁「與傳統做法比較」等）：深藍表頭、最後一欄強調；
+// 手機版表格可橫向捲動，捲動區可用鍵盤聚焦
+interface Props {
+  caption: string;
+  columns: { label: string; highlight?: boolean }[];
+  rows: { head: string; cells: string[] }[];
+  minWidth?: number;
+}
+
+const { caption, columns, rows, minWidth = 760 } = Astro.props;
+const highlightIndex = columns.findIndex((c) => c.highlight);
+---
+
+<div
+  class="overflow-x-auto rounded-md border border-line bg-white"
+  role="region"
+  aria-label={caption}
+  tabindex="0"
+>
+  <table class="w-full border-collapse text-[15px]" style={`min-width:${minWidth}px`}>
+    <caption class="sr-only">{caption}</caption>
+    <thead>
+      <tr class="bg-navy text-left text-white">
+        {columns.map((col) => (
+          <th scope="col" class:list={['px-[18px] py-3.5', col.highlight && 'text-blue-on-navy']}>
+            {col.label}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr class="border-t border-line">
+          <th scope="row" class="px-[18px] py-3.5 text-left">
+            {row.head}
+          </th>
+          {row.cells.map((cell, i) => (
+            <td
+              class:list={[
+                'px-[18px] py-3.5',
+                i + 1 === highlightIndex
+                  ? 'font-bold text-blue-dark'
+                  : i === 0
+                    ? 'text-text-2'
+                    : 'text-muted',
+              ]}
+            >
+              {cell}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

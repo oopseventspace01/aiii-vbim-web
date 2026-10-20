@@ -1,0 +1,49 @@
+---
+// 按鈕連結（設計稿：主要＝藍底白字、次要＝外框、反白＝白底藍字用在藍色區塊）
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+  variant?: 'primary' | 'outline' | 'white' | 'outline-light';
+  size?: 'md' | 'lg';
+  arrow?: boolean;
+  external?: boolean;
+  /** 外部連結給螢幕閱讀器的提示 */
+  newTabLabel?: string;
+  class?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  arrow = false,
+  external = false,
+  newTabLabel = '（另開新視窗）',
+  class: className,
+} = Astro.props;
+
+const variants: Record<NonNullable<Props['variant']>, string> = {
+  primary: 'bg-blue text-white hover:bg-blue-dark hover:text-white',
+  outline: 'border border-line-2 text-navy hover:border-blue hover:text-blue',
+  white: 'bg-white text-blue-dark hover:bg-blue-soft hover:text-blue-dark',
+  'outline-light': 'border border-white/40 text-white hover:border-white hover:text-white',
+};
+const sizes = { md: 'min-h-12 px-6 py-3', lg: 'min-h-12 px-7 py-3.5' };
+---
+
+<a
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+  class:list={[
+    'inline-flex items-center justify-center gap-2 rounded-pill font-bold no-underline transition-colors',
+    variants[variant],
+    sizes[size],
+    className,
+  ]}
+>
+  <slot />
+  {arrow && <Icon name="arrow-right" size={18} />}
+  {external && <span class="sr-only">{newTabLabel}</span>}
+</a>

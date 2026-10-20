@@ -1,0 +1,94 @@
+---
+// 消息卡片（SPEC 5.2）：封面 16:10；沒有封面時顯示品牌色底＋媒體名稱，不可出現破圖。
+// 媒體報導開新分頁到原始報導。
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Icon from '../ui/Icon.astro';
+import { categoryLabel, coverFallbackText } from '../../lib/news';
+import type { Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  href: string;
+  external?: boolean;
+  category?: string;
+  source?: string;
+  dateLabel?: string;
+  excerpt?: string;
+  cover?: { src: ImageMetadata | string; alt: string; width?: number; height?: number };
+  headingLevel?: 'h2' | 'h3';
+}
+
+const {
+  locale,
+  title,
+  href,
+  external = false,
+  category,
+  source,
+  dateLabel,
+  excerpt,
+  cover,
+  headingLevel = 'h3',
+} = Astro.props;
+
+const Heading = headingLevel;
+const meta = [source || categoryLabel(category, locale), dateLabel].filter(Boolean).join(' · ');
+const fallback = coverFallbackText(source, category, locale);
+const newTab = locale === 'en' ? '(opens in a new tab)' : '（另開新視窗）';
+---
+
+<article class="relative flex flex-col overflow-hidden rounded-md border border-line bg-white transition-colors focus-within:border-blue hover:border-blue">
+  {cover ? (
+    typeof cover.src === 'string' ? (
+      <Image
+        src={cover.src}
+        alt={cover.alt}
+        width={cover.width ?? 800}
+        height={cover.height ?? 500}
+        widths={[400, 640, 800]}
+        sizes="(min-width: 1024px) 400px, 100vw"
+        loading="lazy"
+        class="block aspect-[16/10] w-full object-cover"
+      />
+    ) : (
+      <Image
+        src={cover.src}
+        alt={cover.alt}
+        widths={[400, 640, 800]}
+        sizes="(min-width: 1024px) 400px, 100vw"
+        loading="lazy"
+        class="block aspect-[16/10] w-full object-cover"
+      />
+    )
+  ) : (
+    <div
+      class="flex aspect-[16/10] w-full items-center justify-center bg-blue p-6 text-center font-display text-xl font-bold text-white"
+      aria-hidden="true"
+      data-cover-fallback
+    >
+      {fallback}
+    </div>
+  )}
+  <div class="flex flex-col gap-1.5 px-[22px] py-5">
+    {meta && <span class="text-[13px] font-bold text-blue">{meta}</span>}
+    <Heading class="m-0 text-lg font-black">
+      <a
+        href={href}
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noopener noreferrer' : undefined}
+        class="text-navy no-underline after:absolute after:inset-0 hover:text-blue"
+      >
+        {title}
+        {external && (
+          <>
+            <Icon name="external" size={16} class="ml-1 inline align-[-2px] text-muted" />
+            <span class="sr-only">{newTab}</span>
+          </>
+        )}
+      </a>
+    </Heading>
+    {excerpt && <p class="m-0 text-sm text-muted">{excerpt}</p>}
+  </div>
+</article>

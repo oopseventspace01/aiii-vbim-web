@@ -1,0 +1,254 @@
+---
+// 元件展示頁（只在開發時存在；正式建置不會產生這一頁）
+// 網址：/dev/zh-Hant、/dev/en。所有元件在這裡用 MOCK 資料呈現，供 375／1440 寬度檢查與 E2E 測試。
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/ui/Section.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import Button from '../../components/ui/Button.astro';
+import Pill from '../../components/ui/Pill.astro';
+import Hero from '../../components/blocks/Hero.astro';
+import PageHero from '../../components/blocks/PageHero.astro';
+import ProofStrip from '../../components/blocks/ProofStrip.astro';
+import FlowStrip from '../../components/blocks/FlowStrip.astro';
+import PathTrail from '../../components/blocks/PathTrail.astro';
+import CtaBand from '../../components/blocks/CtaBand.astro';
+import MediaFigure from '../../components/blocks/MediaFigure.astro';
+import Tabs from '../../components/blocks/Tabs.astro';
+import CompareTable from '../../components/blocks/CompareTable.astro';
+import LogoWall from '../../components/blocks/LogoWall.astro';
+import VideoPlaceholder from '../../components/blocks/VideoPlaceholder.astro';
+import InfoCard from '../../components/cards/InfoCard.astro';
+import FeatureCard from '../../components/cards/FeatureCard.astro';
+import NewsCard from '../../components/cards/NewsCard.astro';
+import heroBuilding from '../../assets/illustrations/hero-building.jpg';
+import world from '../../assets/illustrations/world.jpg';
+import energy from '../../assets/illustrations/energy.jpg';
+import { localizePath, type Locale } from '../../lib/i18n';
+import { newsLink } from '../../lib/news';
+import { UI } from '../../i18n/ui';
+import { HERO_COPY, MOCK_NEWS, MOCK_PARTNERS } from '../../mocks/showcase';
+
+export function getStaticPaths() {
+  if (import.meta.env.PROD) return [];
+  return [{ params: { lang: 'zh-Hant' } }, { params: { lang: 'en' } }];
+}
+
+const locale = Astro.params.lang as Locale;
+const t = UI[locale];
+const copy = HERO_COPY[locale];
+const zh = locale === 'zh-Hant';
+const L = (path: string) => localizePath(path, locale);
+---
+
+<BaseLayout
+  title={`[DEV] 元件展示 · ${locale}`}
+  locale={locale}
+  alternates={{ 'zh-Hant': '/dev/zh-Hant', en: '/dev/en' }}
+  noindex
+>
+  <div class="bg-amber-100 py-2 text-center text-sm font-bold text-navy" data-dev-banner>
+    DEV ONLY · MOCK DATA ·{' '}
+    {zh ? '此頁只在開發時存在，正式網站不會出現' : 'This page exists only in development'}
+  </div>
+
+  <Hero
+    eyebrow={copy.eyebrow}
+    titleLines={[...copy.titleLines]}
+    subtitle={copy.subtitle}
+    body={copy.body}
+    pills={[...copy.pills]}
+    entries={copy.entries.map((e) => ({ ...e, href: L(e.path) }))}
+  >
+    <MediaFigure slot="media" src={heroBuilding} alt={copy.heroAlt} blend eager />
+  </Hero>
+
+  <ProofStrip
+    label={zh ? '信任背書' : 'Proof points'}
+    items={[
+      { label: '[MOCK] 標籤 1', value: '[MOCK] 說明 1' },
+      { label: '[MOCK] 標籤 2', value: '[MOCK] 說明 2' },
+      { label: '[MOCK] 標籤 3', value: '[MOCK] 說明 3' },
+      { label: '[MOCK] 標籤 4', value: '[MOCK] 說明 4' },
+    ]}
+  />
+
+  <Section labelledby="sc-cards">
+    <div class="flex flex-col gap-9">
+      <SectionHeader
+        id="sc-cards"
+        eyebrow="COMPONENTS · CARDS"
+        title={zh ? 'SectionHeader 標題\n可以換行' : 'SectionHeader title\nwith a line break'}
+        lead="[MOCK] lead text"
+        action={{ label: zh ? '看全部 →' : 'View all →', href: '#sc-cards' }}
+      />
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3">
+        <InfoCard tone="soft" kicker="01" title="[MOCK] InfoCard soft" text="[MOCK] text" />
+        <InfoCard
+          kicker="HOSPITAL"
+          title="[MOCK] InfoCard link"
+          text="[MOCK] text"
+          href="#sc-cards"
+        />
+        <InfoCard
+          kicker={zh ? '天' : 'Eyes'}
+          kickerLarge
+          title="[MOCK] large kicker"
+          subtitle="Camera・VMS"
+          text="[MOCK]"
+        />
+      </div>
+      <FlowStrip
+        steps={[...copy.verbs]}
+        label={zh ? '管理流程' : 'Management flow'}
+        highlight={2}
+      />
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
+        <FeatureCard
+          image={energy}
+          alt="[MOCK] alt"
+          title="[MOCK] FeatureCard"
+          text="[MOCK] text"
+          linkLabel="[MOCK] →"
+          href="#sc-cards"
+        />
+        {MOCK_NEWS(locale).map((n) => {
+          const link = newsLink(
+            { category: n.category, externalUrl: n.externalUrl, slug: n.slug },
+            L('/news'),
+          );
+          return (
+            <NewsCard
+              locale={locale}
+              title={n.title}
+              href={link.href}
+              external={link.external}
+              category={n.category}
+              source={n.source}
+              dateLabel={n.dateLabel}
+              cover={n.hasCover ? { src: world, alt: '[MOCK] cover' } : undefined}
+            />
+          );
+        })}
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <Button href="#sc-cards">Primary</Button>
+        <Button href="#sc-cards" variant="outline">
+          Outline
+        </Button>
+        <Button href="#sc-cards" arrow>
+          With arrow
+        </Button>
+        <Pill>Pill</Pill>
+        <Pill tone="soft">Soft pill</Pill>
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="soft" labelledby="sc-tabs">
+    <div class="flex flex-col gap-8">
+      <SectionHeader id="sc-tabs" eyebrow="COMPONENTS · TABS" title="Tabs" />
+      <Tabs
+        label={zh ? '選擇場域' : 'Choose a sector'}
+        tabs={[
+          { id: 'a', label: '[MOCK] A' },
+          { id: 'b', label: '[MOCK] B' },
+          { id: 'c', label: '[MOCK] C' },
+        ]}
+      >
+        <div slot="panel-a" class="rounded-lg bg-navy p-10 text-white">
+          [MOCK] Panel A
+        </div>
+        <div slot="panel-b" class="rounded-lg bg-navy p-10 text-white">
+          [MOCK] Panel B
+        </div>
+        <div slot="panel-c" class="rounded-lg bg-navy p-10 text-white">
+          [MOCK] Panel C
+        </div>
+      </Tabs>
+      <CompareTable
+        caption="[MOCK] CompareTable"
+        columns={[
+          { label: 'Type' },
+          { label: 'Strength' },
+          { label: 'Limit' },
+          { label: 'Aiii VBIM', highlight: true },
+        ]}
+        rows={[
+          { head: '[MOCK] Row 1', cells: ['[MOCK]', '[MOCK]', '[MOCK]'] },
+          { head: '[MOCK] Row 2', cells: ['[MOCK]', '[MOCK]', '[MOCK]'] },
+        ]}
+      />
+    </div>
+  </Section>
+
+  <Section tone="navy" labelledby="sc-navy">
+    <div class="flex flex-col gap-8">
+      <SectionHeader
+        id="sc-navy"
+        tone="dark"
+        eyebrow="GLOBAL COMMAND CENTER"
+        title="Navy section"
+        lead="[MOCK] lead"
+      />
+      <MediaFigure src={world} alt="[MOCK] alt" framed mockupLabel={t.mockupLabel} />
+      <PathTrail items={[...copy.path]} label={zh ? '導覽路徑' : 'Drill-down path'} />
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-3.5">
+        <InfoCard tone="line-top" title="[MOCK] line-top" text="[MOCK]" />
+        <InfoCard tone="line-top" title="[MOCK] line-top" text="[MOCK]" />
+      </div>
+    </div>
+  </Section>
+
+  <Section labelledby="sc-media">
+    <div class="flex flex-col gap-8">
+      <SectionHeader id="sc-media" eyebrow="COMPONENTS · MEDIA" title="Video & Logo wall" />
+      <div class="max-w-[640px]">
+        <VideoPlaceholder
+          poster={heroBuilding}
+          alt="[MOCK] poster"
+          inProductionLabel={t.videoInProduction}
+          timelineLabel="[MOCK] timeline"
+          timeline={[
+            { time: '00–12s', label: '[MOCK] 1' },
+            { time: '12–20s', label: '[MOCK] 2' },
+            { time: '20–30s', label: '[MOCK] 3' },
+          ]}
+        />
+      </div>
+      <LogoWall logos={MOCK_PARTNERS} label="[MOCK] partners" emptyText="[MOCK] empty" />
+      <LogoWall
+        logos={[]}
+        label="[MOCK] empty"
+        emptyText={zh ? '[MOCK] 尚無已授權的夥伴 Logo' : '[MOCK] No partners yet'}
+      />
+    </div>
+  </Section>
+
+  <PageHero
+    eyebrow="PAGE HERO"
+    title={zh ? 'PageHero 內頁開場\n第二行' : 'PageHero\nsecond line'}
+    lead="[MOCK] lead"
+  />
+
+  <Section>
+    <div class="flex flex-col gap-10">
+      <CtaBand
+        variant="accent"
+        eyebrow="VBIM ACADEMY"
+        title="[MOCK] Accent CTA"
+        text="[MOCK] text"
+        primary={{ label: '[MOCK] →', href: '#main' }}
+      />
+      <CtaBand
+        title="From Data to a Better Physical World."
+        displayFont
+        text="[MOCK] text"
+        primary={{ label: t.cta, href: L('/contact') }}
+        secondary={{ label: '[MOCK]', href: L('/partners') }}
+      />
+    </div>
+  </Section>
+
+  <!-- 讓頁面夠長，用來測試固定導覽列與回到頂部 -->
+  <div class="h-[60vh]" aria-hidden="true"></div>
+</BaseLayout>
