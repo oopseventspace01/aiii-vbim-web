@@ -1,0 +1,186 @@
+{
+  "zh-Hant": {
+    "feat": [
+      {
+        "t": "即時用電與需量",
+        "d": "kW／kWh、需量、契約容量、功率因數與電力品質"
+      },
+      {
+        "t": "再生能源調度",
+        "d": "太陽能、風力發電效率與發電預測"
+      },
+      {
+        "t": "儲能協同",
+        "d": "SOC／SOH、PCS／BMS、充放電與削峰填谷"
+      },
+      {
+        "t": "算力中心能效",
+        "d": "PUE、Rack、PDU、UPS 與冷卻熱管理"
+      },
+      {
+        "t": "ESG／碳排管理",
+        "d": "碳排資料、能源績效基線與報表"
+      }
+    ],
+    "loop": [
+      "發電",
+      "儲能",
+      "配電",
+      "用電",
+      "預測",
+      "調度",
+      "安全",
+      "維護"
+    ],
+    "scope": [
+      {
+        "t": "重電／高低壓",
+        "d": "高低壓盤、變壓器、ATS、斷路器、UPS、柴油發電機、PDU"
+      },
+      {
+        "t": "電力品質",
+        "d": "電壓、電流、功率因數、諧波與異常耗能偵測"
+      },
+      {
+        "t": "能耗歸屬",
+        "d": "分區、樓層、產線、租戶、設備級能耗"
+      },
+      {
+        "t": "再生能源與儲能",
+        "d": "太陽能、風力、儲能 SOC／SOH、逆變器效率"
+      },
+      {
+        "t": "電費與需量",
+        "d": "電費預測、尖峰移轉、需量反應"
+      },
+      {
+        "t": "建築師規劃重點",
+        "d": "電力機房、儲能空間、太陽能介面、電表點位、通訊線路、AI Edge Node、維修動線"
+      }
+    ],
+    "hvac": [
+      {
+        "t": "冰水系統",
+        "k": "kW/RT、COP、供回水溫差、流量、壓差、主機負載率"
+      },
+      {
+        "t": "冷卻水",
+        "k": "進出水溫、Approach、冷卻塔效率、風機頻率"
+      },
+      {
+        "t": "空氣側",
+        "k": "AHU／PAHU、風量、靜壓、送回風溫濕度、VAV"
+      },
+      {
+        "t": "空間品質",
+        "k": "溫度、濕度、CO₂、PM2.5、VOC、人流與舒適度"
+      },
+      {
+        "t": "設備健康",
+        "k": "振動、電流、運轉時數、異常趨勢、維修履歷"
+      }
+    ],
+    "clean": [
+      "溫濕度",
+      "壓差",
+      "粒子",
+      "VOC",
+      "ACH 換氣次數",
+      "HEPA／FFU",
+      "CO₂",
+      "空調鏈追溯"
+    ]
+  },
+  "en": {
+    "feat": [
+      {
+        "t": "Live usage & demand",
+        "d": "kW/kWh, demand, contract capacity, power factor and power quality"
+      },
+      {
+        "t": "Renewable dispatch",
+        "d": "Solar and wind efficiency and generation forecasting"
+      },
+      {
+        "t": "Storage coordination",
+        "d": "SOC/SOH, PCS/BMS, charge/discharge and peak shaving"
+      },
+      {
+        "t": "Compute center efficiency",
+        "d": "PUE, racks, PDUs, UPS and cooling"
+      },
+      {
+        "t": "ESG / carbon",
+        "d": "Carbon data, energy baselines and reporting"
+      }
+    ],
+    "loop": [
+      "Generate",
+      "Store",
+      "Distribute",
+      "Consume",
+      "Predict",
+      "Dispatch",
+      "Secure",
+      "Maintain"
+    ],
+    "scope": [
+      {
+        "t": "Power / HV-LV",
+        "d": "Switchgear, transformers, ATS, breakers, UPS, diesel generators, PDUs"
+      },
+      {
+        "t": "Power quality",
+        "d": "Voltage, current, power factor, harmonics and abnormal consumption"
+      },
+      {
+        "t": "Energy allocation",
+        "d": "By zone, floor, line, tenant and asset"
+      },
+      {
+        "t": "Renewables & storage",
+        "d": "Solar, wind, storage SOC/SOH and inverter efficiency"
+      },
+      {
+        "t": "Tariffs & demand",
+        "d": "Bill forecasting, peak shifting and demand response"
+      },
+      {
+        "t": "For architects",
+        "d": "Power rooms, storage space, solar interfaces, meter points, comms routes, AI edge nodes and maintenance access"
+      }
+    ],
+    "hvac": [
+      {
+        "t": "Chilled water",
+        "k": "kW/RT, COP, supply/return ΔT, flow, pressure differential, chiller load"
+      },
+      {
+        "t": "Condenser water",
+        "k": "Inlet/outlet temperature, approach, cooling tower efficiency, fan speed"
+      },
+      {
+        "t": "Air side",
+        "k": "AHU/PAHU, airflow, static pressure, supply/return temperature and humidity, VAV"
+      },
+      {
+        "t": "Indoor quality",
+        "k": "Temperature, humidity, CO₂, PM2.5, VOC, occupancy and comfort"
+      },
+      {
+        "t": "Equipment health",
+        "k": "Vibration, current, run hours, anomaly trends, maintenance history"
+      }
+    ],
+    "clean": [
+      "Temperature & humidity",
+      "Pressure differential",
+      "Particles",
+      "VOC",
+      "ACH",
+      "HEPA / FFU",
+      "CO₂",
+      "Air-chain traceability"
+    ]
+  }
+}

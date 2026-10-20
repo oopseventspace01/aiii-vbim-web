@@ -23,3 +23,11 @@
 | 經濟日報 川普促投資美國 | news-udn-trump.jpg |
 | 頂尖 2025.09 從台灣到亞利桑那 | news-arizona.jpg |
 | PChome 2025.08 智慧建築迎戰川普關稅 | news-pchome.jpg |
+
+## 業主提供的參考圖片（`ref/`，2026-10-20）
+| 檔案 | 原檔名 | 用途 |
+|---|---|---|
+| ref/hospital-dashboard.jpg | S__8806443.jpg | 智慧醫療上帝視角儀表板：`/solutions` 醫院分頁、`/vbim` 真實畫面（標示「示意畫面」） |
+| ref/factory-dashboard.png | 智慧製造儀表板.png | 智慧製造上帝視角儀表板：`/solutions` 工廠分頁（標示「示意畫面」） |
+| ref/partner-medical-equipment.jpg | S__8585416.jpg | 醫療設備商加入生態海報（圖內中文）：中文 `/partners` |
+| ref/partner-tool-equipment.jpg | S__8806444.jpg | 工具設備商加入生態海報（圖內中文）：中文 `/partners` |

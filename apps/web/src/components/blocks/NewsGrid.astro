@@ -1,0 +1,50 @@
+---
+// 消息卡片網格：把 Sanity 轉好的卡片資料（含後台圖片）交給 NewsCard 顯示
+import NewsCard from '../cards/NewsCard.astro';
+import { imageUrl } from '../../lib/sanity';
+import type { NewsCardData } from '../../lib/home-data';
+import type { Locale } from '../../lib/i18n';
+
+interface Props {
+  items: NewsCardData[];
+  locale: Locale;
+  labelledby?: string;
+  emptyText: string;
+}
+
+const { items, locale, labelledby, emptyText } = Astro.props;
+---
+
+{items.length === 0 ? (
+  <p class="m-0 text-muted">{emptyText}</p>
+) : (
+  <ul
+    aria-labelledby={labelledby}
+    class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-4 p-0"
+  >
+    {items.map((n) => (
+      <li class="flex">
+        <NewsCard
+          locale={locale}
+          title={n.title}
+          href={n.href}
+          external={n.external}
+          category={n.category}
+          source={n.source}
+          dateLabel={n.dateLabel}
+          cover={
+            n.cover
+              ? {
+                  src: imageUrl(n.cover.source, 800),
+                  alt: n.cover.alt,
+                  width: n.cover.width,
+                  height: n.cover.height,
+                }
+              : undefined
+          }
+          headingLevel="h3"
+        />
+      </li>
+    ))}
+  </ul>
+)}

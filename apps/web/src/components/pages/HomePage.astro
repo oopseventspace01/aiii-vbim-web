@@ -14,7 +14,7 @@ import CtaBand from '../blocks/CtaBand.astro';
 import MediaFigure from '../blocks/MediaFigure.astro';
 import InfoCard from '../cards/InfoCard.astro';
 import FeatureCard from '../cards/FeatureCard.astro';
-import NewsCard from '../cards/NewsCard.astro';
+import NewsGrid from '../blocks/NewsGrid.astro';
 import heroBuilding from '../../assets/illustrations/hero-building.jpg';
 import world from '../../assets/illustrations/world.jpg';
 import energy from '../../assets/illustrations/energy.jpg';
@@ -26,13 +26,7 @@ import { SECTOR_PHOTOS } from '../../content/sector-photos';
 import { localizePath, type Locale } from '../../lib/i18n';
 import { sanityClient, imageUrl } from '../../lib/sanity';
 import { HOME_QUERY } from '../../lib/queries';
-import {
-  toFooterInfo,
-  toHomeData,
-  type ImageRef,
-  type NewsCardData,
-  type RawHome,
-} from '../../lib/home-data';
+import { toFooterInfo, toHomeData, type ImageRef, type RawHome } from '../../lib/home-data';
 import { FOOTER_FALLBACK } from '../../data/site-fallback';
 import { UI } from '../../i18n/ui';
 
@@ -56,7 +50,6 @@ const remote = (img: ImageRef, width: number) => ({
   width: img.width,
   height: img.height,
 });
-const newsCover = (n: NewsCardData) => (n.cover ? remote(n.cover, 800) : undefined);
 const newsGroups = [
   { id: 'home-news-product', title: copy.news.product, items: data.product },
   { id: 'home-news-media', title: copy.news.media, items: data.media },
@@ -316,30 +309,12 @@ const newsGroups = [
           <h3 id={group.id} class="m-0 text-lg font-black text-text-2">
             {group.title}
           </h3>
-          {group.items.length === 0 ? (
-            <p class="m-0 text-muted">{copy.news.empty}</p>
-          ) : (
-            <ul
-              aria-labelledby={group.id}
-              class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-4 p-0"
-            >
-              {group.items.map((n) => (
-                <li class="flex">
-                  <NewsCard
-                    locale={locale}
-                    title={n.title}
-                    href={n.href}
-                    external={n.external}
-                    category={n.category}
-                    source={n.source}
-                    dateLabel={n.dateLabel}
-                    cover={newsCover(n)}
-                    headingLevel="h3"
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
+          <NewsGrid
+            items={group.items}
+            locale={locale}
+            labelledby={group.id}
+            emptyText={copy.news.empty}
+          />
         </div>
       ))}
     </div>

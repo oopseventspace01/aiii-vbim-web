@@ -1,0 +1,160 @@
+---
+// /energy（design/pages/Energy.dc.html）：智慧能源管理＋中央空調節能 × 潔淨
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Pill from '../ui/Pill.astro';
+import PageHero from '../blocks/PageHero.astro';
+import MediaFigure from '../blocks/MediaFigure.astro';
+import CompareTable from '../blocks/CompareTable.astro';
+import CtaBand from '../blocks/CtaBand.astro';
+import InfoCard from '../cards/InfoCard.astro';
+import energy from '../../assets/illustrations/energy.jpg';
+import hvac from '../../assets/illustrations/hvac.jpg';
+import design from '../../content/design/Energy.json';
+import { ENERGY_COPY } from '../../content/pages/energy';
+import { localizePath, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = ENERGY_COPY[locale];
+const data = design[locale] as {
+  feat: { t: string; d: string }[];
+  loop: string[];
+  scope: { t: string; d: string }[];
+  hvac: { t: string; k: string }[];
+  clean: string[];
+};
+const L = (path: string) => localizePath(path, locale);
+---
+
+<BaseLayout title={copy.metaTitle} description={copy.subtitle} locale={locale} active="energy">
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} lead={copy.body}>
+    <MediaFigure slot="media" src={energy} alt={copy.heroAlt} blend eager />
+  </PageHero>
+
+  <!-- 監控重點 -->
+  <Section label={copy.title}>
+    <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3 p-0">
+      {data.feat.map((f) => (
+        <li class="flex">
+          <InfoCard tone="soft" title={f.t} text={f.d} class="w-full" />
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <!-- 能源閉環 -->
+  <Section tone="navy" labelledby="en-loop">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="en-loop" tone="dark" eyebrow={copy.loop.eyebrow} title={copy.loop.title} />
+      <ol class="m-0 flex list-none flex-wrap gap-2 p-0">
+        {data.loop.map((step) => (
+          <li class="flex-[1_1_110px] rounded-[14px] border border-white/16 bg-white/6 px-3 py-3 text-center font-black">
+            {step}
+          </li>
+        ))}
+      </ol>
+      <p class="m-0 max-w-[900px] text-[1.05rem] text-[#cfdcf0]">{copy.loop.text}</p>
+    </div>
+  </Section>
+
+  <!-- 管理範圍＋市場趨勢 -->
+  <Section labelledby="en-scope">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="en-scope" title={copy.scope.title} />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-3 p-0">
+        {data.scope.map((s) => (
+          <li class="flex">
+            <InfoCard tone="soft" title={s.t} text={s.d} class="w-full" />
+          </li>
+        ))}
+      </ul>
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-3 p-0">
+        {copy.trends.map((t) => (
+          <li class="flex flex-col gap-1.5 rounded-md border border-line bg-white p-6">
+            <span class="text-[13px] font-bold text-blue">{t.label}</span>
+            <span class="text-lg font-black">{t.text}</span>
+            <span class="text-xs text-muted">{t.source}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- 中央空調節能 × 潔淨 -->
+  <Section tone="soft" labelledby="en-hvac">
+    <div class="flex flex-wrap items-center gap-10">
+      <div class="flex min-w-0 flex-[1_1_440px] flex-col gap-4">
+        <SectionHeader
+          id="en-hvac"
+          eyebrow={copy.hvac.eyebrow}
+          title={copy.hvac.title}
+          lead={copy.hvac.subtitle}
+        />
+        <p class="m-0 text-text-2">{copy.hvac.body}</p>
+        <ol class="m-0 flex list-none flex-wrap items-center gap-2 p-0">
+          {copy.hvac.flow.map((step, i) => (
+            <>
+              <li class="rounded-pill bg-blue px-4 py-2 font-bold text-white">{step}</li>
+              {i < copy.hvac.flow.length - 1 && (
+                <li aria-hidden="true" class="text-muted">
+                  →
+                </li>
+              )}
+            </>
+          ))}
+        </ol>
+      </div>
+      <div class="min-w-0 flex-[1_1_440px]">
+        <MediaFigure src={hvac} alt={copy.hvac.imageAlt} blend />
+      </div>
+    </div>
+  </Section>
+
+  <!-- AI Chiller Optimization -->
+  <Section labelledby="en-chiller">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="en-chiller" title={copy.chiller.title} lead={copy.chiller.text} />
+      <CompareTable
+        caption={copy.chiller.title}
+        columns={copy.chiller.columns.map((label) => ({ label }))}
+        rows={data.hvac.map((h) => ({ head: h.t, cells: [h.k] }))}
+        minWidth={520}
+      />
+    </div>
+  </Section>
+
+  <!-- 潔淨環境管理 -->
+  <Section tone="soft" labelledby="en-clean">
+    <div class="flex flex-wrap items-start gap-10">
+      <div class="flex min-w-0 flex-[1_1_420px] flex-col gap-4">
+        <SectionHeader
+          id="en-clean"
+          eyebrow={copy.clean.eyebrow}
+          title={copy.clean.title}
+          lead={copy.clean.text}
+        />
+      </div>
+      <ul class="m-0 flex min-w-0 flex-[1_1_420px] list-none flex-wrap gap-2 p-0">
+        {data.clean.map((c) => (
+          <li>
+            <Pill>{c}</Pill>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <Section>
+    <CtaBand
+      variant="accent"
+      title={copy.cta.title}
+      text={copy.cta.text}
+      primary={{ label: copy.cta.button, href: L('/contact') }}
+    />
+  </Section>
+</BaseLayout>

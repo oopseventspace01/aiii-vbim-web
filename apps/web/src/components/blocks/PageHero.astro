@@ -4,9 +4,13 @@ interface Props {
   eyebrow?: string;
   title: string;
   lead?: string;
+  /** 標題最後一行用品牌藍（設計稿 VBIM 頁等） */
+  accentLastLine?: boolean;
+  /** 標題下方的粗體副標 */
+  subtitle?: string;
 }
 
-const { eyebrow, title, lead } = Astro.props;
+const { eyebrow, title, lead, accentLastLine = false, subtitle } = Astro.props;
 const lines = title.split('\n');
 const hasMedia = Astro.slots.has('media');
 ---
@@ -18,8 +22,17 @@ const hasMedia = Astro.slots.has('media');
     >
       {eyebrow && <p class="eyebrow m-0">{eyebrow}</p>}
       <h1 class="m-0 text-[clamp(2.2rem,4.4vw,3.6rem)] leading-[1.15] font-black">
-        {lines.map((line, i) => (i < lines.length - 1 ? [line, <br />] : line))}
+        {lines.map((line, i) =>
+          i < lines.length - 1 ? (
+            [line, <br />]
+          ) : accentLastLine && lines.length > 1 ? (
+            <span class="text-blue">{line}</span>
+          ) : (
+            line
+          ),
+        )}
       </h1>
+      {subtitle && <p class="m-0 text-xl font-bold">{subtitle}</p>}
       {lead && <p class="lead max-w-[820px] text-[1.1rem]">{lead}</p>}
       <slot />
     </div>

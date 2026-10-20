@@ -1,0 +1,224 @@
+---
+// /vbim（design/pages/VBIM.dc.html）：第六代智慧建築、六大核心價值、生命週期、競爭優勢、產品家族、真實畫面、媒體報導
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Button from '../ui/Button.astro';
+import PageHero from '../blocks/PageHero.astro';
+import MediaFigure from '../blocks/MediaFigure.astro';
+import NewsGrid from '../blocks/NewsGrid.astro';
+import InfoCard from '../cards/InfoCard.astro';
+import city from '../../assets/illustrations/city.jpg';
+import realDemo from '../../assets/illustrations/real-demo.jpg';
+import realScreens from '../../assets/illustrations/real-screens.jpg';
+import design from '../../content/design/VBIM.json';
+import { VBIM_COPY } from '../../content/pages/vbim';
+import { localizePath, type Locale } from '../../lib/i18n';
+import { getFooterInfo, getLatestMedia } from '../../lib/site';
+import { HOME } from '../../content/home';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = VBIM_COPY[locale];
+const data = design[locale] as {
+  pillars: { no: string; t: string; d: string }[];
+  down: string[];
+  up: string[];
+  stages: { en?: string; zh?: string; t?: string; d: string }[];
+  edge: { t: string; d: string }[];
+  old: string[];
+  neu: string[];
+  family: { n: string; t: string; d: string }[];
+};
+const L = (path: string) => localizePath(path, locale);
+const footer = await getFooterInfo(locale);
+const media = await getLatestMedia(locale, 3);
+const stores = [
+  { label: copy.storeLabel.appStore, name: 'App Store', href: footer.appStoreUrl },
+  { label: copy.storeLabel.googlePlay, name: 'Google Play', href: footer.googlePlayUrl },
+].filter((s): s is { label: string; name: string; href: string } => Boolean(s.href));
+---
+
+<BaseLayout title={copy.metaTitle} description={copy.subtitle} locale={locale} active="vbim">
+  <PageHero
+    eyebrow={copy.eyebrow}
+    title={copy.title}
+    subtitle={copy.subtitle}
+    lead={copy.body}
+    accentLastLine
+  >
+    <div class="flex flex-wrap gap-2.5">
+      {stores.map((s) => (
+        <a
+          href={s.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex min-h-12 flex-col justify-center rounded-[14px] bg-navy px-[22px] py-3 leading-tight font-bold text-white no-underline hover:text-white"
+        >
+          <span class="text-[11px] text-[#aebdd6]">{s.label}</span>
+          <span>{s.name}</span>
+        </a>
+      ))}
+      <Button href={L('/contact')}>{copy.demo}</Button>
+    </div>
+    <MediaFigure slot="media" src={city} alt={copy.heroAlt} blend eager />
+  </PageHero>
+
+  <!-- 六大核心價值 -->
+  <Section labelledby="vbim-values">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="vbim-values" eyebrow={copy.values.eyebrow} title={copy.values.title} />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-3.5 p-0">
+        {data.pillars.map((p) => (
+          <li class="flex">
+            <InfoCard tone="soft" kicker={p.no} title={p.t} text={p.d} class="w-full" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- 降／升 -->
+  <section
+    class="bg-navy text-white"
+    aria-label={`${copy.downUpLabel.down}／${copy.downUpLabel.up}`}
+  >
+    <div class="container-site flex flex-col gap-[18px] py-[72px]">
+      <ul class="m-0 flex list-none flex-wrap gap-2.5 p-0" aria-label={copy.downUpLabel.down}>
+        {data.down.map((d) => (
+          <li class="flex-[1_1_140px] rounded-[14px] border border-white/16 bg-white/6 p-3.5 text-center text-[clamp(1.1rem,1.8vw,1.4rem)] font-black">
+            {d}
+          </li>
+        ))}
+      </ul>
+      <ul class="m-0 flex list-none flex-wrap gap-2.5 p-0" aria-label={copy.downUpLabel.up}>
+        {data.up.map((u) => (
+          <li class="flex-[1_1_140px] rounded-[14px] bg-blue p-3.5 text-center text-[clamp(1.1rem,1.8vw,1.4rem)] font-black">
+            {u}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 生命週期 -->
+  <Section labelledby="vbim-stages">
+    <div class="flex flex-col gap-7">
+      <SectionHeader
+        id="vbim-stages"
+        eyebrow={copy.stages.eyebrow}
+        title={copy.stages.title}
+        lead={copy.stages.lead}
+      />
+      <ol class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3 p-0">
+        {data.stages.map((s) => (
+          <li class="flex flex-col gap-1.5 rounded-b-[18px] border-t-4 border-blue bg-bg-2 p-5">
+            {s.en && <span class="font-display text-[13px] font-semibold text-muted">{s.en}</span>}
+            <span class="text-[19px] font-black">{s.zh ?? s.t}</span>
+            <span class="text-sm text-text-2">{s.d}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <!-- 競爭優勢 -->
+  <Section tone="soft" labelledby="vbim-edge">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="vbim-edge" eyebrow={copy.edge.eyebrow} title={copy.edge.title} />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-3.5 p-0">
+        {data.edge.map((e) => (
+          <li class="flex">
+            <InfoCard title={e.t} text={e.d} class="w-full" />
+          </li>
+        ))}
+      </ul>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-3.5">
+        <div class="flex flex-col gap-2.5 rounded-[20px] border border-line bg-white p-[26px]">
+          <h3 class="m-0 text-base font-black text-muted">{copy.edge.oldTitle}</h3>
+          <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
+            {data.old.map((o) => (
+              <li class="text-[15px] text-text-2">— {o}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="flex flex-col gap-2.5 rounded-[20px] bg-blue p-[26px] text-white">
+          <h3 class="m-0 text-base font-black text-[#eef3ff]">{copy.edge.newTitle}</h3>
+          <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
+            {data.neu.map((n) => (
+              <li class="text-[15px] font-bold">✓ {n}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- 產品家族與研發團隊 -->
+  <Section labelledby="vbim-family">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="vbim-family" eyebrow={copy.family.eyebrow} title={copy.family.title} />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-3.5 p-0">
+        {data.family.map((f) => (
+          <li class="flex flex-col gap-2 rounded-md border border-line bg-bg-2 p-[26px]">
+            <span class="font-display text-[22px] font-bold text-blue-dark">{f.n}</span>
+            <span class="font-black">{f.t}</span>
+            <span class="text-[15px] text-text-2">{f.d}</span>
+          </li>
+        ))}
+      </ul>
+      <div class="flex flex-wrap gap-6 rounded-[24px] bg-navy p-8 text-white">
+        {[copy.family.co, copy.family.starlight].map((b) => (
+          <div class="flex flex-[1_1_380px] flex-col gap-1.5">
+            <span class="text-[13px] font-bold text-blue-on-navy">{b.label}</span>
+            <span class="text-xl font-black">{b.title}</span>
+            <span class="text-[15px] text-[#cfdcf0]">{b.text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <!-- 真實畫面（實拍與系統實際畫面；示意圖不放這裡） -->
+  <Section labelledby="vbim-field" class="pt-0">
+    <div class="flex flex-col gap-7">
+      <SectionHeader
+        id="vbim-field"
+        eyebrow={copy.field.eyebrow}
+        title={copy.field.title}
+        lead={copy.field.lead}
+      />
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] gap-[18px]">
+        <MediaFigure src={realDemo} alt={copy.field.demoAlt} caption={copy.field.demoAlt} />
+        <MediaFigure
+          src={realScreens}
+          alt={copy.field.screensAlt}
+          caption={copy.field.screensAlt}
+        />
+      </div>
+    </div>
+  </Section>
+
+  <!-- 媒體報導（後台最新 3 則） -->
+  <section aria-labelledby="vbim-media" class="border-t border-line bg-bg-2">
+    <div class="container-site flex flex-col gap-6 pt-24 pb-(--section-y)">
+      <div class="flex flex-wrap items-baseline justify-between gap-3">
+        <h2 id="vbim-media" class="heading-section">
+          {copy.media.title}
+        </h2>
+        <a href={L('/news')} class="font-bold no-underline">
+          {copy.media.viewAll}
+        </a>
+      </div>
+      <NewsGrid
+        items={media}
+        locale={locale}
+        labelledby="vbim-media"
+        emptyText={HOME[locale].news.empty}
+      />
+    </div>
+  </section>
+</BaseLayout>

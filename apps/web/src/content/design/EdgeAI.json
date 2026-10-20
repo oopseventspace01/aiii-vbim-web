@@ -1,0 +1,244 @@
+{
+  "zh-Hant": {
+    "five": [
+      {
+        "t": "On-Premise AI PC／GPU Server",
+        "d": "地端運算硬體"
+      },
+      {
+        "t": "AI Vision",
+        "d": "PPE、入侵、火煙、跌倒、車流辨識"
+      },
+      {
+        "t": "AI Agent",
+        "d": "Energy／Facility／Security／ESG"
+      },
+      {
+        "t": "即時推論・低延遲・資料主權",
+        "d": "安全可控的 AI 運算"
+      },
+      {
+        "t": "整合 PMIS／BIM／VMS／EMS",
+        "d": "打通資料與場域"
+      }
+    ],
+    "stack": [
+      {
+        "l": "應用",
+        "d": "BIM 問答・影像 AI・能源預測・AI Agent"
+      },
+      {
+        "l": "Aiii VBIM",
+        "d": "PMIS・Digital Twin・VMS・AIoT・Energy Data"
+      },
+      {
+        "l": "AI 平台",
+        "d": "Local LLM・RAG・Vision AI・Private AI"
+      },
+      {
+        "l": "AI 基礎設施",
+        "d": "AI Memory・Enterprise SSD・Edge AI Server"
+      },
+      {
+        "l": "基礎",
+        "d": "GPU・CPU・XPU・DRAM・NVMe・UPS・Cooling"
+      }
+    ],
+    "design": [
+      "AI Room",
+      "Edge AI Node",
+      "Private AI Storage",
+      "Fiber／Network",
+      "UPS／Cooling",
+      "Cybersecurity"
+    ],
+    "caps": [
+      {
+        "n": "Local AI Vision",
+        "u": "PPE、火煙、跌倒、入侵、人流、異常行為",
+        "v": "低延遲，減少雲端頻寬"
+      },
+      {
+        "n": "Local LLM / RAG",
+        "u": "工程文件、SOP、設備手冊、維修紀錄問答",
+        "v": "企業資料不必離場"
+      },
+      {
+        "n": "AI Agent",
+        "u": "Energy／Facility／Engineering／Security Agent",
+        "v": "跨系統查詢與自動流程"
+      },
+      {
+        "n": "Edge Analytics",
+        "u": "影像、感測、PLC 資料即時分析",
+        "v": "斷網仍可運作"
+      },
+      {
+        "n": "Model Management",
+        "u": "模型版本、場域部署、更新與監控",
+        "v": "可營運、可維護、可擴充"
+      }
+    ],
+    "forms": [
+      {
+        "n": "Edge AI Box",
+        "s": "單棟／單區域部署",
+        "d": "適合單一建築、門診、工地與分點。"
+      },
+      {
+        "n": "Edge AI Server",
+        "s": "大型工廠、醫院、商場",
+        "d": "承載影像 AI、文件問答與 Agent。"
+      },
+      {
+        "n": "GPU Cluster",
+        "s": "算力中心、大型企業",
+        "d": "AI Factory Node，支援多模型多場域。"
+      },
+      {
+        "n": "Hybrid",
+        "s": "Edge 即時推論 + 雲端集中管理",
+        "d": "現場即時運算，私有雲或公有雲統一治理。"
+      }
+    ],
+    "infra": [
+      {
+        "t": "Edge AI Compute",
+        "d": "AI PC、AI Workstation、Edge Server"
+      },
+      {
+        "t": "AI Memory",
+        "d": "階層式 AI Memory 架構"
+      },
+      {
+        "t": "AI Storage",
+        "d": "NVMe、Enterprise SSD"
+      },
+      {
+        "t": "Private AI Infrastructure",
+        "d": "Local LLM、RAG、Vision AI、AI Agent"
+      }
+    ]
+  },
+  "en": {
+    "five": [
+      {
+        "t": "On-premise AI PC / GPU Server",
+        "d": "On-site compute hardware"
+      },
+      {
+        "t": "AI Vision",
+        "d": "PPE, intrusion, smoke & fire, falls, vehicle recognition"
+      },
+      {
+        "t": "AI Agent",
+        "d": "Energy / Facility / Security / ESG"
+      },
+      {
+        "t": "Real-time · low latency · data sovereignty",
+        "d": "Secure, controllable AI compute"
+      },
+      {
+        "t": "Integrated with PMIS / BIM / VMS / EMS",
+        "d": "Data and site, connected"
+      }
+    ],
+    "stack": [
+      {
+        "l": "Applications",
+        "d": "BIM Q&A · video AI · energy forecasting · AI agents"
+      },
+      {
+        "l": "Aiii VBIM",
+        "d": "PMIS · Digital Twin · VMS · AIoT · Energy Data"
+      },
+      {
+        "l": "AI Platform",
+        "d": "Local LLM · RAG · Vision AI · Private AI"
+      },
+      {
+        "l": "AI Infrastructure",
+        "d": "AI Memory · Enterprise SSD · Edge AI Server"
+      },
+      {
+        "l": "Foundation",
+        "d": "GPU · CPU · XPU · DRAM · NVMe · UPS · Cooling"
+      }
+    ],
+    "design": [
+      "AI Room",
+      "Edge AI Node",
+      "Private AI Storage",
+      "Fiber / Network",
+      "UPS / Cooling",
+      "Cybersecurity"
+    ],
+    "caps": [
+      {
+        "n": "Local AI Vision",
+        "u": "PPE, smoke & fire, falls, intrusion, footfall, abnormal behavior",
+        "v": "Low latency, less cloud bandwidth"
+      },
+      {
+        "n": "Local LLM / RAG",
+        "u": "Q&A over engineering documents, SOPs, manuals and maintenance logs",
+        "v": "Enterprise data stays on-site"
+      },
+      {
+        "n": "AI Agent",
+        "u": "Energy / Facility / Engineering / Security agents",
+        "v": "Cross-system queries and automated workflows"
+      },
+      {
+        "n": "Edge Analytics",
+        "u": "Real-time analysis of video, sensor and PLC data",
+        "v": "Keeps running offline"
+      },
+      {
+        "n": "Model Management",
+        "u": "Model versions, site deployment, updates and monitoring",
+        "v": "Operable, maintainable, scalable"
+      }
+    ],
+    "forms": [
+      {
+        "n": "Edge AI Box",
+        "s": "Single building or zone",
+        "d": "For individual buildings, clinics, sites and branches."
+      },
+      {
+        "n": "Edge AI Server",
+        "s": "Large factories, hospitals, malls",
+        "d": "Runs video AI, document Q&A and agents."
+      },
+      {
+        "n": "GPU Cluster",
+        "s": "Compute centers, large enterprises",
+        "d": "An AI Factory node for many models and sites."
+      },
+      {
+        "n": "Hybrid",
+        "s": "Edge inference + central cloud management",
+        "d": "Real-time on-site compute, unified governance in private or public cloud."
+      }
+    ],
+    "infra": [
+      {
+        "t": "Edge AI Compute",
+        "d": "AI PCs, AI workstations, edge servers"
+      },
+      {
+        "t": "AI Memory",
+        "d": "Tiered AI memory architecture"
+      },
+      {
+        "t": "AI Storage",
+        "d": "NVMe, enterprise SSD"
+      },
+      {
+        "t": "Private AI Infrastructure",
+        "d": "Local LLM, RAG, Vision AI, AI agents"
+      }
+    ]
+  }
+}

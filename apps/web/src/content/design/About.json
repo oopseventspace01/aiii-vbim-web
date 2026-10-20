@@ -1,0 +1,142 @@
+{
+  "zh-Hant": {
+    "biz": [
+      {
+        "t": "軟體授權／SaaS",
+        "d": "雲端平台／私有化部署"
+      },
+      {
+        "t": "SI 整合專案",
+        "d": "PMIS／BIM／VMS／EMS 整合落地"
+      },
+      {
+        "t": "能源與空調解決方案",
+        "d": "節能、潔淨、能源管理服務"
+      },
+      {
+        "t": "地端 AI 硬體",
+        "d": "AI PC／GPU Server／Edge Appliance"
+      },
+      {
+        "t": "維運與訂閱服務",
+        "d": "AI Agent／維護／分析／持續優化"
+      }
+    ],
+    "goals": [
+      {
+        "t": "打造五大領域標竿案",
+        "d": "醫院、商場、工廠、辦公、能源"
+      },
+      {
+        "t": "整合三大核心能力",
+        "d": "能源管理、HVAC 潔淨、地端 AI"
+      },
+      {
+        "t": "建立可複製標準方案",
+        "d": "從新建案延伸到既有場域升級"
+      },
+      {
+        "t": "形成長期收入模型",
+        "d": "軟體、硬體、工程、維運、訂閱"
+      },
+      {
+        "t": "擴大合作生態系",
+        "d": "建築、機電、能源、AI 與 SI 夥伴"
+      }
+    ],
+    "market": [
+      "跨國設廠與多據點管理需求升高",
+      "能源成本與 ESG 壓力持續增加",
+      "資料中心與算力中心快速擴張",
+      "醫療與製造場域加速數位轉型",
+      "Edge AI、在地部署與資安需求提升"
+    ],
+    "miles": [
+      {
+        "d": "2026.09",
+        "t": "Aiii VBIM 2.0 發表",
+        "x": "AI-Powered Physical World Operating System：從 BIM／PMIS 升級為企業實體世界營運 OS。"
+      },
+      {
+        "d": "2025.12",
+        "t": "亮相 2025 台灣醫療科技展",
+        "x": "Aiii VBIM 與 Aiii RMS 於南港展覽館展出智慧醫院完整生態系。"
+      },
+      {
+        "d": "2025.11",
+        "t": "Aiii VBIM 系統說明會暨繁星計劃",
+        "x": "於茹曦酒店 OOPS 發表，分享開放合作理念。"
+      }
+    ]
+  },
+  "en": {
+    "biz": [
+      {
+        "t": "Software license / SaaS",
+        "d": "Cloud platform or private deployment"
+      },
+      {
+        "t": "SI projects",
+        "d": "PMIS / BIM / VMS / EMS integration and delivery"
+      },
+      {
+        "t": "Energy & HVAC solutions",
+        "d": "Efficiency, clean environments and energy services"
+      },
+      {
+        "t": "Edge AI hardware",
+        "d": "AI PCs / GPU servers / edge appliances"
+      },
+      {
+        "t": "O&M & subscriptions",
+        "d": "AI agents, maintenance, analytics, continuous optimization"
+      }
+    ],
+    "goals": [
+      {
+        "t": "Flagship sites in five sectors",
+        "d": "Hospitals, retail, factories, offices, energy"
+      },
+      {
+        "t": "Integrate three core capabilities",
+        "d": "Energy, HVAC & clean, Edge AI"
+      },
+      {
+        "t": "Replicable standard solutions",
+        "d": "From new builds to upgrades of existing sites"
+      },
+      {
+        "t": "Long-term revenue model",
+        "d": "Software, hardware, engineering, O&M, subscriptions"
+      },
+      {
+        "t": "Grow the partner ecosystem",
+        "d": "Construction, MEP, energy, AI and SI partners"
+      }
+    ],
+    "market": [
+      "Rising demand for global plants and multi-site management",
+      "Growing energy cost and ESG pressure",
+      "Rapid expansion of data and compute centers",
+      "Accelerating transformation in healthcare and manufacturing",
+      "Growing need for Edge AI, on-site deployment and security"
+    ],
+    "miles": [
+      {
+        "d": "2026.09",
+        "t": "Aiii VBIM 2.0 launched",
+        "x": "AI-Powered Physical World Operating System: from BIM/PMIS to the enterprise physical world OS."
+      },
+      {
+        "d": "2025.12",
+        "t": "Showcased at Healthcare+ Expo Taiwan 2025",
+        "x": "Aiii VBIM and Aiii RMS presented a complete smart hospital ecosystem at Nangang Exhibition Center."
+      },
+      {
+        "d": "2025.11",
+        "t": "Aiii VBIM launch event & Starlight Program",
+        "x": "Unveiled at OOPS, Illume Taipei, sharing an open-collaboration vision."
+      }
+    ]
+  }
+}

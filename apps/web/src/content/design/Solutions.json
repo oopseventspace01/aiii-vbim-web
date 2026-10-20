@@ -1,0 +1,418 @@
+{
+  "zh-Hant": {
+    "tabs": [
+      {
+        "label": "醫院"
+      },
+      {
+        "label": "商場"
+      },
+      {
+        "label": "工廠"
+      },
+      {
+        "label": "辦公"
+      },
+      {
+        "label": "能源"
+      }
+    ],
+    "products": [
+      {
+        "n": "Aiii VBIM AI Factory",
+        "who": "科技廠／半導體／跨國設廠",
+        "d": "BIM、PMIS、廠務、能源、重電、HVAC、潔淨室、VMS、AIoT、Local AI。"
+      },
+      {
+        "n": "Aiii VBIM AI Hospital",
+        "who": "新建醫院／舊院改造／醫療園區",
+        "d": "建築、機電、空調、醫療氣體、設備、能源、消防、安全、維修、VMS。"
+      },
+      {
+        "n": "Aiii VBIM AI Building",
+        "who": "商辦／商場／飯店／園區",
+        "d": "遠距、多點、數據智控、能源、HVAC、影像、AIoT、Edge AI。"
+      }
+    ],
+    "value": [
+      "01 BIM／PMIS",
+      "02 Energy",
+      "03 HVAC",
+      "04 Vision",
+      "05 AIoT",
+      "06 Edge AI"
+    ],
+    "global": [
+      {
+        "p": "Pre-Design",
+        "o": "企業標準模板／資料室"
+      },
+      {
+        "p": "Design",
+        "o": "CDE + BIM Coordination"
+      },
+      {
+        "p": "Construction",
+        "o": "PMIS + VMS + Mobile"
+      },
+      {
+        "p": "Commissioning",
+        "o": "數位驗收 + Asset Handover"
+      },
+      {
+        "p": "Operation",
+        "o": "Digital Twin + EMS + AI"
+      },
+      {
+        "p": "HQ Governance",
+        "o": "Global Command Center"
+      }
+    ],
+    "allTabs": [
+      {
+        "label": "醫院",
+        "en": "Smart Healthcare",
+        "title": "全院一張圖的智慧升級",
+        "tagline": "建築、設備、照護環境與多院區，在同一張圖上管理。",
+        "keys": [
+          "病房",
+          "設備",
+          "醫療氣體"
+        ],
+        "pain": "病床、醫療設備、空調、醫療氣體與保全各自一套系統；多院區資料分散，生命安全事件難以即時定位。",
+        "first": "VBIM + HVAC + VMS + Edge AI",
+        "points": [
+          "HIS／病床／排程與空間串接",
+          "MRI、CT、呼吸器、監護設備等醫材資產",
+          "跌倒、緊急事件、保全、消防等生命安全",
+          "電力、UPS、空調、醫療氣體、給排水、潔淨環境",
+          "多棟、多院區 Command Center"
+        ],
+        "kpis": [
+          "MTTR",
+          "非計畫停機",
+          "事件回應時間",
+          "kWh",
+          "COP"
+        ]
+      },
+      {
+        "label": "商場",
+        "en": "Smart Retail",
+        "title": "從看營收到看整個場域",
+        "tagline": "人流、交易、影像與設備資料連動。",
+        "keys": [
+          "POS",
+          "人流",
+          "停車",
+          "租戶"
+        ],
+        "pain": "只看營收，看不到人流、空調負載與租戶能耗之間的關係，跨店也難以比較。",
+        "first": "VMS + HVAC + Energy",
+        "points": [
+          "POS + 人流 + VMS + 停車 + 租戶 + 空調 + 能源",
+          "樓層、品牌、活動的人流、交易、轉換率與坪效",
+          "租戶能耗、公共區域能耗、空調負載聯動",
+          "AI 分析：人流 × 活動 × 天氣 × 銷售 × 能源"
+        ],
+        "kpis": [
+          "坪效",
+          "轉換率",
+          "公共區域 kWh",
+          "停車周轉",
+          "工單 SLA"
+        ]
+      },
+      {
+        "label": "工廠",
+        "en": "Smart Manufacturing",
+        "title": "跨國工廠上帝視角",
+        "tagline": "把工廠的人、機、料、法、環與能源放進同一個空間資料模型。",
+        "keys": [
+          "設備",
+          "稼動率",
+          "工安",
+          "庫存"
+        ],
+        "pain": "各廠區使用不同顧問、不同表單、不同系統，總部無法用同一套 KPI 比較稼動、能耗與工安。",
+        "first": "PMIS + Digital Twin + Energy",
+        "points": [
+          "ERP／MES／SCADA／PLC／WMS 串接",
+          "設備稼動率 OEE、產能、停機與預防維護",
+          "產線別、設備別、產品別能耗與碳排",
+          "潔淨室、環境、安全與影像",
+          "跨國工廠 Benchmark 與總部上帝視角"
+        ],
+        "kpis": [
+          "OEE",
+          "MTBF",
+          "單位產出能耗",
+          "PPE 違規",
+          "事故率"
+        ]
+      },
+      {
+        "label": "辦公",
+        "en": "Smart Office",
+        "title": "設計到物業不斷鏈",
+        "tagline": "竣工模型直接成為營運數位孿生。",
+        "keys": [
+          "空間",
+          "設備",
+          "能源",
+          "維運"
+        ],
+        "pain": "完工交付後資料斷裂，物業與管委會要重新建立一套設備、保固與維修資料。",
+        "first": "BIM／PMIS + FM 資產管理",
+        "points": [
+          "竣工模型轉為營運數位孿生",
+          "保固、修繕、公設與完整建築履歷",
+          "空調與照明節能排程",
+          "門禁、影像與設備告警整合"
+        ],
+        "kpis": [
+          "工單處理時間",
+          "文件查找時間",
+          "kWh",
+          "人力巡檢時間"
+        ]
+      },
+      {
+        "label": "能源",
+        "en": "Smart Energy",
+        "title": "從供電到用電的全域能源智控",
+        "tagline": "把發電、儲能、負載與冷卻整合成多場站營運平台。",
+        "keys": [
+          "風力",
+          "太陽能",
+          "儲能",
+          "算力中心"
+        ],
+        "pain": "AI 伺服器拉高電力密度，冷卻與配電成為瓶頸；太陽能、風電與儲能多場站難以統一維運。",
+        "first": "Energy + Thermal + Edge AI",
+        "points": [
+          "Solar PV：Module、String、Inverter、PR、日照",
+          "Wind：Turbine、Gearbox、振動、風速",
+          "ESS：BMS、PCS、SOC、SOH、Cell Temperature",
+          "資料中心：Rack、PDU、UPS、Cooling、PUE",
+          "Peak Shaving、Demand Response、發電預測"
+        ],
+        "kpis": [
+          "PUE",
+          "kW Demand",
+          "PR 發電效率",
+          "SOH",
+          "kW/Rack"
+        ]
+      }
+    ]
+  },
+  "en": {
+    "tabs": [
+      {
+        "label": "Hospitals"
+      },
+      {
+        "label": "Retail"
+      },
+      {
+        "label": "Factories"
+      },
+      {
+        "label": "Offices"
+      },
+      {
+        "label": "Energy"
+      }
+    ],
+    "products": [
+      {
+        "n": "Aiii VBIM AI Factory",
+        "who": "Tech fabs · semiconductors · global plants",
+        "d": "BIM, PMIS, facilities, energy, power, HVAC, cleanrooms, VMS, AIoT and Local AI."
+      },
+      {
+        "n": "Aiii VBIM AI Hospital",
+        "who": "New hospitals · renovations · medical campuses",
+        "d": "Building, MEP, HVAC, medical gas, equipment, energy, fire, security, maintenance and VMS."
+      },
+      {
+        "n": "Aiii VBIM AI Building",
+        "who": "Offices · malls · hotels · campuses",
+        "d": "Remote, multi-site, data intelligence, energy, HVAC, video, AIoT and Edge AI."
+      }
+    ],
+    "value": [
+      "01 BIM / PMIS",
+      "02 Energy",
+      "03 HVAC",
+      "04 Vision",
+      "05 AIoT",
+      "06 Edge AI"
+    ],
+    "global": [
+      {
+        "p": "Pre-Design",
+        "o": "Corporate templates & data room"
+      },
+      {
+        "p": "Design",
+        "o": "CDE + BIM coordination"
+      },
+      {
+        "p": "Construction",
+        "o": "PMIS + VMS + mobile"
+      },
+      {
+        "p": "Commissioning",
+        "o": "Digital acceptance + asset handover"
+      },
+      {
+        "p": "Operation",
+        "o": "Digital twin + EMS + AI"
+      },
+      {
+        "p": "HQ Governance",
+        "o": "Global Command Center"
+      }
+    ],
+    "allTabs": [
+      {
+        "label": "Hospitals",
+        "en": "Smart Healthcare",
+        "title": "One map for the whole hospital",
+        "tagline": "Buildings, equipment, care environments and campuses — managed on one map.",
+        "keys": [
+          "Wards",
+          "Equipment",
+          "Medical gas"
+        ],
+        "pain": "Beds, medical devices, HVAC, medical gas and security each run their own systems. Data is split across campuses, and life-safety events are hard to locate in real time.",
+        "first": "VBIM + HVAC + VMS + Edge AI",
+        "points": [
+          "HIS, beds and scheduling linked to space",
+          "Medical assets: MRI, CT, ventilators, monitors",
+          "Life safety: falls, emergencies, security, fire",
+          "Power, UPS, HVAC, medical gas, plumbing, clean rooms",
+          "Multi-building, multi-campus Command Center"
+        ],
+        "kpis": [
+          "MTTR",
+          "Unplanned downtime",
+          "Response time",
+          "kWh",
+          "COP"
+        ]
+      },
+      {
+        "label": "Retail",
+        "en": "Smart Retail",
+        "title": "Beyond revenue — see the whole venue",
+        "tagline": "Footfall, transactions, video and equipment data, all linked.",
+        "keys": [
+          "POS",
+          "Footfall",
+          "Parking",
+          "Tenants"
+        ],
+        "pain": "Looking only at revenue hides how footfall, HVAC load and tenant energy relate — and makes cross-store comparison hard.",
+        "first": "VMS + HVAC + Energy",
+        "points": [
+          "POS + footfall + VMS + parking + tenants + HVAC + energy",
+          "Footfall, transactions, conversion and sales per area by floor, brand and event",
+          "Tenant vs. common-area energy and HVAC load",
+          "AI: footfall × events × weather × sales × energy"
+        ],
+        "kpis": [
+          "Sales per sq. m",
+          "Conversion",
+          "Common-area kWh",
+          "Parking turnover",
+          "Work-order SLA"
+        ]
+      },
+      {
+        "label": "Factories",
+        "en": "Smart Manufacturing",
+        "title": "A god’s-eye view across global plants",
+        "tagline": "People, machines, materials, methods, environment and energy in one spatial model.",
+        "keys": [
+          "Equipment",
+          "OEE",
+          "Safety",
+          "Inventory"
+        ],
+        "pain": "Each plant uses different consultants, forms and systems, so HQ can’t compare OEE, energy and safety on the same KPIs.",
+        "first": "PMIS + Digital Twin + Energy",
+        "points": [
+          "ERP / MES / SCADA / PLC / WMS integration",
+          "OEE, capacity, downtime and preventive maintenance",
+          "Energy and carbon by line, asset and product",
+          "Cleanrooms, environment, safety and video",
+          "Cross-plant benchmarking from HQ"
+        ],
+        "kpis": [
+          "OEE",
+          "MTBF",
+          "Energy per unit",
+          "PPE violations",
+          "Incident rate"
+        ]
+      },
+      {
+        "label": "Offices",
+        "en": "Smart Office",
+        "title": "No break from design to facility management",
+        "tagline": "The as-built model becomes the operational digital twin.",
+        "keys": [
+          "Space",
+          "Equipment",
+          "Energy",
+          "O&M"
+        ],
+        "pain": "Data breaks at handover, and facility teams have to rebuild equipment, warranty and maintenance records from scratch.",
+        "first": "BIM / PMIS + FM asset management",
+        "points": [
+          "As-built model becomes the operating twin",
+          "Warranty, repairs, common areas and full building history",
+          "HVAC and lighting energy scheduling",
+          "Access, video and equipment alarms integrated"
+        ],
+        "kpis": [
+          "Work-order time",
+          "Document search time",
+          "kWh",
+          "Inspection hours"
+        ]
+      },
+      {
+        "label": "Energy",
+        "en": "Smart Energy",
+        "title": "Total energy control, from supply to demand",
+        "tagline": "Generation, storage, load and cooling as one multi-site operating platform.",
+        "keys": [
+          "Wind",
+          "Solar",
+          "Storage",
+          "Compute centers"
+        ],
+        "pain": "AI servers push up power density, making cooling and distribution the bottleneck; multi-site solar, wind and storage are hard to operate as one.",
+        "first": "Energy + Thermal + Edge AI",
+        "points": [
+          "Solar PV: modules, strings, inverters, PR, irradiance",
+          "Wind: turbines, gearboxes, vibration, wind speed",
+          "ESS: BMS, PCS, SOC, SOH, cell temperature",
+          "Data centers: racks, PDU, UPS, cooling, PUE",
+          "Peak shaving, demand response, generation forecasting"
+        ],
+        "kpis": [
+          "PUE",
+          "kW demand",
+          "Performance ratio",
+          "SOH",
+          "kW/rack"
+        ]
+      }
+    ]
+  }
+}

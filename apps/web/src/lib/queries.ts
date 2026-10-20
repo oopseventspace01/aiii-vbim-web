@@ -48,3 +48,7 @@ export const SETTINGS_QUERY = `*[_type == "siteSettings" && language == $lang][0
   companyName, address, phone, email, appStoreUrl, googlePlayUrl,
   lineOfficialUrl, lineQrCode ${IMAGE}, socialLinks[]{ platform, url }, footerTagline
 }`;
+
+/** 最新媒體報導（VBIM 頁等） */
+export const LATEST_MEDIA_QUERY = `*[_type == "news" && category == "media" && language == $lang && publishedAt <= now()]
+  | order(publishedAt desc)[0...6] ${NEWS_CARD}`;

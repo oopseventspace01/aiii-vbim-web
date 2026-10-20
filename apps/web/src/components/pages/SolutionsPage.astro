@@ -1,0 +1,217 @@
+---
+// /solutions（design/pages/Solutions.dc.html）：五大場域分頁切換＋產品化方案＋建築師＋跨國設廠
+// 醫院、工廠分頁附上業主提供的儀表板截圖，一律標示「示意畫面」（圖上數字非真實營運數據）
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Button from '../ui/Button.astro';
+import Pill from '../ui/Pill.astro';
+import PageHero from '../blocks/PageHero.astro';
+import Tabs from '../blocks/Tabs.astro';
+import MediaFigure from '../blocks/MediaFigure.astro';
+import hospitalDashboard from '../../assets/reference/hospital-dashboard.jpg';
+import factoryDashboard from '../../assets/reference/factory-dashboard.png';
+import design from '../../content/design/Solutions.json';
+import { SOLUTIONS_COPY } from '../../content/pages/solutions';
+import { localizePath, type Locale } from '../../lib/i18n';
+import { UI } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+interface Sector {
+  label: string;
+  en: string;
+  title: string;
+  tagline: string;
+  keys: string[];
+  pain: string;
+  first: string;
+  points: string[];
+  kpis: string[];
+}
+
+const { locale } = Astro.props;
+const copy = SOLUTIONS_COPY[locale];
+const data = design[locale] as {
+  allTabs: Sector[];
+  products: { n: string; who: string; d: string }[];
+  value: string[];
+  global: { p: string; o: string }[];
+};
+const L = (path: string) => localizePath(path, locale);
+const IDS = ['hospital', 'retail', 'factory', 'office', 'energy'] as const;
+const sectors = data.allTabs.map((s, i) => ({ ...s, id: IDS[i] ?? `sector-${i}` }));
+const dashboards: Partial<
+  Record<(typeof IDS)[number], { src: typeof hospitalDashboard; alt: string }>
+> = {
+  hospital: { src: hospitalDashboard, alt: copy.dashboardAlt.hospital },
+  factory: { src: factoryDashboard, alt: copy.dashboardAlt.factory },
+};
+---
+
+<BaseLayout title={copy.metaTitle} description={copy.lead} locale={locale} active="solutions">
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} lead={copy.lead} />
+
+  <!-- 五大場域分頁 -->
+  <Section spacing="none" class="pt-16 pb-24">
+    <Tabs label={copy.tabsLabel} tabs={sectors.map((s) => ({ id: s.id, label: s.label }))}>
+      {sectors.map((s) => {
+        const dash = dashboards[s.id as keyof typeof dashboards];
+        return (
+          <div slot={`panel-${s.id}`} class="flex flex-col gap-4" data-sector-panel={s.id}>
+            <div class="flex flex-wrap gap-7 rounded-lg bg-navy p-8 text-white md:p-10">
+              <div class="flex min-w-0 flex-[1_1_440px] flex-col gap-3">
+                <span class="font-display text-[15px] font-semibold text-blue-on-navy">{s.en}</span>
+                <h2 class="m-0 text-[clamp(1.8rem,3.2vw,2.6rem)] leading-[1.2] font-black">
+                  {s.title}
+                </h2>
+                <p class="m-0 text-[1.1rem] text-[#cfdcf0]">{s.tagline}</p>
+                <ul class="mt-1.5 flex list-none flex-wrap gap-2 p-0">
+                  {s.keys.map((k) => (
+                    <li>
+                      <Pill tone="dark">{k}</Pill>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="flex min-w-0 flex-[1_1_320px] flex-col gap-2 rounded-[20px] bg-white/8 p-6">
+                <h3 class="m-0 text-[13px] font-bold text-blue-on-navy">{copy.panel.pain}</h3>
+                <p class="m-0 text-base">{s.pain}</p>
+              </div>
+            </div>
+            {dash && (
+              <MediaFigure src={dash.src} alt={dash.alt} mockupLabel={UI[locale].mockupLabel} />
+            )}
+            <div class="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-4">
+              <div class="flex flex-col gap-2.5 rounded-md border border-line bg-white p-6">
+                <h3 class="m-0 text-[13px] font-bold text-blue">{copy.panel.points}</h3>
+                <ul class="m-0 flex list-none flex-col gap-2 p-0">
+                  {s.points.map((p) => (
+                    <li class="flex gap-2">
+                      <span aria-hidden="true" class="text-blue">
+                        ✓
+                      </span>
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="flex flex-col gap-2.5 rounded-md border border-line bg-white p-6">
+                <h3 class="m-0 text-[13px] font-bold text-blue">{copy.panel.kpis}</h3>
+                <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+                  {s.kpis.map((k) => (
+                    <li>
+                      <Pill tone="soft">{k}</Pill>
+                    </li>
+                  ))}
+                </ul>
+                <p class="m-0 text-sm text-muted">{copy.panel.kpisNote}</p>
+              </div>
+              <div class="flex flex-col gap-2.5 rounded-md bg-blue p-6 text-white">
+                <h3 class="m-0 text-[13px] font-bold text-[#eef3ff]">{copy.panel.first}</h3>
+                <p class="m-0 text-xl font-black">{s.first}</p>
+                <p class="m-0 text-sm text-[#eef3ff]">{copy.panel.firstNote}</p>
+                <Button href={L('/contact')} variant="white" class="mt-auto self-start">
+                  {copy.panel.demo}
+                </Button>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </Tabs>
+  </Section>
+
+  <!-- 三大產品化方案 -->
+  <Section tone="soft" labelledby="sol-products">
+    <div class="flex flex-col gap-7">
+      <SectionHeader
+        id="sol-products"
+        eyebrow={copy.products.eyebrow}
+        title={copy.products.title}
+      />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-3.5 p-0">
+        {data.products.map((p) => (
+          <li class="flex flex-col gap-2 rounded-md border border-line bg-white p-[26px]">
+            <span class="font-display text-[21px] font-bold text-blue-dark">{p.n}</span>
+            <span class="font-black">{p.who}</span>
+            <span class="text-[15px] text-text-2">{p.d}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- 建築師 -->
+  <Section labelledby="sol-architects">
+    <div class="flex flex-col gap-7">
+      <SectionHeader
+        id="sol-architects"
+        eyebrow={copy.architects.eyebrow}
+        title={copy.architects.title}
+        lead={copy.architects.lead}
+      />
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(380px,100%),1fr))] gap-4">
+        <div class="flex flex-col gap-3 rounded-md border border-line bg-bg-2 p-6">
+          <h3 class="m-0 text-base font-black text-muted">{copy.architects.usualLabel}</h3>
+          <ol class="m-0 flex list-none flex-wrap items-center gap-2 p-0 font-bold">
+            {copy.architects.usual.map((step, i) => (
+              <>
+                <li>{step}</li>
+                {i < copy.architects.usual.length - 1 && (
+                  <li aria-hidden="true" class="text-muted">
+                    →
+                  </li>
+                )}
+              </>
+            ))}
+          </ol>
+        </div>
+        <div class="flex flex-col gap-3 rounded-md bg-blue p-6 text-white">
+          <h3 class="m-0 text-base font-black text-[#eef3ff]">{copy.architects.vbimLabel}</h3>
+          <ol class="m-0 flex list-none flex-wrap items-center gap-2 p-0 font-bold">
+            {copy.architects.vbim.map((step, i) => (
+              <>
+                <li>{step}</li>
+                {i < copy.architects.vbim.length - 1 && <li aria-hidden="true">→</li>}
+              </>
+            ))}
+          </ol>
+        </div>
+      </div>
+      <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+        {data.value.map((v) => (
+          <li>
+            <Pill tone="soft">{v}</Pill>
+          </li>
+        ))}
+      </ul>
+      <p class="lead m-0 font-bold">{copy.architects.value}</p>
+    </div>
+  </Section>
+
+  <!-- 跨國設廠 -->
+  <Section spacing="none" class="pb-(--section-y)" labelledby="sol-global">
+    <div class="flex flex-wrap gap-8 rounded-lg bg-navy p-8 text-white md:p-11">
+      <div class="flex min-w-0 flex-[1_1_420px] flex-col gap-3">
+        <span class="font-display text-sm font-semibold tracking-[0.14em] text-blue-on-navy">
+          {copy.global.eyebrow}
+        </span>
+        <h2 id="sol-global" class="m-0 text-[clamp(1.6rem,2.8vw,2.2rem)] leading-[1.25] font-black">
+          {copy.global.title}
+        </h2>
+        <p class="m-0 text-[#cfdcf0]">{copy.global.text}</p>
+      </div>
+      <ol class="m-0 grid min-w-0 flex-[1_1_420px] list-none grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-2.5 p-0">
+        {data.global.map((g) => (
+          <li class="flex flex-col gap-0.5 rounded-[14px] border border-white/16 bg-white/6 px-4 py-3">
+            <span class="font-display text-sm font-bold text-blue-on-navy">{g.p}</span>
+            <span class="font-bold">{g.o}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+</BaseLayout>

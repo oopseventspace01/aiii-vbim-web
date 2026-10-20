@@ -1,0 +1,431 @@
+{
+  "zh-Hant": {
+    "caps": [
+      {
+        "no": "01",
+        "t": "空間化",
+        "d": "所有資料都能回到建築、樓層、區域、設備與資產。"
+      },
+      {
+        "no": "02",
+        "t": "全生命週期",
+        "d": "設計、施工、驗收、營運不再斷鏈。"
+      },
+      {
+        "no": "03",
+        "t": "多系統融合",
+        "d": "連接 ERP、MES、HIS、SCADA、PLC、BMS、EMS、VMS 與 IoT。"
+      },
+      {
+        "no": "04",
+        "t": "遠距多點",
+        "d": "單一總部管理多園區、多城市與跨國據點。"
+      },
+      {
+        "no": "05",
+        "t": "AI 智控",
+        "d": "從顯示數據升級為預測、最佳化、事件處理與閉環控制。"
+      }
+    ],
+    "layers": [
+      {
+        "no": "05",
+        "n": "管理層",
+        "d": "遠距、多點、數據智控、360° Dashboard"
+      },
+      {
+        "no": "04",
+        "n": "AI 運算層",
+        "d": "Edge AI、Local AI、AI Storage、Private AI"
+      },
+      {
+        "no": "03",
+        "n": "設備層",
+        "d": "重電、HVAC、儲能、太陽能、機電與現場設備"
+      },
+      {
+        "no": "02",
+        "n": "感知層",
+        "d": "攝影機、VMS、AIoT Sensor、電表、水表、環境感測"
+      },
+      {
+        "no": "01",
+        "n": "建築資料層",
+        "d": "2D、3D BIM、PMIS、工程文件、設備履歷"
+      }
+    ],
+    "life": [
+      {
+        "en": "PLAN",
+        "zh": "規劃",
+        "d": "基地、法規、需求與企業標準"
+      },
+      {
+        "en": "DESIGN",
+        "zh": "設計",
+        "d": "智慧清圖、錯誤排查、模型協作、版本審查"
+      },
+      {
+        "en": "BUILD",
+        "zh": "施工",
+        "d": "進度、品質、工安、材料、影像同步管理"
+      },
+      {
+        "en": "INSPECT",
+        "zh": "驗收",
+        "d": "缺失、複驗、設備點交、竣工圖、線上簽核"
+      },
+      {
+        "en": "OPERATE",
+        "zh": "營運",
+        "d": "設備、維保、VMS、AIoT、能源與 ESG"
+      },
+      {
+        "en": "ASSET",
+        "zh": "資產維護",
+        "d": "保固、公設、修繕、管委會與建築履歷"
+      }
+    ],
+    "roles": [
+      "業主 Developer",
+      "建築師 Architect",
+      "工程顧問 Consultant",
+      "營造 Contractor",
+      "監造驗收 Inspector",
+      "物業管委會 FM"
+    ],
+    "pmis": [
+      "圖說與版本管理",
+      "RFI／Submittal／簽核",
+      "進度與成本追蹤",
+      "品質／工安／缺失",
+      "現場影像與紀錄",
+      "材料與設備點交",
+      "竣工資料與模型",
+      "保固／維修／資產履歷"
+    ],
+    "four": [
+      {
+        "t": "即時影像辨識整合",
+        "d": "整合 CCTV、Aiii MMS 與 AI 影像辨識，提升施工安全、庫存盤點與營運透明度。",
+        "tags": "CCTV · Aiii MMS · AI Vision"
+      },
+      {
+        "t": "數位化文件管理",
+        "d": "送審、簽署、查驗與各階段文件線上化，降低錯誤並形成可追溯的稽核軌跡。",
+        "tags": "e-Sign · Audit · PMIS"
+      },
+      {
+        "t": "實現數位孿生",
+        "d": "建築模型與現場設備、影像、AIoT 感測同步，讓虛擬模型持續反映真實建築。",
+        "tags": "Digital Twin · AIoT · FM"
+      },
+      {
+        "t": "全流程上鏈追溯",
+        "d": "重要文件、數據、圖面與施工影像建立時間戳記，強化真實、透明與可信。",
+        "tags": "Blockchain · Traceability · Trust"
+      }
+    ],
+    "dims": [
+      {
+        "k": "人",
+        "en": "PEOPLE",
+        "d": "人員、工班、承包商、使用者、權限與作業紀錄"
+      },
+      {
+        "k": "物",
+        "en": "ASSET",
+        "d": "設備、材料、資產、機具、庫存與維修履歷"
+      },
+      {
+        "k": "天",
+        "en": "SPACE",
+        "d": "建築空間、樓層、上方設備、機電系統與環境條件"
+      },
+      {
+        "k": "地",
+        "en": "GROUND",
+        "d": "基地、地下空間、基礎、停車、地下設備與管線"
+      },
+      {
+        "k": "線",
+        "en": "MEP",
+        "d": "電力、給排水、消防、空調、弱電、網路與 MEP 管線"
+      }
+    ],
+    "axes": [
+      "2D 圖面",
+      "3D BIM",
+      "BOQ 工程清單",
+      "Asset 設備細項",
+      "Time 施工進度",
+      "QA/QC 驗收",
+      "FM 維運"
+    ],
+    "personas": [
+      {
+        "t": "建築師事務所",
+        "d": "雲端協作清圖、錯誤排查、模型審查與版本控制，降低設計資訊落差。"
+      },
+      {
+        "t": "營造／開發商",
+        "d": "透明掌握施工進度、品質、工安、文件與交付，強化業主與現場協同。"
+      },
+      {
+        "t": "工廠／醫院",
+        "d": "從建置到營運串接設備、影像、能源與企業系統，支援多據點遠距管理。"
+      },
+      {
+        "t": "物業／管委會",
+        "d": "保固、維修、公設、設備與住戶服務延續完工資料，不必重建一套系統。"
+      }
+    ],
+    "cmp": [
+      {
+        "t": "BIM / CDE",
+        "s": "設計與工程資料",
+        "l": "營運數據與控制不足",
+        "v": "工程資料延伸至營運"
+      },
+      {
+        "t": "BMS / EMS",
+        "s": "設備與能源",
+        "l": "缺少 3D 與工程生命週期",
+        "v": "BIM + 資產 + 能源"
+      },
+      {
+        "t": "VMS / AI Vision",
+        "s": "影像事件",
+        "l": "缺少設備、能源與工程脈絡",
+        "v": "影像事件落到空間與工單"
+      },
+      {
+        "t": "MES / ERP",
+        "s": "生產與企業流程",
+        "l": "不理解建築與 OT 空間",
+        "v": "IT × OT × 空間"
+      },
+      {
+        "t": "DCIM",
+        "s": "資料中心設備",
+        "l": "場景較垂直",
+        "v": "跨資料中心、建築與能源"
+      },
+      {
+        "t": "單一 AI 平台",
+        "s": "模型與資料分析",
+        "l": "缺乏實體世界脈絡",
+        "v": "AI + 數位孿生 + 控制"
+      }
+    ]
+  },
+  "en": {
+    "caps": [
+      {
+        "no": "01",
+        "t": "Spatial",
+        "d": "Every data point maps back to a building, floor, zone, asset or system."
+      },
+      {
+        "no": "02",
+        "t": "Full lifecycle",
+        "d": "Design, construction, commissioning and operations — no more broken handovers."
+      },
+      {
+        "no": "03",
+        "t": "Multi-system",
+        "d": "Connects ERP, MES, HIS, SCADA, PLC, BMS, EMS, VMS and IoT."
+      },
+      {
+        "no": "04",
+        "t": "Remote multi-site",
+        "d": "One HQ managing many campuses, cities and countries."
+      },
+      {
+        "no": "05",
+        "t": "AI control",
+        "d": "From displaying data to prediction, optimization, event handling and closed-loop control."
+      }
+    ],
+    "layers": [
+      {
+        "no": "05",
+        "n": "Management",
+        "d": "Remote, multi-site, data intelligence, 360° dashboard"
+      },
+      {
+        "no": "04",
+        "n": "AI Compute",
+        "d": "Edge AI, Local AI, AI Storage, Private AI"
+      },
+      {
+        "no": "03",
+        "n": "Equipment",
+        "d": "Power, HVAC, storage, solar, MEP and field equipment"
+      },
+      {
+        "no": "02",
+        "n": "Sensing",
+        "d": "Cameras, VMS, AIoT sensors, power and water meters, environment sensors"
+      },
+      {
+        "no": "01",
+        "n": "Building Data",
+        "d": "2D, 3D BIM, PMIS, engineering documents, asset history"
+      }
+    ],
+    "life": [
+      {
+        "t": "Plan",
+        "d": "Site, regulations, requirements and corporate standards"
+      },
+      {
+        "t": "Design",
+        "d": "Drawing cleanup, clash checks, model collaboration, reviews"
+      },
+      {
+        "t": "Build",
+        "d": "Schedule, quality, safety, materials and site video in sync"
+      },
+      {
+        "t": "Inspect",
+        "d": "Defects, re-inspection, asset handover, as-builts, e-sign-off"
+      },
+      {
+        "t": "Operate",
+        "d": "Equipment, maintenance, VMS, AIoT, energy and ESG"
+      },
+      {
+        "t": "Maintain",
+        "d": "Warranty, common areas, repairs and building history"
+      }
+    ],
+    "roles": [
+      "Developer",
+      "Architect",
+      "Consultant",
+      "Contractor",
+      "Inspector",
+      "Facility Manager"
+    ],
+    "pmis": [
+      "Drawing & version control",
+      "RFI / Submittal / Approvals",
+      "Schedule & cost tracking",
+      "Quality / safety / defects",
+      "Site video & records",
+      "Material & asset handover",
+      "As-built data & models",
+      "Warranty / repair / asset history"
+    ],
+    "four": [
+      {
+        "t": "Live video recognition",
+        "d": "CCTV, Aiii MMS and AI vision combined to improve site safety, inventory checks and operational transparency.",
+        "tags": "CCTV · Aiii MMS · AI Vision"
+      },
+      {
+        "t": "Digital document control",
+        "d": "Submissions, signatures and inspections online at every stage — fewer errors, a complete audit trail.",
+        "tags": "e-Sign · Audit · PMIS"
+      },
+      {
+        "t": "A living digital twin",
+        "d": "The building model synced with field equipment, video and AIoT sensors, always reflecting the real building.",
+        "tags": "Digital Twin · AIoT · FM"
+      },
+      {
+        "t": "End-to-end blockchain traceability",
+        "d": "Time-stamped key documents, data, drawings and site video for truth, transparency and trust.",
+        "tags": "Blockchain · Traceability · Trust"
+      }
+    ],
+    "dims": [
+      {
+        "k": "People",
+        "d": "Staff, crews, contractors, users, permissions and work records"
+      },
+      {
+        "k": "Assets",
+        "d": "Equipment, materials, tools, inventory and maintenance history"
+      },
+      {
+        "k": "Space",
+        "d": "Building spaces, floors, overhead systems, MEP and environment"
+      },
+      {
+        "k": "Ground",
+        "d": "Site, basements, foundations, parking, underground utilities"
+      },
+      {
+        "k": "MEP",
+        "d": "Power, plumbing, fire, HVAC, low-voltage and network lines"
+      }
+    ],
+    "axes": [
+      "2D drawings",
+      "3D BIM",
+      "BOQ",
+      "Asset details",
+      "Schedule",
+      "QA/QC",
+      "FM"
+    ],
+    "personas": [
+      {
+        "t": "Architecture firms",
+        "d": "Cloud drawing review, error checks, model review and version control to close design gaps."
+      },
+      {
+        "t": "Contractors & developers",
+        "d": "Transparent schedule, quality, safety, documents and handover for owners and site teams."
+      },
+      {
+        "t": "Factories & hospitals",
+        "d": "Equipment, video, energy and enterprise systems connected from build to operations, across sites."
+      },
+      {
+        "t": "Facility & property managers",
+        "d": "Warranty, repairs, common areas and resident services built on as-built data — no new system needed."
+      }
+    ],
+    "cmp": [
+      {
+        "t": "BIM / CDE",
+        "s": "Design & engineering data",
+        "l": "Little operational data or control",
+        "v": "Engineering data extended into operations"
+      },
+      {
+        "t": "BMS / EMS",
+        "s": "Equipment & energy",
+        "l": "No 3D or project lifecycle",
+        "v": "BIM + assets + energy"
+      },
+      {
+        "t": "VMS / AI Vision",
+        "s": "Video events",
+        "l": "No equipment, energy or project context",
+        "v": "Video events placed in space and work orders"
+      },
+      {
+        "t": "MES / ERP",
+        "s": "Production & business processes",
+        "l": "Don’t understand building or OT space",
+        "v": "IT × OT × spatial"
+      },
+      {
+        "t": "DCIM",
+        "s": "Data center equipment",
+        "l": "Narrow, vertical scope",
+        "v": "Across data centers, buildings and energy"
+      },
+      {
+        "t": "Standalone AI",
+        "s": "Models & analytics",
+        "l": "No physical-world context",
+        "v": "AI + digital twin + control"
+      }
+    ]
+  }
+}

@@ -1,0 +1,291 @@
+{
+  "zh-Hant": {
+    "pillars": [
+      {
+        "no": "01",
+        "t": "遠距",
+        "d": "不必親臨現場，總部即可掌握每一個工地、廠區與建築的即時狀態。"
+      },
+      {
+        "no": "02",
+        "t": "多點",
+        "d": "跨城市、跨國家的多個據點，用同一套標準、同一個平台管理。"
+      },
+      {
+        "no": "03",
+        "t": "數據智控",
+        "d": "設備、能源、影像與工程資料即時串接，從監看走向預測與控制。"
+      },
+      {
+        "no": "04",
+        "t": "360° 上帝視角",
+        "d": "天（影像）、地（感測）、腦（AI）、中樞（VBIM），一眼看懂整棟建築。"
+      },
+      {
+        "no": "05",
+        "t": "超級戰情室",
+        "d": "從全球、據點、建築、樓層、空間到設備，一個畫面掌握全局。"
+      },
+      {
+        "no": "06",
+        "t": "AI 可信",
+        "d": "文件、圖面與施工影像上鏈留痕；AI 代理依授權行事，可追溯、可撤銷。"
+      }
+    ],
+    "down": [
+      "降成本",
+      "降耗損",
+      "降能耗",
+      "降錯誤",
+      "降風險"
+    ],
+    "up": [
+      "升效率",
+      "升品質",
+      "升透明",
+      "升安全",
+      "升信任"
+    ],
+    "stages": [
+      {
+        "en": "DESIGN",
+        "zh": "設計",
+        "d": "智慧清圖、錯誤排查、模型協作、版本與設計審查"
+      },
+      {
+        "en": "BUILD",
+        "zh": "施工",
+        "d": "進度、品質、工安、材料、影像與施工模型同步"
+      },
+      {
+        "en": "INSPECT",
+        "zh": "驗收",
+        "d": "缺失、複驗、設備點交、竣工圖與線上簽核"
+      },
+      {
+        "en": "OPERATE",
+        "zh": "營運",
+        "d": "設備、維保、VMS、AIoT、能源與 ESG 即時管理"
+      },
+      {
+        "en": "ASSET",
+        "zh": "資產管理",
+        "d": "保固、公設、修繕、管委會與完整建築履歷"
+      }
+    ],
+    "edge": [
+      {
+        "t": "一站式整合",
+        "d": "BIM + PMIS + CCTV/VMS + AI + AIoT + 數位孿生，不再讓資料散落在不同工具。"
+      },
+      {
+        "t": "合法合規與追溯",
+        "d": "線上簽署、完整稽核軌跡與上鏈留痕，降低工程爭議與資訊失真。"
+      },
+      {
+        "t": "提升營運效率",
+        "d": "流程自動化、異常預警、視覺化管理，提升跨部門與跨據點效率。"
+      },
+      {
+        "t": "數位資產永續",
+        "d": "完工後模型持續服務設備、維修、改建與資產管理，BIM 不再是一次性成果。"
+      }
+    ],
+    "old": [
+      "模型多停留在設計或施工階段",
+      "文件、影像、設備分散管理",
+      "完工交付後資訊斷裂",
+      "不同據點難以統一比較",
+      "管理多仰賴人工作業"
+    ],
+    "neu": [
+      "設計到營運全生命週期",
+      "BIM、PMIS、VMS、AIoT 同平台整合",
+      "驗收資料直接延續到物業與營運",
+      "支援遠距、多點、跨國管理",
+      "建立上帝視角數據智控"
+    ],
+    "family": [
+      {
+        "n": "Aiii VBIM",
+        "t": "第六代智慧建築平台",
+        "d": "BIM、PMIS、數位孿生、影像、AIoT、能源與 AI 的核心平台。"
+      },
+      {
+        "n": "Aiii RMS",
+        "t": "全方位智慧醫療管理系統",
+        "d": "病床、排程、空間、醫療設備與院區營運管理。"
+      },
+      {
+        "n": "Aiii MMS",
+        "t": "智慧商場管理系統",
+        "d": "POS、人流、停車、租戶、影像與設備資料整合。"
+      }
+    ],
+    "media": [
+      {
+        "src": "Yahoo News",
+        "date": "2026.06",
+        "t": "數位孿生重塑建築未來　Aiii VBIM 引領新時代",
+        "img": "../assets/world.jpg",
+        "href": "https://tw.news.yahoo.com/%E6%95%B8%E4%BD%8D%E5%AD%BF%E7%94%9F%E9%87%8D%E5%A1%91%E5%BB%BA%E7%AF%89%E6%9C%AA%E4%BE%86-aiii-vbim%E5%BC%95%E9%A0%98%E6%96%B0%E6%99%82%E4%BB%A3-031454152.html"
+      },
+      {
+        "src": "中華民國總統府",
+        "date": "2026",
+        "t": "星宴國際 Aiii VBIM 隨亞太再生醫學會拜會總統府",
+        "img": "../assets/news-president.jpg",
+        "href": "https://www.president.gov.tw/NEWS/40132"
+      },
+      {
+        "src": "頂尖傳媒",
+        "date": "2025.12",
+        "t": "Aiii VBIM 與 Aiii RMS 亮相 2025 台灣醫療科技展",
+        "img": "../assets/news-medtech.jpg",
+        "href": "https://www.premiermedia.com.tw/2025120506-2/"
+      }
+    ]
+  },
+  "en": {
+    "pillars": [
+      {
+        "no": "01",
+        "t": "Remote",
+        "d": "No need to be on site — HQ sees the live status of every site, plant and building."
+      },
+      {
+        "no": "02",
+        "t": "Multi-site",
+        "d": "Sites across cities and countries, managed with one standard on one platform."
+      },
+      {
+        "no": "03",
+        "t": "Data Intelligence",
+        "d": "Equipment, energy, video and engineering data connected live — from monitoring to prediction and control."
+      },
+      {
+        "no": "04",
+        "t": "360° God’s-Eye View",
+        "d": "Eyes (video), nerves (sensors), brain (AI) and hub (VBIM) — understand the whole building at a glance."
+      },
+      {
+        "no": "05",
+        "t": "Super Command Center",
+        "d": "From global, site, building, floor and space down to each asset — everything on one screen."
+      },
+      {
+        "no": "06",
+        "t": "Trustworthy AI",
+        "d": "Documents, drawings and site video recorded on-chain; AI agents act only within granted authority — traceable and revocable."
+      }
+    ],
+    "down": [
+      "Reduce cost",
+      "Reduce waste",
+      "Reduce energy",
+      "Reduce errors",
+      "Reduce risk"
+    ],
+    "up": [
+      "Increase efficiency",
+      "Increase quality",
+      "Increase transparency",
+      "Increase safety",
+      "Increase trust"
+    ],
+    "stages": [
+      {
+        "t": "Design",
+        "d": "Drawing cleanup, error checks, model collaboration, version and design review"
+      },
+      {
+        "t": "Build",
+        "d": "Schedule, quality, safety, materials, video and the construction model in sync"
+      },
+      {
+        "t": "Inspect",
+        "d": "Defects, re-inspection, asset handover, as-builts and e-sign-off"
+      },
+      {
+        "t": "Operate",
+        "d": "Equipment, maintenance, VMS, AIoT, energy and ESG in real time"
+      },
+      {
+        "t": "Asset",
+        "d": "Warranty, common areas, repairs, owners’ associations and building history"
+      }
+    ],
+    "edge": [
+      {
+        "t": "One-stop integration",
+        "d": "BIM + PMIS + CCTV/VMS + AI + AIoT + digital twin — no more data scattered across tools."
+      },
+      {
+        "t": "Compliance & traceability",
+        "d": "E-signatures, full audit trails and on-chain records reduce disputes and distortion."
+      },
+      {
+        "t": "Operational efficiency",
+        "d": "Automated workflows, early warnings and visual management across teams and sites."
+      },
+      {
+        "t": "A lasting digital asset",
+        "d": "The model keeps serving equipment, maintenance, renovation and asset management after handover."
+      }
+    ],
+    "old": [
+      "Models stop at design or construction",
+      "Documents, video and equipment managed separately",
+      "Information breaks at handover",
+      "Sites hard to compare consistently",
+      "Management relies on manual work"
+    ],
+    "neu": [
+      "Full lifecycle from design to operations",
+      "BIM, PMIS, VMS and AIoT on one platform",
+      "Commissioning data flows into facility management",
+      "Remote, multi-site, cross-border management",
+      "A god’s-eye view with data-driven control"
+    ],
+    "family": [
+      {
+        "n": "Aiii VBIM",
+        "t": "6th-generation smart building platform",
+        "d": "The core platform for BIM, PMIS, digital twin, video, AIoT, energy and AI."
+      },
+      {
+        "n": "Aiii RMS",
+        "t": "Total smart healthcare management",
+        "d": "Beds, scheduling, space, medical equipment and campus operations."
+      },
+      {
+        "n": "Aiii MMS",
+        "t": "Smart retail management",
+        "d": "POS, footfall, parking, tenants, video and equipment data in one view."
+      }
+    ],
+    "media": [
+      {
+        "src": "Yahoo News",
+        "date": "2026.06",
+        "t": "Digital twins reshape the future of buildings — Aiii VBIM leads a new era",
+        "img": "../assets/world.jpg",
+        "href": "https://tw.news.yahoo.com/%E6%95%B8%E4%BD%8D%E5%AD%BF%E7%94%9F%E9%87%8D%E5%A1%91%E5%BB%BA%E7%AF%89%E6%9C%AA%E4%BE%86-aiii-vbim%E5%BC%95%E9%A0%98%E6%96%B0%E6%99%82%E4%BB%A3-031454152.html"
+      },
+      {
+        "src": "Office of the President, R.O.C.",
+        "date": "2026",
+        "t": "Aiii VBIM joins the Asia-Pacific regenerative medicine delegation at the Presidential Office",
+        "img": "../assets/news-president.jpg",
+        "href": "https://www.president.gov.tw/NEWS/40132"
+      },
+      {
+        "src": "Premier Media",
+        "date": "2025.12",
+        "t": "Aiii VBIM and Aiii RMS at Healthcare+ Expo Taiwan 2025",
+        "img": "../assets/news-medtech.jpg",
+        "href": "https://www.premiermedia.com.tw/2025120506-2/"
+      }
+    ]
+  }
+}

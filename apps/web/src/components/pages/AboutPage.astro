@@ -1,0 +1,130 @@
+---
+// /about（design/pages/About.dc.html）
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import PageHero from '../blocks/PageHero.astro';
+import MediaFigure from '../blocks/MediaFigure.astro';
+import CtaBand from '../blocks/CtaBand.astro';
+import InfoCard from '../cards/InfoCard.astro';
+import heroBuilding from '../../assets/illustrations/hero-building.jpg';
+import design from '../../content/design/About.json';
+import { ABOUT_COPY } from '../../content/pages/about';
+import { localizePath, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = ABOUT_COPY[locale];
+const data = design[locale] as {
+  biz: { t: string; d: string }[];
+  goals: { t: string; d: string }[];
+  market: string[];
+  miles: { d: string; t: string; x: string }[];
+};
+const L = (path: string) => localizePath(path, locale);
+---
+
+<BaseLayout title={copy.metaTitle} description={copy.lead} locale={locale} active="about">
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} lead={copy.lead}>
+    <MediaFigure slot="media" src={heroBuilding} alt={copy.heroAlt} blend eager />
+  </PageHero>
+
+  <!-- 我們看見的問題 -->
+  <Section labelledby="ab-problem">
+    <div class="flex flex-wrap gap-10">
+      <div class="flex-[1_1_300px]">
+        <SectionHeader id="ab-problem" title={copy.problem.title} />
+      </div>
+      <div class="flex flex-[2_1_520px] flex-col gap-4">
+        {copy.problem.paragraphs.map((p, i) => (
+          <p
+            class:list={[
+              'm-0 text-[1.1rem]',
+              i === copy.problem.paragraphs.length - 1 ? 'font-bold text-navy' : 'text-text-2',
+            ]}
+          >
+            {p}
+          </p>
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <!-- 商業模式 -->
+  <Section tone="soft" labelledby="ab-biz">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="ab-biz" eyebrow={copy.biz.eyebrow} title={copy.biz.title} />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3 p-0">
+        {data.biz.map((b) => (
+          <li class="flex">
+            <InfoCard title={b.t} text={b.d} class="w-full" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- 計畫目標 -->
+  <Section labelledby="ab-goals">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="ab-goals" eyebrow={copy.goals.eyebrow} title={copy.goals.title} />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3 p-0">
+        {data.goals.map((g) => (
+          <li class="flex">
+            <InfoCard tone="soft" title={g.t} text={g.d} class="w-full" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- 市場機會 -->
+  <Section tone="navy" labelledby="ab-market">
+    <div class="flex flex-col gap-7">
+      <SectionHeader
+        id="ab-market"
+        tone="dark"
+        eyebrow={copy.market.eyebrow}
+        title={copy.market.title}
+      />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3 p-0">
+        {data.market.map((m) => (
+          <li class="rounded-[16px] border border-white/16 bg-white/6 p-5 font-bold">{m}</li>
+        ))}
+      </ul>
+      <p class="m-0 text-[#cfdcf0]">{copy.market.note}</p>
+    </div>
+  </Section>
+
+  <!-- 里程碑 -->
+  <Section labelledby="ab-miles">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="ab-miles" title={copy.miles.title} />
+      <ol class="m-0 flex list-none flex-col gap-0 border-l-2 border-line-2 p-0 pl-6">
+        {data.miles.map((m) => (
+          <li class="relative flex flex-col gap-1 pb-8 last:pb-0">
+            <span
+              aria-hidden="true"
+              class="absolute top-1.5 -left-[31px] h-3 w-3 rounded-full bg-blue"
+            />
+            <span class="font-display text-sm font-bold text-blue">{m.d}</span>
+            <span class="text-xl font-black">{m.t}</span>
+            <span class="text-text-2">{m.x}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <Section spacing="none" class="pb-(--section-y)">
+    <CtaBand
+      variant="accent"
+      title={copy.cta.title}
+      primary={{ label: copy.cta.contact, href: L('/contact') }}
+      secondary={{ label: copy.cta.partner, href: L('/partners') }}
+    />
+  </Section>
+</BaseLayout>
