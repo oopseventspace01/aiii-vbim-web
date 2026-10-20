@@ -272,7 +272,7 @@ v1.1 改為 Aiii VBIM 2.0 簡報的白底藍色系：
 ### 5.2 `news`（最新消息與活動）
 | 欄位 | 型別 | 必填 | 說明 |
 |---|---|---|---|
-| title | string | ✅ | ≤ 60 字 |
+| title | string | ✅ | ≤ 70 字（2026-10-20 業主同意由 60 放寬，配合設計稿定稿標題） |
 | slug | slug | ✅ | 由 title 產生，可手改 |
 | category | string（news／event／hackathon／media） | ✅ | media = 媒體報導 |
 | source | string | category=media 時必填 | 媒體名稱，如「Yahoo News」「經濟日報」 |

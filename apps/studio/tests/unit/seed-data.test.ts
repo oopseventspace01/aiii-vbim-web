@@ -98,8 +98,9 @@ describe('全站設定種子資料', () => {
     expect([...s.metaDescription].length).toBeLessThanOrEqual(160);
   });
 
-  it('公司 Email 未提供時用 [TBD] 佔位，不可編造', () => {
-    expect(SITE_SETTINGS.zh.email).toMatch(/^\[TBD/);
+  it('公司 Email 為有效格式，中英文版一致', () => {
+    expect(SITE_SETTINGS.zh.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+    expect(SITE_SETTINGS.en.email).toBe(SITE_SETTINGS.zh.email);
   });
 
   it('App 下載連結與 SPEC 第 15 節一致', () => {

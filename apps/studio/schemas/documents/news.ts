@@ -38,9 +38,9 @@ export const news = defineType({
     defineField({
       name: 'title',
       title: '標題',
-      description: '60 字以內。',
+      description: '70 字以內。',
       type: 'string',
-      validation: limitFor(60),
+      validation: limitFor(70),
     }),
     slugField('title'),
     defineField({
