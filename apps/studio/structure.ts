@@ -19,6 +19,7 @@ function byLanguage(S: StructureBuilder, type: string, title: string) {
               .schemaType(type)
               .child(
                 S.documentList()
+                  .id(`${type}-${lang.id}-list`)
                   .title(`${title}（${lang.title}）`)
                   .schemaType(type)
                   .apiVersion('2025-02-19')
@@ -32,7 +33,7 @@ function byLanguage(S: StructureBuilder, type: string, title: string) {
             .title('全部語言')
             .id(`${type}-all`)
             .schemaType(type)
-            .child(S.documentTypeList(type).title(`${title}（全部語言）`)),
+            .child(S.documentTypeList(type).id(`${type}-all-list`).title(`${title}（全部語言）`)),
         ]),
     );
 }
@@ -41,6 +42,7 @@ function byLanguage(S: StructureBuilder, type: string, title: string) {
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('內容')
+    .id('root')
     .items([
       S.listItem()
         .title('全站設定')
