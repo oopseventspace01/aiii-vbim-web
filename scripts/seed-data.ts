@@ -281,6 +281,8 @@ export interface SiteSettingsSeed {
 export const APP_LINKS = {
   appStoreUrl: 'https://apps.apple.com/tw/app/aiii-vbim/id6781813710',
   googlePlayUrl: 'https://play.google.com/store/apps/details?id=ai.aiii.vbim',
+  // LINE 官方帳號（2026-10-20 業主提供）
+  lineOfficialUrl: 'https://lin.ee/pyy9XNM',
 };
 
 export const HERO_POSTER_FILE = 'hero-building.jpg';
