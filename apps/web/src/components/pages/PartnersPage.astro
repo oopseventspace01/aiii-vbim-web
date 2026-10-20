@@ -10,7 +10,7 @@ import PageHero from '../blocks/PageHero.astro';
 import MediaFigure from '../blocks/MediaFigure.astro';
 import CompareTable from '../blocks/CompareTable.astro';
 import LogoWall from '../blocks/LogoWall.astro';
-import FormPending from '../blocks/FormPending.astro';
+import LeadForm from '../forms/LeadForm.astro';
 import ecosystem from '../../assets/illustrations/ecosystem.jpg';
 import posterMedical from '../../assets/reference/partner-medical-equipment.jpg';
 import posterTool from '../../assets/reference/partner-tool-equipment.jpg';
@@ -147,7 +147,7 @@ const posters =
     </div>
   </Section>
 
-  <!-- 申請表（P5 接上） -->
+  <!-- 申請表（LeadForm） -->
   <Section id="apply" labelledby="pt-apply">
     <div class="flex max-w-[820px] flex-col gap-6">
       <SectionHeader
@@ -156,7 +156,7 @@ const posters =
         title={copy.form.title}
         lead={copy.form.lead}
       />
-      <FormPending locale={locale} info={footer} />
+      <LeadForm variant="partner" locale={locale} fallbackEmail={footer.email} />
     </div>
   </Section>
 </BaseLayout>

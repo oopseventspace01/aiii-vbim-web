@@ -5,7 +5,7 @@ import Section from '../ui/Section.astro';
 import SectionHeader from '../ui/SectionHeader.astro';
 import Button from '../ui/Button.astro';
 import Pill from '../ui/Pill.astro';
-import FormPending from '../blocks/FormPending.astro';
+import LeadForm from '../forms/LeadForm.astro';
 import InfoCard from '../cards/InfoCard.astro';
 import design from '../../content/design/Academy.json';
 import { ACADEMY_COPY } from '../../content/pages/academy';
@@ -181,11 +181,11 @@ const fmt = (d?: string) => (d ? dateFmt.format(new Date(d)) : '');
     </div>
   </Section>
 
-  <!-- 登記首期招生（P5 接上表單） -->
+  <!-- 登記首期招生（LeadForm） -->
   <Section id="register" labelledby="ac-register">
     <div class="flex max-w-[820px] flex-col gap-6">
       <SectionHeader id="ac-register" title={copy.form.title} lead={copy.form.lead} />
-      <FormPending locale={locale} info={footer} />
+      <LeadForm variant="academy" locale={locale} fallbackEmail={footer.email} />
     </div>
   </Section>
 </BaseLayout>

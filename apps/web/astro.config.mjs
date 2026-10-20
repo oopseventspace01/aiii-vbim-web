@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig, envField, fontProviders } from 'astro/config';
 import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import '../../scripts/load-root-env.mjs';
@@ -13,6 +13,67 @@ export default defineConfig({
   // 開發工具列會蓋住畫面、影響截圖檢查，關閉
   devToolbar: { enabled: false },
   adapter: vercel(),
+  // 表單（P5）：執行時才讀取的環境變數，值放在 .env／Vercel，絕不寫進程式碼
+  env: {
+    schema: {
+      PUBLIC_TURNSTILE_SITE_KEY: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      TURNSTILE_SECRET_KEY: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
+      N8N_LEAD_WEBHOOK_URL: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
+      N8N_LEAD_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
+      CHECKLIST_FORM_BUILDING: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
+      CHECKLIST_FORM_MANUFACTURING: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
+      CHECKLIST_FORM_MEDICAL: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
+      CHECKLIST_FORM_RETAIL: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
+      CHECKLIST_PDF_BUILDING: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
+      CHECKLIST_PDF_MANUFACTURING: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
+      CHECKLIST_PDF_MEDICAL: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
+      CHECKLIST_PDF_RETAIL: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
+    },
+  },
   i18n: {
     locales: ['zh-Hant', 'en'],
     defaultLocale: 'zh-Hant',

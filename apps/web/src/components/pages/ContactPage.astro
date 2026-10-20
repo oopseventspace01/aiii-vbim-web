@@ -1,9 +1,9 @@
 ---
-// /contact（design/pages/Contact.dc.html）：左側說明與公司資訊（後台），右側表單（P5 接上）
+// /contact（design/pages/Contact.dc.html）：左側說明與公司資訊（後台），右側表單（LeadForm）
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../ui/Button.astro';
-import FormPending from '../blocks/FormPending.astro';
+import LeadForm from '../forms/LeadForm.astro';
 import { CONTACT_COPY } from '../../content/pages/contact';
 import type { Locale } from '../../lib/i18n';
 import { getFooterInfo } from '../../lib/site';
@@ -61,7 +61,7 @@ const tel = info.phone.replace(/[^+\d]/g, '');
 
       <div class="flex min-w-0 flex-[1_1_440px] flex-col gap-5">
         <h2 class="m-0 text-xl font-black">{copy.ui.formTitle}</h2>
-        <FormPending locale={locale} info={info} showLine={!info.lineOfficialUrl} />
+        <LeadForm variant="contact" locale={locale} fallbackEmail={info.email} />
         {info.lineOfficialUrl && (
           <div
             class="flex flex-wrap items-center gap-5 rounded-md border border-line bg-white p-6"

@@ -30,6 +30,8 @@ export default defineConfig({
     command: `npx astro dev --port ${PORT}`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
+    // 表單只模擬送出，不會真的轉送 n8n、寄信（見 src/pages/api/lead.ts）
+    env: { LEAD_DRY_RUN: '1' },
     timeout: 120_000,
   },
 });

@@ -1,0 +1,365 @@
+---
+// 預約／申請／登記表單（SPEC 6.1、6.4、P5 決定 2026-10-20）
+// 版面與文字依設計稿 Contact／Partners／Academy；題目設定在 src/forms/lead-form.config.ts
+import { PUBLIC_TURNSTILE_SITE_KEY } from 'astro:env/client';
+import {
+  FORM_UI,
+  JOB_ROLES,
+  LABELS,
+  MODULES,
+  PARTNER_TYPES,
+  ROLES,
+  SITE_TYPES,
+  VARIANT_ROLE,
+  VARIANT_TEXT,
+  type FormVariant,
+  type Option,
+} from '../../forms/lead-form.config';
+import { fieldRules } from '../../forms/lead-schema';
+import { localizePath, type Locale } from '../../lib/i18n';
+
+interface Props {
+  variant: FormVariant;
+  locale: Locale;
+  /** 送出失敗時提供的備用聯絡 Email（後台全站設定） */
+  fallbackEmail?: string;
+}
+
+const { variant, locale, fallbackEmail = '' } = Astro.props;
+const ui = FORM_UI[locale];
+const L = (key: keyof typeof LABELS) => LABELS[key][locale];
+const role = VARIANT_ROLE[variant];
+const { show, required } = fieldRules(variant, role);
+const text = VARIANT_TEXT[variant];
+const uid = `lead-${variant}`;
+const id = (name: string) => `${uid}-${name}`;
+
+// 隨身分切換的文字與必填狀態（給瀏覽器端的程式用）
+const roleData = Object.fromEntries(
+  ROLES.map((r) => {
+    const rules = fieldRules(variant, r.id);
+    const msg = variant === 'partner' ? L('partnerMessage') : r.message[locale];
+    return [r.id, { ...rules, messageLabel: msg }];
+  }),
+);
+const messageLabel =
+  variant === 'partner' ? L('partnerMessage') : ROLES.find((r) => r.id === role)!.message[locale];
+
+const input =
+  'min-h-11 w-full rounded-xl border border-[#c9d8f0] bg-white px-3.5 py-3 text-[15px] font-normal text-[#0c1a33] aria-[invalid=true]:border-[#c62828]';
+const labelCls = 'flex flex-col gap-1.5 text-sm font-bold text-[#34425e]';
+const opts = (list: Option[]) => list.map((o) => ({ value: o.id, label: o.label[locale] }));
+const consentParts = L('consent').split(locale === 'zh-Hant' ? '隱私權政策' : 'privacy policy');
+const turnstileLang = locale === 'zh-Hant' ? 'zh-tw' : 'en';
+---
+
+<form
+  class="flex min-w-0 flex-col gap-4 rounded-[28px] border border-[#dce6f2] bg-white p-6 md:p-8"
+  data-lead-form
+  data-variant={variant}
+  data-locale={locale}
+  data-role={role}
+  data-roles={JSON.stringify(roleData)}
+  data-ui={JSON.stringify(ui)}
+  data-email={fallbackEmail}
+  novalidate
+>
+  <div data-success hidden tabindex="-1" class="flex flex-col gap-4">
+    <div
+      role="status"
+      class="rounded-[14px] border border-[#2f9e6e] bg-[#e6f6ef] px-4 py-3.5 font-bold text-[#145c3e]"
+    >
+      {text.success[locale]}
+    </div>
+    <p class="m-0 flex flex-col gap-1">
+      <span class="text-sm font-bold text-[#34425e]">{ui.leadCode}</span>
+      <span class="font-display text-2xl font-bold tracking-wider" data-lead-code></span>
+      <span class="text-sm text-muted">{ui.leadCodeHint}</span>
+    </p>
+    <div data-checklist hidden class="flex flex-col gap-3 rounded-[18px] bg-bg-2 p-5">
+      <h3 class="m-0 text-lg font-black">{ui.checklistTitle}</h3>
+      <p class="m-0 text-sm text-text-2">{ui.checklistLead}</p>
+      <a
+        data-checklist-link
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex min-h-12 items-center self-start rounded-full bg-blue px-8 py-3 font-bold text-white no-underline hover:bg-blue-dark hover:text-white"
+      >
+        {ui.checklistButton} →<span class="sr-only">{ui.newTab}</span>
+      </a>
+    </div>
+  </div>
+
+  <div data-form-body class="flex flex-col gap-4">
+    {variant === 'contact' && (
+      <fieldset class="m-0 flex flex-wrap gap-2 border-0 p-0">
+        <legend class="mb-2 text-sm font-bold text-[#34425e]">{L('role')} *</legend>
+        {ROLES.map((r) => (
+          <button
+            type="button"
+            data-role-button={r.id}
+            aria-pressed={r.id === role ? 'true' : 'false'}
+            class="min-h-11 cursor-pointer rounded-xl border border-[#c9d8f0] bg-white px-4 py-2.5 text-[15px] font-bold text-[#0c1a33] aria-pressed:border-blue aria-pressed:bg-blue aria-pressed:font-black aria-pressed:text-white"
+          >
+            {r.label[locale]}
+          </button>
+        ))}
+      </fieldset>
+    )}
+
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3.5">
+      {variant !== 'academy' && (
+        <div data-field="company" hidden={!show.company}>
+          <label class={labelCls}>
+            <span>
+              {L('company')}
+              {required.company && ' *'}
+            </span>
+            <input
+              id={id('company')}
+              name="company"
+              type="text"
+              autocomplete="organization"
+              maxlength="200"
+              class={input}
+            />
+          </label>
+          <p data-error-for="company" class="m-0 mt-1 text-sm text-[#c62828]" hidden></p>
+        </div>
+      )}
+      {variant === 'partner' && (
+        <div data-field="partnerType">
+          <label class={labelCls}>
+            <span>{L('partnerType')} *</span>
+            <select id={id('partnerType')} name="partnerType" class={input}>
+              <option value="">{L('selectPlaceholder')}</option>
+              {opts(PARTNER_TYPES).map((o) => (
+                <option value={o.value}>{o.label}</option>
+              ))}
+            </select>
+          </label>
+          <p data-error-for="partnerType" class="m-0 mt-1 text-sm text-[#c62828]" hidden></p>
+        </div>
+      )}
+      <div data-field="name">
+        <label class={labelCls}>
+          <span>{variant === 'partner' ? L('contactName') : L('name')} *</span>
+          <input
+            id={id('name')}
+            name="name"
+            type="text"
+            autocomplete="name"
+            maxlength="100"
+            class={input}
+          />
+        </label>
+        <p data-error-for="name" class="m-0 mt-1 text-sm text-[#c62828]" hidden></p>
+      </div>
+      <div data-field="email">
+        <label class={labelCls}>
+          <span>{L('email')} *</span>
+          <input
+            id={id('email')}
+            name="email"
+            type="email"
+            autocomplete="email"
+            maxlength="200"
+            class={input}
+          />
+        </label>
+        <p data-error-for="email" class="m-0 mt-1 text-sm text-[#c62828]" hidden></p>
+      </div>
+      {variant !== 'academy' && (
+        <div data-field="phone">
+          <label class={labelCls}>
+            <span>{L('phone')}</span>
+            <input
+              id={id('phone')}
+              name="phone"
+              type="tel"
+              autocomplete="tel"
+              maxlength="40"
+              class={input}
+            />
+          </label>
+        </div>
+      )}
+      {variant === 'partner' && (
+        <div data-field="website">
+          <label class={labelCls}>
+            <span>{L('website')}</span>
+            <input
+              id={id('website')}
+              name="website"
+              type="url"
+              autocomplete="url"
+              maxlength="200"
+              placeholder="https://"
+              class={input}
+            />
+          </label>
+          <p data-error-for="website" class="m-0 mt-1 text-sm text-[#c62828]" hidden></p>
+        </div>
+      )}
+      {variant === 'contact' && (
+        <>
+          <div data-field="siteType" hidden={!show.siteType}>
+            <label class={labelCls}>
+              <span>{L('siteType')}</span>
+              <select id={id('siteType')} name="siteType" class={input}>
+                {opts(SITE_TYPES).map((o) => (
+                  <option value={o.value}>{o.label}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <div data-field="partnerType" hidden={!show.partnerType}>
+            <label class={labelCls}>
+              <span>{L('partnerType')}</span>
+              <select id={id('partnerType')} name="partnerType" class={input}>
+                {opts(PARTNER_TYPES).map((o) => (
+                  <option value={o.value}>{o.label}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <div data-field="module" hidden={!show.module}>
+            <label class={labelCls}>
+              <span>{L('module')}</span>
+              <select id={id('module')} name="module" class={input}>
+                {opts(MODULES).map((o) => (
+                  <option value={o.value}>{o.label}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+        </>
+      )}
+      {variant === 'academy' && (
+        <>
+          <div data-field="organization">
+            <label class={labelCls}>
+              <span>{L('organization')}</span>
+              <input
+                id={id('organization')}
+                name="organization"
+                type="text"
+                autocomplete="organization"
+                maxlength="200"
+                class={input}
+              />
+            </label>
+          </div>
+          <div data-field="jobRole">
+            <label class={labelCls}>
+              <span>{L('jobRole')}</span>
+              <select id={id('jobRole')} name="jobRole" class={input}>
+                {opts(JOB_ROLES).map((o) => (
+                  <option value={o.value}>{o.label}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+        </>
+      )}
+    </div>
+
+    {show.message && (
+      <div data-field="message">
+        <label class={labelCls}>
+          <span>
+            <span data-message-label>{messageLabel}</span>
+            <span data-message-suffix>{required.message ? ' *' : ui.optional}</span>
+          </span>
+          <textarea
+            id={id('message')}
+            name="message"
+            rows={variant === 'partner' ? 4 : 5}
+            maxlength="2000"
+            class:list={[input, 'resize-y']}
+          ></textarea>
+        </label>
+        <p data-error-for="message" class="m-0 mt-1 text-sm text-[#c62828]" hidden></p>
+      </div>
+    )}
+
+    {variant === 'academy' && (
+      <fieldset class="m-0 flex flex-col gap-2 border-0 p-0">
+        <legend class="mb-2 text-sm font-bold text-[#34425e]">{L('modules')}</legend>
+        <div class="flex flex-wrap gap-x-5 gap-y-2">
+          {opts(MODULES).map((o) => (
+            <label class="flex min-h-11 items-center gap-2 text-[15px]">
+              <input type="checkbox" name="modules" value={o.value} class="h-5 w-5" />
+              {o.label}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    )}
+
+    <!-- 隱藏欄位：真人看不到也不會填，機器人常會自動填入 -->
+    <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+      <label>
+        Website URL
+        <input name="honeypot" type="text" tabindex="-1" autocomplete="off" />
+      </label>
+    </div>
+
+    <div data-field="consent">
+      <label class="flex items-start gap-2.5 text-sm text-[#34425e]">
+        <input id={id('consent')} name="consent" type="checkbox" class="mt-0.5 h-5 w-5 shrink-0" />
+        <span>
+          {consentParts[0]}
+          <a
+            href={localizePath('/privacy', locale)}
+            target="_blank"
+            rel="noopener"
+            class="font-bold underline underline-offset-2"
+          >
+            {locale === 'zh-Hant' ? '隱私權政策' : 'privacy policy'}
+            <span class="sr-only">{ui.newTab}</span>
+          </a>
+          {consentParts[1]}
+        </span>
+      </label>
+      <p data-error-for="consent" class="m-0 mt-1 text-sm text-[#c62828]" hidden></p>
+    </div>
+
+    {PUBLIC_TURNSTILE_SITE_KEY && (
+      <div
+        class="cf-turnstile"
+        data-sitekey={PUBLIC_TURNSTILE_SITE_KEY}
+        data-language={turnstileLang}
+      ></div>
+    )}
+
+    <p
+      data-form-error
+      role="alert"
+      class="m-0 rounded-[14px] border border-[#c62828] bg-[#fdecea] px-4 py-3 text-sm font-bold text-[#8e1c1c]"
+      hidden
+    ></p>
+
+    <button
+      type="submit"
+      class="min-h-12 cursor-pointer self-start rounded-full border-0 bg-blue px-8 py-3 text-base font-bold text-white hover:bg-blue-dark disabled:cursor-wait disabled:opacity-70"
+    >
+      {text.submit[locale]}
+    </button>
+  </div>
+</form>
+
+{PUBLIC_TURNSTILE_SITE_KEY && (
+  <script
+    is:inline
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer
+  ></script>
+)}
+
+<script>
+  import { initLeadForms } from '../../forms/lead-client';
+  initLeadForms();
+</script>

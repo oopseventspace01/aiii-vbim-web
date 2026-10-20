@@ -133,10 +133,11 @@ test.describe('其他頁面', () => {
     await expect(page.locator('[data-line-oa] a')).toHaveAttribute('href', /^https:\/\/lin\.ee\//);
   });
 
-  test('表單預留區：聯絡、夥伴、學院都有（P5 會換成正式表單）', async ({ page }) => {
-    for (const path of ['/contact', '/partners', '/academy']) {
+  test('表單：聯絡、夥伴、學院都已換成正式表單（沒有預留區）', async ({ page }) => {
+    for (const path of ['/contact', '/partners', '/academy', '/en/contact']) {
       await page.goto(path);
-      await expect(page.locator('[data-form-pending]')).toBeVisible();
+      await expect(page.locator('form[data-lead-form]')).toBeVisible();
+      await expect(page.locator('[data-form-pending]')).toHaveCount(0);
     }
   });
 
