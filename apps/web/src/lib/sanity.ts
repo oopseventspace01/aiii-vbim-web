@@ -18,7 +18,9 @@ export function sanityClient(): SanityClient {
     projectId,
     dataset,
     apiVersion: API_VERSION,
-    useCdn: true,
+    // 不走 CDN：後台一發布就觸發重建時，CDN 可能還是舊內容（P3 實測發現）。
+    // 只有建置時才查詢，用量遠低於免費方案每月 25 萬次非 CDN 額度。
+    useCdn: false,
     perspective: 'published',
   });
   return cached;
