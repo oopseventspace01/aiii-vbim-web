@@ -44,7 +44,7 @@ export const VBIM_COPY: Record<
     values: { eyebrow: 'SIX CORE VALUES', title: '六大核心價值' },
     stages: {
       eyebrow: 'FROM DESIGN TO OPERATIONS',
-      title: '不是再增加一套系統，而是讓所有資料真正接得起來',
+      title: '從設計到營運，每一筆資料都接得下去',
       lead: '原有建築流程把設計、圖說、施工、影像、設備與營運拆成不同系統。Aiii VBIM 把這些資訊重新整合，讓每一個階段都能被追蹤、被理解、被延續，最後形成完整的建築數位資產。',
     },
     edge: {
@@ -90,7 +90,7 @@ export const VBIM_COPY: Record<
     values: { eyebrow: 'SIX CORE VALUES', title: 'Six core values' },
     stages: {
       eyebrow: 'FROM DESIGN TO OPERATIONS',
-      title: 'Not another system — making all your data truly connect',
+      title: 'From design to operations, every piece of data carries forward',
       lead: 'Traditional building workflows split design, drawings, construction, video, equipment and operations into separate systems. Aiii VBIM reintegrates them so every stage can be tracked, understood and carried forward — building a complete digital asset.',
     },
     edge: {

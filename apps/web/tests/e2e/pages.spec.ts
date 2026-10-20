@@ -160,3 +160,33 @@ test('截圖：第一批頁面（供人工檢查）', async ({ page }, testInfo)
     });
   }
 });
+
+test.describe('文案精簡決定（2026-10-20）', () => {
+  test('五大領域分頁：延伸閱讀連到站內頁面，不再出現基準值與 Land & Expand 說明', async ({
+    page,
+  }) => {
+    await page.goto('/solutions');
+    const panel = page.locator('[data-sector-panel="hospital"]');
+    const links = panel.locator('[data-sector-related] a');
+    await expect(links).toHaveCount(3);
+    await expect(links.first()).toHaveAttribute('href', '/energy');
+    await expect(panel).not.toContainText('Land & Expand');
+    await expect(panel).not.toContainText('建立基準值');
+  });
+
+  test('VBIM 生命週期改為一行流程', async ({ page }) => {
+    await page.goto('/vbim');
+    await expect(page.locator('[data-vbim-flow] li:not([aria-hidden])')).toHaveText([
+      '設計',
+      '施工',
+      '驗收',
+      '營運',
+      '資產管理',
+    ]);
+  });
+
+  test('關於我們結尾不再和頁尾標語重複', async ({ page }) => {
+    await page.goto('/about');
+    await expect(page.locator('main h2').last()).toHaveText('想知道 Aiii VBIM 怎麼用在你的場域？');
+  });
+});

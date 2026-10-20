@@ -12,7 +12,8 @@ import MediaFigure from '../blocks/MediaFigure.astro';
 import hospitalDashboard from '../../assets/reference/hospital-dashboard.jpg';
 import factoryDashboard from '../../assets/reference/factory-dashboard.png';
 import design from '../../content/design/Solutions.json';
-import { SOLUTIONS_COPY } from '../../content/pages/solutions';
+import { SECTOR_RELATED, SOLUTIONS_COPY } from '../../content/pages/solutions';
+import { NAV_ITEMS } from '../../i18n/ui';
 import { localizePath, type Locale } from '../../lib/i18n';
 import { UI } from '../../i18n/ui';
 
@@ -107,12 +108,28 @@ const dashboards: Partial<
                     </li>
                   ))}
                 </ul>
-                <p class="m-0 text-sm text-muted">{copy.panel.kpisNote}</p>
               </div>
               <div class="flex flex-col gap-2.5 rounded-md bg-blue p-6 text-white">
                 <h3 class="m-0 text-[13px] font-bold text-[#eef3ff]">{copy.panel.first}</h3>
                 <p class="m-0 text-xl font-black">{s.first}</p>
-                <p class="m-0 text-sm text-[#eef3ff]">{copy.panel.firstNote}</p>
+                <div class="flex flex-col gap-1.5" data-sector-related>
+                  <h4 class="m-0 text-[13px] font-bold text-[#eef3ff]">{copy.ui.related}</h4>
+                  <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+                    {(SECTOR_RELATED[s.id] ?? []).map((key) => {
+                      const item = NAV_ITEMS.find((n) => n.key === key);
+                      return item ? (
+                        <li>
+                          <a
+                            href={L(item.path)}
+                            class="inline-flex min-h-10 items-center rounded-pill border border-white/40 px-3.5 text-sm font-bold text-white no-underline hover:border-white hover:text-white"
+                          >
+                            {item.label[locale]} →
+                          </a>
+                        </li>
+                      ) : null;
+                    })}
+                  </ul>
+                </div>
                 <Button href={L('/contact')} variant="white" class="mt-auto self-start">
                   {copy.panel.demo}
                 </Button>

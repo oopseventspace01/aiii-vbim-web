@@ -27,8 +27,8 @@ export const EDGE_COPY: Record<
     heroAlt: '地端 AI 智慧園區示意：Smart Building、Smart Campus、Sustainable Future',
     design: {
       eyebrow: 'AI-READY BUILDING · DESIGN-IN',
-      title: '不是完工後加裝 AI，\n而是在規劃初期就設計進建築',
-      text: 'Aiii VBIM 把 AI 帶進建築：在設計階段就把 AI 運算、記憶體、儲存、網路與散熱一起規劃進去，形成可 Design-In 的 AI-Ready Building Solution。',
+      title: 'AI-Ready Building：\n在設計階段就把地端 AI 規劃進建築',
+      text: '地端 AI 讓企業資料不必離開現場，符合資安與法規要求；推論在現場完成，反應即時、斷網也能運作；影像不必整批傳上雲端，大幅節省頻寬。Aiii VBIM 在設計階段就把 AI 運算、記憶體、儲存、網路與散熱一起規劃進去，形成可 Design-In 的 AI-Ready Building Solution。',
       itemsLabel: 'Design-In 項目',
     },
     caps: { title: '地端 AI 能做什麼', columns: ['能力', '用途', '價值'] },
@@ -49,8 +49,8 @@ export const EDGE_COPY: Record<
     heroAlt: 'Edge AI for a smart campus',
     design: {
       eyebrow: 'AI-READY BUILDING · DESIGN-IN',
-      title: 'Don’t bolt AI on after handover —\ndesign it in from the start',
-      text: 'Aiii VBIM brings AI into the building — planning AI compute, memory, storage, networking and cooling from the design stage, for an AI-Ready Building solution that can be designed in.',
+      title: 'AI-Ready Building:\nEdge AI planned in from the design stage',
+      text: 'With Edge AI, enterprise data never has to leave your site, keeping you compliant with security and regulatory requirements. Inference runs on-site, so responses are instant and keep working offline, and video doesn’t have to be streamed to the cloud, saving significant bandwidth. Aiii VBIM plans AI compute, memory, storage, networking and cooling from the design stage, for an AI-Ready Building solution that can be designed in.',
       itemsLabel: 'Design-in items',
     },
     caps: { title: 'What Edge AI can do', columns: ['Capability', 'Use', 'Value'] },

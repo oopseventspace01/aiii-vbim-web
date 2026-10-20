@@ -20,7 +20,7 @@
 <div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">PLATFORM · PHYSICAL WORLD OS</div>
 <h1 style="margin: 0; font-size: clamp(2.3rem, 4.6vw, 3.8rem); line-height: 1.15; font-weight: 900">Aiii VBIM 平台 OS</h1>
 <p style="margin: 0; font-size: 1.3rem; font-weight: 700">把建築資料、設備與 AI 基礎建設，整合為可營運的建築作業系統。</p>
-<p style="margin: 0; color: #34425e; font-size: 1.05rem">企業數位轉型最難的不是沒有資料，而是資料分散在不同系統、不同承包商、不同場域與不同時間階段。Aiii VBIM 建立實體世界共同資料層，讓圖說、BIM、工程文件、設備台帳、影像、感測、能源、維修與 AI，都落在同一個空間與資產架構中。</p>
+<p style="margin: 0; color: #34425e; font-size: 1.05rem">Aiii VBIM OS 不只管理建築，而是建築、設備、能源與 AI 的共同作業系統：圖說、BIM、工程文件、設備台帳、影像、感測、能源、維修與 AI，都落在同一個空間與資產架構中，夥伴的設備與系統也能透過標準介面接進來。</p>
 </div>
 <div style="flex: 1 1 460px; min-width: 0"><img src="../assets/city.jpg" alt="以建築為核心的城市示意" style="width: 100%; height: auto; display: block; border-radius: 24px; mix-blend-mode: multiply"></div>
 </div>
@@ -92,7 +92,7 @@
 
 <section style="background: #f3f7fc; border-top: 1px solid #dce6f2; border-bottom: 1px solid #dce6f2">
 <div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 28px">
-<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">AIOT × DIGITAL TWIN</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">人、物、天、地、線：<br>工程與營運的全域數位座標</h2><p style="margin: 0; color: #34425e">Aiii VBIM 不只管理空間，更管理時間。當人、物、空間、設備、管線、工程清單與進度全部數位化，系統不只告訴你「現在發生什麼」，更能提前看見「接下來會發生什麼」。</p></div>
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 860px"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.16em; color: #2160e8; font-weight: 600">AIOT × DIGITAL TWIN</div><h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 900; line-height: 1.2">人、物、空間、地下、管線：<br>工程與營運的全域數位座標</h2><p style="margin: 0; color: #34425e">Aiii VBIM 不只管理空間，更管理時間。當人、物、空間、設備、管線、工程清單與進度全部數位化，系統不只告訴你「現在發生什麼」，更能提前看見「接下來會發生什麼」。</p></div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px">
 <sc-for list="{{dims}}" as="d" hint-placeholder-count="5">
 <div style="background: #ffffff; border: 1px solid #dce6f2; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 36px; font-weight: 900; color: #2160e8; line-height: 1">{{d.k}}</span><span style="font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: #5a6a85; font-weight: 600">{{d.en}}</span><span style="font-size: 14px; color: #34425e">{{d.d}}</span></div>
@@ -171,9 +171,9 @@ class Component extends DCLogic {
       dims: [
         { k: '人', en: 'PEOPLE', d: '人員、工班、承包商、使用者、權限與作業紀錄' },
         { k: '物', en: 'ASSET', d: '設備、材料、資產、機具、庫存與維修履歷' },
-        { k: '天', en: 'SPACE', d: '建築空間、樓層、上方設備、機電系統與環境條件' },
-        { k: '地', en: 'GROUND', d: '基地、地下空間、基礎、停車、地下設備與管線' },
-        { k: '線', en: 'MEP', d: '電力、給排水、消防、空調、弱電、網路與 MEP 管線' }
+        { k: '空間', en: 'SPACE', d: '建築空間、樓層、上方設備、機電系統與環境條件' },
+        { k: '地下', en: 'GROUND', d: '基地、地下空間、基礎、停車、地下設備與管線' },
+        { k: '管線', en: 'MEP', d: '電力、給排水、消防、空調、弱電、網路與 MEP 管線' }
       ],
       axes: ['2D 圖面', '3D BIM', 'BOQ 工程清單', 'Asset 設備細項', 'Time 施工進度', 'QA/QC 驗收', 'FM 維運'],
       personas: [

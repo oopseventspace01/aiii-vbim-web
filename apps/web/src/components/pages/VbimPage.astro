@@ -113,13 +113,19 @@ const stores = [
         title={copy.stages.title}
         lead={copy.stages.lead}
       />
-      <ol class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3 p-0">
-        {data.stages.map((s) => (
-          <li class="flex flex-col gap-1.5 rounded-b-[18px] border-t-4 border-blue bg-bg-2 p-5">
-            {s.en && <span class="font-display text-[13px] font-semibold text-muted">{s.en}</span>}
-            <span class="text-[19px] font-black">{s.zh ?? s.t}</span>
-            <span class="text-sm text-text-2">{s.d}</span>
-          </li>
+      <!-- 2026-10-20 文案精簡決定：詳細說明留在平台 OS 頁，這裡只放一行流程 -->
+      <ol class="m-0 flex list-none flex-wrap items-center gap-2 p-0" data-vbim-flow>
+        {data.stages.map((s, i) => (
+          <>
+            <li class="rounded-pill border-2 border-blue bg-blue-soft px-5 py-2 text-lg font-black text-blue-dark">
+              {s.zh ?? s.t}
+            </li>
+            {i < data.stages.length - 1 && (
+              <li aria-hidden="true" class="text-xl font-bold text-muted">
+                →
+              </li>
+            )}
+          </>
         ))}
       </ol>
     </div>

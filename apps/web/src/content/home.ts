@@ -132,7 +132,7 @@ export const HOME: Record<Locale, HomeCopy> = {
         { key: 'office', en: 'OFFICE', title: '辦公', items: '空間・設備・能源・維運' },
         { key: 'energy', en: 'ENERGY', title: '能源', items: '風力・太陽能・儲能・算力中心' },
       ],
-      footnote: '以數據串聯空間、設備與人，驅動更高效、更永續的建築與城市。',
+      footnote: '從一棟建築到整座城市，用同一套資料串起空間、設備與人。',
     },
     seb: {
       eyebrow: "360° GOD'S-EYE VIEW",
@@ -307,7 +307,7 @@ export const HOME: Record<Locale, HomeCopy> = {
         { key: 'energy', title: 'Energy', items: 'Wind · solar · storage · compute centers' },
       ],
       footnote:
-        'Connecting spaces, equipment and people with data — for more efficient, more sustainable buildings and cities.',
+        'From one building to a whole city — one set of data connecting spaces, equipment and people.',
     },
     seb: {
       eyebrow: "360° GOD'S-EYE VIEW",

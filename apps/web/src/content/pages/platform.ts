@@ -26,7 +26,7 @@ export const PLATFORM_COPY: Record<
     eyebrow: 'PLATFORM · PHYSICAL WORLD OS',
     title: 'Aiii VBIM 平台 OS',
     subtitle: '把建築資料、設備與 AI 基礎建設，整合為可營運的建築作業系統。',
-    body: '企業數位轉型最難的不是沒有資料，而是資料分散在不同系統、不同承包商、不同場域與不同時間階段。Aiii VBIM 建立實體世界共同資料層，讓圖說、BIM、工程文件、設備台帳、影像、感測、能源、維修與 AI，都落在同一個空間與資產架構中。',
+    body: 'Aiii VBIM OS 不只管理建築，而是建築、設備、能源與 AI 的共同作業系統：圖說、BIM、工程文件、設備台帳、影像、感測、能源、維修與 AI，都落在同一個空間與資產架構中，夥伴的設備與系統也能透過標準介面接進來。',
     heroAlt: '以建築為核心的城市示意',
     caps: { title: '五個核心能力' },
     layers: {
@@ -52,7 +52,7 @@ export const PLATFORM_COPY: Record<
     },
     dims: {
       eyebrow: 'AIOT × DIGITAL TWIN',
-      title: '人、物、天、地、線：\n工程與營運的全域數位座標',
+      title: '人、物、空間、地下、管線：\n工程與營運的全域數位座標',
       lead: 'Aiii VBIM 不只管理空間，更管理時間。當人、物、空間、設備、管線、工程清單與進度全部數位化，系統不只告訴你「現在發生什麼」，更能提前看見「接下來會發生什麼」。',
       axesEnd: 'TIME → PREDICT → NEXT ACTION',
     },
@@ -70,7 +70,7 @@ export const PLATFORM_COPY: Record<
     title: 'The Aiii VBIM Platform OS',
     subtitle:
       'Building data, equipment and AI infrastructure — integrated into one operable building OS.',
-    body: 'The hardest part of digital transformation isn’t a lack of data — it’s data scattered across systems, contractors, sites and project phases. Aiii VBIM creates a shared data layer for the physical world, placing drawings, BIM, engineering documents, asset registers, video, sensors, energy, maintenance and AI into one spatial and asset structure.',
+    body: 'Aiii VBIM OS goes beyond building management — it is the shared operating system for buildings, equipment, energy and AI. Drawings, BIM, engineering documents, asset registers, video, sensors, energy, maintenance and AI sit in one spatial and asset structure, and partners’ equipment and systems connect through standard interfaces.',
     heroAlt: 'A city with the building at its core',
     caps: { title: 'Five core capabilities' },
     layers: {

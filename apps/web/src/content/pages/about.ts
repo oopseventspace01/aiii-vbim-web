@@ -40,7 +40,7 @@ export const ABOUT_COPY: Record<
     },
     miles: { title: '里程碑' },
     cta: {
-      title: '以數據驅動建築，創造更高效、更永續的實體世界',
+      title: '想知道 Aiii VBIM 怎麼用在你的場域？',
       contact: '聯絡我們',
       partner: '成為夥伴',
     },
@@ -75,7 +75,7 @@ export const ABOUT_COPY: Record<
     },
     miles: { title: 'Milestones' },
     cta: {
-      title: 'Data-driven buildings for a more efficient, more sustainable physical world',
+      title: 'Want to see how Aiii VBIM fits your site?',
       contact: 'Contact us',
       partner: 'Become a partner',
     },

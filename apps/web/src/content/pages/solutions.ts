@@ -13,9 +13,7 @@ export const SOLUTIONS_COPY: Record<
       pain: string;
       points: string;
       kpis: string;
-      kpisNote: string;
       first: string;
-      firstNote: string;
       demo: string;
     };
     dashboardAlt: { hospital: string; factory: string };
@@ -31,6 +29,7 @@ export const SOLUTIONS_COPY: Record<
       value: string;
     };
     global: { eyebrow: string; title: string; text: string };
+    ui: { related: string };
   }
 > = {
   'zh-Hant': {
@@ -43,9 +42,7 @@ export const SOLUTIONS_COPY: Record<
       pain: '現場痛點',
       points: '整合範圍',
       kpis: '可量化指標',
-      kpisNote: '每個案場導入前建立基準值，導入後持續追蹤成效。',
       first: '第一個可導入模組',
-      firstNote: 'Land & Expand：從一個明確痛點切入，再擴展至 Aiii VBIM 全平台。',
       demo: '預約這個場域的 Demo →',
     },
     dashboardAlt: {
@@ -76,6 +73,7 @@ export const SOLUTIONS_COPY: Record<
       title: '跨國設廠：一套標準，複製到每一座廠',
       text: '跨國設廠是設計、施工、供應鏈、設備、驗收、營運與總部治理的長週期問題。同一套企業標準可複製到 Arizona、Texas、Japan、Singapore、Malaysia、Vietnam 或 Europe，總部看的是同一套 KPI、資料結構與權限模型。',
     },
+    ui: { related: '延伸閱讀' },
   },
   en: {
     metaTitle: 'Sectors',
@@ -87,10 +85,7 @@ export const SOLUTIONS_COPY: Record<
       pain: 'The pain point',
       points: 'What we integrate',
       kpis: 'Measurable KPIs',
-      kpisNote: 'We set a baseline before deployment and track results continuously after.',
       first: 'First module to deploy',
-      firstNote:
-        'Land & Expand: start with one clear pain point, then scale to the full Aiii VBIM platform.',
       demo: 'Book a demo for this sector →',
     },
     dashboardAlt: {
@@ -123,5 +118,16 @@ export const SOLUTIONS_COPY: Record<
       title: 'Global plant build-outs: one standard, every site',
       text: 'Building plants overseas is a long-cycle challenge spanning design, construction, supply chain, equipment, commissioning, operations and HQ governance. One corporate standard can be replicated in Arizona, Texas, Japan, Singapore, Malaysia, Vietnam or Europe — with HQ seeing the same KPIs, data structure and permission model.',
     },
+    ui: { related: 'Learn more' },
   },
 };
+
+/** 各場域分頁的延伸閱讀（2026-10-20 文案精簡決定：以站內頁面連結取代 Land & Expand 說明） */
+export const SECTOR_RELATED: Record<string, ('vbim' | 'platform' | 'energy' | 'edge' | 'cases')[]> =
+  {
+    hospital: ['energy', 'edge', 'cases'],
+    retail: ['energy', 'platform', 'cases'],
+    factory: ['platform', 'energy', 'cases'],
+    office: ['platform', 'vbim', 'cases'],
+    energy: ['energy', 'edge', 'cases'],
+  };
