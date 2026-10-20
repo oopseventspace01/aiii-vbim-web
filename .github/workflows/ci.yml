@@ -52,7 +52,8 @@ jobs:
         working-directory: apps/web
 
       - name: E2E 測試（Playwright）
-        run: npm run test:e2e
+        # Sanity 內容 E2E 需要登入與 .env，只在本機跑（npm run test:e2e -w apps/studio）
+        run: npm run test:e2e -w apps/web
 
       - name: 上傳 E2E 報告（失敗時）
         if: failure()
