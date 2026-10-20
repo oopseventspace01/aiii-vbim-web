@@ -7,7 +7,8 @@ import SiteFooter from '../components/layout/SiteFooter.astro';
 import BackToTop from '../components/layout/BackToTop.astro';
 import { HTML_LANG, getLocaleFromPath, switchLocalePath, type Locale } from '../lib/i18n';
 import { UI, type NavKey } from '../i18n/ui';
-import { FOOTER_FALLBACK, type FooterInfo } from '../data/site-fallback';
+import type { FooterInfo } from '../data/site-fallback';
+import { getFooterInfo } from '../lib/site';
 
 interface Props {
   title: string;
@@ -37,6 +38,8 @@ const alternates: Record<Locale, string> = {
   en: alternatesProp.en ?? switchLocalePath(Astro.url.pathname, 'en'),
 };
 const t = UI[locale];
+// 頁尾公司資訊：頁面沒有傳入時，自動從 Sanity「全站設定」讀取
+const footerInfo = footer ?? (await getFooterInfo(locale));
 ---
 
 <!doctype html>
@@ -61,7 +64,7 @@ const t = UI[locale];
     <main id="main" tabindex="-1" class="outline-none">
       <slot />
     </main>
-    <SiteFooter locale={locale} info={footer ?? FOOTER_FALLBACK[locale]} />
+    <SiteFooter locale={locale} info={footerInfo} />
     <BackToTop locale={locale} />
   </body>
 </html>

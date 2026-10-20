@@ -13,9 +13,13 @@ interface Props {
 
 const { locale, info } = Astro.props;
 const t = UI[locale];
+const lineLabel = locale === 'en' ? 'LINE Official Account' : 'LINE 官方帳號';
+// App 下載、LINE 官方帳號、社群連結：後台有填才顯示
 const appLinks = [
   { label: 'App Store', href: info.appStoreUrl },
   { label: 'Google Play', href: info.googlePlayUrl },
+  { label: lineLabel, href: info.lineOfficialUrl },
+  ...(info.socialLinks ?? []).map((s) => ({ label: s.platform, href: s.url })),
 ].filter((l): l is { label: string; href: string } => Boolean(l.href));
 ---
 
@@ -54,7 +58,8 @@ const appLinks = [
             {appLinks.map((l) => (
               <a
                 href={l.href}
-                rel="noopener"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="inline-flex min-h-11 items-center rounded-[10px] border border-white/30 px-3.5 py-2 text-[13px] font-bold text-white no-underline hover:border-white hover:text-white"
               >
                 {l.label}

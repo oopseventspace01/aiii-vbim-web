@@ -114,7 +114,7 @@ const L = (path: string) => localizePath(path, locale);
         {MOCK_NEWS(locale).map((n) => {
           const link = newsLink(
             { category: n.category, externalUrl: n.externalUrl, slug: n.slug },
-            L('/news'),
+            locale,
           );
           return (
             <NewsCard

@@ -1,8 +1,10 @@
 # Aiii VBIM OS 2.0 官網｜開發規格書 SPEC
 
-> 版本：v1.3（2026-10-19）
+> 版本：v1.4（2026-10-20）
 > 用途：交給 Claude Code 逐階段執行。每個階段結束都要停下來回報，等確認後才進入下一階段。
 > 標示 `[TBD]` 的項目是待業主提供的資料。**不可自行編造**，請用明顯的佔位文字代替。
+>
+> **v1.4 更新（2026-10-20 業主同意）**：首頁 Hero 右側照設計稿放插圖，後台填了影片網址才換成影片；首頁五大場域照設計稿做 5 張卡片，每張可加真實照片（業主提供後才顯示）；消息新增分類「產品發表」（可連到站內頁面），首頁「最新消息」分「產品發表」與「媒體報導」兩排，顯示則數 3～5 由全站設定調整；全站設定新增 LINE 官方帳號（連結＋QR Code）；表單通知收件人設定在 n8n，不放後台（免費方案資料公開可讀）；不加 meta keywords 欄位（Google 不採用），改在操作手冊說明關鍵字寫法。
 >
 > **v1.3 更新**：導覽列改為**固定在頂部**（捲動時永遠可見，含半透明白底＋陰影）＋右下角**「回到頂部」按鈕**（捲動超過約 300px 才出現）；最新消息「媒體報導」改為**有封面圖的卡片網格**，13 則中 12 則使用 1.0 官網的原圖（`design/assets/news-*.jpg`）；VBIM 頁新增「真實畫面」區塊（1.0 官網的實機展示照與系統畫面）；手機版漢堡選單規格補齊，1 則（Yahoo 2026.06）原圖屬第三方媒體，暫用自家插圖。
 >
@@ -260,12 +262,16 @@ v1.1 改為 Aiii VBIM 2.0 簡報的白底藍色系：
 | heroTitle | string | ✅ | 預設 `One OS. Every Building. Every System.` |
 | heroSubtitle | string | ✅ | — |
 | heroBody | text | ✅ | — |
-| heroVideoUrl | url | — | 空值時顯示封面＋「影片製作中」 |
+| heroVideoUrl | url | — | 空值時顯示 heroPoster 插圖（v1.4：照設計稿，不標「影片製作中」）；有值時改為 `<video muted playsinline>` |
 | heroPoster | image (alt 必填) | ✅ | — |
 | proofItems | array of {label, value} | ✅ | 最多 4 筆 |
 | commandCenterImage | image | — | 空值時顯示示意框 |
 | companyName / address / phone / email | string | ✅ | — |
 | socialLinks | array of {platform, url} | — | — |
+| appStoreUrl / googlePlayUrl | url | — | App 下載連結（v1.2） |
+| lineOfficialUrl | url | — | LINE 官方帳號加好友連結（v1.4） |
+| lineQrCode | image (alt 必填) | — | LINE 官方帳號 QR Code（v1.4） |
+| homeNewsCount | number（3～5） | ✅ | 首頁「產品發表」「媒體報導」各顯示幾則，預設 3（v1.4） |
 | footerTagline | string | ✅ | — |
 | seo | seo object | ✅ | 見 5.8 |
 
@@ -274,13 +280,15 @@ v1.1 改為 Aiii VBIM 2.0 簡報的白底藍色系：
 |---|---|---|---|
 | title | string | ✅ | ≤ 70 字（2026-10-20 業主同意由 60 放寬，配合設計稿定稿標題） |
 | slug | slug | ✅ | 由 title 產生，可手改 |
-| category | string（news／event／hackathon／media） | ✅ | media = 媒體報導 |
+| category | string（news／event／hackathon／media／product） | ✅ | media = 媒體報導；product = 產品發表（v1.4） |
 | source | string | category=media 時必填 | 媒體名稱，如「Yahoo News」「經濟日報」 |
 | externalUrl | url | category=media 時必填 | 點擊後開新分頁到原始報導，此時不需內頁 |
+| internalPath | string（以 / 開頭） | — | category=product 時可填，例如 `/edge-ai`；填了就連到站內頁面、不需內文（v1.4） |
+| displayDate | string | — | 只知道年份或年月時的顯示文字，如「2026.06」（P1 新增） |
 | publishedAt | datetime | ✅ | 未來時間 → 到時間才顯示（重建時判斷） |
 | cover | image (alt 必填) | — | 列表卡片的封面（16:10，`object-fit: cover`）。媒體報導 12 則的種子封面已放在 `design/assets/news-*.jpg`（見第 15 節）；**未上傳封面時顯示品牌色底＋媒體名稱的預設圖**，不可出現破圖。用 Astro `<Image>` 輸出 WebP、`loading="lazy"` |
 | excerpt | text | ✅ | ≤ 120 字，列表與 SEO 用 |
-| body | Portable Text（段落、H2/H3、圖片、YouTube、按鈕） | ✅ | — |
+| body | Portable Text（段落、H2/H3、圖片、YouTube、按鈕） | ✅ | 媒體報導、以及有填 internalPath 的產品發表不需要 |
 | eventDate / eventLocation / registerUrl | datetime / string / url | category=event 時顯示 | — |
 | seo | seo object | — | — |
 
@@ -539,6 +547,7 @@ n8n
 
 ## 15. 種子資料（P1 匯入 Sanity）
 - 媒體報導 13 則：標題、來源、日期、外部連結、摘要、封面，取自 `design/pages/News.dc.html` 與 `en-News.dc.html` 的 `renderVals()`，匯入為 `news`（category = media）的中英雙語文件。`img` 欄位對應的檔案在 `design/assets/`（對照表見 `design/assets/README.md`），匯入時上傳到 Sanity 當 `cover`，alt 用報導標題
+- 產品發表 3 則（v1.4）：取自 `design/pages/News.dc.html` 與 `en-News.dc.html` 的 `updates`，匯入為 `news`（category = product）中英雙語文件，internalPath 分別為 `/edge-ai`、`/energy`、`/vbim`，封面用對應插圖
 - 公司資訊（全站設定）：星宴國際開發股份有限公司／星賀建設股份有限公司；台北市松山區敦化北路 100 號 15 樓；02-2712-3339；App Store：https://apps.apple.com/tw/app/aiii-vbim/id6781813710；Google Play：https://play.google.com/store/apps/details?id=ai.aiii.vbim
 - 請寫成一支可重複執行的匯入腳本（`scripts/seed.ts`），不要手動逐筆輸入
 - [ ] 夥伴名單與 Logo 授權

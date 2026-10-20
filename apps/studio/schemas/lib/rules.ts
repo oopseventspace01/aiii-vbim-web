@@ -16,10 +16,29 @@ export function requiredForMedia(category: unknown, value: unknown): Result {
   return category === 'media' && isEmpty(value) ? '分類為「媒體報導」時必填' : true;
 }
 
-/** 消息內文：媒體報導直接連到外部網址，不需要內文；其他分類必填。 */
-export function bodyRequiredUnlessMedia(category: unknown, value: unknown): Result {
+/**
+ * 消息內文：媒體報導連到外部原文、產品發表若有「站內連結」就連到站內頁面，這兩種不需要內文；其他必填。
+ */
+export function bodyRequiredUnlessMedia(
+  category: unknown,
+  value: unknown,
+  internalPath?: unknown,
+): Result {
   if (category === 'media') return true;
-  return Array.isArray(value) && value.length > 0 ? true : '內文為必填（媒體報導除外）';
+  if (category === 'product' && !isEmpty(internalPath)) return true;
+  if (Array.isArray(value) && value.length > 0) return true;
+  return category === 'product'
+    ? '請填寫內文，或在「站內連結」填入要連到的頁面'
+    : '內文為必填（媒體報導除外）';
+}
+
+/** 站內連結：必須是 / 開頭的站內路徑（例如 /edge-ai），不可填外部網址。 */
+export function internalPathRule(value: unknown): Result {
+  if (isEmpty(value)) return true;
+  if (typeof value !== 'string' || !value.startsWith('/') || value.startsWith('//')) {
+    return '請填站內路徑，以 / 開頭，例如 /edge-ai';
+  }
+  return /\s/.test(value) ? '路徑不可包含空白' : true;
 }
 
 /** 課程報名方式為「外部連結」時，外部網址必填。 */

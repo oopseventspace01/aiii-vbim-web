@@ -5,6 +5,7 @@ import {
   APP_LINKS,
   HERO_POSTER_FILE,
   MEDIA_NEWS,
+  PRODUCT_NEWS,
   SITE_SETTINGS,
   sortableDates,
 } from '../../../../scripts/seed-data';
@@ -73,7 +74,12 @@ describe('排序用日期（sortableDates）', () => {
   });
 
   it('有月份時落在該月或更早', () => {
-    expect(sortableDates(['2026.10'])[0]).toBe('2026-10-01T00:00:00.000Z');
+    expect(sortableDates(['2026.10'], Date.UTC(2026, 9, 20))[0]).toBe('2026-10-01T00:00:00.000Z');
+  });
+
+  it('只有年份時不會超過現在時間（避免變成預約發布）', () => {
+    const now = Date.UTC(2026, 9, 20);
+    expect(Date.parse(sortableDates(['2026'], now)[0]!)).toBeLessThanOrEqual(now);
   });
 });
 
@@ -116,6 +122,34 @@ describe('全站設定種子資料', () => {
 describe('禁用名稱檢查', () => {
   it('種子資料不含業主指示不可出現的名稱', () => {
     const text = JSON.stringify({ MEDIA_NEWS, SITE_SETTINGS });
+    for (const word of BANNED) expect(text, word).not.toContain(word);
+  });
+});
+
+describe('產品發表種子資料（v1.4）', () => {
+  it('共 3 則，站內連結與封面有效', () => {
+    expect(PRODUCT_NEWS).toHaveLength(3);
+    for (const n of PRODUCT_NEWS) {
+      expect(n.internalPath).toMatch(/^\/[a-z-]+$/);
+      expect(existsSync(assetPath(n.cover)), n.cover).toBe(true);
+      for (const lang of [n.zh, n.en]) {
+        expect(lang.title.trim()).not.toBe('');
+        expect(lang.alt.trim()).not.toBe('');
+      }
+    }
+  });
+
+  it('文案與設計稿一致', () => {
+    const zhPage = readFileSync(`${root}design/pages/News.dc.html`, 'utf-8');
+    const enPage = readFileSync(`${root}design/pages/en-News.dc.html`, 'utf-8');
+    for (const n of PRODUCT_NEWS) {
+      expect(zhPage).toContain(n.zh.title);
+      expect(enPage).toContain(n.en.title);
+    }
+  });
+
+  it('不含禁用名稱', () => {
+    const text = JSON.stringify(PRODUCT_NEWS);
     for (const word of BANNED) expect(text, word).not.toContain(word);
   });
 });

@@ -1,5 +1,5 @@
 // 消息卡片顯示用的小工具（純函式，方便單元測試）
-import type { Locale } from './i18n';
+import { localizePath, type Locale } from './i18n';
 
 /**
  * 日期文字：有「顯示日期」（例如 2026、2026.06）就照原文顯示；
@@ -27,6 +27,7 @@ export const NEWS_CATEGORY_LABEL: Record<string, Record<Locale, string>> = {
   event: { 'zh-Hant': '活動', en: 'Event' },
   hackathon: { 'zh-Hant': '黑客松', en: 'Hackathon' },
   media: { 'zh-Hant': '媒體報導', en: 'Media' },
+  product: { 'zh-Hant': '產品發表', en: 'Product' },
 };
 
 export function categoryLabel(category: string | undefined, locale: Locale): string {
@@ -42,13 +43,25 @@ export function coverFallbackText(
   return source?.trim() || categoryLabel(category, locale) || 'Aiii VBIM';
 }
 
-/** 媒體報導連到外部原文（開新分頁），其他分類連到站內內頁 */
+/**
+ * 消息連結：
+ *  媒體報導 → 外部原文（開新分頁）
+ *  產品發表且有站內連結 → 站內頁面（例如 /edge-ai）
+ *  其他 → 消息內頁 /news/{slug}
+ */
 export function newsLink(
-  item: { category?: string; externalUrl?: string; slug?: string },
-  newsBasePath: string,
+  item: { category?: string; externalUrl?: string; internalPath?: string; slug?: string },
+  locale: Locale,
 ) {
   if (item.category === 'media' && item.externalUrl) {
     return { href: item.externalUrl, external: true };
   }
-  return { href: `${newsBasePath}/${item.slug ?? ''}`, external: false };
+  if (
+    item.category === 'product' &&
+    item.internalPath?.startsWith('/') &&
+    !item.internalPath.startsWith('//')
+  ) {
+    return { href: localizePath(item.internalPath, locale), external: false };
+  }
+  return { href: localizePath(`/news/${item.slug ?? ''}`, locale), external: false };
 }

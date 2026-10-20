@@ -18,6 +18,9 @@ jobs:
     timeout-minutes: 20
     env:
       SANITY_TELEMETRY_DISABLED: 'true'
+      # 網站建置時讀取 Sanity 已發布內容（公開資料，專案 ID 不是機密）
+      PUBLIC_SANITY_PROJECT_ID: pg0x5cyw
+      PUBLIC_SANITY_DATASET: production
     steps:
       - uses: actions/checkout@v7
 

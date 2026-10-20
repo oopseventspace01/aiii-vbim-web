@@ -1,17 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import HomePage from '../components/pages/HomePage.astro';
 ---
 
-<BaseLayout
-  title="Aiii VBIM OS 2.0"
-  description="建築、設備、能源與 AI 的共同作業系統"
-  active="home"
->
-  <section class="container-site flex min-h-[60vh] flex-col justify-center py-16">
-    <p class="eyebrow">AIII VBIM OS 2.0</p>
-    <h1 class="mt-4 font-display text-4xl font-bold md:text-6xl">
-      One OS. Every Building. Every System.
-    </h1>
-    <p class="lead mt-4">建置中（首頁於 P3 完成）</p>
-  </section>
-</BaseLayout>
+<HomePage locale="zh-Hant" />

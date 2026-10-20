@@ -1,5 +1,5 @@
 // 頁尾公司資訊的預設值：取自 design/pages/Footer.dc.html 與 SPEC 第 15 節。
-// P3 起改由 Sanity「全站設定」提供，這份只在讀不到 Sanity 時備用。
+// P3 起由 Sanity「全站設定」提供；後台某欄位空白時才用這裡的值。
 import type { Locale } from '../lib/i18n';
 
 export interface FooterInfo {
@@ -10,6 +10,8 @@ export interface FooterInfo {
   footerTagline: string;
   appStoreUrl?: string;
   googlePlayUrl?: string;
+  lineOfficialUrl?: string;
+  socialLinks?: { platform: string; url: string }[];
 }
 
 export const FOOTER_FALLBACK: Record<Locale, FooterInfo> = {

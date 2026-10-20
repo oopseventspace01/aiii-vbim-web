@@ -26,13 +26,23 @@ describe('coverFallbackText（沒有封面時的預設圖文字）', () => {
 
 describe('newsLink', () => {
   it('媒體報導連外部並開新分頁', () =>
-    expect(newsLink({ category: 'media', externalUrl: 'https://a.com/x' }, '/news')).toEqual({
+    expect(newsLink({ category: 'media', externalUrl: 'https://a.com/x' }, 'zh-Hant')).toEqual({
       href: 'https://a.com/x',
       external: true,
     }));
-  it('一般消息連站內內頁', () =>
-    expect(newsLink({ category: 'news', slug: 'hello' }, '/en/news')).toEqual({
+  it('一般消息連站內內頁（英文加 /en）', () =>
+    expect(newsLink({ category: 'news', slug: 'hello' }, 'en')).toEqual({
       href: '/en/news/hello',
       external: false,
     }));
+  it('產品發表有站內連結 → 連到該頁', () =>
+    expect(newsLink({ category: 'product', internalPath: '/edge-ai', slug: 'x' }, 'en')).toEqual({
+      href: '/en/edge-ai',
+      external: false,
+    }));
+  it('產品發表的站內連結不可被當成外部網址', () =>
+    expect(
+      newsLink({ category: 'product', internalPath: '//evil.com', slug: 'x' }, 'zh-Hant').href,
+    ).toBe('/news/x'));
+  it('產品發表分類名稱', () => expect(categoryLabel('product', 'zh-Hant')).toBe('產品發表'));
 });

@@ -246,9 +246,10 @@ export const MEDIA_NEWS: MediaNewsSeed[] = [
  * 這裡產生「只用來排序」的時間：照設計稿順序由新到舊遞減，網站顯示的是 displayDate（原始文字）。
  * 業主之後可在後台改成正確的發布時間。
  */
-export function sortableDates(labels: string[]): string[] {
+export function sortableDates(labels: string[], now = Date.now()): string[] {
   const HOUR = 3_600_000;
-  let prev = Number.POSITIVE_INFINITY;
+  // 不可超過現在時間，否則網站會當成「預約發布」而不顯示
+  let prev = now + HOUR;
   return labels.map((label) => {
     const [year, month] = label.split('.');
     const known = month
@@ -326,3 +327,66 @@ export const SITE_SETTINGS: Record<'zh' | 'en', SiteSettingsSeed> = {
     metaDescription: 'From BIM / PMIS to the operating system for your physical world',
   },
 };
+
+export interface ProductNewsSeed {
+  key: string;
+  date: string;
+  /** 站內連結（v1.4 產品發表） */
+  internalPath: string;
+  cover: string;
+  zh: { title: string; excerpt: string; alt: string };
+  en: { title: string; excerpt: string; alt: string };
+}
+
+// 產品發表 3 則（SPEC 第 15 節 v1.4）：由 design/pages/News.dc.html、en-News.dc.html 的 updates 逐字轉出
+export const PRODUCT_NEWS: ProductNewsSeed[] = [
+  {
+    key: 'edge-ai-solution',
+    date: '2026',
+    internalPath: '/edge-ai',
+    cover: 'edge.jpg',
+    zh: {
+      title: '地端 AI 完整解決方案：Edge AI Appliance + AI Agent',
+      excerpt: '即時推論、低延遲、資料主權，讓 AI 理解場域並協助決策。',
+      alt: '地端 AI 智慧園區示意',
+    },
+    en: {
+      title: 'A complete Edge AI solution: Edge AI Appliance + AI Agent',
+      excerpt:
+        'Real-time inference, low latency and data sovereignty — AI that understands your site.',
+      alt: 'Edge AI smart campus',
+    },
+  },
+  {
+    key: 'core-capabilities',
+    date: '2026',
+    internalPath: '/energy',
+    cover: 'energy.jpg',
+    zh: {
+      title: '三大核心能力：能源管理、中央空調節能 × 潔淨、地端 AI',
+      excerpt: '以建築為核心，串聯設備、能源與 AI。',
+      alt: '智慧能源管理示意',
+    },
+    en: {
+      title: 'Three core capabilities: energy, HVAC × clean environments, Edge AI',
+      excerpt: 'With the building at the core, equipment, energy and AI connect.',
+      alt: 'Smart energy management',
+    },
+  },
+  {
+    key: 'global-command-center',
+    date: '2026',
+    internalPath: '/vbim',
+    cover: 'world.jpg',
+    zh: {
+      title: 'Global Command Center：遠距多點數據智控',
+      excerpt: '從全球一路看到感測器，總部即時掌握每一個據點。',
+      alt: '全球據點連線示意',
+    },
+    en: {
+      title: 'Global Command Center: remote, multi-site, data-driven control',
+      excerpt: 'From global view down to each sensor — HQ sees every site in real time.',
+      alt: 'Global sites connected',
+    },
+  },
+];

@@ -123,6 +123,14 @@ export const siteSettings = defineType({
       group: 'company',
     }),
     defineField({
+      name: 'lineOfficialUrl',
+      title: 'LINE 官方帳號連結',
+      description: '加好友連結，例如 https://lin.ee/xxxx 或 https://line.me/R/ti/p/@xxxx',
+      type: 'url',
+      group: 'company',
+    }),
+    { ...imageField('lineQrCode', 'LINE 官方帳號 QR Code'), group: 'company' },
+    defineField({
       name: 'socialLinks',
       title: '社群連結',
       type: 'array',
@@ -151,6 +159,16 @@ export const siteSettings = defineType({
           preview: { select: { title: 'platform', subtitle: 'url' } },
         }),
       ],
+    }),
+    defineField({
+      name: 'homeNewsCount',
+      title: '首頁最新消息顯示則數',
+      description: '首頁「產品發表」與「媒體報導」各顯示幾則（3～5）。',
+      type: 'number',
+      group: 'hero',
+      initialValue: 3,
+      options: { list: [3, 4, 5], layout: 'radio', direction: 'horizontal' },
+      validation: (rule) => rule.required().integer().min(3).max(5),
     }),
     defineField({
       name: 'footerTagline',

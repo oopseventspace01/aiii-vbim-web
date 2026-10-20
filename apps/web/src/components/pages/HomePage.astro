@@ -1,0 +1,358 @@
+---
+// 首頁（SPEC 3.1、design/pages/Main.dc.html）：中英文共用同一個版型
+// 後台提供：Hero 標語／副標／內文、影片網址、封面、背書條、戰情室截圖、最新消息、頁尾公司資訊
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Button from '../ui/Button.astro';
+import Hero from '../blocks/Hero.astro';
+import ProofStrip from '../blocks/ProofStrip.astro';
+import FlowStrip from '../blocks/FlowStrip.astro';
+import PathTrail from '../blocks/PathTrail.astro';
+import CtaBand from '../blocks/CtaBand.astro';
+import MediaFigure from '../blocks/MediaFigure.astro';
+import InfoCard from '../cards/InfoCard.astro';
+import FeatureCard from '../cards/FeatureCard.astro';
+import NewsCard from '../cards/NewsCard.astro';
+import heroBuilding from '../../assets/illustrations/hero-building.jpg';
+import world from '../../assets/illustrations/world.jpg';
+import energy from '../../assets/illustrations/energy.jpg';
+import hvac from '../../assets/illustrations/hvac.jpg';
+import edge from '../../assets/illustrations/edge.jpg';
+import ecosystem from '../../assets/illustrations/ecosystem.jpg';
+import { HOME } from '../../content/home';
+import { SECTOR_PHOTOS } from '../../content/sector-photos';
+import { localizePath, type Locale } from '../../lib/i18n';
+import { sanityClient, imageUrl } from '../../lib/sanity';
+import { HOME_QUERY } from '../../lib/queries';
+import {
+  toFooterInfo,
+  toHomeData,
+  type ImageRef,
+  type NewsCardData,
+  type RawHome,
+} from '../../lib/home-data';
+import { FOOTER_FALLBACK } from '../../data/site-fallback';
+import { UI } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = HOME[locale];
+const t = UI[locale];
+const L = (path: string) => localizePath(path, locale);
+
+const raw = await sanityClient().fetch<RawHome>(HOME_QUERY, { lang: locale });
+const data = toHomeData(raw, locale);
+const footer = toFooterInfo(raw.settings, FOOTER_FALLBACK[locale]);
+
+const capabilityImages = { energy, hvac, edge };
+const remote = (img: ImageRef, width: number) => ({
+  src: imageUrl(img.source, width),
+  alt: img.alt,
+  width: img.width,
+  height: img.height,
+});
+const newsCover = (n: NewsCardData) => (n.cover ? remote(n.cover, 800) : undefined);
+const newsGroups = [
+  { id: 'home-news-product', title: copy.news.product, items: data.product },
+  { id: 'home-news-media', title: copy.news.media, items: data.media },
+];
+---
+
+<BaseLayout
+  title={data.metaTitle ?? 'Aiii VBIM OS 2.0'}
+  description={data.metaDescription}
+  locale={locale}
+  active="home"
+  footer={footer}
+>
+  <!-- 2. Hero -->
+  <Hero
+    eyebrow={copy.eyebrow}
+    titleLines={data.heroTitleLines}
+    subtitle={data.heroSubtitle}
+    body={data.heroBody}
+    pills={copy.pills}
+    entries={copy.entries.map((e) => ({ ...e, href: L(e.path) }))}
+  >
+    <div slot="media" data-hero-media>
+      {data.heroVideoUrl ? (
+        <video
+          class="block aspect-video w-full rounded-lg bg-navy object-cover"
+          src={data.heroVideoUrl}
+          poster={data.heroPoster ? imageUrl(data.heroPoster.source, 1280) : heroBuilding.src}
+          muted
+          playsinline
+          controls
+          preload="none"
+          data-hero-video
+        />
+      ) : data.heroPoster ? (
+        <MediaFigure {...remote(data.heroPoster, 1280)} blend eager />
+      ) : (
+        <MediaFigure src={heroBuilding} alt={copy.command.imageAlt} blend eager />
+      )}
+    </div>
+  </Hero>
+
+  <!-- 3. 背書條 -->
+  {data.proofItems.length > 0 && <ProofStrip label={copy.proofLabel} items={data.proofItems} />}
+
+  <!-- 4. 核心定位 -->
+  <Section labelledby="home-positioning">
+    <div class="flex flex-col gap-9">
+      <SectionHeader
+        id="home-positioning"
+        eyebrow={copy.positioning.eyebrow}
+        title={copy.positioning.title}
+        lead={copy.positioning.lead}
+      />
+      <ol class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3 p-0">
+        {copy.positioning.stack.map((s) => (
+          <li class="flex">
+            <InfoCard tone="soft" kicker={s.no} title={s.t} text={s.d} class="w-full" />
+          </li>
+        ))}
+      </ol>
+      <FlowStrip steps={copy.positioning.verbs} label={copy.positioning.verbsLabel} />
+    </div>
+  </Section>
+
+  <!-- 5. 三大能力模組 -->
+  <Section tone="soft" labelledby="home-capabilities">
+    <div class="flex flex-col gap-8">
+      <SectionHeader
+        id="home-capabilities"
+        eyebrow={copy.capabilities.eyebrow}
+        title={copy.capabilities.title}
+      />
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] gap-[18px]">
+        {copy.capabilities.cards.map((c) => (
+          <FeatureCard
+            image={capabilityImages[c.image]}
+            alt={c.alt}
+            title={c.title}
+            text={c.text}
+            linkLabel={c.link}
+            href={L(c.path)}
+          />
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <!-- 6. 五大場域 -->
+  <Section labelledby="home-sectors">
+    <div class="flex flex-col gap-8">
+      <SectionHeader
+        id="home-sectors"
+        eyebrow={copy.sectors.eyebrow}
+        title={copy.sectors.title}
+        action={{ label: copy.sectors.action, href: L('/solutions') }}
+      />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(210px,1fr))] gap-3.5 p-0">
+        {copy.sectors.items.map((s) => {
+          const photo = SECTOR_PHOTOS[s.key as keyof typeof SECTOR_PHOTOS];
+          return (
+            <li class="flex">
+              <a
+                href={L('/solutions')}
+                class="flex w-full flex-col overflow-hidden rounded-md border border-line bg-white text-navy no-underline transition-colors hover:border-blue hover:text-navy"
+                data-sector={s.key}
+              >
+                {photo && (
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt[locale]}
+                    widths={[320, 480, 640]}
+                    sizes="(min-width: 1024px) 240px, 100vw"
+                    class="block aspect-[4/3] w-full object-cover"
+                  />
+                )}
+                <span class="flex flex-col gap-2.5 px-[22px] py-[26px]">
+                  {s.en && <span class="font-display text-[13px] font-bold text-blue">{s.en}</span>}
+                  <span class="text-2xl font-black">{s.title}</span>
+                  <span class="text-sm text-muted">{s.items}</span>
+                </span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      <p class="lead m-0">{copy.sectors.footnote}</p>
+    </div>
+  </Section>
+
+  <!-- 7. 天・地・腦・中樞 -->
+  <Section tone="soft" labelledby="home-seb">
+    <div class="flex flex-col gap-8">
+      <SectionHeader
+        id="home-seb"
+        eyebrow={copy.seb.eyebrow}
+        title={copy.seb.title}
+        lead={copy.seb.lead}
+      />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3.5 p-0">
+        {copy.seb.items.map((s) => (
+          <li class="flex">
+            <InfoCard
+              kicker={s.k}
+              kickerLarge
+              title={s.role}
+              subtitle={s.sys}
+              text={s.d}
+              class="w-full"
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- 8. Global Command Center -->
+  <Section tone="navy" labelledby="home-command">
+    <div class="flex flex-col gap-8">
+      <div class="flex flex-wrap items-center gap-10">
+        <div class="flex flex-[1_1_420px] flex-col gap-3.5">
+          <SectionHeader
+            id="home-command"
+            tone="dark"
+            eyebrow={copy.command.eyebrow}
+            title={copy.command.title}
+            lead={copy.command.lead}
+          />
+        </div>
+        <div class="min-w-0 flex-[1.2_1_480px]" data-command-image>
+          {data.commandCenterImage ? (
+            <MediaFigure {...remote(data.commandCenterImage, 1280)} framed />
+          ) : (
+            <MediaFigure
+              src={world}
+              alt={copy.command.imageAlt}
+              framed
+              mockupLabel={t.mockupLabel}
+            />
+          )}
+        </div>
+      </div>
+      <PathTrail items={copy.command.path} label={copy.command.pathLabel} />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-3.5 p-0">
+        {copy.command.features.map((f) => (
+          <li class="flex">
+            <InfoCard tone="line-top" title={f.t} text={f.d} class="w-full" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- 9. 平台生態系 -->
+  <Section labelledby="home-ecosystem">
+    <div class="flex flex-wrap items-center gap-12">
+      <div class="flex min-w-0 flex-[1_1_420px] flex-col gap-4">
+        <SectionHeader
+          id="home-ecosystem"
+          eyebrow={copy.ecosystem.eyebrow}
+          title={copy.ecosystem.title}
+        />
+        <p class="m-0 text-[1.15rem] font-bold">{copy.ecosystem.strong}</p>
+        <p class="m-0 text-text-2">{copy.ecosystem.text}</p>
+        <div class="mt-1 flex flex-wrap gap-3">
+          <Button href={L('/partners')}>{copy.ecosystem.primary}</Button>
+          <Button href={L('/platform')} variant="outline">
+            {copy.ecosystem.secondary}
+          </Button>
+        </div>
+      </div>
+      <div class="min-w-0 flex-[1_1_460px]">
+        <MediaFigure src={ecosystem} alt={copy.ecosystem.imageAlt} />
+      </div>
+    </div>
+  </Section>
+
+  <!-- 10. 認證學院 -->
+  <section aria-labelledby="home-academy" class="bg-white">
+    <div class="container-site pb-(--section-y)">
+      <div class="flex flex-wrap gap-8 rounded-lg bg-blue p-8 text-white md:p-11">
+        <div class="flex flex-[1_1_440px] flex-col gap-3">
+          <span class="font-display text-sm font-bold tracking-[0.14em] text-[#eef3ff]">
+            {copy.academy.eyebrow}
+          </span>
+          <h2
+            id="home-academy"
+            class="m-0 text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.25] font-black"
+          >
+            {copy.academy.title}
+          </h2>
+          <p class="m-0 text-base text-[#eef3ff]">{copy.academy.text}</p>
+        </div>
+        <div class="flex flex-[1_1_320px] flex-col justify-center gap-2.5">
+          <span class="font-bold">{copy.academy.modules}</span>
+          <Button href={L('/academy')} variant="white" class="self-start">
+            {copy.academy.cta}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. 最新消息：產品發表＋媒體報導（則數由全站設定決定） -->
+  <section aria-labelledby="home-news" class="border-t border-line bg-bg-2" data-home-news>
+    <div class="container-site flex flex-col gap-8 py-24">
+      <div class="flex flex-wrap items-baseline justify-between gap-3">
+        <h2 id="home-news" class="m-0 text-[1.8rem] font-black">
+          {copy.news.title}
+        </h2>
+        <a href={L('/news')} class="font-bold no-underline">
+          {copy.news.viewAll}
+        </a>
+      </div>
+      {newsGroups.map((group) => (
+        <div class="flex flex-col gap-4" data-news-group={group.id}>
+          <h3 id={group.id} class="m-0 text-lg font-black text-text-2">
+            {group.title}
+          </h3>
+          {group.items.length === 0 ? (
+            <p class="m-0 text-muted">{copy.news.empty}</p>
+          ) : (
+            <ul
+              aria-labelledby={group.id}
+              class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-4 p-0"
+            >
+              {group.items.map((n) => (
+                <li class="flex">
+                  <NewsCard
+                    locale={locale}
+                    title={n.title}
+                    href={n.href}
+                    external={n.external}
+                    category={n.category}
+                    source={n.source}
+                    dateLabel={n.dateLabel}
+                    cover={newsCover(n)}
+                    headingLevel="h3"
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 12. 聯絡 CTA -->
+  <Section labelledby="home-cta">
+    <CtaBand
+      title={copy.cta.title}
+      text={copy.cta.text}
+      displayFont
+      primary={{ label: copy.cta.primary, href: L('/contact') }}
+      secondary={{ label: copy.cta.secondary, href: L('/partners') }}
+    />
+  </Section>
+</BaseLayout>

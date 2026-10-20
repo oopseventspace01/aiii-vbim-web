@@ -3,6 +3,7 @@ import { imageField, languageField, needsReviewField, slugField } from '../lib/f
 import {
   bodyRequiredUnlessMedia,
   englishLengthHint,
+  internalPathRule,
   maxLengthForLanguage,
   requiredForMedia,
 } from '../lib/rules';
@@ -12,11 +13,13 @@ export const NEWS_CATEGORIES = [
   { title: '活動', value: 'event' },
   { title: '黑客松', value: 'hackathon' },
   { title: '媒體報導', value: 'media' },
+  { title: '產品發表', value: 'product' },
 ];
 
-type NewsParent = { category?: string; language?: string } | undefined;
+type NewsParent = { category?: string; language?: string; internalPath?: string } | undefined;
 const categoryOf = (document: unknown) => (document as NewsParent)?.category;
 const languageOf = (document: unknown) => (document as NewsParent)?.language;
+const internalPathOf = (document: unknown) => (document as NewsParent)?.internalPath;
 
 /** 中文超過上限＝錯誤；英文超過＝提醒 */
 const limitFor = (max: number) => (rule: StringRule | TextRule) => [
@@ -70,6 +73,15 @@ export const news = defineType({
         rule.custom((value, context) => requiredForMedia(categoryOf(context.document), value)),
     }),
     defineField({
+      name: 'internalPath',
+      title: '站內連結（選填）',
+      description:
+        '產品發表可以直接連到站內頁面，例如 /edge-ai、/energy、/vbim。填了就不需要內文。',
+      type: 'string',
+      hidden: ({ document }) => categoryOf(document) !== 'product',
+      validation: (rule) => rule.custom(internalPathRule),
+    }),
+    defineField({
       name: 'publishedAt',
       title: '發布時間',
       description: '設定未來時間的話，到時間後網站重新建置時才會顯示。',
@@ -99,10 +111,16 @@ export const news = defineType({
       name: 'body',
       title: '內文',
       type: 'blockContent',
-      hidden: ({ document }) => categoryOf(document) === 'media',
+      hidden: ({ document }) =>
+        categoryOf(document) === 'media' ||
+        (categoryOf(document) === 'product' && Boolean(internalPathOf(document))),
       validation: (rule) =>
         rule.custom((value, context) =>
-          bodyRequiredUnlessMedia(categoryOf(context.document), value),
+          bodyRequiredUnlessMedia(
+            categoryOf(context.document),
+            value,
+            internalPathOf(context.document),
+          ),
         ),
     }),
     defineField({

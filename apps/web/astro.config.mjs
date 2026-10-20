@@ -8,6 +8,8 @@ import '../../scripts/load-root-env.mjs';
 export default defineConfig({
   site: 'https://aiiivbim.com',
   output: 'static',
+  // 後台（Sanity）上傳的圖片：建置時下載並最佳化
+  image: { domains: ['cdn.sanity.io'] },
   // 開發工具列會蓋住畫面、影響截圖檢查，關閉
   devToolbar: { enabled: false },
   adapter: vercel(),

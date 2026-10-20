@@ -3,6 +3,7 @@ import {
   altRequired,
   bodyRequiredUnlessMedia,
   englishLengthHint,
+  internalPathRule,
   maxLengthForLanguage,
   requiredForExternal,
   requiredForMedia,
@@ -54,4 +55,16 @@ describe('字數上限（中文錯誤、英文提醒）', () => {
   it('英文超過 → 不算錯誤', () => expect(maxLengthForLanguage('en', en61, 60)).toBe(true));
   it('英文超過 → 給提醒', () => expect(englishLengthHint('en', en61, 60)).toMatch(/61/));
   it('中文不會出現英文提醒', () => expect(englishLengthHint('zh-Hant', zh61, 60)).toBe(true));
+});
+
+describe('產品發表（v1.4）', () => {
+  it('有站內連結 → 不需要內文', () =>
+    expect(bodyRequiredUnlessMedia('product', undefined, '/edge-ai')).toBe(true));
+  it('沒有站內連結也沒有內文 → 錯誤', () =>
+    expect(bodyRequiredUnlessMedia('product', [], '')).toMatch(/站內連結/));
+  it('站內連結必須以 / 開頭', () => expect(internalPathRule('edge-ai')).toMatch(/以 \//));
+  it('不可填外部網址', () => expect(internalPathRule('https://example.com')).toMatch(/以 \//));
+  it('不可用 // 開頭', () => expect(internalPathRule('//evil.com')).toMatch(/以 \//));
+  it('正確的站內路徑 → 通過', () => expect(internalPathRule('/edge-ai')).toBe(true));
+  it('空白 → 通過（選填）', () => expect(internalPathRule(undefined)).toBe(true));
 });

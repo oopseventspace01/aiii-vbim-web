@@ -1,5 +1,5 @@
 /**
- * 種子資料匯入（SPEC 第 15 節）：13 則媒體報導（中英）＋全站設定（中英）。
+ * 種子資料匯入（SPEC 第 15 節）：13 則媒體報導＋3 則產品發表（中英）＋全站設定（中英）。
  *
  * 執行（在專案根目錄）：npm run seed
  *   - 使用你在 `npx sanity login` 登入的帳號權限，不需要另外的 token。
@@ -10,7 +10,14 @@
 import { createReadStream } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { getCliClient } from 'sanity/cli';
-import { APP_LINKS, HERO_POSTER_FILE, MEDIA_NEWS, SITE_SETTINGS, sortableDates } from './seed-data';
+import {
+  APP_LINKS,
+  HERO_POSTER_FILE,
+  MEDIA_NEWS,
+  PRODUCT_NEWS,
+  SITE_SETTINGS,
+  sortableDates,
+} from './seed-data';
 
 type Lang = 'zh-Hant' | 'en';
 type Doc = { _id: string; _type: string } & Record<string, unknown>;
@@ -72,6 +79,7 @@ async function buildSiteSettings(): Promise<Doc[]> {
       email: s.email,
       ...APP_LINKS,
       footerTagline: s.footerTagline,
+      homeNewsCount: 3,
       seo: {
         _type: 'seo',
         metaTitle: s.metaTitle,
@@ -123,17 +131,58 @@ async function buildMediaNews(): Promise<Doc[]> {
   return docs;
 }
 
+async function buildProductNews(): Promise<Doc[]> {
+  const dates = sortableDates(PRODUCT_NEWS.map((n) => n.date));
+  const docs: Doc[] = [];
+  for (const [i, item] of PRODUCT_NEWS.entries()) {
+    const coverId = await uploadImage(item.cover);
+    const ids: Record<Lang, string> = {
+      'zh-Hant': `news-product-${item.key}-zh-Hant`,
+      en: `news-product-${item.key}-en`,
+    };
+    for (const [language, text] of [
+      ['zh-Hant', item.zh],
+      ['en', item.en],
+    ] as const) {
+      docs.push({
+        _id: ids[language],
+        _type: 'news',
+        language,
+        needsReview: false,
+        title: text.title,
+        slug: { _type: 'slug', current: item.key },
+        category: 'product',
+        internalPath: item.internalPath,
+        publishedAt: dates[i],
+        displayDate: item.date,
+        cover: image(coverId, text.alt),
+        excerpt: text.excerpt,
+      });
+    }
+    docs.push(translationMetadata(`translation-metadata-news-product-${item.key}`, 'news', ids));
+  }
+  return docs;
+}
+
 async function main() {
   const { projectId, dataset } = client.config();
   console.log(
     `匯入目標：專案 ${projectId}／dataset ${dataset}${FORCE ? '（--force：覆蓋既有文件）' : ''}`,
   );
 
-  const docs = [...(await buildSiteSettings()), ...(await buildMediaNews())];
+  const docs = [
+    ...(await buildSiteSettings()),
+    ...(await buildMediaNews()),
+    ...(await buildProductNews()),
+  ];
   const tx = client.transaction();
   for (const doc of docs) {
     if (FORCE) tx.createOrReplace(doc);
     else tx.createIfNotExists(doc);
+  }
+  // v1.4 新增的欄位：已存在的全站設定只補上預設值，不覆蓋業主改過的內容
+  for (const id of ['siteSettings-zh-Hant', 'siteSettings-en']) {
+    tx.patch(id, (p) => p.setIfMissing({ homeNewsCount: 3 }));
   }
   await tx.commit({ visibility: 'sync' });
 
