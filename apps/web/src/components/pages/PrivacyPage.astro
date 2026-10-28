@@ -8,6 +8,7 @@ import RichText from '../rich/RichText.astro';
 import type { Locale } from '../../lib/i18n';
 import { getCmsPage } from '../../lib/cms-pages';
 import { getFooterInfo } from '../../lib/site';
+import { ogImageUrl } from '../../lib/sanity';
 
 interface Props {
   locale: Locale;
@@ -25,6 +26,7 @@ const title = page?.title ?? (zh ? '隱私權政策' : 'Privacy Policy');
   description={page?.seo?.metaDescription}
   locale={locale}
   noindex={!page || Boolean(page.seo?.noIndex)}
+  ogImage={page?.seo?.ogImage?.asset?.url ? ogImageUrl(page.seo.ogImage) : undefined}
 >
   <ComingSoonNotice show={locale === 'en' && Boolean(page?.fallback)} />
   <article

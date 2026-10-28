@@ -38,3 +38,16 @@ export function imageUrl(
     .fit('max')
     .url();
 }
+
+/** 分享預覽圖：裁成 1200×630 的 JPG（LINE、Facebook 不一定支援 WebP） */
+export function ogImageUrl(source: {
+  asset?: { _id?: string; _ref?: string; url?: string } | null;
+}) {
+  return createImageUrlBuilder(sanityClient())
+    .image(source)
+    .width(1200)
+    .height(630)
+    .fit('crop')
+    .format('jpg')
+    .url();
+}

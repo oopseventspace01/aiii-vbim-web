@@ -451,6 +451,11 @@ n8n
 - 結構化資料：Organization（全站）、Article（消息）、Event（活動類消息）
 - **舊網址轉址**：上線前抓取現有 aiiivbim.com 所有網址，建立 `redirects` 對照表（`vercel.json` 301）。清單 [TBD]
 - Favicon、Apple touch icon、OG 預設圖
+
+**P6 決定（2026-10-28）**
+- 舊網址轉址改用 Astro `redirects` 設定（對照表在 `apps/web/redirects.mjs`），不用 `vercel.json`：網站透過 Vercel 轉接器部署時，Vercel 會忽略 `vercel.json` 的轉址；用 Astro 設定才會寫進部署設定，本機也能測。舊網站（Gamma）只有 `/`、`/aiiivbim-en`、`/contact`、`/news`，只有 `/aiiivbim-en → /en` 需要轉址。
+- 中文字型仍為 Noto Sans TC，正式環境改用「建置時只取網站用到的字」的子集字型（`apps/web/integrations/site-font.mjs`，從 Google Fonts 下載後自行託管），字型下載量約從 1.1MB 降到 300KB。下載失敗或遇到子集沒有的字時，改用系統中文字型顯示。
+- 網站圖示與預設分享圖由 `scripts/generate-icons.mjs` 從 `design/assets/logo.png` 產生；業主提供 logo 向量檔後重新產生。
 - 網域切換步驟與回滾方式寫在 `docs/launch-checklist.md`
 
 ---

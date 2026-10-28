@@ -1,6 +1,6 @@
 // 最新消息：語言備援、分類、分頁、路由（純函式，方便單元測試）
 import type { Locale } from './i18n';
-import type { RawNews } from './home-data';
+import type { RawImage, RawNews } from './home-data';
 
 export const NEWS_PAGE_SIZE = 12;
 export const NEWS_CATEGORIES = ['news', 'event', 'hackathon', 'product', 'media'] as const;
@@ -21,6 +21,7 @@ export interface RawNewsFull extends RawNews {
     metaTitle?: string | null;
     metaDescription?: string | null;
     noIndex?: boolean | null;
+    ogImage?: RawImage | null;
   } | null;
   /** 中英文版本共用的 translation.metadata 編號 */
   group?: string | null;

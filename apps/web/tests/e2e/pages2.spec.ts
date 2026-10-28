@@ -169,6 +169,8 @@ test('內文元件（元件展示頁 MOCK）：標題、清單、外部連結、
 
 test('截圖：第二批頁面（供人工檢查）', async ({ page }, testInfo) => {
   test.setTimeout(240_000);
+  // 表單上的 Turnstile 會持續連線，網路永遠不會「靜下來」；截圖時擋掉
+  await page.route('https://challenges.cloudflare.com/**', (route) => route.abort());
   for (const path of ['/news', '/cases', '/partners', '/academy', '/contact']) {
     await page.goto(path);
     for (let y = 0; y < 12000; y += 700) await page.evaluate((top) => window.scrollTo(0, top), y);

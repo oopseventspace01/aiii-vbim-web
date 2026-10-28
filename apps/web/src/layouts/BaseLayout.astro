@@ -2,6 +2,8 @@
 // 全站共用版型：導覽列（sticky）→ 主要內容 → 頁尾 → 回到頂部按鈕
 import { Font } from 'astro:assets';
 import '../styles/global.css';
+// 本機開發：沒有子集字型，改載入完整的 Noto Sans TC 字型片段（正式環境不載入）
+import devNotoCss from '@fontsource-variable/noto-sans-tc/index.css?url';
 import SiteHeader from '../components/layout/SiteHeader.astro';
 import SiteFooter from '../components/layout/SiteFooter.astro';
 import BackToTop from '../components/layout/BackToTop.astro';
@@ -9,6 +11,16 @@ import { HTML_LANG, getLocaleFromPath, switchLocalePath, type Locale } from '../
 import { UI, type NavKey } from '../i18n/ui';
 import type { FooterInfo } from '../data/site-fallback';
 import { getFooterInfo } from '../lib/site';
+import {
+  DEFAULT_OG_IMAGE,
+  OG_LOCALE,
+  SITE_URL,
+  absoluteUrl,
+  alternateLinks,
+  jsonLdString,
+  organizationJsonLd,
+  pageTitle,
+} from '../lib/seo';
 
 interface Props {
   title: string;
@@ -21,6 +33,11 @@ interface Props {
   alternates?: Partial<Record<Locale, string>>;
   footer?: FooterInfo;
   noindex?: boolean;
+  /** 分享預覽圖（絕對網址或 /public 底下的路徑）；不指定用預設分享圖 */
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  /** 額外的結構化資料（例如消息內頁的 Article、Event） */
+  jsonLd?: object[];
 }
 
 const {
@@ -31,6 +48,9 @@ const {
   alternates: alternatesProp = {},
   footer,
   noindex = false,
+  ogImage,
+  ogType = 'website',
+  jsonLd = [],
 } = Astro.props;
 
 const alternates: Record<Locale, string> = {
@@ -40,6 +60,16 @@ const alternates: Record<Locale, string> = {
 const t = UI[locale];
 // 頁尾公司資訊：頁面沒有傳入時，自動從 Sanity「全站設定」讀取
 const footerInfo = footer ?? (await getFooterInfo(locale));
+
+// SEO（SPEC 7）：標題加品牌名、canonical、hreflang、分享卡片、公司結構化資料
+const site = Astro.site?.origin ?? SITE_URL;
+const fullTitle = pageTitle(title, locale);
+const metaDescription = description?.trim() || footerInfo.footerTagline;
+const canonical = absoluteUrl(Astro.url.pathname, site);
+const hreflangs = alternateLinks(alternates, site);
+const ogImageUrl = absoluteUrl(ogImage ?? DEFAULT_OG_IMAGE, site);
+const otherLocale = locale === 'en' ? 'zh-Hant' : 'en';
+const structured = [organizationJsonLd(footerInfo, locale, site), ...jsonLd];
 ---
 
 <!doctype html>
@@ -47,10 +77,34 @@ const footerInfo = footer ?? (await getFooterInfo(locale));
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>{title}</title>
-    {description && <meta name="description" content={description} />}
+    <title>{fullTitle}</title>
+    <meta name="description" content={metaDescription} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <Font cssVariable="--font-space-grotesk" preload />
+    {!noindex && <link rel="canonical" href={canonical} />}
+    {!noindex && hreflangs.map((l) => <link rel="alternate" hreflang={l.hreflang} href={l.href} />)}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Aiii VBIM" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={OG_LOCALE[locale]} />
+    <meta property="og:locale:alternate" content={OG_LOCALE[otherLocale]} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#2160e8" />
+    {structured.map((data) => (
+      <script type="application/ld+json" set:html={jsonLdString(data)} />
+    ))}
+    <Font cssVariable="--font-space-grotesk" />
+    <!-- 中文子集字型（建置時產生，只在正式環境存在；見 integrations/site-font.mjs） -->
+    {import.meta.env.PROD && <link rel="stylesheet" href="/fonts/site-font.css" />}
+    {import.meta.env.DEV && <link rel="stylesheet" href={devNotoCss} />}
   </head>
   <body class="min-h-screen bg-bg text-navy antialiased">
     <a

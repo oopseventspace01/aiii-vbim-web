@@ -72,7 +72,7 @@ export const ALL_NEWS_QUERY = `*[_type == "news" && publishedAt <= now()] | orde
   registerUrl,
   cover ${IMAGE},
   body,
-  seo { metaTitle, metaDescription, noIndex },
+  seo { metaTitle, metaDescription, noIndex, ogImage ${IMAGE} },
   "group": *[_type == "translation.metadata" && references(^._id)][0]._id
 }`;
 
@@ -105,5 +105,5 @@ export const COURSES_QUERY = `*[_type == "course" && language == $lang] | order(
 
 /** 一般頁（關於、隱私權等） */
 export const PAGE_QUERY = `*[_type == "page" && slug.current == $slug && language in [$lang, "zh-Hant"]]{
-  _id, language, title, body, seo { metaTitle, metaDescription, noIndex }
+  _id, language, title, body, seo { metaTitle, metaDescription, noIndex, ogImage ${IMAGE} }
 }`;

@@ -10,7 +10,8 @@ import RichText from '../rich/RichText.astro';
 import { NEWS_COPY } from '../../content/pages/news';
 import { localizePath, type Locale } from '../../lib/i18n';
 import { categoryLabel, newsDateLabel } from '../../lib/news';
-import { imageUrl } from '../../lib/sanity';
+import { imageUrl, ogImageUrl } from '../../lib/sanity';
+import { articleJsonLd, eventJsonLd } from '../../lib/seo';
 import { toImage, toNewsCard, type NewsCardData } from '../../lib/home-data';
 import { relatedNews, type NewsEntry } from '../../lib/news-data';
 import { isExternalUrl } from '../../lib/rich-text';
@@ -36,6 +37,27 @@ const dateFmt = new Intl.DateTimeFormat(locale === 'en' ? 'en-US' : 'zh-TW', {
 const isEvent = entry.category === 'event';
 // 顯示中文版時，內容語言標示為中文
 const contentLang = entry.fallback ? (entry.language ?? undefined) : undefined;
+
+// 結構化資料（SPEC 7）：消息＝Article；活動類且有日期與地點＝再加 Event
+const ogSource = entry.seo?.ogImage?.asset?.url ? entry.seo.ogImage : cover?.source;
+const seoImage = ogSource ? ogImageUrl(ogSource) : undefined;
+const seoInput = {
+  title: entry.title ?? ui.metaTitle,
+  description: entry.seo?.metaDescription || entry.excerpt || undefined,
+  url: Astro.url.pathname,
+  image: seoImage,
+  publishedAt: entry.publishedAt,
+  language: entry.language ?? locale,
+};
+const event = isEvent
+  ? eventJsonLd({
+      ...seoInput,
+      startDate: entry.eventDate,
+      location: entry.eventLocation,
+      registerUrl: entry.registerUrl,
+    })
+  : null;
+const jsonLd = [articleJsonLd(seoInput), ...(event ? [event] : [])];
 ---
 
 <BaseLayout
@@ -44,6 +66,9 @@ const contentLang = entry.fallback ? (entry.language ?? undefined) : undefined;
   locale={locale}
   active="news"
   noindex={Boolean(entry.seo?.noIndex)}
+  ogImage={seoImage}
+  ogType="article"
+  jsonLd={jsonLd}
 >
   <ComingSoonNotice show={locale === 'en' && entry.fallback} />
 

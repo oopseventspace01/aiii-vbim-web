@@ -83,7 +83,12 @@ export interface CmsPage {
   language?: string;
   title?: string;
   body?: unknown[];
-  seo?: { metaTitle?: string; metaDescription?: string; noIndex?: boolean };
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    noIndex?: boolean;
+    ogImage?: RawImage | null;
+  };
   fallback: boolean;
 }
 /** 一般頁：優先該語言版本，沒有就用中文版（標記 fallback）；都沒有回傳 undefined */

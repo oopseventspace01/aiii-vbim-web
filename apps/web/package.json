@@ -8,9 +8,11 @@
     "preview": "astro preview",
     "typecheck": "astro check",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "lighthouse": "node scripts/lighthouse.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/vercel": "^11.0.15",
     "@fontsource-variable/noto-sans-tc": "^5.3.1",
     "@sanity/client": "^8.9.0",
@@ -24,6 +26,7 @@
     "@astrojs/check": "^0.9.10",
     "@axe-core/playwright": "^4.14.0",
     "@playwright/test": "^1.64.1",
+    "lighthouse": "^13.6.0",
     "typescript": "^6.0.3",
     "vitest": "^5.0.5"
   }

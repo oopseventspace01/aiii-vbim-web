@@ -1,6 +1,5 @@
 @import 'tailwindcss';
-/* 中文字型（可變字重 100–900）：依 unicode-range 分段，瀏覽器只下載頁面用到的字 */
-@import '@fontsource-variable/noto-sans-tc';
+/* 中文字型：正式環境用建置時產生的子集字型（integrations/site-font.mjs），本機開發見 BaseLayout */
 @import './tokens.css';
 
 /* 讓 Tailwind class（如 bg-bg-2、text-navy、bg-blue）對應到 tokens */
@@ -28,9 +27,10 @@
 
   /* 字型由 astro.config.mjs 的 fonts 設定自行託管，這裡接上 Astro 產生的 CSS 變數 */
   --font-display:
-    var(--font-space-grotesk), 'Noto Sans TC Variable', 'PingFang TC', 'Microsoft JhengHei',
-    sans-serif;
-  --font-sans: 'Noto Sans TC Variable', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    var(--font-space-grotesk), 'Noto Sans TC Site', 'Noto Sans TC Variable', 'PingFang TC',
+    'Microsoft JhengHei', sans-serif;
+  --font-sans:
+    'Noto Sans TC Site', 'Noto Sans TC Variable', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
 }
 
 /* 基本樣式放在 base 層，Tailwind 的 class（例如 text-white）才能覆蓋 */
