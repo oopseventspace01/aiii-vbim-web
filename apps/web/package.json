@@ -9,7 +9,8 @@
     "typecheck": "astro check",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "lighthouse": "node scripts/lighthouse.mjs"
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "check:content": "node scripts/check-content.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

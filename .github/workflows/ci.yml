@@ -15,7 +15,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     env:
       SANITY_TELEMETRY_DISABLED: 'true'
       # 網站建置時讀取 Sanity 已發布內容（公開資料，專案 ID 不是機密）
@@ -51,8 +51,12 @@ jobs:
         run: npm run studio:build
 
       - name: 安裝 Playwright 瀏覽器
-        run: npx playwright install --with-deps chromium
+        # Chromium（主要測試）＋ Firefox、WebKit（Safari 核心，瀏覽器相容測試）
+        run: npx playwright install --with-deps chromium firefox webkit
         working-directory: apps/web
+
+      - name: 內容檢查（禁用名稱）
+        run: npm run check:content -w apps/web
 
       - name: E2E 測試（Playwright）
         # Sanity 內容 E2E 需要登入與 .env，只在本機跑（npm run test:e2e -w apps/studio）

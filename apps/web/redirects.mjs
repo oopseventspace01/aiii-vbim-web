@@ -4,3 +4,11 @@
 export const REDIRECTS = {
   '/aiiivbim-en': '/en',
 };
+
+/** 後台（Sanity Studio，放在 Sanity 官方主機）的網址 */
+export const STUDIO_URL = 'https://aiii-vbim.sanity.studio';
+
+// 好記的捷徑：302 暫時轉址（目的地日後可能更換，不讓瀏覽器永久記住）
+export const SHORTCUTS = {
+  '/admin': STUDIO_URL,
+};

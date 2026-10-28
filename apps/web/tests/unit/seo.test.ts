@@ -12,7 +12,7 @@ import {
 } from '../../src/lib/seo';
 import { FOOTER_FALLBACK } from '../../src/data/site-fallback';
 import { collectText } from '../../integrations/site-font.mjs';
-import { REDIRECTS } from '../../redirects.mjs';
+import { REDIRECTS, SHORTCUTS, STUDIO_URL } from '../../redirects.mjs';
 
 describe('網址與標題', () => {
   it('絕對網址：去掉結尾斜線，根目錄保留 /', () => {
@@ -110,5 +110,10 @@ describe('舊網址轉址', () => {
       expect(from.startsWith('/')).toBe(true);
       expect(to.startsWith('/')).toBe(true);
     }
+  });
+
+  it('/admin 捷徑轉到後台（Sanity 官方主機）', () => {
+    expect(SHORTCUTS).toEqual({ '/admin': STUDIO_URL });
+    expect(STUDIO_URL).toMatch(/^https:\/\/[a-z0-9-]+\.sanity\.studio$/);
   });
 });

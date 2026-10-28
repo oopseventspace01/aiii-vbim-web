@@ -90,6 +90,22 @@ test('舊網址 /aiiivbim-en 301 轉到 /en', async ({ request }) => {
   expect(res.headers()['location']).toMatch(/\/en$/);
 });
 
+test('/admin 轉到後台（正式環境為 302，本機開發伺服器一律回 301）', async ({ request }) => {
+  const res = await request.get('/admin', { maxRedirects: 0 });
+  expect([301, 302]).toContain(res.status());
+  expect(res.headers()['location']).toMatch(/^https:\/\/aiii-vbim\.sanity\.studio\/?$/);
+
+  const config = new URL('../../.vercel/output/config.json', import.meta.url);
+  if (existsSync(config)) {
+    const routes = JSON.parse(readFileSync(config, 'utf-8')).routes as {
+      src?: string;
+      status?: number;
+    }[];
+    expect(routes.find((r) => r.src === '^/admin$')?.status).toBe(302);
+    expect(routes.find((r) => r.src === '^/aiiivbim-en$')?.status).toBe(301);
+  }
+});
+
 test('網站地圖（建置後）：中英文頁面互相對應，不含開發頁與 404', async () => {
   const file = new URL('../../dist/client/sitemap-0.xml', import.meta.url);
   test.skip(!existsSync(file), '尚未建置（npm run build 之後才有網站地圖）');

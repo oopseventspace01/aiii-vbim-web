@@ -1,0 +1,45 @@
+name: 更新截圖基準
+
+# 手動執行：GitHub → Actions →「更新截圖基準」→ Run workflow
+# 版面有刻意修改時跑一次，會重新拍 375px 截圖並 commit 回目前的分支
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SANITY_TELEMETRY_DISABLED: 'true'
+      PUBLIC_SANITY_PROJECT_ID: pg0x5cyw
+      PUBLIC_SANITY_DATASET: production
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: 安裝依賴
+        run: npm ci
+
+      - name: 安裝 Playwright 瀏覽器
+        run: npx playwright install --with-deps chromium
+        working-directory: apps/web
+
+      - name: 重新拍攝基準圖
+        run: npx playwright test --project=visual --update-snapshots=all
+        working-directory: apps/web
+
+      - name: Commit 基準圖
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/tests/e2e/__screenshots__
+          git diff --cached --quiet && echo "基準圖沒有變化" && exit 0
+          git commit -m "更新 375px 截圖基準（GitHub Actions）"
+          git push

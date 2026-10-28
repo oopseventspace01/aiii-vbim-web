@@ -3,7 +3,7 @@ import { defineConfig, envField, fontProviders } from 'astro/config';
 import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
-import { REDIRECTS } from './redirects.mjs';
+import { REDIRECTS, SHORTCUTS } from './redirects.mjs';
 import siteFont from './integrations/site-font.mjs';
 import '../../scripts/load-root-env.mjs';
 
@@ -18,9 +18,10 @@ export default defineConfig({
   adapter: vercel(),
   // 舊網址 301 轉址（對照表在 redirects.mjs）。用 Astro 設定而不是 vercel.json：
   // Vercel 轉接器會把它寫進部署設定，本機開發也能測試
-  redirects: Object.fromEntries(
-    Object.entries(REDIRECTS).map(([from, to]) => [from, { status: 301, destination: to }]),
-  ),
+  redirects: Object.fromEntries([
+    ...Object.entries(REDIRECTS).map(([from, to]) => [from, { status: 301, destination: to }]),
+    ...Object.entries(SHORTCUTS).map(([from, to]) => [from, { status: 302, destination: to }]),
+  ]),
   // 網站地圖（SPEC 7）：中英文互相標示對應頁；開發展示頁、404 不列入
   integrations: [
     // 中文字型瘦身：建置後只取網站用到的字（見 integrations/site-font.mjs）
