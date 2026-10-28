@@ -1,7 +1,12 @@
 # n8n 名單工作流規格（SPEC 6.2、6.4；P5 決定 2026-10-20）
 
-網站表單送出後，`/api/lead` 會把資料 POST 給 n8n。n8n 負責：存進 Supabase、通知業務、寄確認信給填表人。
+網站表單送出後，`/api/lead` 會把資料 POST 給 n8n。n8n 負責：存下名單、通知業務、寄確認信給填表人。
 本文件是節點規格與測試資料；n8n 本身的設定不在這個 repo 裡。
+
+> **目前實作（2026-10-28，SPEC P5 決定）**：名單存在 Google 試算表，不是 Supabase（免費名額已滿）。
+> n8n 工作流名稱「Aiii VBIM 官網｜表單名單（webhook）」，節點：Webhook（Header Auth 驗證 `X-Lead-Secret`）→ 整理資料（Code）→ 寫入名單試算表（Google Sheets，分頁 `Untitled`）→ 回應成功／回應失敗 → 確認信給填表人、內部通知信（Gmail）。
+> 寫入失敗時回 500，網站顯示「目前無法送出」；寄信失敗不影響回應。LINE OA 推播尚未加上（待 Channel access token）。
+> 下方第 2、3 節的 Supabase 節點與欄位對應保留，作為日後改回資料庫時的規格。
 
 > **機密不寫在這裡**：Webhook 網址、`X-Lead-Secret`、Supabase service role key、LINE Channel access token、通知收件人（含副本）一律放在 n8n 的 Credentials／環境變數。
 
