@@ -1,6 +1,7 @@
 // Lighthouse 手機版評分（SPEC 8）：先 npm run build，再 npm run lighthouse -w apps/web
 // 用建置好的靜態檔（dist/client）在本機開一個伺服器測，不需要網路上的正式網站。
 // 報告存在 apps/web/.lighthouse/（不進 git）。
+// 測線上網址：設定 LH_BASE，例如 LH_BASE=https://aiii-vbim-web.vercel.app npm run lighthouse -w apps/web
 import { createServer } from 'node:http';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { extname, join } from 'node:path';
@@ -11,6 +12,7 @@ import { chromium } from '@playwright/test';
 
 const ROOT = new URL('../dist/client/', import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1');
 const PORT = 4322;
+const REMOTE = process.env.LH_BASE?.replace(/\/$/, '');
 const PAGES = process.argv.slice(2).length
   ? process.argv.slice(2)
   : ['/', '/platform', '/solutions', '/contact', '/news', '/en'];
@@ -29,7 +31,7 @@ const TYPES = {
   '.txt': 'text/plain',
 };
 
-if (!existsSync(ROOT)) {
+if (!REMOTE && !existsSync(ROOT)) {
   console.error('找不到 dist/client，請先執行 npm run build');
   process.exit(1);
 }
@@ -56,7 +58,7 @@ const server = createServer((req, res) => {
   });
   res.end(compress ? gzipSync(body) : body);
 });
-await new Promise((r) => server.listen(PORT, r));
+if (!REMOTE) await new Promise((r) => server.listen(PORT, r));
 
 const chrome = await chromeLauncher.launch({
   chromePath: chromium.executablePath(),
@@ -68,7 +70,7 @@ mkdirSync(outDir, { recursive: true });
 let failed = false;
 const rows = [];
 for (const page of PAGES) {
-  const result = await lighthouse(`http://localhost:${PORT}${page}`, {
+  const result = await lighthouse(`${REMOTE ?? `http://localhost:${PORT}`}${page}`, {
     port: chrome.port,
     output: 'json',
     logLevel: 'error',
@@ -88,7 +90,7 @@ for (const page of PAGES) {
   writeFileSync(join(outDir, `${page.replace(/\W+/g, '_') || 'home'}.json`), result.report);
 }
 chrome.kill();
-server.close();
+if (!REMOTE) server.close();
 
 console.table(rows);
 console.log(
