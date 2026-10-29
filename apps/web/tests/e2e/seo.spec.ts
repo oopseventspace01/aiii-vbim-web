@@ -15,6 +15,7 @@ const PAGES = [
   '/news',
   '/about',
   '/contact',
+  '/faq',
 ];
 const ALL = [...PAGES, ...PAGES.map((p) => (p === '/' ? '/en' : `/en${p}`))];
 
@@ -100,6 +101,23 @@ test('內頁有麵包屑結構化資料，首頁有軟體產品資料', async ({
     (t) => JSON.parse(t),
   );
   expect(home.map((d) => d['@type'])).toContain('SoftwareApplication');
+});
+
+test('常見問題頁：15 題答案直接顯示在頁面上，並有 FAQPage 結構化資料', async ({ page }) => {
+  for (const path of ['/faq', '/en/faq']) {
+    await page.goto(path);
+    await expect(page.locator('[data-faq] article')).toHaveCount(15);
+    const ld = (await page.locator('script[type="application/ld+json"]').allTextContents()).map(
+      (t) => JSON.parse(t),
+    );
+    const faq = ld.find((d) => d['@type'] === 'FAQPage');
+    expect(faq.mainEntity).toHaveLength(15);
+    // 結構化資料的第一題必須和頁面上看得到的第一題一樣
+    await expect(page.locator('[data-faq] article h3').first()).toHaveText(faq.mainEntity[0].name);
+  }
+  await page.goto('/faq');
+  await expect(page.locator('#vs-bim h3')).toHaveText('Aiii VBIM 跟傳統 BIM 有什麼不同？');
+  await expect(page.locator('footer a[href="/faq"]')).toBeVisible();
 });
 
 test('robots.txt 允許收錄並指向網站地圖', async ({ request }) => {

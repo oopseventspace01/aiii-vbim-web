@@ -15,6 +15,7 @@ const PAGES = [
   '/news',
   '/about',
   '/contact',
+  '/faq',
   '/privacy',
 ];
 const ALL = [...PAGES, ...PAGES.map((p) => (p === '/' ? '/en' : `/en${p}`))];

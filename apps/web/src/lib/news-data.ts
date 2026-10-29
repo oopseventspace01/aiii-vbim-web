@@ -3,7 +3,14 @@ import type { Locale } from './i18n';
 import type { RawImage, RawNews } from './home-data';
 
 export const NEWS_PAGE_SIZE = 12;
-export const NEWS_CATEGORIES = ['news', 'event', 'hackathon', 'product', 'media'] as const;
+export const NEWS_CATEGORIES = [
+  'news',
+  'event',
+  'hackathon',
+  'product',
+  'media',
+  'insight',
+] as const;
 export type NewsCategory = (typeof NEWS_CATEGORIES)[number];
 
 /** 這些網址代稱被列表網址使用，消息不可用 */

@@ -80,6 +80,7 @@ export const UI: Record<Locale, Dict> = {
         links: [
           { label: '關於我們', path: '/about' },
           { label: '最新消息', path: '/news' },
+          { label: '常見問題', path: '/faq' },
           { label: '聯絡我們', path: '/contact' },
           { label: '隱私權政策', path: '/privacy' },
         ],
@@ -133,6 +134,7 @@ export const UI: Record<Locale, Dict> = {
         links: [
           { label: 'About', path: '/about' },
           { label: 'News', path: '/news' },
+          { label: 'FAQ', path: '/faq' },
           { label: 'Contact', path: '/contact' },
           { label: 'Privacy Policy', path: '/privacy' },
         ],

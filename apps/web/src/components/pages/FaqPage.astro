@@ -1,0 +1,65 @@
+---
+// /faq 常見問題（SEO／AEO／GEO）：一問一答、答案直接寫在頁面上（不收合），並輸出 FAQPage 結構化資料
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../blocks/PageHero.astro';
+import Section from '../ui/Section.astro';
+import CtaBand from '../blocks/CtaBand.astro';
+import { FAQ_COPY } from '../../content/pages/faq';
+import { localizePath, type Locale } from '../../lib/i18n';
+import { faqJsonLd } from '../../lib/seo';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = FAQ_COPY[locale];
+const L = (path: string) => localizePath(path, locale);
+const all = copy.groups.flatMap((g) => g.items);
+---
+
+<BaseLayout
+  title={copy.metaTitle}
+  description={copy.lead}
+  locale={locale}
+  jsonLd={[faqJsonLd(all)]}
+>
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} lead={copy.lead} />
+
+  <Section>
+    <div class="flex max-w-[880px] flex-col gap-14" data-faq>
+      {copy.groups.map((group, gi) => (
+        <section aria-labelledby={`faq-group-${gi}`} class="flex flex-col gap-6">
+          <h2 id={`faq-group-${gi}`} class="m-0 text-[1.6rem] font-black">
+            {group.title}
+          </h2>
+          {group.items.map((item) => (
+            <article
+              id={item.id}
+              class="flex flex-col gap-2 rounded-md border border-line bg-white p-6"
+            >
+              <h3 class="m-0 text-lg font-black">{item.q}</h3>
+              <p class="m-0 text-text-2">{item.a}</p>
+              {item.link && (
+                <p class="m-0 text-sm">
+                  {copy.more}
+                  <a href={L(item.link.path)} class="font-bold">
+                    {item.link.label} →
+                  </a>
+                </p>
+              )}
+            </article>
+          ))}
+        </section>
+      ))}
+    </div>
+  </Section>
+
+  <Section>
+    <CtaBand
+      variant="accent"
+      title={copy.ctaTitle}
+      primary={{ label: copy.ctaButton, href: L('/contact') }}
+    />
+  </Section>
+</BaseLayout>

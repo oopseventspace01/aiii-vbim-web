@@ -14,6 +14,8 @@ export const NEWS_CATEGORIES = [
   { title: '黑客松', value: 'hackathon' },
   { title: '媒體報導', value: 'media' },
   { title: '產品發表', value: 'product' },
+  // 2026-10-29 業主同意：SEO／AEO／GEO 主題文章
+  { title: '知識專欄', value: 'insight' },
 ];
 
 type NewsParent = { category?: string; language?: string; internalPath?: string } | undefined;

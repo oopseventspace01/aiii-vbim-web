@@ -456,6 +456,12 @@ n8n
 - 舊網址轉址改用 Astro `redirects` 設定（對照表在 `apps/web/redirects.mjs`），不用 `vercel.json`：網站透過 Vercel 轉接器部署時，Vercel 會忽略 `vercel.json` 的轉址；用 Astro 設定才會寫進部署設定，本機也能測。舊網站（Gamma）只有 `/`、`/aiiivbim-en`、`/contact`、`/news`，只有 `/aiiivbim-en → /en` 需要轉址。
 - 中文字型仍為 Noto Sans TC，正式環境改用「建置時只取網站用到的字」的子集字型（`apps/web/integrations/site-font.mjs`，從 Google Fonts 下載後自行託管），字型下載量約從 1.1MB 降到 300KB。下載失敗或遇到子集沒有的字時，改用系統中文字型顯示。
 - 網站圖示與預設分享圖由 `scripts/generate-icons.mjs` 從 `design/assets/logo.png` 產生；業主提供 logo 向量檔後重新產生。
+
+**SEO／AEO／GEO 決定（2026-10-29 業主同意，SPEC 原本沒有的範圍）**
+- 新增 `/faq`、`/en/faq` 常見問題頁（15 題，答案只取自網站已核准文案，題目見 `docs/faq-draft.md`），輸出 FAQPage 結構化資料；頁尾「公司」欄加「常見問題」連結（設計稿沒有這一頁與連結）。
+- 新增 `/llms.txt`（給 AI 讀的網站簡介，由網站文案自動產生）；首頁加 SoftwareApplication、內頁加 BreadcrumbList 結構化資料；允許 AI 爬蟲收錄。
+- 後台「最新消息」新增分類「知識專欄」（`insight`），用於主題文章；第一批 4 篇初稿在 `docs/articles/`，內容規劃見 `docs/content-plan.md`。
+- 文章封面可用 AI 產生的示意圖（Codex），限文章封面與情境示意，不可用於真實畫面、案例與人物，系統畫面一律標「示意畫面」。
 - 網域切換步驟與回滾方式寫在 `docs/launch-checklist.md`
 
 ---

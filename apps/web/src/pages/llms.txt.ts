@@ -6,6 +6,7 @@ import { ACADEMY_COPY } from '../content/pages/academy';
 import { CASES_COPY } from '../content/pages/cases';
 import { CONTACT_COPY } from '../content/pages/contact';
 import { EDGE_COPY } from '../content/pages/edge-ai';
+import { FAQ_COPY } from '../content/pages/faq';
 import { ENERGY_COPY } from '../content/pages/energy';
 import { NEWS_COPY } from '../content/pages/news';
 import { PARTNERS_COPY } from '../content/pages/partners';
@@ -45,6 +46,7 @@ export const GET: APIRoute = async ({ site }) => {
     return NAV_ITEMS.map(
       (n) => `- [${n.label[l]}](${url(n.path, l)}): ${oneLine(desc[n.key] ?? '')}`,
     ).concat(
+      `- [${l === 'en' ? 'FAQ' : '常見問題'}](${url('/faq', l)}): ${oneLine(FAQ_COPY[l].lead)}`,
       `- [${l === 'en' ? 'Contact' : '聯絡我們'}](${url('/contact', l)}): ${oneLine(CONTACT_COPY[l].lead)}`,
     );
   };

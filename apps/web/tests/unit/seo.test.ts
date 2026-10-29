@@ -5,6 +5,7 @@ import {
   alternateLinks,
   articleJsonLd,
   breadcrumbJsonLd,
+  faqJsonLd,
   softwareJsonLd,
   eventJsonLd,
   jsonLdString,
@@ -15,6 +16,7 @@ import {
 import { FOOTER_FALLBACK } from '../../src/data/site-fallback';
 import { collectText } from '../../integrations/site-font.mjs';
 import { REDIRECTS, SHORTCUTS, STUDIO_URL } from '../../redirects.mjs';
+import { FAQ_COPY } from '../../src/content/pages/faq';
 
 describe('網址與標題', () => {
   it('絕對網址：去掉結尾斜線，根目錄保留 /', () => {
@@ -141,5 +143,30 @@ describe('AEO／GEO 結構化資料', () => {
       [1, 'https://aiiivbim.com/'],
       [2, 'https://aiiivbim.com/platform'],
     ]);
+  });
+});
+
+describe('常見問題', () => {
+  it('中英文題目一一對應（同樣的 id 與數量），每題都有答案', () => {
+    const ids = (l: 'zh-Hant' | 'en') =>
+      FAQ_COPY[l].groups.flatMap((g) => g.items.map((i) => i.id));
+    expect(ids('zh-Hant')).toHaveLength(15);
+    expect(ids('en')).toEqual(ids('zh-Hant'));
+    for (const l of ['zh-Hant', 'en'] as const) {
+      for (const item of FAQ_COPY[l].groups.flatMap((g) => g.items)) {
+        expect(item.q.length, item.id).toBeGreaterThan(4);
+        expect(item.a.length, item.id).toBeGreaterThan(20);
+      }
+    }
+  });
+
+  it('FAQPage 結構化資料與頁面文字一致', () => {
+    const items = FAQ_COPY['zh-Hant'].groups.flatMap((g) => g.items);
+    const ld = faqJsonLd(items);
+    expect(ld.mainEntity).toHaveLength(15);
+    expect(ld.mainEntity[1]).toMatchObject({
+      name: 'Aiii VBIM 跟傳統 BIM 有什麼不同？',
+      acceptedAnswer: { text: items[1].a },
+    });
   });
 });

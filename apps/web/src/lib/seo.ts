@@ -148,3 +148,16 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[], site =
     })),
   };
 }
+
+/** 常見問題頁：FAQPage（問答內容必須和頁面上看得到的文字一致） */
+export function faqJsonLd(items: { q: string; a: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((it) => ({
+      '@type': 'Question',
+      name: it.q,
+      acceptedAnswer: { '@type': 'Answer', text: it.a },
+    })),
+  };
+}

@@ -28,6 +28,7 @@ export const NEWS_CATEGORY_LABEL: Record<string, Record<Locale, string>> = {
   hackathon: { 'zh-Hant': '黑客松', en: 'Hackathon' },
   media: { 'zh-Hant': '媒體報導', en: 'Media' },
   product: { 'zh-Hant': '產品發表', en: 'Product' },
+  insight: { 'zh-Hant': '知識專欄', en: 'Insights' },
 };
 
 export function categoryLabel(category: string | undefined, locale: Locale): string {
