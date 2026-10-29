@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "sanity dev",
     "build": "sanity build",
-    "deploy": "sanity deploy --url aiii-vbim",
+    "deploy": "sanity deploy",
     "typecheck": "tsc --noEmit",
     "seed": "sanity exec ../../scripts/seed.ts --with-user-token",
     "seed:force": "sanity exec ../../scripts/seed.ts --with-user-token -- --force",
