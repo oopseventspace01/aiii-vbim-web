@@ -29,3 +29,7 @@ docs/需求表/*
 
 # Lighthouse 報告（本機）
 apps/web/.lighthouse/
+
+# Vercel 指令工具（vercel link）產生的連結設定與暫時憑證
+.vercel
+.env.local
