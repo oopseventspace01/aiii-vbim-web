@@ -30,7 +30,7 @@
   - 需求表：`CHECKLIST_FORM_*`、`CHECKLIST_PDF_*`
   - GA4（選填）：`PUBLIC_GA_ID`
 - [ ] Turnstile Widget 的主機名稱加上 `aiiivbim.com` 與 `www.aiiivbim.com`
-- [ ] Sanity Webhook 指向 Vercel Deploy Hook（後台發布後自動重建）
+- [x] Sanity Webhook 指向 Vercel Deploy Hook（後台發布後自動重建）— 2026-10-29 已設定並實測，約 20～40 秒完成重建。換成正式網域不用重設。
 - [ ] 在 Vercel 預覽網址跑一次：表單三種身分各送一筆、檢查確認信與試算表
 - [ ] 用 [PageSpeed Insights](https://pagespeed.web.dev/) 測預覽網址：手機效能 ≥ 90、無障礙 ≥ 95、SEO ≥ 95（SPEC 8）
 - [ ] 隱私權政策已在後台發布（目前顯示「制定中」且不收錄）
