@@ -3,6 +3,7 @@
 // 後台提供：Hero 標語／副標／內文、影片網址、封面、背書條、戰情室截圖、最新消息、頁尾公司資訊
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { softwareJsonLd } from '../../lib/seo';
 import Section from '../ui/Section.astro';
 import SectionHeader from '../ui/SectionHeader.astro';
 import Button from '../ui/Button.astro';
@@ -62,6 +63,7 @@ const newsGroups = [
   locale={locale}
   active="home"
   footer={footer}
+  jsonLd={[softwareJsonLd(footer, data.metaDescription || footer.footerTagline)]}
 >
   <!-- 2. Hero -->
   <Hero

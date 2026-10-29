@@ -117,3 +117,34 @@ export function eventJsonLd(
 export function jsonLdString(data: unknown): string {
   return JSON.stringify(data).replace(/</g, '\\u003c');
 }
+
+/** 首頁：Aiii VBIM 軟體產品（App 下載連結來自全站設定；不放評分等沒有根據的資料） */
+export function softwareJsonLd(info: FooterInfo, description: string, site = SITE_URL) {
+  const stores = [info.appStoreUrl, info.googlePlayUrl].filter((u): u is string => Boolean(u));
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: SITE_NAME,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'iOS, Android, Web',
+    description,
+    url: `${site}/`,
+    ...(stores.length ? { downloadUrl: stores, installUrl: stores } : {}),
+    publisher: { '@type': 'Organization', name: SITE_NAME, url: `${site}/` },
+  };
+}
+
+/** 麵包屑：首頁 → 所屬區塊 → 目前頁（內頁才有） */
+export function breadcrumbJsonLd(items: { name: string; path: string }[], site = SITE_URL) {
+  if (items.length < 2) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((it, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: it.name,
+      item: absoluteUrl(it.path, site),
+    })),
+  };
+}

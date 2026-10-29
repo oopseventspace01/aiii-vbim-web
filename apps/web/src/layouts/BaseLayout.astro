@@ -7,8 +7,14 @@ import devNotoCss from '@fontsource-variable/noto-sans-tc/index.css?url';
 import SiteHeader from '../components/layout/SiteHeader.astro';
 import SiteFooter from '../components/layout/SiteFooter.astro';
 import BackToTop from '../components/layout/BackToTop.astro';
-import { HTML_LANG, getLocaleFromPath, switchLocalePath, type Locale } from '../lib/i18n';
-import { UI, type NavKey } from '../i18n/ui';
+import {
+  HTML_LANG,
+  getLocaleFromPath,
+  localizePath,
+  switchLocalePath,
+  type Locale,
+} from '../lib/i18n';
+import { NAV_ITEMS, UI, type NavKey } from '../i18n/ui';
 import type { FooterInfo } from '../data/site-fallback';
 import { getFooterInfo } from '../lib/site';
 import {
@@ -17,6 +23,7 @@ import {
   SITE_URL,
   absoluteUrl,
   alternateLinks,
+  breadcrumbJsonLd,
   jsonLdString,
   organizationJsonLd,
   pageTitle,
@@ -69,7 +76,21 @@ const canonical = absoluteUrl(Astro.url.pathname, site);
 const hreflangs = alternateLinks(alternates, site);
 const ogImageUrl = absoluteUrl(ogImage ?? DEFAULT_OG_IMAGE, site);
 const otherLocale = locale === 'en' ? 'zh-Hant' : 'en';
-const structured = [organizationJsonLd(footerInfo, locale, site), ...jsonLd];
+// 麵包屑：首頁 → 導覽列上的區塊 → 更深一層時加上目前頁標題
+const homePath = locale === 'en' ? '/en' : '/';
+const section = NAV_ITEMS.find((n) => n.key === active);
+const crumbs = [{ name: 'Aiii VBIM', path: homePath }];
+if (section) crumbs.push({ name: section.label[locale], path: localizePath(section.path, locale) });
+const sectionPath = crumbs[1]?.path;
+if (section && sectionPath && Astro.url.pathname.replace(/\/$/, '') !== sectionPath) {
+  crumbs.push({ name: title, path: Astro.url.pathname });
+}
+const breadcrumb = noindex ? null : breadcrumbJsonLd(crumbs, site);
+const structured = [
+  organizationJsonLd(footerInfo, locale, site),
+  ...(breadcrumb ? [breadcrumb] : []),
+  ...jsonLd,
+];
 ---
 
 <!doctype html>

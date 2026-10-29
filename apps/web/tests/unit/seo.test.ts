@@ -4,6 +4,8 @@ import {
   absoluteUrl,
   alternateLinks,
   articleJsonLd,
+  breadcrumbJsonLd,
+  softwareJsonLd,
   eventJsonLd,
   jsonLdString,
   localeAlternates,
@@ -115,5 +117,29 @@ describe('舊網址轉址', () => {
   it('/admin 捷徑轉到後台（Sanity 官方主機）', () => {
     expect(SHORTCUTS).toEqual({ '/admin': STUDIO_URL });
     expect(STUDIO_URL).toMatch(/^https:\/\/[a-z0-9-]+\.sanity\.studio$/);
+  });
+});
+
+describe('AEO／GEO 結構化資料', () => {
+  it('軟體產品：下載連結來自全站設定，不放評分', () => {
+    const app = softwareJsonLd(FOOTER_FALLBACK['zh-Hant'], '說明');
+    expect(app).toMatchObject({ '@type': 'SoftwareApplication', name: 'Aiii VBIM' });
+    expect(app.downloadUrl).toEqual([
+      FOOTER_FALLBACK['zh-Hant'].appStoreUrl,
+      FOOTER_FALLBACK['zh-Hant'].googlePlayUrl,
+    ]);
+    expect(app).not.toHaveProperty('aggregateRating');
+  });
+
+  it('麵包屑：首頁沒有，內頁依序列出', () => {
+    expect(breadcrumbJsonLd([{ name: 'Aiii VBIM', path: '/' }])).toBeNull();
+    const b = breadcrumbJsonLd([
+      { name: 'Aiii VBIM', path: '/' },
+      { name: '平台 OS', path: '/platform' },
+    ]);
+    expect(b?.itemListElement.map((i) => [i.position, i.item])).toEqual([
+      [1, 'https://aiiivbim.com/'],
+      [2, 'https://aiiivbim.com/platform'],
+    ]);
   });
 });

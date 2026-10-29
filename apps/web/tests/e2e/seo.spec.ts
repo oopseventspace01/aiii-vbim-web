@@ -75,6 +75,33 @@ test.describe('每頁的 SEO 設定', () => {
   });
 });
 
+test('llms.txt：給 AI 讀的網站簡介，含主要頁面與公司資訊', async ({ request }) => {
+  const res = await request.get('/llms.txt');
+  expect(res.status()).toBe(200);
+  const body = await res.text();
+  expect(body.startsWith('# Aiii VBIM')).toBe(true);
+  expect(body).toContain('(https://aiiivbim.com/platform)');
+  expect(body).toContain('(https://aiiivbim.com/en/edge-ai)');
+  expect(body).toContain('## 公司資訊');
+});
+
+test('內頁有麵包屑結構化資料，首頁有軟體產品資料', async ({ page }) => {
+  await page.goto('/platform');
+  const ld = (await page.locator('script[type="application/ld+json"]').allTextContents()).map((t) =>
+    JSON.parse(t),
+  );
+  const crumb = ld.find((d) => d['@type'] === 'BreadcrumbList');
+  expect(crumb.itemListElement.map((i: { name: string }) => i.name)).toEqual([
+    'Aiii VBIM',
+    '平台 OS',
+  ]);
+  await page.goto('/');
+  const home = (await page.locator('script[type="application/ld+json"]').allTextContents()).map(
+    (t) => JSON.parse(t),
+  );
+  expect(home.map((d) => d['@type'])).toContain('SoftwareApplication');
+});
+
 test('robots.txt 允許收錄並指向網站地圖', async ({ request }) => {
   const res = await request.get('/robots.txt');
   expect(res.status()).toBe(200);
