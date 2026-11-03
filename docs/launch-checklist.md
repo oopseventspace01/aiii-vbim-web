@@ -27,7 +27,7 @@
   - Sanity：`PUBLIC_SANITY_PROJECT_ID`、`PUBLIC_SANITY_DATASET`、`SANITY_API_READ_TOKEN`
   - 表單：`N8N_LEAD_WEBHOOK_URL`、`N8N_LEAD_SECRET`
   - Turnstile：`PUBLIC_TURNSTILE_SITE_KEY`、`TURNSTILE_SECRET_KEY`（**正式金鑰**，不可用測試金鑰）
-  - 需求表：`CHECKLIST_FORM_*`、`CHECKLIST_PDF_*`
+  - 需求表：`CHECKLIST_FORM_*`、`CHECKLIST_PDF_*`（值都在本機 `.env`；PDF 已於 2026-11-03 上傳雲端硬碟並實測確認信附連結）
   - GA4（選填）：`PUBLIC_GA_ID`
 - [ ] Turnstile Widget 的主機名稱加上 `aiiivbim.com` 與 `www.aiiivbim.com`
 - [x] Sanity Webhook 指向 Vercel Deploy Hook（後台發布後自動重建）— 2026-10-29 已設定並實測，約 20～40 秒完成重建。換成正式網域不用重設。
