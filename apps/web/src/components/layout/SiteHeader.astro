@@ -5,7 +5,7 @@ import { Image } from 'astro:assets';
 import logo from '../../assets/brand/logo.png';
 import Icon from '../ui/Icon.astro';
 import { localizePath, type Locale } from '../../lib/i18n';
-import { CONTACT_PATH, NAV_ITEMS, UI, type NavKey } from '../../i18n/ui';
+import { CONTACT_PATH, MENU_GROUPS, NAV_ITEMS, UI, type NavKey } from '../../i18n/ui';
 
 interface Props {
   locale: Locale;
@@ -20,6 +20,15 @@ const links = NAV_ITEMS.map((item) => ({
   ...item,
   href: localizePath(item.path, locale),
   current: item.key === active,
+}));
+// 手機選單：分組＋子項目（例如 PMIS 在 Aiii VBIM 底下）
+const groups = MENU_GROUPS.map((g) => ({
+  title: g.title[locale],
+  links: g.links.map((l) => ({
+    ...l,
+    href: localizePath(l.path, locale),
+    current: Boolean(l.key) && l.key === active,
+  })),
 }));
 const homeHref = localizePath('/', locale);
 const ctaHref = localizePath(CONTACT_PATH, locale);
@@ -134,22 +143,40 @@ const ctaHref = localizePath(CONTACT_PATH, locale);
   class="fixed inset-x-0 top-[72px] bottom-0 z-[49] flex flex-col overflow-y-auto overscroll-contain bg-white px-5 pt-2 pb-[calc(24px+env(safe-area-inset-bottom))] lg:hidden"
   data-menu-panel
 >
-  <ul class="m-0 list-none p-0">
-    {links.map((l) => (
-      <li>
-        <a
-          href={l.href}
-          aria-current={l.current ? 'page' : undefined}
-          class:list={[
-            'block min-h-12 border-b border-[#edf2f9] px-1 py-4 text-lg no-underline',
-            l.current ? 'font-black text-blue' : 'font-bold text-navy',
-          ]}
+  <div class="flex flex-col gap-4">
+    {groups.map((g) => (
+      <section aria-label={g.title}>
+        <p
+          aria-hidden="true"
+          class="m-0 px-1 pt-2 pb-1 text-[13px] font-bold tracking-[0.08em] text-text-2"
         >
-          {l.label[locale]}
-        </a>
-      </li>
+          {g.title}
+        </p>
+        <ul class="m-0 list-none p-0">
+          {g.links.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                aria-current={l.current ? 'page' : undefined}
+                class:list={[
+                  'block min-h-12 border-b border-[#edf2f9] py-3.5 no-underline',
+                  l.sub ? 'pl-5 text-base' : 'px-1 text-lg',
+                  l.current
+                    ? 'font-black text-blue'
+                    : l.sub
+                      ? 'font-bold text-text-2'
+                      : 'font-bold text-navy',
+                ]}
+              >
+                {l.sub && <span aria-hidden="true">└ </span>}
+                {l.label[locale]}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
     ))}
-  </ul>
+  </div>
   <div class="flex items-center gap-2.5 pt-5" role="group" aria-label={t.langLabel}>
     <a
       href={alternates['zh-Hant']}

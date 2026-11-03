@@ -2,7 +2,7 @@
 
 > ⚠️ **草稿，待法務確認**（2026-10-20 由 Claude Code 依 SPEC 第 6 節表單實際蒐集的資料起草）
 >
-> - 這份草稿**尚未放進後台**，網站 `/privacy` 目前顯示「制定中」說明。
+> - 2026-11-03：依目前實際使用的服務更新（資料存 Google 試算表、確認信用 Gmail），並放進後台「一般頁」成為草稿（勾選「待審稿」）；網站 `/privacy` 在發布前仍顯示「制定中」說明。
 > - 標示 `[TBD]` 的地方需要業主或法務決定。
 > - 審閱完成後：到 Studio「一般頁」新增中文與英文版，網址代稱填 `privacy`，貼上定稿內容並發布，網站重建後就會顯示。
 > - 本草稿依個人資料保護法第 8 條應告知事項的架構撰寫，**不構成法律意見**。
@@ -43,15 +43,15 @@
 
 為提供服務，我們使用下列服務供應商處理資料（僅限於提供服務所需）：
 
-| 服務                                           | 用途                                                       |
-| ---------------------------------------------- | ---------------------------------------------------------- |
-| Vercel                                         | 網站主機與表單傳送                                         |
-| Cloudflare Turnstile                           | 表單防垃圾驗證                                             |
-| n8n（本公司自行架設）                          | 表單資料轉送與通知                                         |
-| Supabase                                       | 表單資料儲存                                               |
-| LINE 官方帳號                                  | 通知本公司負責同仁（不會以此主動傳訊給您，除非您加入好友） |
-| Email 服務 [TBD：例如 Gmail／Google Workspace] | 寄送確認信與聯繫                                           |
-| Google Analytics [TBD]                         | 匿名化網站使用統計                                         |
+| 服務                              | 用途                                                       |
+| --------------------------------- | ---------------------------------------------------------- |
+| Vercel                            | 網站主機與表單傳送                                         |
+| Cloudflare Turnstile              | 表單防垃圾驗證                                             |
+| n8n（本公司自行架設）             | 表單資料轉送與通知                                         |
+| Google 試算表（Google Sheets）    | 表單資料儲存                                               |
+| LINE 官方帳號 [TBD：啟用後才列入] | 通知本公司負責同仁（不會以此主動傳訊給您，除非您加入好友） |
+| Gmail（Google）                   | 寄送確認信與聯繫                                           |
+| Google Analytics [TBD]            | 匿名化網站使用統計                                         |
 
 ### 四、您的權利
 
@@ -96,7 +96,7 @@ Last updated: [TBD]
 
 **2. Data we collect** — Name, email, phone (optional), company or organization; your role (owner/enterprise, vendor/SI/technology partner, professional), your message, partner type, courses or modules of interest and any other optional details you provide; the page you submitted from, site language, tracking parameters (such as UTM) and submission time. Forms are protected by Cloudflare Turnstile. If Google Analytics is enabled, anonymized browsing statistics are collected via cookies. [TBD] Please do not submit sensitive data such as national ID or financial account numbers.
 
-**3. Retention, location, recipients and methods** — Data is kept until [TBD, e.g. 3 years] after the purpose is fulfilled or as required by law, and you may request deletion at any time. Data is processed in Taiwan and in the regions where our service providers operate: Vercel (hosting), Cloudflare Turnstile (spam protection), n8n (self-hosted form processing), Supabase (storage), LINE Official Account (internal notifications), email [TBD] and Google Analytics [TBD]. Recipients are limited to our staff [TBD: affiliated companies] responsible for handling your request.
+**3. Retention, location, recipients and methods** — Data is kept until [TBD, e.g. 3 years] after the purpose is fulfilled or as required by law, and you may request deletion at any time. Data is processed in Taiwan and in the regions where our service providers operate: Vercel (hosting), Cloudflare Turnstile (spam protection), n8n (self-hosted form processing), Google Sheets (storage), Gmail (confirmation emails), LINE Official Account (internal notifications, [TBD: once enabled]) and Google Analytics [TBD]. Recipients are limited to our staff [TBD: affiliated companies] responsible for handling your request.
 
 **4. Your rights** — Under Taiwan's Personal Data Protection Act, you may request to access, obtain a copy of, correct, stop the processing of, or delete your personal data by emailing [TBD]. We will respond within [TBD] days.
 

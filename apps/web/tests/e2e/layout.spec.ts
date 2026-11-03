@@ -132,9 +132,9 @@ test.describe('手機漢堡選單', () => {
     // 背景鎖住捲動
     expect(await page.evaluate(() => document.documentElement.style.overflow)).toBe('hidden');
 
-    // 10 個連結＋中文／EN＋預約 Demo，捲到每一個都看得到
+    // 12 個連結（10 頁＋PMIS＋常見問題）＋中文／EN＋預約 Demo，捲到每一個都看得到
     const items = panel.locator('a');
-    await expect(items).toHaveCount(13);
+    await expect(items).toHaveCount(15);
     for (const item of await items.all()) {
       await item.scrollIntoViewIfNeeded();
       await expect(item).toBeInViewport();
@@ -170,6 +170,22 @@ test.describe('手機漢堡選單', () => {
     await page.locator('#site-menu').getByRole('link', { name: 'EN' }).click();
     await expect(page).toHaveURL(/\/dev\/en$/);
     await expect(page.locator('#site-menu')).toBeHidden();
+  });
+
+  test('選單分組：5 組、PMIS 在 Aiii VBIM 底下，點了捲到 PMIS 區塊', async ({ page }) => {
+    await page.goto('/vbim');
+    await page.locator('[data-menu-toggle]').click();
+    const menu = page.locator('#site-menu');
+    await expect(menu.locator('section')).toHaveCount(5);
+    const names = await menu.locator('section').nth(1).getByRole('link').allInnerTexts();
+    expect(names.map((n) => n.replace('└', '').trim()).slice(0, 2)).toEqual([
+      'Aiii VBIM',
+      'PMIS 工程管理',
+    ]);
+    await menu.getByRole('link', { name: 'PMIS 工程管理' }).click();
+    await expect(menu).toBeHidden();
+    await expect(page).toHaveURL(/\/vbim#pmis$/);
+    await expect(page.locator('#pmis h2')).toBeInViewport();
   });
 });
 

@@ -1,5 +1,6 @@
 ---
 // /vbim（design/pages/VBIM.dc.html）：第六代智慧建築、六大核心價值、生命週期、競爭優勢、產品家族、真實畫面、媒體報導
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../ui/Section.astro';
 import SectionHeader from '../ui/SectionHeader.astro';
@@ -11,8 +12,12 @@ import InfoCard from '../cards/InfoCard.astro';
 import city from '../../assets/illustrations/city.jpg';
 import realDemo from '../../assets/illustrations/real-demo.jpg';
 import realScreens from '../../assets/illustrations/real-screens.jpg';
+import pmisMachineRoom from '../../assets/illustrations/pmis-machine-room.jpg';
+import pmisIntegrated from '../../assets/illustrations/pmis-integrated-model.jpg';
+import pmisCeiling from '../../assets/illustrations/pmis-ceiling-piping.jpg';
 import design from '../../content/design/VBIM.json';
 import { VBIM_COPY } from '../../content/pages/vbim';
+import { PMIS_COPY } from '../../content/pages/pmis';
 import { localizePath, type Locale } from '../../lib/i18n';
 import { getFooterInfo, getLatestMedia } from '../../lib/site';
 import { HOME } from '../../content/home';
@@ -23,6 +28,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const copy = VBIM_COPY[locale];
+const pmis = PMIS_COPY[locale];
 const data = design[locale] as {
   pillars: { no: string; t: string; d: string }[];
   down: string[];
@@ -128,6 +134,88 @@ const stores = [
           </>
         ))}
       </ol>
+    </div>
+  </Section>
+
+  <!-- PMIS 工程管理（2026-11-03 業主指示新增；選單「PMIS 工程管理」連到 #pmis） -->
+  <Section tone="navy" id="pmis" labelledby="vbim-pmis" class="scroll-mt-[72px]">
+    <div class="flex flex-col gap-8">
+      <SectionHeader
+        id="vbim-pmis"
+        tone="dark"
+        eyebrow={pmis.eyebrow}
+        title={pmis.title}
+        lead={pmis.lead}
+      />
+      <ol class="m-0 flex list-none flex-wrap items-center gap-2 p-0" aria-label={pmis.eyebrow}>
+        {pmis.flow.map((f, i) => (
+          <>
+            <li class="rounded-pill bg-blue px-5 py-2 text-lg font-black text-white">{f}</li>
+            {i < pmis.flow.length - 1 && (
+              <li aria-hidden="true" class="text-xl font-bold text-[#aebdd6]">
+                →
+              </li>
+            )}
+          </>
+        ))}
+      </ol>
+
+      <div class="flex flex-col gap-3.5">
+        <h3 class="m-0 text-lg font-black text-white">{pmis.stagesTitle}</h3>
+        <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(230px,100%),1fr))] gap-3.5 p-0">
+          {pmis.stages.map((s) => (
+            <li class="flex flex-col gap-1.5 rounded-[18px] border border-white/16 bg-white/6 p-5">
+              <span class="text-base font-black text-white">{s.t}</span>
+              <span class="text-[15px] leading-relaxed text-[#d5def0]">{s.d}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] gap-3.5">
+        <div class="flex flex-col gap-3 rounded-[20px] bg-white p-[26px] text-navy">
+          <h3 class="m-0 text-base font-black">{pmis.stepsTitle}</h3>
+          <ol class="m-0 flex list-none flex-col gap-2 p-0">
+            {pmis.steps.map((s, i) => (
+              <li class="flex items-center gap-3 text-[15px] font-bold">
+                <span class="inline-flex h-7 w-7 flex-none items-center justify-center rounded-full bg-blue-soft font-display text-sm text-blue">
+                  {i + 1}
+                </span>
+                {s}
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div class="flex flex-col gap-3 rounded-[20px] bg-white p-[26px] text-navy">
+          <h3 class="m-0 text-base font-black">{pmis.servicesTitle}</h3>
+          <ul class="m-0 flex list-none flex-col gap-2 p-0">
+            {pmis.services.map((s) => (
+              <li class="text-[15px] text-text-2">✓ {s}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-3.5">
+        {[
+          { src: pmisMachineRoom, alt: pmis.figures.machineRoom },
+          { src: pmisIntegrated, alt: pmis.figures.integrated },
+          { src: pmisCeiling, alt: pmis.figures.ceiling },
+        ].map((f) => (
+          <figure class="m-0 flex flex-col gap-2">
+            <Image
+              src={f.src}
+              alt={f.alt}
+              widths={[480, 800]}
+              sizes="(min-width: 1024px) 380px, 100vw"
+              class="aspect-[16/10] w-full rounded-[14px] bg-white object-cover"
+            />
+            <figcaption class="text-[13px] leading-snug text-[#d5def0]">{f.alt}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <div>
+        <Button href={L('/contact')}>{pmis.cta}</Button>
+      </div>
     </div>
   </Section>
 

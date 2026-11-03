@@ -2,20 +2,61 @@
 // 公司名稱、地址等會由 Sanity「全站設定」提供（P3 串接）。
 import type { Locale } from '../lib/i18n';
 
+// 2026-11-03 業主指示：「VBIM」改名「Aiii VBIM」、最新消息往前放
 export const NAV_ITEMS = [
-  { key: 'vbim', path: '/vbim', label: { 'zh-Hant': 'VBIM', en: 'VBIM' } },
+  { key: 'news', path: '/news', label: { 'zh-Hant': '最新消息', en: 'News' } },
+  { key: 'vbim', path: '/vbim', label: { 'zh-Hant': 'Aiii VBIM', en: 'Aiii VBIM' } },
   { key: 'platform', path: '/platform', label: { 'zh-Hant': '平台 OS', en: 'Platform' } },
-  { key: 'solutions', path: '/solutions', label: { 'zh-Hant': '五大領域', en: 'Sectors' } },
   { key: 'energy', path: '/energy', label: { 'zh-Hant': '能源 × 空調', en: 'Energy & HVAC' } },
   { key: 'edge', path: '/edge-ai', label: { 'zh-Hant': '地端 AI', en: 'Edge AI' } },
+  { key: 'solutions', path: '/solutions', label: { 'zh-Hant': '五大領域', en: 'Sectors' } },
   { key: 'cases', path: '/cases', label: { 'zh-Hant': '案例', en: 'Cases' } },
   { key: 'partners', path: '/partners', label: { 'zh-Hant': '生態夥伴', en: 'Partners' } },
   { key: 'academy', path: '/academy', label: { 'zh-Hant': '認證學院', en: 'Academy' } },
-  { key: 'news', path: '/news', label: { 'zh-Hant': '最新消息', en: 'News' } },
   { key: 'about', path: '/about', label: { 'zh-Hant': '關於我們', en: 'About' } },
 ] as const;
 
 export type NavKey = (typeof NAV_ITEMS)[number]['key'] | 'home' | 'contact';
+
+type Label = Record<Locale, string>;
+export type MenuLink = { key?: NavKey; path: string; label: Label; sub?: boolean };
+
+/** 手機漢堡選單的分組（2026-11-03 業主指示；桌機導覽列不分組） */
+export const MENU_GROUPS: { title: Label; links: MenuLink[] }[] = (() => {
+  const nav = (key: NavKey): MenuLink => {
+    const item = NAV_ITEMS.find((n) => n.key === key)!;
+    return { key, path: item.path, label: item.label };
+  };
+  return [
+    { title: { 'zh-Hant': '最新動態', en: 'Updates' }, links: [nav('news')] },
+    {
+      title: { 'zh-Hant': '產品與平台', en: 'Products & Platform' },
+      links: [
+        nav('vbim'),
+        {
+          path: '/vbim#pmis',
+          label: { 'zh-Hant': 'PMIS 工程管理', en: 'PMIS' },
+          sub: true,
+        },
+        nav('platform'),
+        nav('energy'),
+        nav('edge'),
+      ],
+    },
+    {
+      title: { 'zh-Hant': '應用與案例', en: 'Sectors & Cases' },
+      links: [nav('solutions'), nav('cases')],
+    },
+    {
+      title: { 'zh-Hant': '生態與學院', en: 'Ecosystem & Academy' },
+      links: [nav('partners'), nav('academy')],
+    },
+    {
+      title: { 'zh-Hant': '關於', en: 'About' },
+      links: [nav('about'), { path: '/faq', label: { 'zh-Hant': '常見問題', en: 'FAQ' } }],
+    },
+  ];
+})();
 
 export const CONTACT_PATH = '/contact';
 

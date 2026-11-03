@@ -5,7 +5,7 @@ import { expect, test } from '@playwright/test';
 const PAGES = [
   {
     path: '/vbim',
-    nav: 'VBIM',
+    nav: 'Aiii VBIM',
     h1: { 'zh-Hant': '第六代智慧建築', en: '6th-Generation Smart Building' },
   },
   {

@@ -8,6 +8,7 @@
     "deploy": "sanity deploy",
     "typecheck": "tsc --noEmit",
     "import:articles": "sanity exec ../../scripts/import-articles.ts --with-user-token",
+    "import:privacy": "sanity exec ../../scripts/import-privacy.ts --with-user-token",
     "seed": "sanity exec ../../scripts/seed.ts --with-user-token",
     "seed:force": "sanity exec ../../scripts/seed.ts --with-user-token -- --force",
     "test": "vitest run",
