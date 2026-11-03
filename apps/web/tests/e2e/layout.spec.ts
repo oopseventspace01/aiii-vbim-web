@@ -125,6 +125,9 @@ test.describe('手機漢堡選單', () => {
     // 面板從導覽列下緣開始，不被遮住
     const box = await panel.boundingBox();
     expect(box?.y).toBe(72);
+    // 面板撐滿到畫面底部（header 的毛玻璃效果曾讓面板被壓成 32px 高）
+    const viewportHeight = page.viewportSize()?.height ?? 0;
+    expect(box?.height).toBeCloseTo(viewportHeight - 72, 0);
 
     // 背景鎖住捲動
     expect(await page.evaluate(() => document.documentElement.style.overflow)).toBe('hidden');

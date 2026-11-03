@@ -122,57 +122,61 @@ const ctaHref = localizePath(CONTACT_PATH, locale);
       </span>
     </button>
   </nav>
+</header>
 
-  <div
-    id="site-menu"
-    hidden
-    class="fixed inset-x-0 top-[72px] bottom-0 z-[49] flex flex-col overflow-y-auto overscroll-contain bg-white px-5 pt-2 pb-[calc(24px+env(safe-area-inset-bottom))] lg:hidden"
-    data-menu-panel
-  >
-    <ul class="m-0 list-none p-0">
-      {links.map((l) => (
-        <li>
-          <a
-            href={l.href}
-            aria-current={l.current ? 'page' : undefined}
-            class:list={[
-              'block min-h-12 border-b border-[#edf2f9] px-1 py-4 text-lg no-underline',
-              l.current ? 'font-black text-blue' : 'font-bold text-navy',
-            ]}
-          >
-            {l.label[locale]}
-          </a>
-        </li>
-      ))}
-    </ul>
-    <div class="flex items-center gap-2.5 pt-5" role="group" aria-label={t.langLabel}>
-      <a
-        href={alternates['zh-Hant']}
-        lang="zh-Hant"
-        hreflang="zh-Hant"
-        aria-current={locale === 'zh-Hant' ? 'true' : undefined}
-        class="flex-1 rounded-xl border border-line p-3 text-center font-bold text-navy no-underline"
-      >
-        中文
-      </a>
-      <a
-        href={alternates.en}
-        lang="en"
-        hreflang="en"
-        aria-current={locale === 'en' ? 'true' : undefined}
-        class="flex-1 rounded-xl border border-line p-3 text-center font-display font-bold text-navy no-underline"
-      >
-        EN
-      </a>
-    </div>
+<!--
+  手機選單面板放在 header 外面：header 有 backdrop-filter（毛玻璃），
+  會讓裡面的 position: fixed 改以 header（72px 高）為範圍，面板會被壓扁。
+-->
+<div
+  id="site-menu"
+  hidden
+  class="fixed inset-x-0 top-[72px] bottom-0 z-[49] flex flex-col overflow-y-auto overscroll-contain bg-white px-5 pt-2 pb-[calc(24px+env(safe-area-inset-bottom))] lg:hidden"
+  data-menu-panel
+>
+  <ul class="m-0 list-none p-0">
+    {links.map((l) => (
+      <li>
+        <a
+          href={l.href}
+          aria-current={l.current ? 'page' : undefined}
+          class:list={[
+            'block min-h-12 border-b border-[#edf2f9] px-1 py-4 text-lg no-underline',
+            l.current ? 'font-black text-blue' : 'font-bold text-navy',
+          ]}
+        >
+          {l.label[locale]}
+        </a>
+      </li>
+    ))}
+  </ul>
+  <div class="flex items-center gap-2.5 pt-5" role="group" aria-label={t.langLabel}>
     <a
-      href={ctaHref}
-      class="mt-3.5 flex min-h-[52px] items-center justify-center rounded-pill bg-blue text-[17px] font-black text-white no-underline hover:text-white"
+      href={alternates['zh-Hant']}
+      lang="zh-Hant"
+      hreflang="zh-Hant"
+      aria-current={locale === 'zh-Hant' ? 'true' : undefined}
+      class="flex-1 rounded-xl border border-line p-3 text-center font-bold text-navy no-underline"
     >
-      {t.cta}
+      中文
+    </a>
+    <a
+      href={alternates.en}
+      lang="en"
+      hreflang="en"
+      aria-current={locale === 'en' ? 'true' : undefined}
+      class="flex-1 rounded-xl border border-line p-3 text-center font-display font-bold text-navy no-underline"
+    >
+      EN
     </a>
   </div>
-</header>
+  <a
+    href={ctaHref}
+    class="mt-3.5 flex min-h-[52px] items-center justify-center rounded-pill bg-blue text-[17px] font-black text-white no-underline hover:text-white"
+  >
+    {t.cta}
+  </a>
+</div>
 
 <style>
   .nav-scroll {
