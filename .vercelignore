@@ -1,0 +1,19 @@
+# 用 Vercel 指令從本機部署時不上傳的檔案（Git 自動部署不受影響）
+# 機密：絕不上傳
+.env
+.env.*
+!.env.example
+# 業主內部文件
+docs/需求表/
+# 本機產物
+node_modules/
+**/node_modules/
+.vercel/output/
+apps/web/.vercel/
+apps/web/dist/
+apps/studio/dist/
+apps/web/.lighthouse/
+**/test-results/
+**/playwright-report/
+.astro/
+**/.astro/
