@@ -9,6 +9,8 @@ import MediaFigure from '../blocks/MediaFigure.astro';
 import CompareTable from '../blocks/CompareTable.astro';
 import CtaBand from '../blocks/CtaBand.astro';
 import InfoCard from '../cards/InfoCard.astro';
+import ShowcaseGrid from '../blocks/ShowcaseGrid.astro';
+import { PLATFORM_SHOWCASE } from '../../content/pages/showcase';
 import city from '../../assets/illustrations/city.jpg';
 import design from '../../content/design/Platform.json';
 import { PLATFORM_COPY } from '../../content/pages/platform';
@@ -137,6 +139,14 @@ const L = (path: string) => localizePath(path, locale);
           </li>
         ))}
       </ul>
+    </div>
+  </Section>
+
+  <!-- 系統實際畫面（舊官網圖片，2026-11-05 業主指示） -->
+  <Section labelledby="pf-screens">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="pf-screens" title={PLATFORM_SHOWCASE[locale].title} />
+      <ShowcaseGrid items={PLATFORM_SHOWCASE[locale].items} min={440} />
     </div>
   </Section>
 

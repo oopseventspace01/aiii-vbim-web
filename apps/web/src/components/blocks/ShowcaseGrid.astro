@@ -1,0 +1,34 @@
+---
+// 實際圖片格狀排列（含圖說），用於 Aiii VBIM／五大領域／平台 OS 頁
+import { Image } from 'astro:assets';
+import type { ShowcaseItem } from '../../content/pages/showcase';
+
+interface Props {
+  items: ShowcaseItem[];
+  /** 每張最小寬度（px），決定一列放幾張 */
+  min?: number;
+  class?: string;
+}
+
+const { items, min = 300, class: className } = Astro.props;
+---
+
+<div
+  class:list={['grid gap-4', className]}
+  style={`grid-template-columns: repeat(auto-fit, minmax(min(100%, ${min}px), 1fr))`}
+  data-showcase
+>
+  {items.map((f) => (
+    <figure class="m-0 flex flex-col gap-2">
+      <Image
+        src={f.src}
+        alt={f.caption}
+        widths={[480, 800, 1200]}
+        sizes={`(min-width: 1024px) ${min + 100}px, 100vw`}
+        class="h-auto w-full rounded-[14px] border border-line bg-navy"
+        loading="lazy"
+      />
+      <figcaption class="text-[13px] leading-snug text-muted">{f.caption}</figcaption>
+    </figure>
+  ))}
+</div>

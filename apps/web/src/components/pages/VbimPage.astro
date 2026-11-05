@@ -9,6 +9,8 @@ import PageHero from '../blocks/PageHero.astro';
 import MediaFigure from '../blocks/MediaFigure.astro';
 import NewsGrid from '../blocks/NewsGrid.astro';
 import InfoCard from '../cards/InfoCard.astro';
+import ShowcaseGrid from '../blocks/ShowcaseGrid.astro';
+import { LIFECYCLE_SHOWCASE } from '../../content/pages/showcase';
 import city from '../../assets/illustrations/city.jpg';
 import realDemo from '../../assets/illustrations/real-demo.jpg';
 import realScreens from '../../assets/illustrations/real-screens.jpg';
@@ -134,6 +136,16 @@ const stores = [
           </>
         ))}
       </ol>
+      {locale === 'zh-Hant' && (
+        <div class="flex flex-col gap-4" data-vbim-lifecycle-images>
+          <ShowcaseGrid
+            items={[LIFECYCLE_SHOWCASE.loop]}
+            min={600}
+            class="mx-auto w-full max-w-[880px]"
+          />
+          <ShowcaseGrid items={LIFECYCLE_SHOWCASE.stages} />
+        </div>
+      )}
     </div>
   </Section>
 

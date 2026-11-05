@@ -16,6 +16,8 @@ import { SECTOR_RELATED, SOLUTIONS_COPY } from '../../content/pages/solutions';
 import { NAV_ITEMS } from '../../i18n/ui';
 import { localizePath, type Locale } from '../../lib/i18n';
 import { UI } from '../../i18n/ui';
+import ShowcaseGrid from '../blocks/ShowcaseGrid.astro';
+import { SECTOR_SHOWCASE } from '../../content/pages/showcase';
 
 interface Props {
   locale: Locale;
@@ -84,6 +86,13 @@ const dashboards: Partial<
             </div>
             {dash && (
               <MediaFigure src={dash.src} alt={dash.alt} mockupLabel={UI[locale].mockupLabel} />
+            )}
+            {locale === 'zh-Hant' && SECTOR_SHOWCASE[s.id as keyof typeof SECTOR_SHOWCASE] && (
+              <ShowcaseGrid
+                items={[SECTOR_SHOWCASE[s.id as keyof typeof SECTOR_SHOWCASE]!]}
+                min={600}
+                class="mx-auto w-full max-w-[880px]"
+              />
             )}
             <div class="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-4">
               <div class="flex flex-col gap-2.5 rounded-md border border-line bg-white p-6">
