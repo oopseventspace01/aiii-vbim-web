@@ -24,11 +24,17 @@ foreach ($k in @($values.Keys)) { if (-not $values[$k]) { throw ".env 裡沒有 
 $secure = Read-Host '請貼上 Turnstile 的 Secret key（畫面不會顯示）' -AsSecureString
 $values['TURNSTILE_SECRET_KEY'] = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
   [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure))
-if ($values['TURNSTILE_SECRET_KEY'].Length -lt 20) { throw 'Secret key 看起來不完整，請重新複製' }
+$values['TURNSTILE_SECRET_KEY'] = $values['TURNSTILE_SECRET_KEY'].Trim()
+$len = $values['TURNSTILE_SECRET_KEY'].Length
+if ($values['TURNSTILE_SECRET_KEY'] -notmatch '^0x[A-Za-z0-9_-]{25,45}$') {
+  throw "貼上的內容不像 Secret key（長度 $len；正確的是 0x 開頭、約 35 個字）。請在 Cloudflare 只按一次 Secret key 複製，再重新執行。"
+}
 
+# Vercel 指令會把一般訊息寫到錯誤輸出，改用 cmd 執行並只看結束代碼
+$ErrorActionPreference = 'Continue'
 foreach ($name in $values.Keys) {
   foreach ($target in 'production', 'preview') {
-    npx --yes vercel@65.7.0 env add $name --environment $target --sensitive --value $values[$name] --force --yes --scope vbim *> $null
+    cmd /c "npx --yes vercel@65.7.0 env add $name --environment $target --sensitive --value `"$($values[$name])`" --force --yes --scope vbim >nul 2>&1"
     if ($LASTEXITCODE -eq 0) { Write-Host "OK  $name ($target)" } else { Write-Host "失敗 $name ($target)" -ForegroundColor Red }
   }
 }
