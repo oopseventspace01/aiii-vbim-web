@@ -21,7 +21,7 @@ const L = (path: string) => localizePath(path, locale);
 const videoLabel = locale === 'en' ? 'Watch the video on YouTube' : '在 YouTube 觀看介紹影片';
 ---
 
-<BaseLayout title={copy.metaTitle} description={copy.lead} locale={locale} active="solutions">
+<BaseLayout title={copy.metaTitle} description={copy.lead} locale={locale} active="vbim">
   <PageHero eyebrow={copy.eyebrow} title={copy.title} lead={copy.lead}>
     <div class="flex flex-wrap gap-2.5">
       <Button href={L('/contact')}>{copy.cta}</Button>

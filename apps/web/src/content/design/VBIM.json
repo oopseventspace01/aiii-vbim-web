@@ -32,20 +32,8 @@
         "d": "文件、圖面與施工影像上鏈留痕；AI 代理依授權行事，可追溯、可撤銷。"
       }
     ],
-    "down": [
-      "降成本",
-      "降耗損",
-      "降能耗",
-      "降錯誤",
-      "降風險"
-    ],
-    "up": [
-      "升效率",
-      "升品質",
-      "升透明",
-      "升安全",
-      "升信任"
-    ],
+    "down": ["降成本", "降耗損", "降能耗", "降錯誤", "降風險"],
+    "up": ["升效率", "升品質", "升透明", "升安全", "升信任"],
     "stages": [
       {
         "en": "DESIGN",
@@ -179,13 +167,7 @@
         "d": "Documents, drawings and site video recorded on-chain; AI agents act only within granted authority — traceable and revocable."
       }
     ],
-    "down": [
-      "Reduce cost",
-      "Reduce waste",
-      "Reduce energy",
-      "Reduce errors",
-      "Reduce risk"
-    ],
+    "down": ["Reduce cost", "Reduce waste", "Reduce energy", "Reduce errors", "Reduce risk"],
     "up": [
       "Increase efficiency",
       "Increase quality",

@@ -78,7 +78,8 @@ test.describe('桌機導覽列', () => {
   test('10 個頁面連結、語言切換與預約 Demo 都在', async ({ page }) => {
     await page.goto(SHOWCASE);
     const nav = page.getByRole('navigation', { name: '主選單' });
-    await expect(nav.locator('ul a')).toHaveCount(10);
+    // 下拉選單裡的連結不算（要展開才看得到）
+    await expect(nav.locator('[data-nav-item] > a')).toHaveCount(10);
     await expect(nav.getByRole('link', { name: '預約 Demo' })).toBeVisible();
     await expect(page.locator('[data-menu-toggle]')).toBeHidden();
   });
@@ -255,5 +256,34 @@ test('截圖：元件展示頁（供人工檢查）', async ({ page }, testInfo)
   await page.screenshot({
     path: testInfo.outputPath(`showcase-${testInfo.project.name}.png`),
     fullPage: true,
+  });
+});
+
+test.describe('桌機下拉選單', () => {
+  test.skip(({ viewport }) => (viewport?.width ?? 0) < 1024, '只在桌機寬度執行');
+
+  test('「產品」可展開，列出 Aiii VBIM、PMIS、RMS、MMS；Esc 收起', async ({ page }) => {
+    await page.goto('/');
+    const btn = page.getByRole('button', { name: '展開「產品」選單' });
+    await btn.click();
+    const panel = page.locator('#nav-dd-vbim');
+    await expect(panel).toBeVisible();
+    await expect(btn).toHaveAttribute('aria-expanded', 'true');
+    await expect(panel.getByRole('link')).toHaveText([
+      'Aiii VBIM',
+      '└ PMIS 工程管理',
+      'Aiii RMS 智慧零售',
+      'Aiii MMS 智慧醫療',
+    ]);
+    await page.keyboard.press('Escape');
+    await expect(panel).toBeHidden();
+  });
+
+  test('「五大領域」的場域連結會切到對應分頁', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('button', { name: '展開「五大領域」選單' }).click();
+    await page.locator('#nav-dd-solutions').getByRole('link', { name: '商場' }).click();
+    await expect(page).toHaveURL(/\/solutions#retail$/);
+    await expect(page.getByRole('tab', { name: '商場' })).toHaveAttribute('aria-selected', 'true');
   });
 });

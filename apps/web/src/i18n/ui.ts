@@ -64,6 +64,44 @@ export const MENU_GROUPS: { title: Label; links: MenuLink[] }[] = (() => {
   ];
 })();
 
+/**
+ * 桌機導覽列的下拉選單（2026-11-12 業主指示：從標題列往下延伸商品項目）
+ * label：標題列上顯示的名稱（沒填就用 NAV_ITEMS 的名稱）
+ */
+export const NAV_DROPDOWNS: Partial<Record<NavKey, { label?: Label; links: MenuLink[] }>> = {
+  vbim: {
+    label: { 'zh-Hant': '產品', en: 'Products' },
+    links: [
+      { key: 'vbim', path: '/vbim', label: { 'zh-Hant': 'Aiii VBIM', en: 'Aiii VBIM' } },
+      { path: '/vbim#pmis', label: { 'zh-Hant': 'PMIS 工程管理', en: 'PMIS' }, sub: true },
+      { path: '/products/rms', label: { 'zh-Hant': 'Aiii RMS 智慧零售', en: 'Aiii RMS Retail' } },
+      {
+        path: '/products/mms',
+        label: { 'zh-Hant': 'Aiii MMS 智慧醫療', en: 'Aiii MMS Healthcare' },
+      },
+    ],
+  },
+  solutions: {
+    links: [
+      { path: '/solutions#hospital', label: { 'zh-Hant': '醫院', en: 'Hospitals' } },
+      {
+        path: '/products/mms',
+        label: { 'zh-Hant': 'Aiii MMS 智慧醫療', en: 'Aiii MMS Healthcare' },
+        sub: true,
+      },
+      { path: '/solutions#retail', label: { 'zh-Hant': '商場', en: 'Retail' } },
+      {
+        path: '/products/rms',
+        label: { 'zh-Hant': 'Aiii RMS 智慧零售', en: 'Aiii RMS Retail' },
+        sub: true,
+      },
+      { path: '/solutions#factory', label: { 'zh-Hant': '工廠', en: 'Factories' } },
+      { path: '/solutions#office', label: { 'zh-Hant': '辦公', en: 'Offices' } },
+      { path: '/solutions#energy', label: { 'zh-Hant': '能源', en: 'Energy' } },
+    ],
+  },
+};
+
 export const CONTACT_PATH = '/contact';
 
 type Dict = {

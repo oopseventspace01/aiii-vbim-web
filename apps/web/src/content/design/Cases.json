@@ -5,11 +5,7 @@
         "scene": "智慧醫療 · 2025.12",
         "name": "2025 台灣醫療科技展",
         "d": "Aiii VBIM 第六代智慧建築平台與 Aiii RMS 智慧醫療管理系統，於南港展覽館展出智慧醫院完整生態系。",
-        "tags": [
-          "智慧醫院",
-          "RMS",
-          "生態系"
-        ],
+        "tags": ["智慧醫院", "RMS", "生態系"],
         "img": "../assets/hvac.jpg",
         "alt": "中央空調與醫療場域示意"
       },
@@ -17,11 +13,7 @@
         "scene": "跨國設廠 · 2025",
         "name": "從台灣到亞利桑那",
         "d": "協助企業面對跨國設廠的資訊分散與工程透明度挑戰，用一個平台管理海外據點。",
-        "tags": [
-          "跨國設廠",
-          "PMIS",
-          "戰情室"
-        ],
+        "tags": ["跨國設廠", "PMIS", "戰情室"],
         "img": "../assets/world.jpg",
         "alt": "全球據點連線示意"
       },
@@ -29,11 +21,7 @@
         "scene": "淨零建築 · 2025.09",
         "name": "智慧節能減碳創新技術推廣",
         "d": "參與內政部建築研究所主辦的推廣活動，與產官學研共同推動近零碳建築。",
-        "tags": [
-          "淨零",
-          "節能",
-          "ESG"
-        ],
+        "tags": ["淨零", "節能", "ESG"],
         "img": "../assets/energy.jpg",
         "alt": "智慧能源示意"
       }
@@ -103,11 +91,7 @@
         "scene": "Smart healthcare · 2025.12",
         "name": "Healthcare+ Expo Taiwan 2025",
         "d": "The Aiii VBIM smart building platform and Aiii RMS healthcare management system presented a complete smart hospital ecosystem at Nangang Exhibition Center.",
-        "tags": [
-          "Smart hospital",
-          "RMS",
-          "Ecosystem"
-        ],
+        "tags": ["Smart hospital", "RMS", "Ecosystem"],
         "img": "../assets/hvac.jpg",
         "alt": "HVAC and healthcare site"
       },
@@ -115,11 +99,7 @@
         "scene": "Global plants · 2025",
         "name": "From Taiwan to Arizona",
         "d": "Helping companies tackle scattered information and low transparency in overseas plant build-outs — one platform for every site.",
-        "tags": [
-          "Global plants",
-          "PMIS",
-          "Command center"
-        ],
+        "tags": ["Global plants", "PMIS", "Command center"],
         "img": "../assets/world.jpg",
         "alt": "Global sites connected"
       },
@@ -127,11 +107,7 @@
         "scene": "Net-zero buildings · 2025.09",
         "name": "Smart energy-saving innovation showcase",
         "d": "Part of the Architecture & Building Research Institute (MOI) program advancing near-zero-carbon buildings with industry, government and academia.",
-        "tags": [
-          "Net zero",
-          "Energy saving",
-          "ESG"
-        ],
+        "tags": ["Net zero", "Energy saving", "ESG"],
         "img": "../assets/energy.jpg",
         "alt": "Smart energy"
       }

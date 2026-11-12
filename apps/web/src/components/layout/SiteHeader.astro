@@ -5,7 +5,14 @@ import { Image } from 'astro:assets';
 import logo from '../../assets/brand/logo.png';
 import Icon from '../ui/Icon.astro';
 import { localizePath, type Locale } from '../../lib/i18n';
-import { CONTACT_PATH, MENU_GROUPS, NAV_ITEMS, UI, type NavKey } from '../../i18n/ui';
+import {
+  CONTACT_PATH,
+  MENU_GROUPS,
+  NAV_DROPDOWNS,
+  NAV_ITEMS,
+  UI,
+  type NavKey,
+} from '../../i18n/ui';
 
 interface Props {
   locale: Locale;
@@ -16,11 +23,24 @@ interface Props {
 
 const { locale, active, alternates } = Astro.props;
 const t = UI[locale];
-const links = NAV_ITEMS.map((item) => ({
-  ...item,
-  href: localizePath(item.path, locale),
-  current: item.key === active,
-}));
+const links = NAV_ITEMS.map((item) => {
+  const dd = NAV_DROPDOWNS[item.key];
+  const label = (dd?.label ?? item.label)[locale];
+  return {
+    key: item.key,
+    label,
+    href: localizePath(item.path, locale),
+    current: item.key === active,
+    dropdown: dd && {
+      toggleLabel: locale === 'en' ? `${label} menu` : `展開「${label}」選單`,
+      links: dd.links.map((d) => ({
+        label: d.label[locale],
+        href: localizePath(d.path, locale),
+        sub: d.sub,
+      })),
+    },
+  };
+});
 // 手機選單：分組＋子項目（例如 PMIS 在 Aiii VBIM 底下）
 const groups = MENU_GROUPS.map((g) => ({
   title: g.title[locale],
@@ -45,19 +65,59 @@ const ctaHref = localizePath(CONTACT_PATH, locale);
 
     <ul class="nav-scroll hidden min-w-0 flex-auto list-none flex-nowrap gap-x-0.5 overflow-x-auto p-0 text-[15px] whitespace-nowrap lg:flex">
       {links.map((l) => (
-        <li>
+        <li class="flex items-center" data-nav-item={l.key}>
           <a
             href={l.href}
             aria-current={l.current ? 'page' : undefined}
             class:list={[
-              'block border-b-2 px-2.5 py-2.5 no-underline',
+              'block border-b-2 py-2.5 no-underline',
+              l.dropdown ? 'pr-0.5 pl-2.5' : 'px-2.5',
               l.current
                 ? 'border-blue font-bold text-blue'
                 : 'border-transparent text-text-2 hover:text-blue',
             ]}
           >
-            {l.label[locale]}
+            {l.label}
           </a>
+          {l.dropdown && (
+            <>
+              <button
+                type="button"
+                class="flex h-9 w-6 items-center justify-center rounded text-text-2 hover:text-blue"
+                aria-expanded="false"
+                aria-controls={`nav-dd-${l.key}`}
+                aria-label={l.dropdown.toggleLabel}
+                data-dd-toggle
+              >
+                <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                  <path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" />
+                </svg>
+              </button>
+              <div
+                id={`nav-dd-${l.key}`}
+                class="fixed top-[72px] z-50 min-w-[240px] rounded-b-[14px] border border-t-0 border-line bg-white p-2 shadow-[0_14px_30px_rgba(12,26,51,0.12)]"
+                hidden
+                data-dd-panel
+              >
+                <ul class="m-0 list-none p-0">
+                  {l.dropdown.links.map((d) => (
+                    <li>
+                      <a
+                        href={d.href}
+                        class:list={[
+                          'block rounded-[10px] py-2.5 no-underline hover:bg-blue-soft hover:text-blue',
+                          d.sub ? 'pr-4 pl-7 text-[14px] text-text-2' : 'px-4 font-bold text-navy',
+                        ]}
+                      >
+                        {d.sub && <span aria-hidden="true">└ </span>}
+                        {d.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          )}
         </li>
       ))}
     </ul>
@@ -215,6 +275,61 @@ const ctaHref = localizePath(CONTACT_PATH, locale);
 </style>
 
 <script>
+  // 桌機下拉選單：滑鼠移入或點 ▾ 展開、移出／Esc／點別處收起
+  // 面板用 position: fixed（header 有毛玻璃效果，fixed 會以 header 為基準），才不會被可橫向捲動的選單列切掉
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  const items = [...document.querySelectorAll<HTMLElement>('[data-nav-item]')].filter((li) =>
+    li.querySelector('[data-dd-panel]'),
+  );
+  const closeAll = (except?: HTMLElement) => {
+    for (const li of items) if (li !== except) setDd(li, false);
+  };
+  function setDd(li: HTMLElement, open: boolean) {
+    const btn = li.querySelector<HTMLButtonElement>('[data-dd-toggle]')!;
+    const panel = li.querySelector<HTMLElement>('[data-dd-panel]')!;
+    if (open && header) {
+      const left = li.getBoundingClientRect().left - header.getBoundingClientRect().left;
+      const max = header.clientWidth - panel.offsetWidth - 8;
+      panel.style.left = `${Math.max(8, Math.min(left, max > 8 ? max : left))}px`;
+    }
+    panel.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+  }
+  for (const li of items) {
+    const btn = li.querySelector<HTMLButtonElement>('[data-dd-toggle]')!;
+    const panel = li.querySelector<HTMLElement>('[data-dd-panel]')!;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let openedAt = 0;
+    const open = () => {
+      clearTimeout(timer);
+      if (panel.hidden) openedAt = Date.now();
+      closeAll(li);
+      setDd(li, true);
+    };
+    const later = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => setDd(li, false), 220);
+    };
+    li.addEventListener('mouseenter', open);
+    li.addEventListener('mouseleave', later);
+    // 滑鼠移入時已經展開，緊接著的點擊不要又把它收起來
+    btn.addEventListener('click', () =>
+      panel.hidden || Date.now() - openedAt < 500 ? open() : setDd(li, false),
+    );
+    li.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !panel.hidden) {
+        setDd(li, false);
+        btn.focus();
+      }
+    });
+    li.addEventListener('focusout', (event) => {
+      if (!li.contains(event.relatedTarget as Node)) setDd(li, false);
+    });
+  }
+  document.addEventListener('click', (event) => {
+    if (!(event.target as HTMLElement).closest('[data-nav-item]')) closeAll();
+  });
+
   // 手機選單：開關、Esc 關閉、焦點留在選單內、開啟時鎖住背景捲動
   const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const panel = document.querySelector<HTMLElement>('[data-menu-panel]');

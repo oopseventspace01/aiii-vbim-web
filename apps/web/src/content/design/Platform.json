@@ -362,15 +362,7 @@
         "d": "Power, plumbing, fire, HVAC, low-voltage and network lines"
       }
     ],
-    "axes": [
-      "2D drawings",
-      "3D BIM",
-      "BOQ",
-      "Asset details",
-      "Schedule",
-      "QA/QC",
-      "FM"
-    ],
+    "axes": ["2D drawings", "3D BIM", "BOQ", "Asset details", "Schedule", "QA/QC", "FM"],
     "personas": [
       {
         "t": "Architecture firms",

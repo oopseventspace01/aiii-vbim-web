@@ -60,6 +60,19 @@ const panels = await Promise.all(tabs.map((tab) => Astro.slots.render(`panel-${t
       if (focus) next.focus();
     };
 
+    // 網址帶 #hospital 之類的分頁代號時，直接切到該分頁（導覽列下拉選單會用到）
+    const fromHash = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const target = id && tabs.find((t) => t.id.endsWith(`-tab-${id}`));
+      if (target) {
+        select(target, false);
+        root.style.scrollMarginTop = '88px';
+        root.scrollIntoView({ block: 'start' });
+      }
+    };
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
+
     tabs.forEach((tab, index) => {
       tab.addEventListener('click', () => select(tab, false));
       tab.addEventListener('keydown', (event) => {

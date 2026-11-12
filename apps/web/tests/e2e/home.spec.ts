@@ -81,8 +81,14 @@ for (const [locale, path] of [
       await page.goto(path);
       const product = page.locator('[data-news-group="home-news-product"] article');
       const media = page.locator('[data-news-group="home-news-media"] article');
-      await expect(product).toHaveCount(count);
-      await expect(media).toHaveCount(count);
+      // 後台已發布的則數比設定少時，就全部顯示
+      const available = await sanity<{ product: number; media: number }>(
+        `{"product": count(*[_type == "news" && category == "product" && language == $lang && publishedAt <= now()]),
+          "media": count(*[_type == "news" && category == "media" && language == $lang && publishedAt <= now()])}`,
+        { lang: locale },
+      );
+      await expect(product).toHaveCount(Math.min(count, available.product));
+      await expect(media).toHaveCount(Math.min(count, available.media));
 
       // 產品發表連到站內頁面；媒體報導開新分頁到原始報導
       for (const link of await product.locator('h3 a').all()) {
