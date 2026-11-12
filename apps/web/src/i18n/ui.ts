@@ -41,6 +41,12 @@ export const MENU_GROUPS: { title: Label; links: MenuLink[] }[] = (() => {
         nav('platform'),
         nav('energy'),
         nav('edge'),
+        // 2026-11-12 業主指示新增兩個產品頁
+        { path: '/products/rms', label: { 'zh-Hant': 'Aiii RMS 智慧零售', en: 'Aiii RMS Retail' } },
+        {
+          path: '/products/mms',
+          label: { 'zh-Hant': 'Aiii MMS 智慧醫療', en: 'Aiii MMS Healthcare' },
+        },
       ],
     },
     {
@@ -98,6 +104,8 @@ export const UI: Record<Locale, Dict> = {
           { label: '平台 OS', path: '/platform' },
           { label: '能源 × 空調', path: '/energy' },
           { label: '地端 AI', path: '/edge-ai' },
+          { label: 'Aiii RMS 智慧零售', path: '/products/rms' },
+          { label: 'Aiii MMS 智慧醫療', path: '/products/mms' },
         ],
       },
       {
@@ -152,6 +160,8 @@ export const UI: Record<Locale, Dict> = {
           { label: 'Platform OS', path: '/platform' },
           { label: 'Energy & HVAC', path: '/energy' },
           { label: 'Edge AI', path: '/edge-ai' },
+          { label: 'Aiii RMS Retail', path: '/products/rms' },
+          { label: 'Aiii MMS Healthcare', path: '/products/mms' },
         ],
       },
       {

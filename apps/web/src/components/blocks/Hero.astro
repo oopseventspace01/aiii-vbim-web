@@ -28,6 +28,7 @@ const last = titleLines.length - 1;
 <header class="bg-bg-2">
   <div class="container-site flex flex-wrap items-center gap-10 pt-12 pb-14 md:pt-[72px]">
     <div class="flex min-w-0 flex-[1_1_500px] flex-col gap-5">
+      <slot name="top" />
       <p class="eyebrow m-0">{eyebrow}</p>
       <h1 class="m-0 font-display text-[clamp(2.6rem,5.2vw,4.6rem)] leading-[1.04] font-bold tracking-[-0.02em]">
         {titleLines.map((line, i) => (

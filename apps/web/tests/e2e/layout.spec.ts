@@ -132,9 +132,9 @@ test.describe('手機漢堡選單', () => {
     // 背景鎖住捲動
     expect(await page.evaluate(() => document.documentElement.style.overflow)).toBe('hidden');
 
-    // 12 個連結（10 頁＋PMIS＋常見問題）＋中文／EN＋預約 Demo，捲到每一個都看得到
+    // 14 個連結（10 頁＋PMIS＋2 個產品頁＋常見問題）＋中文／EN＋預約 Demo，捲到每一個都看得到
     const items = panel.locator('a');
-    await expect(items).toHaveCount(15);
+    await expect(items).toHaveCount(17);
     for (const item of await items.all()) {
       await item.scrollIntoViewIfNeeded();
       await expect(item).toBeInViewport();

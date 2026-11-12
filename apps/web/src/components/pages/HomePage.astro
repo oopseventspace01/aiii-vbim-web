@@ -8,6 +8,7 @@ import Section from '../ui/Section.astro';
 import SectionHeader from '../ui/SectionHeader.astro';
 import Button from '../ui/Button.astro';
 import Hero from '../blocks/Hero.astro';
+import StoreButtons from '../blocks/StoreButtons.astro';
 import ProofStrip from '../blocks/ProofStrip.astro';
 import FlowStrip from '../blocks/FlowStrip.astro';
 import PathTrail from '../blocks/PathTrail.astro';
@@ -74,6 +75,12 @@ const newsGroups = [
     pills={copy.pills}
     entries={copy.entries.map((e) => ({ ...e, href: L(e.path) }))}
   >
+    <StoreButtons
+      slot="top"
+      locale={locale}
+      appStoreUrl={footer.appStoreUrl}
+      googlePlayUrl={footer.googlePlayUrl}
+    />
     <div slot="media" data-hero-media>
       {data.heroVideoUrl ? (
         <video

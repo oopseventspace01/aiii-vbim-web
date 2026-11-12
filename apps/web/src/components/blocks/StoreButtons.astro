@@ -1,0 +1,44 @@
+---
+// App Store／Google Play 下載鈕（連結來自後台「全站設定」，沒填的就不顯示）
+import type { Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  appStoreUrl?: string | null;
+  googlePlayUrl?: string | null;
+  class?: string;
+}
+
+const LABEL: Record<Locale, { appStore: string; googlePlay: string; group: string }> = {
+  'zh-Hant': { appStore: '下載', googlePlay: '下載', group: '下載 Aiii VBIM App' },
+  en: { appStore: 'Download on the', googlePlay: 'Get it on', group: 'Download the Aiii VBIM app' },
+};
+
+const { locale, appStoreUrl, googlePlayUrl, class: className } = Astro.props;
+const t = LABEL[locale];
+const stores = [
+  { label: t.appStore, name: 'App Store', href: appStoreUrl },
+  { label: t.googlePlay, name: 'Google Play', href: googlePlayUrl },
+].filter((s): s is { label: string; name: string; href: string } => Boolean(s.href));
+---
+
+{stores.length > 0 && (
+  <div
+    class:list={['flex flex-wrap gap-2.5', className]}
+    role="group"
+    aria-label={t.group}
+    data-store-buttons
+  >
+    {stores.map((s) => (
+      <a
+        href={s.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex min-h-12 flex-col justify-center rounded-[14px] bg-navy px-[22px] py-3 leading-tight font-bold text-white no-underline hover:text-white"
+      >
+        <span class="text-[11px] text-[#aebdd6]">{s.label}</span>
+        <span>{s.name}</span>
+      </a>
+    ))}
+  </div>
+)}

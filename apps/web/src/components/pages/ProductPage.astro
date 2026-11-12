@@ -1,0 +1,92 @@
+---
+// /products/rms、/products/mms 產品頁（2026-11-12 業主指示新增；內容取自業主原 Gamma 產品網站，見 content/pages/products.ts）
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Button from '../ui/Button.astro';
+import PageHero from '../blocks/PageHero.astro';
+import MediaFigure from '../blocks/MediaFigure.astro';
+import InfoCard from '../cards/InfoCard.astro';
+import { PRODUCTS, type ProductKey } from '../../content/pages/products';
+import { localizePath, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  product: ProductKey;
+}
+
+const { locale, product } = Astro.props;
+const copy = PRODUCTS[product][locale];
+const L = (path: string) => localizePath(path, locale);
+const videoLabel = locale === 'en' ? 'Watch the video on YouTube' : '在 YouTube 觀看介紹影片';
+---
+
+<BaseLayout title={copy.metaTitle} description={copy.lead} locale={locale} active="solutions">
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} lead={copy.lead}>
+    <div class="flex flex-wrap gap-2.5">
+      <Button href={L('/contact')}>{copy.cta}</Button>
+      {copy.video && (
+        <Button
+          href={copy.video.url}
+          variant="outline"
+          external
+          newTabLabel={locale === 'en' ? '(opens in new tab)' : '（另開新視窗）'}
+        >
+          {videoLabel}
+        </Button>
+      )}
+    </div>
+    <MediaFigure slot="media" src={copy.heroImage.src} alt={copy.heroImage.alt} eager />
+  </PageHero>
+
+  {copy.sections.map((s, i) => {
+    const id = `${product}-s${i}`;
+    return (
+      <Section tone={i % 2 ? 'soft' : 'white'} labelledby={id}>
+        <div class="flex flex-wrap items-start gap-10">
+          <div class="flex min-w-0 flex-[1_1_440px] flex-col gap-5">
+            <SectionHeader id={id} title={s.title} lead={s.lead} />
+            {s.items && s.items.length > 0 && (
+              <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-3 p-0">
+                {s.items.map((it) => (
+                  <li class="flex">
+                    <InfoCard
+                      tone={i % 2 ? 'white' : 'soft'}
+                      title={it.t}
+                      text={it.d}
+                      class="w-full"
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+            {s.bullets && s.bullets.length > 0 && (
+              <ul class="m-0 flex list-none flex-col gap-2 p-0">
+                {s.bullets.map((b) => (
+                  <li class="flex gap-2">
+                    <span aria-hidden="true" class="text-blue">
+                      ✓
+                    </span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          {s.image && (
+            <div class="min-w-0 flex-[1_1_420px]">
+              <MediaFigure src={s.image.src} alt={s.image.alt} framed />
+            </div>
+          )}
+        </div>
+      </Section>
+    );
+  })}
+
+  <Section tone="navy">
+    <div class="flex flex-wrap items-center justify-between gap-6">
+      <p class="m-0 text-[clamp(1.4rem,2.6vw,2rem)] font-black text-white">{copy.title}</p>
+      <Button href={L('/contact')}>{copy.cta}</Button>
+    </div>
+  </Section>
+</BaseLayout>

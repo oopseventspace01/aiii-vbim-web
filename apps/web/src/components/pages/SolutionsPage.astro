@@ -44,6 +44,17 @@ const data = design[locale] as {
   global: { p: string; o: string }[];
 };
 const L = (path: string) => localizePath(path, locale);
+// 2026-11-12：零售、醫院分頁連到對應的產品頁
+const SECTOR_PRODUCT: Partial<Record<string, { path: string; label: Record<Locale, string> }>> = {
+  retail: {
+    path: '/products/rms',
+    label: { 'zh-Hant': '了解 Aiii RMS 智慧零售 →', en: 'Explore Aiii RMS Smart Retail →' },
+  },
+  hospital: {
+    path: '/products/mms',
+    label: { 'zh-Hant': '了解 Aiii MMS 智慧醫療 →', en: 'Explore Aiii MMS Smart Healthcare →' },
+  },
+};
 const IDS = ['hospital', 'retail', 'factory', 'office', 'energy'] as const;
 const sectors = data.allTabs.map((s, i) => ({ ...s, id: IDS[i] ?? `sector-${i}` }));
 const dashboards: Partial<
@@ -93,6 +104,13 @@ const dashboards: Partial<
                 min={600}
                 class="mx-auto w-full max-w-[880px]"
               />
+            )}
+            {SECTOR_PRODUCT[s.id] && (
+              <div data-sector-product>
+                <Button href={L(SECTOR_PRODUCT[s.id]!.path)} variant="outline">
+                  {SECTOR_PRODUCT[s.id]!.label[locale]}
+                </Button>
+              </div>
             )}
             <div class="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-4">
               <div class="flex flex-col gap-2.5 rounded-md border border-line bg-white p-6">

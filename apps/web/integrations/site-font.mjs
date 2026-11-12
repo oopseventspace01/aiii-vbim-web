@@ -1,21 +1,25 @@
-// 中文字型瘦身（P6 效能）：建置完成後，只取網站實際用到的字做成 Noto Sans TC 子集字型
-// - 掃描建置好的 HTML，收集所有用到的字
-// - 分批向 Google Fonts 取得「只含這些字」的 woff2（text= 參數），存到 /fonts/site/，網站自行託管
-// - 產生 /fonts/site-font.css（字型名稱 'Noto Sans TC Site'），BaseLayout 在正式環境載入
-// 後台每次發布都會重新建置，新文章的字也會一起收進子集；萬一還是有沒涵蓋的字，改用系統中文字型顯示。
-// 下載失敗時只會寫一個空的 CSS，網站改用系統中文字型（PingFang TC／微軟正黑體），照常可讀。
+// 中文字型瘦身（P6 效能；2026-11-12 業主指示改成圓體）：建置完成後，只取網站實際用到的字做成子集字型
+// - 字型：源泉圓體 GenSen Rounded 2 TW（SIL OFL 1.1，可商用），底稿在 fonts-src/（產生方式見 scripts/make-font-base.mjs）
+// - 掃描建置好的 HTML，收集所有用到的字，依使用頻率分批切成小檔，存到 /fonts/site/，網站自行託管
+// - 產生 /fonts/site-font.css（字型名稱 'Aiii Rounded'），BaseLayout 在正式環境載入
+// 後台每次發布都會重新建置，新文章的字也會一起收進子集；底稿沒有的罕用字改用系統中文字型顯示。
+// 產生失敗時只會寫一個空的 CSS，網站改用系統中文字型（PingFang TC／微軟正黑體），照常可讀。
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import subsetFont from 'subset-font';
 
-const FAMILY = 'Noto Sans TC Site';
-const API = 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400..900&text=';
-// 用新版 Chrome 的 User-Agent，Google 才會回傳 woff2
-const UA =
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36';
-// 每批字數：太少會變成很多檔案（每載入一個字型就重新排版一次），太多會超過網址長度上限
+const FAMILY = 'Aiii Rounded';
+// 三個字重：400 用於內文與 500／600，700 用於粗體與 800，900 用於最粗標題
+const WEIGHTS = [
+  { file: 'gensen-400.woff2', range: '400 600' },
+  { file: 'gensen-700.woff2', range: '700 800' },
+  { file: 'gensen-900.woff2', range: '900' },
+];
+const SRC = new URL('../fonts-src/', import.meta.url);
+// 每批字數：太少會變成很多檔案（每載入一個字型就重新排版一次），太多則每頁都要下載用不到的字
 const BATCH = 320;
-const ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
+const ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
 
 function htmlFiles(dir) {
   return (
@@ -55,14 +59,8 @@ export function collectText(htmls) {
     .join('');
 }
 
-async function get(url, as) {
-  const res = await fetch(url, {
-    headers: { 'User-Agent': UA },
-    signal: AbortSignal.timeout(20_000),
-  });
-  if (!res.ok) throw new Error(`${res.status} ${url.slice(0, 80)}`);
-  return as === 'text' ? res.text() : Buffer.from(await res.arrayBuffer());
-}
+const unicodeRange = (chars) =>
+  chars.map((c) => `U+${c.codePointAt(0).toString(16).toUpperCase()}`).join(',');
 
 export default function siteFont() {
   return {
@@ -81,32 +79,26 @@ export default function siteFont() {
         };
         try {
           const pages = htmlFiles(out);
-          const text = collectText(pages.map((f) => readFileSync(f, 'utf-8')));
-          const chars = [...text];
+          const chars = [...collectText(pages.map((f) => readFileSync(f, 'utf-8')))];
           const rules = [];
           let n = 0;
           let bytes = 0;
-          for (let i = 0; i < chars.length; i += BATCH) {
-            const css = await get(
-              API + encodeURIComponent(chars.slice(i, i + BATCH).join('')),
-              'text',
-            );
-            for (const block of css.match(/@font-face\s*{[^}]+}/g) ?? []) {
-              const src = block.match(/url\((https:[^)]+)\)/)?.[1];
-              const range = block.match(/unicode-range:\s*([^;]+);/)?.[1];
-              if (!src || !range) continue;
-              const font = await get(src);
+          for (const w of WEIGHTS) {
+            const base = readFileSync(new URL(w.file, SRC));
+            for (let i = 0; i < chars.length; i += BATCH) {
+              const batch = chars.slice(i, i + BATCH);
+              const font = await subsetFont(base, batch.join(''), { targetFormat: 'woff2' });
               const file = `fonts/site/${n++}.woff2`;
               write(file, font);
               bytes += font.length;
               rules.push(
-                `@font-face{font-family:'${FAMILY}';font-style:normal;font-weight:400 900;font-display:swap;src:url(/${file}) format('woff2');unicode-range:${range};}`,
+                `@font-face{font-family:'${FAMILY}';font-style:normal;font-weight:${w.range};font-display:swap;src:url(/${file}) format('woff2');unicode-range:${unicodeRange(batch)};}`,
               );
             }
           }
           write('fonts/site-font.css', rules.join('\n') + '\n');
           logger.info(
-            `${chars.length} 個字 → ${n} 個子集字型檔，共 ${Math.round(bytes / 1024)} KB`,
+            `${chars.length} 個字 × ${WEIGHTS.length} 個字重 → ${n} 個子集字型檔，共 ${Math.round(bytes / 1024)} KB`,
           );
         } catch (err) {
           write('fonts/site-font.css', '/* 子集字型產生失敗，改用系統中文字型 */\n');

@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, envField, fontProviders } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
@@ -113,20 +113,6 @@ export default defineConfig({
     defaultLocale: 'zh-Hant',
     routing: { prefixDefaultLocale: false },
   },
-  // 英文標題字型自行託管（建置時下載），不依賴 Google Fonts；SPEC 第 4 節
-  // 中文 Noto Sans TC 改用 @fontsource-variable/noto-sans-tc（見 global.css），
-  // 因為 Astro 的 subsets 選不到中文的 108 個分段檔
-  fonts: [
-    {
-      provider: fontProviders.fontsource(),
-      name: 'Space Grotesk',
-      cssVariable: '--font-space-grotesk',
-      weights: [500, 600, 700],
-      styles: ['normal'],
-      subsets: ['latin'],
-      fallbacks: ['sans-serif'],
-    },
-  ],
   vite: {
     plugins: [tailwindcss()],
   },
