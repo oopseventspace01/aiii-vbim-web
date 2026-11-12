@@ -1,11 +1,12 @@
 // 產品頁：Aiii RMS 智慧零售／Aiii MMS 智慧醫療
 // 文案逐字取自業主舊 Gamma 網站（中文取中文頁、英文取英文頁），只挑段落、不改寫。
-// 已刻意移除：無出處的統計數字與最高級用語、人臉辨識／黑名單等隱私敏感功能、徵才段落。
+// 已刻意移除：無出處的統計數字（87%、效益分析 50/80/95%）、徵才段落。最高級用語與人臉辨識／黑白名單內容經業主同意保留。
 import type { ImageMetadata } from 'astro';
 import type { Locale } from '../../lib/i18n';
 import rmsHero from '../../assets/products/rms-hero.jpg';
 import rmsCamera from '../../assets/products/rms-camera.jpg';
 import rmsBox from '../../assets/products/rms-box.jpg';
+import rmsVms from '../../assets/products/rms-vms.jpg';
 import mmsHero from '../../assets/products/mms-hero.jpg';
 import mmsBlood from '../../assets/products/mms-blood.jpg';
 import mmsBlockchain from '../../assets/products/mms-blockchain.jpg';
@@ -45,7 +46,7 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
             { t: 'POS 系統', d: '串接銷售紀錄，提供平均客單價、購買頻率、商品熱銷度。' },
             {
               t: 'AI 影像辨識',
-              d: '分析顧客行為，包括：停留時間（熱區／冷區）、性別、年齡層分析、首次來客、新客／回流客比例',
+              d: '分析顧客行為，包括：停留時間（熱區／冷區）、性別、年齡層分析、首次來客、新客／回流客比例、白名單（VIP 顧客）、黑名單（問題客戶）辨識',
             },
             { t: 'BI 行為智慧', d: '結合多維度數據，生成消費行為模型，優化行銷與營運決策。' },
           ],
@@ -78,6 +79,10 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
         {
           title: '7×24 監控通報事件追蹤與管理',
           items: [
+            {
+              t: '人工智慧 AI 與深度學習（Deep Learning）',
+              d: '實現人臉辨識、車牌辨識、行為分析等高效影像處理應用，為客戶提供精準且即時的數據支持。',
+            },
             {
               t: '物聯網 IoT 生態建設',
               d: '構建設備互聯互通的智慧平台，提供開放 API，簡化系統整合，並加速多元 IoT 裝置的應用落地。',
@@ -113,7 +118,24 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
           image: { src: rmsBox, alt: 'Aiii BOX 邊緣運算主機' },
         },
         {
+          title: '顧客行為&無人商店',
+          lead: '我們整合多項 AI 工具，包括：',
+          bullets: [
+            '智慧攝影機與電腦視覺',
+            '臉部辨識與客戶分析',
+            'RFID 商品追蹤',
+            'IoT 感測器網絡',
+          ],
+          items: [
+            {
+              t: 'Edge AI',
+              d: '採用 Edge AI 技術進行本地即時分析，大幅減少傳輸壓力並提升反應速度，分析結果可無縫整合至：POS 系統、數位購物車、庫存管理平台',
+            },
+          ],
+        },
+        {
           title: '行為智慧（BI）分析能力',
+          lead: '系統能自動生成人流熱區圖，追蹤冷熱區分布，同時支援顧客性別／年齡分析，並可設定黑白名單監控特定顧客。',
           items: [
             { t: '平均客單價', d: '精確追蹤每筆交易金額，分析提升銷售的關鍵因素' },
             { t: '平均停留時間', d: '掌握顧客在店內及特定區域的逗留時間' },
@@ -140,14 +162,21 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
             '支援多種資料傳輸格式：CSV／FTPS、RestAPI、SQL',
             '智慧員工管理：收銀員監控、排隊偵測、自動開啟新櫃台',
             '人流熱區、銷售數據、客單價',
+            '顧客行為分析（性別、年齡、首客比例）',
             '實時庫存與補貨狀態',
+            '安全監控：黑名單警報、竊盜偵測',
             'AI 預警與管理決策支援',
           ],
+          image: { src: rmsVms, alt: '視訊管理系統集中檢視多支門市攝影機畫面' },
         },
         {
           title: '數據上鏈應用優勢',
           lead: '供應鍊、商品源溯管理、銷售數據、顧客行為影像、庫存紀錄、發票、會員記錄等自動上鏈，生成不可竄改的數位憑證。',
           items: [
+            {
+              t: '全面資料保護',
+              d: '所有銷售數據、影像、交易紀錄自動上鏈，生成不可竄改的時間戳記，建立絕對可信的數據基礎',
+            },
             {
               t: '防弊增信機制',
               d: '有效防止內外部舞弊行為，保障交易真實性，提升管理透明度與稽核效率',
@@ -156,6 +185,11 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
               t: '擴展應用潛力',
               d: '區塊鏈技術可延伸應用於會員積分追蹤、供應鏈透明化、跨品牌數據共享等多元場景',
             },
+          ],
+          bullets: [
+            '會員積分與白名單客戶管理',
+            '防止資料造假與內外部舞弊',
+            '跨平台數據共享（供應鏈、品牌聯盟）',
           ],
         },
       ],
@@ -184,7 +218,7 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
             },
             {
               t: 'AI Image Recognition',
-              d: 'Analyzes customer behavior, including: dwell time (hot zones / cold zones); gender and age group analysis; proportion of first-time visitors, new customers, and returning customers',
+              d: 'Analyzes customer behavior, including: dwell time (hot zones / cold zones); gender and age group analysis; proportion of first-time visitors, new customers, and returning customers; identification of whitelists (VIP customers) and blacklists (problematic customers)',
             },
             {
               t: 'BI Behavioral Intelligence',
@@ -242,6 +276,10 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
           title: '7×24 Monitoring, Incident Reporting, and Management',
           items: [
             {
+              t: 'Artificial Intelligence (AI) and Deep Learning',
+              d: 'Enables efficient image processing applications such as facial recognition, license plate recognition, and behavior analysis, providing customers with accurate and real-time data support.',
+            },
+            {
               t: 'IoT Ecosystem Development',
               d: 'Builds a smart platform for device interconnectivity, offers open APIs, simplifies system integration, and accelerates the deployment of diverse IoT devices.',
             },
@@ -276,7 +314,24 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
           image: { src: rmsBox, alt: 'Aiii BOX edge computing unit' },
         },
         {
+          title: 'Customer Behavior & Unmanned Stores',
+          lead: 'We integrate multiple AI tools, including:',
+          bullets: [
+            'Smart Cameras and Computer Vision',
+            'Facial Recognition and Customer Analytics',
+            'RFID Product Tracking',
+            'IoT Sensor Networks',
+          ],
+          items: [
+            {
+              t: 'Edge AI',
+              d: 'By applying Edge AI technology for real-time local analysis, transmission load is greatly reduced and response speed is improved. The analysis results can be seamlessly integrated into: POS Systems, Digital Shopping Carts, Inventory Management Platforms',
+            },
+          ],
+        },
+        {
           title: 'Behavioral Intelligence (BI) Analytical Capabilities',
+          lead: 'The system can automatically generate heat maps of customer flow, track hot and cold zone distribution, support gender/age group analysis, and set up whitelist/blacklist monitoring for specific customers.',
           items: [
             {
               t: 'Average Transaction Value',
@@ -327,14 +382,24 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
             'Supports multiple data transmission formats: CSV/FTPS, RestAPI, SQL.',
             'Smart Employee Management: cashier monitoring, queue detection, and automatic counter activation.',
             'Customer flow heat maps, sales data, and average transaction value.',
+            'Customer behavior analysis (gender, age, first-time customer ratio).',
             'Real-time inventory and restocking status.',
+            'Security monitoring: blacklist alerts and theft detection.',
             'AI Early Warning and Management Decision Support',
           ],
+          image: {
+            src: rmsVms,
+            alt: 'Video management system showing multiple store camera feeds',
+          },
         },
         {
           title: 'Advantages of On-Chain Data Applications',
           lead: 'Supply chain, product traceability, sales data, customer behavior images, inventory records, invoices, and membership records are automatically uploaded to the blockchain, generating immutable digital certificates.',
           items: [
+            {
+              t: 'Comprehensive Data Protection',
+              d: 'All sales data, images, and transaction records are automatically uploaded to the blockchain, generating immutable timestamps and creating a fully trustworthy data foundation.',
+            },
             {
               t: 'Anti-Fraud and Trust Enhancement Mechanism',
               d: 'Effectively prevents internal and external fraud, ensures transaction authenticity, and improves management transparency and audit efficiency.',
@@ -343,6 +408,11 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
               t: 'Expanded Application Potential',
               d: 'Blockchain technology can be extended to diverse scenarios such as membership points tracking, supply chain transparency, and cross-brand data sharing.',
             },
+          ],
+          bullets: [
+            'Membership points and whitelist customer management',
+            'Preventing data falsification and internal/external fraud',
+            'Cross-platform data sharing (supply chains, brand alliances)',
           ],
         },
       ],
@@ -384,6 +454,10 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
           lead: 'Aiii MMS 平台能無縫整合各類醫療資訊系統，並透過 AI 影像辨識技術提升醫療流程效率：',
           items: [
             {
+              t: '資訊系統整合',
+              d: '門急診、住院、檢驗、影像（HIS／LIS／RIS／HRP）等系統與 V-BIM 平台完美整合，實現資料互通與集中管理。',
+            },
+            {
               t: 'AI 影像辨識應用',
               d: '醫護人員與病患動線智慧管理、病患身分驗證與行為即時監控、病歷與 BI（Behavior Intelligence）數據分析',
             },
@@ -395,6 +469,7 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
         },
         {
           title: '醫療 AIoT 與設備智慧管理',
+          lead: '透過智慧物聯網技術，醫院能建立完整的設備生命週期管理系統，確保醫療設備處於最佳運作狀態。',
           items: [
             {
               t: '醫療設備 AIoT 串接',
@@ -433,6 +508,10 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
           title: '7×24 監控通報事件追蹤與管理',
           items: [
             {
+              t: '人工智慧 AI 與深度學習（Deep Learning）',
+              d: '實現人臉辨識、車牌辨識、行為分析等高效影像處理應用，為客戶提供精準且即時的數據支持。',
+            },
+            {
               t: '物聯網 IoT 生態建設',
               d: '構建設備互聯互通的智慧平台，提供開放 API，簡化系統整合，並加速多元 IoT 裝置的應用落地。',
             },
@@ -467,6 +546,11 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
           ],
         },
         {
+          title: '未來展望與拓展應用',
+          lead: '本系統有望樹立智慧醫療診所運營新標杆，推動整個行業的數位化轉型。未來將探索與區塊鏈技術結合，用於患者數據安全追蹤，進一步提升系統的安全性和可靠性。',
+          items: [{ t: '區塊鏈技術整合' }, { t: '擴展至其他醫療科室' }, { t: '行業數位化轉型' }],
+        },
+        {
           title: '數據上鏈，保障醫療可信度',
           lead: '所有醫療數據、影像與文件皆自動上鏈（Blockchain），生成不可竄改的時間戳記，確保醫療紀錄透明、可追溯，有效降低醫療糾紛爭議。',
           items: [
@@ -490,6 +574,11 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
               t: '醫療保險與理賠',
               d: '智能合約自動執行保險理賠條件，例如根據穿戴設備數據判斷是否達到理賠標準。提高理賠效率，減少人為干預與詐保行為。',
             },
+          ],
+          bullets: [
+            '病歷與白名單客戶管理',
+            '防止資料造假與內外部舞弊',
+            '跨平台數據共享（供應鏈、品牌聯盟）',
           ],
           image: {
             src: mmsBlockchain,
@@ -550,6 +639,10 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
           lead: 'The Aiii MMS platform seamlessly integrates various hospital information systems and enhances medical process efficiency through AI image recognition technology:',
           items: [
             {
+              t: 'Information System Integration',
+              d: 'Outpatient, inpatient, laboratory, imaging (HIS/LIS/RIS/HRP), and other systems are perfectly integrated with the V-BIM platform, achieving data interoperability and centralized management.',
+            },
+            {
               t: 'AI Image Recognition Applications',
               d: 'Smart management of medical staff and patient movement routes; real-time monitoring of patient identity verification and behavior; medical record and BI (Behavioral Intelligence) data analysis',
             },
@@ -561,6 +654,7 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
         },
         {
           title: 'Medical AIoT and Intelligent Equipment Management',
+          lead: 'With smart IoT technology, hospitals can establish a complete equipment lifecycle management system to ensure medical devices remain in optimal operating condition.',
           items: [
             {
               t: 'Medical Equipment AIoT Integration',
@@ -599,6 +693,10 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
           title: '7×24 Monitoring, Incident Reporting, and Event Management',
           items: [
             {
+              t: 'Artificial Intelligence (AI) and Deep Learning',
+              d: 'Enables efficient image processing applications such as facial recognition, license plate recognition, and behavior analysis, providing customers with accurate and real-time data support.',
+            },
+            {
               t: 'IoT Ecosystem Development',
               d: 'Builds a smart platform for device interconnectivity, offers open APIs, simplifies system integration, and accelerates the deployment of diverse IoT devices.',
             },
@@ -633,6 +731,15 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
           ],
         },
         {
+          title: 'Future Outlook and Application Expansion',
+          lead: 'This system is expected to set a new benchmark for smart medical clinic operations and drive digital transformation across the entire industry. In the future, integration with blockchain technology will be explored to enable secure tracking of patient data, further enhancing the system’s security and reliability.',
+          items: [
+            { t: 'Blockchain Technology Integration' },
+            { t: 'Expansion to Other Medical Departments' },
+            { t: 'Industry Digital Transformation' },
+          ],
+        },
+        {
           title: 'On-Chain Data for Trusted Healthcare',
           lead: 'All medical data, images, and documents are automatically uploaded to the blockchain, generating immutable timestamps to ensure transparency and traceability of medical records, effectively reducing disputes and conflicts.',
           items: [
@@ -656,6 +763,11 @@ export const PRODUCTS: Record<ProductKey, Record<Locale, ProductCopy>> = {
               t: 'Medical Insurance and Claims',
               d: 'Smart contracts can automatically enforce insurance claim conditions, such as verifying eligibility based on wearable device data. This improves claim efficiency while reducing human intervention and fraudulent claims.',
             },
+          ],
+          bullets: [
+            'Medical records and whitelist patient management',
+            'Preventing data falsification and internal/external fraud',
+            'Cross-platform data sharing (supply chains, brand alliances)',
           ],
           image: {
             src: mmsBlockchain,
