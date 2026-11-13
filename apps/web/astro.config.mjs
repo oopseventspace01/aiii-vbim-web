@@ -15,7 +15,8 @@ export default defineConfig({
   image: { domains: ['cdn.sanity.io'] },
   // 開發工具列會蓋住畫面、影響截圖檢查，關閉
   devToolbar: { enabled: false },
-  adapter: vercel(),
+  // 翻譯在背景執行，給函式最多 120 秒（Vercel 方案上限以官方文件為準）
+  adapter: vercel({ maxDuration: 120 }),
   // 舊網址 301 轉址（對照表在 redirects.mjs）。用 Astro 設定而不是 vercel.json：
   // Vercel 轉接器會把它寫進部署設定，本機開發也能測試
   redirects: Object.fromEntries([
@@ -66,6 +67,14 @@ export default defineConfig({
         optional: true,
       }),
       N8N_LEAD_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
+      // 最新消息自動翻譯（src/pages/api/translate-news.ts）
+      ANTHROPIC_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
+      SANITY_WRITE_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
+      SANITY_TRANSLATE_WEBHOOK_SECRET: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
       CHECKLIST_FORM_BUILDING: envField.string({
         context: 'server',
         access: 'secret',

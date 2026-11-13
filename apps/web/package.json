@@ -13,14 +13,18 @@
     "check:content": "node scripts/check-content.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.8.0",
     "@astrojs/sitemap": "^3.7.4",
     "@astrojs/vercel": "^11.0.15",
     "@sanity/client": "^8.9.0",
     "@sanity/image-url": "^2.1.1",
+    "@sanity/webhook": "^4.0.4",
     "@tailwindcss/vite": "^4.3.3",
+    "@vercel/functions": "^3.11.2",
     "astro": "^7.4.0",
     "astro-portabletext": "^1.0.1",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

@@ -151,6 +151,23 @@ export const news = defineType({
       hidden: ({ document }) => categoryOf(document) !== 'event',
     }),
     defineField({ name: 'seo', title: 'SEO 設定', type: 'seo' }),
+    // 2026-11-13 業主指示：中文最新消息自動翻成英文版（apps/web/src/pages/api/translate-news.ts）
+    defineField({
+      name: 'autoTranslate',
+      title: '自動翻譯',
+      description:
+        '勾選時，中文版發布後會自動重新翻譯並覆蓋這份英文內容。手動修改過英文、不想被覆蓋，請取消勾選。',
+      type: 'boolean',
+      initialValue: true,
+      hidden: ({ document }) => languageOf(document) !== 'en',
+    }),
+    defineField({
+      name: 'translatedFromRev',
+      title: '翻譯來源版本（系統用）',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    }),
   ],
   orderings: [
     {
