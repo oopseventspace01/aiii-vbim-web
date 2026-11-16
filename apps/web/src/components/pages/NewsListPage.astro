@@ -14,6 +14,7 @@ import { toImage, toNewsCard, type NewsCardData } from '../../lib/home-data';
 import {
   availableCategories,
   newsListPath,
+  newsListDescription,
   pageSlice,
   pickFeatured,
   totalPages,
@@ -64,9 +65,19 @@ const pageTitle = [
 ]
   .filter(Boolean)
   .join(' · ');
+// SEO：「全部」第一頁用列表導言；分類頁、第 2 頁以後用這一頁的消息標題組成各自的描述
+const metaDescription =
+  category === null && page === 1
+    ? copy.lead
+    : newsListDescription({
+        locale,
+        label: pageTitle,
+        items: pageSlice(pool, page),
+        lead: copy.lead,
+      });
 ---
 
-<BaseLayout title={pageTitle} description={copy.lead} locale={locale} active="news">
+<BaseLayout title={pageTitle} description={metaDescription} locale={locale} active="news">
   <PageHero eyebrow={copy.eyebrow} title={copy.title} lead={copy.lead} />
 
   {featured && featuredLink && page === 1 && (

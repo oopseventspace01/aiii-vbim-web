@@ -38,6 +38,10 @@ test.describe('每頁的 SEO 設定', () => {
       expect(title, path).toContain('Aiii VBIM');
       const desc = (await page.locator('meta[name="description"]').getAttribute('content')) ?? '';
       expect(desc.length, `${path} 描述`).toBeGreaterThan(10);
+      // 描述長度：太短 Google 會改抓頁面其他文字，太長會被截斷（中文 40～100 字、英文 70～160 字元）
+      const [min, max] = path === '/en' || path.startsWith('/en/') ? [70, 160] : [40, 100];
+      expect([...desc].length, `${path} 描述長度：${desc}`).toBeGreaterThanOrEqual(min);
+      expect([...desc].length, `${path} 描述長度：${desc}`).toBeLessThanOrEqual(max);
       expect(titles.has(title), `${path} 標題和 ${titles.get(title)} 重複`).toBe(false);
       expect(descriptions.has(desc), `${path} 描述和 ${descriptions.get(desc)} 重複`).toBe(false);
       titles.set(title, path);
@@ -159,4 +163,58 @@ test('網站地圖（建置後）：中英文頁面互相對應，不含開發�
   }
   expect(xml).toContain('hreflang="en" href="https://aiiivbim.com/en/platform"');
   expect(xml).not.toMatch(/\/dev\/|\/404/);
+  // 不收錄的頁面（隱私權政策）不列入網站地圖
+  expect(xml).not.toContain('/privacy</loc>');
+});
+
+test('還沒翻譯的消息：備援頁不收錄、另一語言頁不標 hreflang', async ({ page, request }) => {
+  // 從英文列表找出顯示「即將推出英文版」的消息（內容是中文版）
+  const list = await (await request.get('/en/news')).text();
+  const slugs = [
+    ...new Set([...list.matchAll(/href="\/en\/news\/([a-z0-9-]+)"/g)].map((m) => m[1])),
+  ].filter((s) => s !== 'page' && s !== 'category');
+  let checked = 0;
+  for (const slug of slugs) {
+    await page.goto(`/en/news/${slug}`);
+    const lang = await page.locator('[data-news-detail]').getAttribute('lang');
+    const robots = page.locator('meta[name="robots"]');
+    if (lang && lang !== 'en') {
+      // 備援頁：不收錄、沒有 canonical 與 hreflang
+      await expect(robots).toHaveAttribute('content', /noindex/);
+      await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
+      await expect(page.locator('link[hreflang]')).toHaveCount(0);
+      // 中文原文頁照常收錄，但不用 hreflang 指向英文備援頁
+      await page.goto(`/news/${slug}`);
+      await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+      await expect(page.locator('link[rel="canonical"]')).toHaveCount(1);
+      await expect(page.locator('link[hreflang]')).toHaveCount(0);
+      checked++;
+    } else {
+      await expect(robots).toHaveCount(0);
+      await expect(page.locator('link[hreflang]')).toHaveCount(3);
+    }
+  }
+  test.skip(slugs.length === 0, '目前沒有消息內頁');
+  test.info().annotations.push({ type: '未翻譯消息', description: String(checked) });
+});
+
+test('消息分類頁與分頁：描述各不相同，也和列表首頁不同', async ({ page, request }) => {
+  for (const base of ['/news', '/en/news']) {
+    const html = await (await request.get(base)).text();
+    const paths = [
+      base,
+      ...new Set(
+        [...html.matchAll(new RegExp(`href="(${base}/(?:category/[a-z]+|page/[0-9]+))"`, 'g'))].map(
+          (m) => m[1],
+        ),
+      ),
+    ];
+    const seen = new Map<string, string>();
+    for (const path of paths) {
+      await page.goto(path);
+      const desc = (await page.locator('meta[name="description"]').getAttribute('content')) ?? '';
+      expect(seen.has(desc), `${path} 描述和 ${seen.get(desc)} 重複`).toBe(false);
+      seen.set(desc, path);
+    }
+  }
 });

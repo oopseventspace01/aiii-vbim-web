@@ -41,6 +41,8 @@ interface Props {
   alternates?: Partial<Record<Locale, string>>;
   footer?: FooterInfo;
   noindex?: boolean;
+  /** 另一語言沒有真正的翻譯時設 false：不輸出 hreflang（避免指向不收錄的備援頁） */
+  hreflang?: boolean;
   /** 分享預覽圖（絕對網址或 /public 底下的路徑）；不指定用預設分享圖 */
   ogImage?: string;
   ogType?: 'website' | 'article';
@@ -56,6 +58,7 @@ const {
   alternates: alternatesProp = {},
   footer,
   noindex = false,
+  hreflang = true,
   ogImage,
   ogType = 'website',
   jsonLd = [],
@@ -103,7 +106,7 @@ const structured = [
     <meta name="description" content={metaDescription} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     {!noindex && <link rel="canonical" href={canonical} />}
-    {!noindex && hreflangs.map((l) => <link rel="alternate" hreflang={l.hreflang} href={l.href} />)}
+    {!noindex && hreflang && hreflangs.map((l) => <link rel="alternate" hreflang={l.hreflang} href={l.href} />)}
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="Aiii VBIM" />
     <meta property="og:title" content={fullTitle} />

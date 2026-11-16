@@ -16,6 +16,7 @@ import { VISUAL_ALT } from '../../content/visuals';
 import design from '../../content/design/Energy.json';
 import { ENERGY_COPY } from '../../content/pages/energy';
 import { localizePath, type Locale } from '../../lib/i18n';
+import { seoDescription } from '../../content/seo-descriptions';
 
 interface Props {
   locale: Locale;
@@ -33,7 +34,12 @@ const data = design[locale] as {
 const L = (path: string) => localizePath(path, locale);
 ---
 
-<BaseLayout title={copy.metaTitle} description={copy.subtitle} locale={locale} active="energy">
+<BaseLayout
+  title={copy.metaTitle}
+  description={seoDescription('energy', locale, copy.subtitle)}
+  locale={locale}
+  active="energy"
+>
   <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} lead={copy.body}>
     <MediaFigure slot="media" src={energy} alt={copy.heroAlt} blend eager />
   </PageHero>

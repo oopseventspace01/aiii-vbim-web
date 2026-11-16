@@ -6,6 +6,8 @@
 > **目前實作（2026-10-28，SPEC P5 決定）**：名單存在 Google 試算表，不是 Supabase（免費名額已滿）。
 > n8n 工作流名稱「Aiii VBIM 官網｜表單名單（webhook）」，節點：Webhook（Header Auth 驗證 `X-Lead-Secret`）→ 整理資料（Code）→ 寫入名單試算表（Google Sheets，分頁 `Untitled`）→ 回應成功／回應失敗 → 確認信給填表人、內部通知信（Gmail）。
 > 寫入失敗時回 500，網站顯示「目前無法送出」；寄信失敗不影響回應。LINE OA 推播尚未加上（待 Channel access token）。
+> **失敗通知（2026-11-16）**：寫入試算表失敗 →「通知：名單沒存到」（Telegram 附完整名單，方便手動補登）；確認信／內部通知信寄不出去 → 各自的 Telegram 通知；工作流整個出錯 → 另一條工作流「Aiii VBIM 官網｜錯誤通知」（Error Trigger → Telegram，必須保持啟用）。Telegram 用 n8n 既有的機器人憑證，聊天室設定在節點裡。通知節點本身失敗不影響名單流程。
+> 尚未涵蓋：n8n 整台連不上（網站回 502）與自動翻譯失敗，這兩種只有 Vercel 那端知道。
 > 下方第 2、3 節的 Supabase 節點與欄位對應保留，作為日後改回資料庫時的規格。
 
 > **機密不寫在這裡**：Webhook 網址、`X-Lead-Secret`、Supabase service role key、LINE Channel access token、通知收件人（含副本）一律放在 n8n 的 Credentials／環境變數。

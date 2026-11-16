@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   availableCategories,
   needsDetailPage,
+  newsListDescription,
   newsListPath,
   newsRoutes,
   pageSlice,
@@ -59,6 +60,13 @@ describe('pickForLocale（語言備援）', () => {
 
   it('中文：一律用中文版', () => {
     expect(pickForLocale(items, 'zh-Hant').every((x) => !x.fallback)).toBe(true);
+  });
+
+  it('記錄每則消息實際有哪些語言版本（決定要不要標 hreflang）', () => {
+    const byTitle = (l: 'en' | 'zh-Hant') =>
+      Object.fromEntries(pickForLocale(items, l).map((x) => [x.title, x.languages]));
+    expect(byTitle('en')).toEqual({ 'A English': ['zh-Hant', 'en'], 'B 只有中文': ['zh-Hant'] });
+    expect(byTitle('zh-Hant')['B 只有中文']).toEqual(['zh-Hant']);
   });
 
   it('沒有翻譯連結資料的文件各自獨立', () => {
@@ -163,5 +171,47 @@ describe('內文工具', () => {
     expect(isExternalUrl('https://example.com')).toBe(true);
     expect(isExternalUrl('https://aiiivbim.com/news')).toBe(false);
     expect(isExternalUrl('/contact')).toBe(false);
+  });
+});
+
+describe('newsListDescription（分類頁、分頁的搜尋描述）', () => {
+  const e = (title: string, fallback = false) => ({ ...n({ title }), fallback, languages: [] });
+  const lead = '列表導言';
+
+  it('用分類名稱＋這一頁的消息標題組成', () => {
+    expect(
+      newsListDescription({
+        locale: 'zh-Hant',
+        label: '最新消息 · 知識專欄',
+        items: [e('甲'), e('乙')],
+        lead,
+      }),
+    ).toBe('最新消息 · 知識專欄｜甲、乙');
+  });
+
+  it('超過長度上限就少列幾則，不會截斷到一半的標題', () => {
+    const long = '很長的標題'.repeat(8); // 40 字
+    const out = newsListDescription({
+      locale: 'zh-Hant',
+      label: '最新消息',
+      items: [e(long), e(long), e(long)],
+      lead,
+    });
+    expect(out).toBe(`最新消息｜${long}、${long}`);
+    expect([...out].length).toBeLessThanOrEqual(100);
+  });
+
+  it('英文頁不用還沒翻譯的中文標題；都沒有時改用導言', () => {
+    expect(
+      newsListDescription({
+        locale: 'en',
+        label: 'News · Insights',
+        items: [e('中文標題', true), e('English title')],
+        lead,
+      }),
+    ).toBe('News · Insights: English title');
+    expect(
+      newsListDescription({ locale: 'en', label: 'News', items: [e('中文', true)], lead: 'Lead.' }),
+    ).toBe('News: Lead.');
   });
 });

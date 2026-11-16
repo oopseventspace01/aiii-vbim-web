@@ -11,6 +11,7 @@ import heroBuilding from '../../assets/illustrations/hero-building.jpg';
 import design from '../../content/design/About.json';
 import { ABOUT_COPY } from '../../content/pages/about';
 import { localizePath, type Locale } from '../../lib/i18n';
+import { seoDescription } from '../../content/seo-descriptions';
 
 interface Props {
   locale: Locale;
@@ -27,7 +28,12 @@ const data = design[locale] as {
 const L = (path: string) => localizePath(path, locale);
 ---
 
-<BaseLayout title={copy.metaTitle} description={copy.lead} locale={locale} active="about">
+<BaseLayout
+  title={copy.metaTitle}
+  description={seoDescription('about', locale, copy.lead)}
+  locale={locale}
+  active="about"
+>
   <PageHero eyebrow={copy.eyebrow} title={copy.title} lead={copy.lead}>
     <MediaFigure slot="media" src={heroBuilding} alt={copy.heroAlt} blend eager />
   </PageHero>

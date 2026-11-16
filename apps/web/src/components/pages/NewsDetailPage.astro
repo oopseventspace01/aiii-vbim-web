@@ -37,6 +37,10 @@ const dateFmt = new Intl.DateTimeFormat(locale === 'en' ? 'en-US' : 'zh-TW', {
 const isEvent = entry.category === 'event';
 // 顯示中文版時，內容語言標示為中文
 const contentLang = entry.fallback ? (entry.language ?? undefined) : undefined;
+// SEO：還沒翻譯的備援頁（例如英文網址顯示中文內容）不收錄；
+// 另一語言沒有真正的翻譯時，這頁也不標 hreflang，避免指向不收錄的頁面
+const otherLocale = locale === 'en' ? 'zh-Hant' : 'en';
+const otherLocaleTranslated = entry.languages.includes(otherLocale);
 
 // 結構化資料（SPEC 7）：消息＝Article；活動類且有日期與地點＝再加 Event
 const ogSource = entry.seo?.ogImage?.asset?.url ? entry.seo.ogImage : cover?.source;
@@ -65,7 +69,8 @@ const jsonLd = [articleJsonLd(seoInput), ...(event ? [event] : [])];
   description={entry.seo?.metaDescription || entry.excerpt || undefined}
   locale={locale}
   active="news"
-  noindex={Boolean(entry.seo?.noIndex)}
+  noindex={Boolean(entry.seo?.noIndex) || entry.fallback}
+  hreflang={otherLocaleTranslated}
   ogImage={seoImage}
   ogType="article"
   jsonLd={jsonLd}

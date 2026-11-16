@@ -28,6 +28,7 @@ import { localizePath, type Locale } from '../../lib/i18n';
 import { UI } from '../../i18n/ui';
 import ShowcaseGrid from '../blocks/ShowcaseGrid.astro';
 import { SECTOR_SHOWCASE } from '../../content/pages/showcase';
+import { seoDescription } from '../../content/seo-descriptions';
 
 interface Props {
   locale: Locale;
@@ -95,7 +96,12 @@ const dashboards: Partial<
 };
 ---
 
-<BaseLayout title={copy.metaTitle} description={copy.lead} locale={locale} active="solutions">
+<BaseLayout
+  title={copy.metaTitle}
+  description={seoDescription('solutions', locale, copy.lead)}
+  locale={locale}
+  active="solutions"
+>
   <PageHero eyebrow={copy.eyebrow} title={copy.title} lead={copy.lead} />
 
   <!-- 五大場域分頁 -->

@@ -12,6 +12,7 @@ import { PARTNERS_COPY } from '../content/pages/partners';
 import { PLATFORM_COPY } from '../content/pages/platform';
 import { SOLUTIONS_COPY } from '../content/pages/solutions';
 import { VBIM_COPY } from '../content/pages/vbim';
+import { seoDescription } from '../content/seo-descriptions';
 import { NAV_ITEMS } from '../i18n/ui';
 import { localizePath, type Locale } from '../lib/i18n';
 import { SITE_URL } from '../lib/seo';
@@ -20,15 +21,15 @@ import { getFooterInfo } from '../lib/site';
 /** 各頁的描述：和該頁 <meta name="description"> 相同 */
 function descriptions(l: Locale): Record<string, string> {
   return {
-    vbim: VBIM_COPY[l].subtitle,
-    platform: PLATFORM_COPY[l].subtitle,
-    solutions: SOLUTIONS_COPY[l].lead,
-    energy: ENERGY_COPY[l].subtitle,
-    edge: EDGE_COPY[l].subtitle,
-    partners: PARTNERS_COPY[l].subtitle,
-    academy: ACADEMY_COPY[l].lead,
+    vbim: seoDescription('vbim', l, VBIM_COPY[l].subtitle),
+    platform: seoDescription('platform', l, PLATFORM_COPY[l].subtitle),
+    solutions: seoDescription('solutions', l, SOLUTIONS_COPY[l].lead),
+    energy: seoDescription('energy', l, ENERGY_COPY[l].subtitle),
+    edge: seoDescription('edge', l, EDGE_COPY[l].subtitle),
+    partners: seoDescription('partners', l, PARTNERS_COPY[l].subtitle),
+    academy: seoDescription('academy', l, ACADEMY_COPY[l].lead),
     news: NEWS_COPY[l].lead,
-    about: ABOUT_COPY[l].lead,
+    about: seoDescription('about', l, ABOUT_COPY[l].lead),
   };
 }
 
