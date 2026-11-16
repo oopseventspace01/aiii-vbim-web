@@ -171,8 +171,9 @@ test('網站地圖（建置後）：中英文頁面互相對應，不含開發�
 test('還沒翻譯的消息：備援頁不收錄、另一語言頁不標 hreflang', async ({ page, request }) => {
   // 從英文列表找出顯示「即將推出英文版」的消息（內容是中文版）
   const list = await (await request.get('/en/news')).text();
-  const slugs = [...new Set([...list.matchAll(/href="\/en\/news\/([a-z0-9-]+)"/g)].map((m) => m[1]))]
-    .filter((s) => s !== 'page' && s !== 'category');
+  const slugs = [
+    ...new Set([...list.matchAll(/href="\/en\/news\/([a-z0-9-]+)"/g)].map((m) => m[1])),
+  ].filter((s) => s !== 'page' && s !== 'category');
   let checked = 0;
   for (const slug of slugs) {
     await page.goto(`/en/news/${slug}`);
@@ -196,4 +197,25 @@ test('還沒翻譯的消息：備援頁不收錄、另一語言頁不標 hreflan
   }
   test.skip(slugs.length === 0, '目前沒有消息內頁');
   test.info().annotations.push({ type: '未翻譯消息', description: String(checked) });
+});
+
+test('消息分類頁與分頁：描述各不相同，也和列表首頁不同', async ({ page, request }) => {
+  for (const base of ['/news', '/en/news']) {
+    const html = await (await request.get(base)).text();
+    const paths = [
+      base,
+      ...new Set(
+        [...html.matchAll(new RegExp(`href="(${base}/(?:category/[a-z]+|page/[0-9]+))"`, 'g'))].map(
+          (m) => m[1],
+        ),
+      ),
+    ];
+    const seen = new Map<string, string>();
+    for (const path of paths) {
+      await page.goto(path);
+      const desc = (await page.locator('meta[name="description"]').getAttribute('content')) ?? '';
+      expect(seen.has(desc), `${path} 描述和 ${seen.get(desc)} 重複`).toBe(false);
+      seen.set(desc, path);
+    }
+  }
 });

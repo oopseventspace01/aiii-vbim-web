@@ -55,7 +55,9 @@ export function pickForLocale(items: RawNewsFull[], locale: Locale): NewsEntry[]
   for (const versions of groups.values()) {
     const own = versions.find((v) => v.language === locale);
     const chosen = own ?? versions[0];
-    const languages = [...new Set(versions.map((v) => v.language).filter((l): l is string => Boolean(l)))];
+    const languages = [
+      ...new Set(versions.map((v) => v.language).filter((l): l is string => Boolean(l))),
+    ];
     if (chosen) picked.push({ ...chosen, fallback: !own, languages });
   }
   return picked.sort((a, b) => Date.parse(b.publishedAt ?? '') - Date.parse(a.publishedAt ?? ''));
@@ -127,4 +129,34 @@ export function relatedNews(items: NewsEntry[], current: NewsEntry, count = 3): 
   const same = others.filter((n) => n.category === current.category);
   const rest = others.filter((n) => n.category !== current.category);
   return [...same, ...rest].slice(0, count);
+}
+
+/**
+ * 分類頁、第 2 頁以後的搜尋結果描述（SEO）：用「分類／頁碼＋這一頁實際的消息標題」組成，
+ * 每頁都不一樣，也不需要另外撰寫文案。只採用這個語言真正的版本（不用還沒翻譯的備援標題）；
+ * 一則都沒有時，改用「分類／頁碼＋列表導言」。
+ */
+export function newsListDescription(opts: {
+  locale: Locale;
+  label: string;
+  items: NewsEntry[];
+  lead: string;
+}): string {
+  const { locale, label, items, lead } = opts;
+  const en = locale === 'en';
+  const max = en ? 160 : 100;
+  const sep = en ? ' · ' : '、';
+  const head = en ? `${label}: ` : `${label}｜`;
+  const titles = items
+    .filter((n) => !n.fallback && n.title?.trim())
+    .map((n) => n.title!.trim().replace(/\s+/g, ' '));
+  let text = '';
+  for (const t of titles) {
+    const next = text ? `${text}${sep}${t}` : t;
+    if ([...(head + next)].length > max) break;
+    text = next;
+  }
+  if (text) return head + text;
+  const fallback = head + lead;
+  return [...fallback].length > max ? [...fallback].slice(0, max - 1).join('') + '…' : fallback;
 }

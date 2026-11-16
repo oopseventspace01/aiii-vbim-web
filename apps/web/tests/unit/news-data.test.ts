@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   availableCategories,
   needsDetailPage,
+  newsListDescription,
   newsListPath,
   newsRoutes,
   pageSlice,
@@ -170,5 +171,47 @@ describe('內文工具', () => {
     expect(isExternalUrl('https://example.com')).toBe(true);
     expect(isExternalUrl('https://aiiivbim.com/news')).toBe(false);
     expect(isExternalUrl('/contact')).toBe(false);
+  });
+});
+
+describe('newsListDescription（分類頁、分頁的搜尋描述）', () => {
+  const e = (title: string, fallback = false) => ({ ...n({ title }), fallback, languages: [] });
+  const lead = '列表導言';
+
+  it('用分類名稱＋這一頁的消息標題組成', () => {
+    expect(
+      newsListDescription({
+        locale: 'zh-Hant',
+        label: '最新消息 · 知識專欄',
+        items: [e('甲'), e('乙')],
+        lead,
+      }),
+    ).toBe('最新消息 · 知識專欄｜甲、乙');
+  });
+
+  it('超過長度上限就少列幾則，不會截斷到一半的標題', () => {
+    const long = '很長的標題'.repeat(8); // 40 字
+    const out = newsListDescription({
+      locale: 'zh-Hant',
+      label: '最新消息',
+      items: [e(long), e(long), e(long)],
+      lead,
+    });
+    expect(out).toBe(`最新消息｜${long}、${long}`);
+    expect([...out].length).toBeLessThanOrEqual(100);
+  });
+
+  it('英文頁不用還沒翻譯的中文標題；都沒有時改用導言', () => {
+    expect(
+      newsListDescription({
+        locale: 'en',
+        label: 'News · Insights',
+        items: [e('中文標題', true), e('English title')],
+        lead,
+      }),
+    ).toBe('News · Insights: English title');
+    expect(
+      newsListDescription({ locale: 'en', label: 'News', items: [e('中文', true)], lead: 'Lead.' }),
+    ).toBe('News: Lead.');
   });
 });
