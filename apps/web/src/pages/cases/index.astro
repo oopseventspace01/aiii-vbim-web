@@ -1,0 +1,7 @@
+---
+// 2026-11-16 案例列表併入五大領域：舊網址 301 永久轉址到 /solutions#cases
+// 用伺服器端轉址（不預先產生），/cases 與 /cases/ 都會轉，不會 404
+export const prerender = false;
+
+return Astro.redirect('/solutions#cases', 301);
+---

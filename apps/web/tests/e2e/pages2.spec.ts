@@ -124,7 +124,9 @@ test.describe('其他頁面', () => {
   test('舊的 /cases 網址轉到五大領域的 #cases', async ({ page }) => {
     for (const [from, to] of [
       ['/cases', '/solutions#cases'],
+      ['/cases/', '/solutions#cases'],
       ['/en/cases', '/en/solutions#cases'],
+      ['/en/cases/', '/en/solutions#cases'],
     ]) {
       await page.goto(from!);
       await expect(page).toHaveURL(new RegExp(`${to!.replace('#', '\\#')}$`));
