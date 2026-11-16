@@ -19,7 +19,7 @@ import InfoCard from '../cards/InfoCard.astro';
 import FeatureCard from '../cards/FeatureCard.astro';
 import NewsGrid from '../blocks/NewsGrid.astro';
 import heroBuilding from '../../assets/illustrations/hero-building.jpg';
-import world from '../../assets/illustrations/world.jpg';
+import commandCenter from '../../assets/illustrations/command-center.jpg';
 import energy from '../../assets/illustrations/energy.jpg';
 import hvac from '../../assets/illustrations/hvac.jpg';
 import edge from '../../assets/illustrations/edge.jpg';
@@ -32,6 +32,7 @@ import { HOME_QUERY } from '../../lib/queries';
 import { toFooterInfo, toHomeData, type ImageRef, type RawHome } from '../../lib/home-data';
 import { FOOTER_FALLBACK } from '../../data/site-fallback';
 import { UI } from '../../i18n/ui';
+import { VISUAL_ALT } from '../../content/visuals';
 
 interface Props {
   locale: Locale;
@@ -233,8 +234,8 @@ const newsGroups = [
             <MediaFigure {...remote(data.commandCenterImage, 1280)} framed />
           ) : (
             <MediaFigure
-              src={world}
-              alt={copy.command.imageAlt}
+              src={commandCenter}
+              alt={VISUAL_ALT[locale].commandCenter}
               framed
               mockupLabel={t.mockupLabel}
             />

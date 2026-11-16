@@ -14,7 +14,7 @@ type PmisCopy = {
   steps: string[];
   servicesTitle: string;
   services: string[];
-  figures: { machineRoom: string; integrated: string; ceiling: string };
+  figures: { title: string; before: string; after: string };
   cta: string;
 };
 
@@ -53,9 +53,10 @@ export const PMIS_COPY: Record<Locale, PmisCopy> = {
       'Aiii VBIM 特定管線套圖',
     ],
     figures: {
-      machineRoom: '所有管線配置／閥件／接頭／機房設備等空間配置',
-      integrated: '土建及機電各專業整合模型',
-      ceiling: '成果範例：走道上端施工前密布管線，檢討天花板上配管空間',
+      // 取自業主提供的投影片「施工階段機電系統模型建置-管線衝突檢討」
+      title: '施工階段機電系統模型建置－管線衝突檢討',
+      before: '管線修正前',
+      after: '管線修正後',
     },
     cta: '預約 PMIS 導入諮詢',
   },
@@ -105,10 +106,10 @@ export const PMIS_COPY: Record<Locale, PmisCopy> = {
       'Aiii VBIM coordination drawings for specific piping',
     ],
     figures: {
-      machineRoom: 'Spatial layout of all piping, valves, fittings and plant-room equipment',
-      integrated: 'Integrated civil and MEP model across disciplines',
-      ceiling:
-        'Example: dense piping above a corridor, reviewed for ceiling space before construction',
+      // 英文為草稿，待業主確認
+      title: 'Construction-phase MEP modeling: pipe clash review',
+      before: 'Before clash fix',
+      after: 'After clash fix',
     },
     cta: 'Book a PMIS consultation',
   },

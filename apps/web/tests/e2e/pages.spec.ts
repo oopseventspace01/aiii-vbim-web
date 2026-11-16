@@ -190,3 +190,38 @@ test.describe('文案精簡決定（2026-10-20）', () => {
     await expect(page.locator('main h2').last()).toHaveText('想知道 Aiii VBIM 怎麼用在你的場域？');
   });
 });
+
+// AI 生成的示意圖一律標「示意畫面」；PMIS 改放業主提供的管線衝突修正前／後截圖
+test.describe('示意圖標示與 PMIS 管線衝突圖', () => {
+  for (const { path, label } of [
+    { path: '/vbim', label: '示意畫面' },
+    { path: '/platform', label: '示意畫面' },
+    { path: '/en/vbim', label: 'Illustrative mockup' },
+  ]) {
+    test(`${path} 頁首圖標示示意`, async ({ page }) => {
+      await page.goto(path);
+      await expect(page.locator('main figure').first().locator('span')).toHaveText(label);
+    });
+  }
+
+  test('能源頁空調異常圖標示示意', async ({ page }) => {
+    await page.goto('/energy');
+    const fig = page.locator('section', { has: page.locator('#en-hvac') }).locator('figure');
+    await expect(fig.locator('span')).toHaveText('示意畫面');
+  });
+
+  test('PMIS 顯示修正前／後兩張圖且圖片載入成功', async ({ page }) => {
+    await page.goto('/vbim#pmis');
+    const clash = page.locator('[data-pmis-clash]');
+    await expect(clash.locator('figcaption')).toHaveText('施工階段機電系統模型建置－管線衝突檢討');
+    await expect(clash.locator('span')).toHaveText(['管線修正前', '管線修正後']);
+    const imgs = clash.locator('img');
+    await expect(imgs).toHaveCount(2);
+    for (const img of await imgs.all()) {
+      await img.scrollIntoViewIfNeeded();
+      await expect
+        .poll(() => img.evaluate((e) => (e as HTMLImageElement).naturalWidth))
+        .toBeGreaterThan(0);
+    }
+  });
+});

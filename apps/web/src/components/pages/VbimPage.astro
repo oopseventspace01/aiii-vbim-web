@@ -11,12 +11,13 @@ import NewsGrid from '../blocks/NewsGrid.astro';
 import InfoCard from '../cards/InfoCard.astro';
 import ShowcaseGrid from '../blocks/ShowcaseGrid.astro';
 import { LIFECYCLE_SHOWCASE } from '../../content/pages/showcase';
-import city from '../../assets/illustrations/city.jpg';
+import digitalTwin from '../../assets/illustrations/vbim-digital-twin.jpg';
 import realDemo from '../../assets/illustrations/real-demo.jpg';
 import realScreens from '../../assets/illustrations/real-screens.jpg';
-import pmisMachineRoom from '../../assets/illustrations/pmis-machine-room.jpg';
-import pmisIntegrated from '../../assets/illustrations/pmis-integrated-model.jpg';
-import pmisCeiling from '../../assets/illustrations/pmis-ceiling-piping.jpg';
+import clashBefore from '../../assets/illustrations/pmis-clash-before.jpg';
+import clashAfter from '../../assets/illustrations/pmis-clash-after.jpg';
+import { UI } from '../../i18n/ui';
+import { VISUAL_ALT } from '../../content/visuals';
 import design from '../../content/design/VBIM.json';
 import { VBIM_COPY } from '../../content/pages/vbim';
 import { PMIS_COPY } from '../../content/pages/pmis';
@@ -72,7 +73,13 @@ const stores = [
       ))}
       <Button href={L('/contact')}>{copy.demo}</Button>
     </div>
-    <MediaFigure slot="media" src={city} alt={copy.heroAlt} blend eager />
+    <MediaFigure
+      slot="media"
+      src={digitalTwin}
+      alt={VISUAL_ALT[locale].digitalTwin}
+      mockupLabel={UI[locale].mockupLabel}
+      eager
+    />
   </PageHero>
 
   <!-- 六大核心價值 -->
@@ -207,24 +214,33 @@ const stores = [
           </ul>
         </div>
       </div>
-      <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-3.5">
-        {[
-          { src: pmisMachineRoom, alt: pmis.figures.machineRoom },
-          { src: pmisIntegrated, alt: pmis.figures.integrated },
-          { src: pmisCeiling, alt: pmis.figures.ceiling },
-        ].map((f) => (
-          <figure class="m-0 flex flex-col gap-2">
-            <Image
-              src={f.src}
-              alt={f.alt}
-              widths={[480, 800]}
-              sizes="(min-width: 1024px) 380px, 100vw"
-              class="aspect-[16/10] w-full rounded-[14px] bg-white object-cover"
-            />
-            <figcaption class="text-[13px] leading-snug text-[#d5def0]">{f.alt}</figcaption>
-          </figure>
-        ))}
-      </div>
+      <figure class="m-0 flex flex-col gap-3" data-pmis-clash>
+        <figcaption class="text-base font-black text-white">{pmis.figures.title}</figcaption>
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-3.5">
+          {[
+            { src: clashBefore, label: pmis.figures.before, tone: 'bg-[#c62828]' },
+            { src: clashAfter, label: pmis.figures.after, tone: 'bg-[#1b7a43]' },
+          ].map((f) => (
+            <div class="relative overflow-hidden rounded-[14px] bg-black">
+              <Image
+                src={f.src}
+                alt={`${pmis.figures.title}${locale === 'en' ? ': ' : '：'}${f.label}`}
+                widths={[480, 590]}
+                sizes="(min-width: 1024px) 590px, 100vw"
+                class="block aspect-[2/1] w-full object-contain"
+              />
+              <span
+                class:list={[
+                  'absolute top-3 left-3 rounded-pill px-3 py-1 text-sm font-bold text-white shadow',
+                  f.tone,
+                ]}
+              >
+                {f.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </figure>
       <div>
         <Button href={L('/contact')}>{pmis.cta}</Button>
       </div>

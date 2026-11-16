@@ -10,7 +10,9 @@ import CompareTable from '../blocks/CompareTable.astro';
 import CtaBand from '../blocks/CtaBand.astro';
 import InfoCard from '../cards/InfoCard.astro';
 import energy from '../../assets/illustrations/energy.jpg';
-import hvac from '../../assets/illustrations/hvac.jpg';
+import hvacAnomaly from '../../assets/illustrations/hvac-pipe-anomaly.jpg';
+import { UI } from '../../i18n/ui';
+import { VISUAL_ALT } from '../../content/visuals';
 import design from '../../content/design/Energy.json';
 import { ENERGY_COPY } from '../../content/pages/energy';
 import { localizePath, type Locale } from '../../lib/i18n';
@@ -110,7 +112,11 @@ const L = (path: string) => localizePath(path, locale);
         </ol>
       </div>
       <div class="min-w-0 flex-[1_1_440px]">
-        <MediaFigure src={hvac} alt={copy.hvac.imageAlt} blend />
+        <MediaFigure
+          src={hvacAnomaly}
+          alt={VISUAL_ALT[locale].hvacAnomaly}
+          mockupLabel={UI[locale].mockupLabel}
+        />
       </div>
     </div>
   </Section>

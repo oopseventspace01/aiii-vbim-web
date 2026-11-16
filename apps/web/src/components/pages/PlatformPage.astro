@@ -11,7 +11,9 @@ import CtaBand from '../blocks/CtaBand.astro';
 import InfoCard from '../cards/InfoCard.astro';
 import ShowcaseGrid from '../blocks/ShowcaseGrid.astro';
 import { PLATFORM_SHOWCASE } from '../../content/pages/showcase';
-import city from '../../assets/illustrations/city.jpg';
+import digitalTwin from '../../assets/illustrations/vbim-digital-twin.jpg';
+import { UI } from '../../i18n/ui';
+import { VISUAL_ALT } from '../../content/visuals';
 import design from '../../content/design/Platform.json';
 import { PLATFORM_COPY } from '../../content/pages/platform';
 import { localizePath, type Locale } from '../../lib/i18n';
@@ -39,7 +41,13 @@ const L = (path: string) => localizePath(path, locale);
 
 <BaseLayout title={copy.metaTitle} description={copy.subtitle} locale={locale} active="platform">
   <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} lead={copy.body}>
-    <MediaFigure slot="media" src={city} alt={copy.heroAlt} blend eager />
+    <MediaFigure
+      slot="media"
+      src={digitalTwin}
+      alt={VISUAL_ALT[locale].digitalTwin}
+      mockupLabel={UI[locale].mockupLabel}
+      eager
+    />
   </PageHero>
 
   <!-- 五個核心能力 -->
