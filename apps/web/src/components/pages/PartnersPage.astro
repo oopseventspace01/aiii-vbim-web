@@ -20,6 +20,7 @@ import { localizePath, type Locale } from '../../lib/i18n';
 import { getFooterInfo } from '../../lib/site';
 import { getApprovedPartners } from '../../lib/cms-pages';
 import { imageUrl } from '../../lib/sanity';
+import { seoDescription } from '../../content/seo-descriptions';
 
 interface Props {
   locale: Locale;
@@ -48,7 +49,12 @@ const posters =
     : [];
 ---
 
-<BaseLayout title={copy.ui.metaTitle} description={copy.subtitle} locale={locale} active="partners">
+<BaseLayout
+  title={copy.ui.metaTitle}
+  description={seoDescription('partners', locale, copy.subtitle)}
+  locale={locale}
+  active="partners"
+>
   <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} lead={copy.body}>
     <div class="flex flex-wrap gap-3">
       <Button href="#apply">{copy.apply}</Button>

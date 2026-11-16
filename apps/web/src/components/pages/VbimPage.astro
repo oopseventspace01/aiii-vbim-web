@@ -23,6 +23,7 @@ import { PMIS_COPY } from '../../content/pages/pmis';
 import { localizePath, type Locale } from '../../lib/i18n';
 import { getFooterInfo, getLatestMedia } from '../../lib/site';
 import { HOME } from '../../content/home';
+import { seoDescription } from '../../content/seo-descriptions';
 
 interface Props {
   locale: Locale;
@@ -50,7 +51,12 @@ const stores = [
 ].filter((s): s is { label: string; name: string; href: string } => Boolean(s.href));
 ---
 
-<BaseLayout title={copy.metaTitle} description={copy.subtitle} locale={locale} active="vbim">
+<BaseLayout
+  title={copy.metaTitle}
+  description={seoDescription('vbim', locale, copy.subtitle)}
+  locale={locale}
+  active="vbim"
+>
   <PageHero
     eyebrow={copy.eyebrow}
     title={copy.title}

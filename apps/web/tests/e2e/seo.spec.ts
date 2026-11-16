@@ -39,6 +39,10 @@ test.describe('每頁的 SEO 設定', () => {
       expect(title, path).toContain('Aiii VBIM');
       const desc = (await page.locator('meta[name="description"]').getAttribute('content')) ?? '';
       expect(desc.length, `${path} 描述`).toBeGreaterThan(10);
+      // 描述長度：太短 Google 會改抓頁面其他文字，太長會被截斷（中文 40～100 字、英文 70～160 字元）
+      const [min, max] = path === '/en' || path.startsWith('/en/') ? [70, 160] : [40, 100];
+      expect([...desc].length, `${path} 描述長度：${desc}`).toBeGreaterThanOrEqual(min);
+      expect([...desc].length, `${path} 描述長度：${desc}`).toBeLessThanOrEqual(max);
       expect(titles.has(title), `${path} 標題和 ${titles.get(title)} 重複`).toBe(false);
       expect(descriptions.has(desc), `${path} 描述和 ${descriptions.get(desc)} 重複`).toBe(false);
       titles.set(title, path);

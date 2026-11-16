@@ -15,6 +15,7 @@ import city from '../../assets/illustrations/city.jpg';
 import design from '../../content/design/Platform.json';
 import { PLATFORM_COPY } from '../../content/pages/platform';
 import { localizePath, type Locale } from '../../lib/i18n';
+import { seoDescription } from '../../content/seo-descriptions';
 
 interface Props {
   locale: Locale;
@@ -37,7 +38,12 @@ const data = design[locale] as {
 const L = (path: string) => localizePath(path, locale);
 ---
 
-<BaseLayout title={copy.metaTitle} description={copy.subtitle} locale={locale} active="platform">
+<BaseLayout
+  title={copy.metaTitle}
+  description={seoDescription('platform', locale, copy.subtitle)}
+  locale={locale}
+  active="platform"
+>
   <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} lead={copy.body}>
     <MediaFigure slot="media" src={city} alt={copy.heroAlt} blend eager />
   </PageHero>

@@ -17,6 +17,7 @@ import { FOOTER_FALLBACK } from '../../src/data/site-fallback';
 import { collectText } from '../../integrations/site-font.mjs';
 import { REDIRECTS, SHORTCUTS, STUDIO_URL } from '../../redirects.mjs';
 import { FAQ_COPY } from '../../src/content/pages/faq';
+import { SEO_DESCRIPTIONS, seoDescription } from '../../src/content/seo-descriptions';
 
 describe('網址與標題', () => {
   it('絕對網址：去掉結尾斜線，根目錄保留 /', () => {
@@ -168,5 +169,22 @@ describe('常見問題', () => {
       name: 'Aiii VBIM 跟傳統 BIM 有什麼不同？',
       acceptedAnswer: { text: items[1].a },
     });
+  });
+});
+
+describe('搜尋結果專用描述', () => {
+  it('長度在建議範圍內（中文 40～100 字、英文 70～160 字元）', () => {
+    for (const [key, byLocale] of Object.entries(SEO_DESCRIPTIONS)) {
+      for (const [locale, text] of Object.entries(byLocale ?? {})) {
+        const [min, max] = locale === 'en' ? [70, 160] : [40, 100];
+        const len = [...(text ?? '')].length;
+        expect(len, `${key} ${locale}`).toBeGreaterThanOrEqual(min);
+        expect(len, `${key} ${locale}`).toBeLessThanOrEqual(max);
+      }
+    }
+  });
+  it('沒有專用描述時沿用頁面文字', () => {
+    expect(seoDescription('about', 'zh-Hant', '頁面導言')).toBe('頁面導言');
+    expect(seoDescription('about', 'en', 'lead')).toMatch(/^With buildings/);
   });
 });

@@ -13,6 +13,7 @@ import type { Locale } from '../../lib/i18n';
 import { getFooterInfo } from '../../lib/site';
 import { getCourses } from '../../lib/cms-pages';
 import { isExternalUrl } from '../../lib/rich-text';
+import { seoDescription } from '../../content/seo-descriptions';
 
 interface Props {
   locale: Locale;
@@ -34,7 +35,12 @@ const dateFmt = new Intl.DateTimeFormat(locale === 'en' ? 'en-US' : 'zh-TW', {
 const fmt = (d?: string) => (d ? dateFmt.format(new Date(d)) : '');
 ---
 
-<BaseLayout title={copy.ui.metaTitle} description={copy.lead} locale={locale} active="academy">
+<BaseLayout
+  title={copy.ui.metaTitle}
+  description={seoDescription('academy', locale, copy.lead)}
+  locale={locale}
+  active="academy"
+>
   <header class="bg-blue text-white">
     <div class="container-site flex flex-wrap items-end justify-between gap-8 py-14 md:py-[88px]">
       <div class="flex max-w-[820px] flex-col gap-4">
