@@ -14,6 +14,7 @@ import FlowStrip from '../blocks/FlowStrip.astro';
 import PathTrail from '../blocks/PathTrail.astro';
 import CtaBand from '../blocks/CtaBand.astro';
 import MediaFigure from '../blocks/MediaFigure.astro';
+import HeroBuilding from '../blocks/HeroBuilding.astro';
 import InfoCard from '../cards/InfoCard.astro';
 import FeatureCard from '../cards/FeatureCard.astro';
 import NewsGrid from '../blocks/NewsGrid.astro';
@@ -81,6 +82,7 @@ const newsGroups = [
       appStoreUrl={footer.appStoreUrl}
       googlePlayUrl={footer.googlePlayUrl}
     />
+    {/* 有影片就放影片（後台封面圖當影片播放前畫面）；沒有影片就放動態主視覺 */}
     <div slot="media" data-hero-media>
       {data.heroVideoUrl ? (
         <video
@@ -93,10 +95,8 @@ const newsGroups = [
           preload="none"
           data-hero-video
         />
-      ) : data.heroPoster ? (
-        <MediaFigure {...remote(data.heroPoster, 1280)} blend eager />
       ) : (
-        <MediaFigure src={heroBuilding} alt={copy.command.imageAlt} blend eager />
+        <HeroBuilding locale={locale} />
       )}
     </div>
   </Hero>

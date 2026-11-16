@@ -122,6 +122,93 @@ for (const [locale, path] of [
       expect(missingAlt).toBe(0);
     });
 
+    test('Hero 主視覺：平面圖 → 線框 → 建築，四個層次標題讀得到，播完會停留再重播', async ({
+      page,
+    }) => {
+      test.setTimeout(60_000);
+      await page.goto(path);
+      test.skip((await page.locator('[data-hero-video]').count()) > 0, '後台設定了 Hero 影片');
+      const hero = page.locator('[data-hero-building]');
+      await expect(hero.locator('img')).toHaveAttribute('alt', /\S/);
+      await expect(hero.locator('svg.hb-wire')).toHaveAttribute('aria-hidden', 'true');
+      // 由上往下的順序和畫面一致；中英文頁都同時顯示英文大字與中文小字
+      const labels = (await hero.locator('li').allInnerTexts()).map((t) => t.replace(/\s+/g, ' '));
+      expect(labels).toEqual([
+        'AI 智慧決策',
+        'OPERATIONS 營運管理',
+        'TWIN 數位孿生',
+        'BUILDING 建築本體',
+      ]);
+      // 捲到主視覺 → 開始播放（約 8 秒），播完停在最終畫面
+      await hero.scrollIntoViewIfNeeded();
+      await expect(hero).toHaveAttribute('data-anim', 'play');
+      await page.waitForFunction(() =>
+        document
+          .querySelector('[data-hero-building]')!
+          .getAnimations({ subtree: true })
+          .every((a) => a.playState === 'finished'),
+      );
+      expect(await hero.locator('img').evaluate((e) => getComputedStyle(e).opacity)).toBe('1');
+      await expect(hero).not.toHaveAttribute('data-anim');
+      expect(await hero.locator('img').evaluate((e) => getComputedStyle(e).opacity)).toBe('1');
+      expect(
+        await hero
+          .locator('svg')
+          .first()
+          .evaluate((e) => getComputedStyle(e).opacity),
+      ).toBe('0');
+      for (const li of await hero.locator('li').all()) await expect(li).toBeVisible();
+      // 停留約 8 秒後淡出、重播
+      await expect(hero).toHaveAttribute('data-anim', 'out', { timeout: 12_000 });
+      await expect(hero).toHaveAttribute('data-anim', 'play', { timeout: 3_000 });
+    });
+
+    test('Hero 主視覺：暫停鈕可暫停／繼續，捲出畫面時自動暫停', async ({ page }) => {
+      await page.goto(path);
+      test.skip((await page.locator('[data-hero-video]').count()) > 0, '後台設定了 Hero 影片');
+      const hero = page.locator('[data-hero-building]');
+      const pauseName = locale === 'en' ? 'Pause animation' : '暫停動畫';
+      const playName = locale === 'en' ? 'Play animation' : '播放動畫';
+      await hero.scrollIntoViewIfNeeded();
+      await expect(hero).toHaveAttribute('data-anim', 'play');
+      const states = () =>
+        hero.evaluate((e) => [
+          ...new Set(e.getAnimations({ subtree: true }).map((a) => a.playState)),
+        ]);
+
+      await hero.getByRole('button', { name: pauseName }).click();
+      await expect(hero).toHaveAttribute('data-paused', '');
+      await expect.poll(states).toEqual(['paused']);
+      await hero.getByRole('button', { name: playName }).click();
+      await expect(hero).not.toHaveAttribute('data-paused');
+      await expect.poll(states).not.toContain('paused');
+
+      // 捲到頁尾 → 自動暫停；捲回來 → 繼續
+      await page.locator('footer').scrollIntoViewIfNeeded();
+      await expect(hero).toHaveAttribute('data-paused', '');
+      await hero.scrollIntoViewIfNeeded();
+      await expect(hero).not.toHaveAttribute('data-paused');
+    });
+
+    test('Hero 主視覺：「減少動態效果」時直接顯示最終畫面', async ({ page }) => {
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      await page.goto(path);
+      test.skip((await page.locator('[data-hero-video]').count()) > 0, '後台設定了 Hero 影片');
+      const hero = page.locator('[data-hero-building]');
+      await hero.scrollIntoViewIfNeeded();
+      expect(await hero.getAttribute('data-anim')).toBeNull();
+      expect(await hero.evaluate((e) => e.getAnimations({ subtree: true }).length)).toBe(0);
+      expect(await hero.locator('img').evaluate((e) => getComputedStyle(e).opacity)).toBe('1');
+      expect(
+        await hero
+          .locator('svg')
+          .first()
+          .evaluate((e) => getComputedStyle(e).opacity),
+      ).toBe('0');
+      for (const li of await hero.locator('li').all()) await expect(li).toBeVisible();
+      await expect(hero.getByRole('button')).toBeHidden();
+    });
+
     test('戰情室未上傳截圖時標示「示意畫面」', async ({ page }) => {
       test.skip(!projectId, '需要 .env 的 PUBLIC_SANITY_PROJECT_ID');
       const hasImage = await sanity<boolean>(

@@ -1,0 +1,492 @@
+---
+// 首頁 Hero 主視覺（動態版）：2D 平面圖 → 3D 線框 → 建築本體，四個層次標題由下往上出現
+// - 建築圖：hero-building-plain.jpg（原 hero-building.jpg 裁掉右側烤字標題，854×548 → 600×548）
+// - 標題是 HTML 文字（螢幕閱讀器讀得到），字樣取自原圖
+// - 沒有 JavaScript 或「減少動態效果」時，直接顯示最終畫面
+// - 只用 CSS／SVG；進入畫面才播，約 8 秒播完後停在最終畫面 8 秒再重播
+// - 有暫停／播放鈕（WCAG 2.2.2），捲出畫面時自動暫停
+import { Image } from 'astro:assets';
+import type { Locale } from '../../lib/i18n';
+import plain from '../../assets/illustrations/hero-building-plain.jpg';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+// 座標都以原圖 854×548 為準；x1／y 是原圖上建築端圓點的位置（百分比）
+const LAYERS = [
+  { en: 'AI', zh: '智慧決策', x1: 61.5, y: 17.7, t: 5.3 },
+  { en: 'OPERATIONS', zh: '營運管理', x1: 62.2, y: 36.7, t: 4.4 },
+  { en: 'TWIN', zh: '數位孿生', x1: 62.4, y: 56.9, t: 3.5 },
+  { en: 'BUILDING', zh: '建築本體', x1: 62.4, y: 76.3, t: 2.6 },
+];
+
+const ALT = {
+  'zh-Hant': '分層的玻璃建築示意圖',
+  en: 'Illustration of a layered glass building',
+}[locale];
+
+// 2D 平面圖（地面上的平面配置線）
+const PLAN = [
+  'M230 505 L520 505 L610 478 L320 478 Z',
+  'M275 491.5 L565 491.5',
+  'M327 505 L417 478',
+  'M423 505 L513 478',
+  'M250 498 L250 512 M520 498 L520 512 M250 512 L520 512',
+];
+// 3D 線框：樓板（由下往上）與柱線（由下往上畫）
+const FLOORS = [490, 388, 330, 240, 185, 135, 100, 42];
+const DEPTH = { x: 85, y: -20 };
+const plate = (y: number) =>
+  `M250 ${y} L495 ${y} L${495 + DEPTH.x} ${y + DEPTH.y} L${250 + DEPTH.x} ${y + DEPTH.y} Z`;
+const top = FLOORS[FLOORS.length - 1];
+const COLUMNS = [
+  { d: `M250 490 L250 ${top}` },
+  { d: `M495 490 L495 ${top}` },
+  { d: `M580 470 L580 ${top + DEPTH.y}` },
+  { d: `M335 470 L335 ${top + DEPTH.y}`, back: true },
+];
+const TOGGLE = {
+  'zh-Hant': { pause: '暫停動畫', play: '播放動畫' },
+  en: { pause: 'Pause animation', play: 'Play animation' },
+}[locale];
+const enLang = locale === 'en' ? undefined : 'en';
+const zhLang = locale === 'zh-Hant' ? undefined : 'zh-Hant';
+---
+
+<figure class="hb m-0" data-hero-building>
+  <div class="hb-stage">
+    <svg class="hb-wire" viewBox="0 0 854 548" aria-hidden="true" focusable="false">
+      <g class="hb-plan">
+        {PLAN.map((d, i) => (
+          <path d={d} pathLength="1" style={`--t:${(i * 0.3).toFixed(1)}s`} />
+        ))}
+      </g>
+      <g class="hb-cols">
+        {COLUMNS.map((c) => (
+          <path d={c.d} pathLength="1" class:list={[c.back && 'hb-back']} style="--t:1.8s" />
+        ))}
+      </g>
+      <g class="hb-floors">
+        {FLOORS.map((y, i) => (
+          <path d={plate(y)} pathLength="1" style={`--t:${(2 + i * 0.4).toFixed(1)}s`} />
+        ))}
+      </g>
+    </svg>
+    <Image
+      src={plain}
+      alt={ALT}
+      widths={[480, 760, 1040]}
+      sizes="(min-width: 1024px) 440px, 72vw"
+      loading="eager"
+      fetchpriority="high"
+      class="hb-img blend-multiply"
+    />
+    <ul class="hb-labels">
+      {LAYERS.map((l) => (
+        <li class="hb-label" style={`--x1:${l.x1};--y:${l.y};--t:${l.t}s`}>
+          <span class="hb-lead" aria-hidden="true">
+            <span class="hb-dot hb-dot-in" />
+            <span class="hb-line" />
+            <span class="hb-dot hb-dot-out" />
+          </span>
+          <span class="hb-text">
+            <span class="hb-en" lang={enLang}>
+              {l.en}
+            </span>
+            <span class="hb-zh" lang={zhLang}>
+              {l.zh}
+            </span>
+          </span>
+        </li>
+      ))}
+    </ul>
+    <button
+      type="button"
+      class="hb-toggle"
+      hidden
+      data-hb-toggle
+      aria-label={TOGGLE.pause}
+      data-label-pause={TOGGLE.pause}
+      data-label-play={TOGGLE.play}
+    >
+      <svg class="hb-i-pause" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <rect x="3.5" y="2.5" width="3" height="11" rx="1" />
+        <rect x="9.5" y="2.5" width="3" height="11" rx="1" />
+      </svg>
+      <svg class="hb-i-play" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path d="M4.5 2.8v10.4a.8.8 0 0 0 1.2.7l8.3-5.2a.8.8 0 0 0 0-1.4L5.7 2.1a.8.8 0 0 0-1.2.7Z" />
+      </svg>
+    </button>
+  </div>
+</figure>
+<script is:inline>
+  // 播放流程：pre（等進入畫面）→ play（約 8 秒）→ 停在最終畫面 8 秒 → out（淡出）→ 再 play
+  // 暫停：使用者按鈕或捲出畫面；動畫中用 animation-play-state 暫停，停留中就暫停倒數
+  (() => {
+    const el = document.currentScript && document.currentScript.previousElementSibling;
+    if (!el || !matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+    const btn = el.querySelector('[data-hb-toggle]');
+    const HOLD = 8000;
+    const OUT = 800;
+    let phase = 'pre';
+    let userPaused = false;
+    let visible = false;
+    let timer = 0;
+    let holdLeft = HOLD;
+    let holdStart = 0;
+
+    const paused = () => userPaused || !visible;
+    const clear = () => {
+      clearTimeout(timer);
+      timer = 0;
+    };
+    const finalize = () => {
+      // 拿掉 data-anim 就是最終畫面（和沒有 JavaScript 時一樣）
+      el.removeAttribute('data-anim');
+      phase = 'hold';
+      holdLeft = HOLD;
+    };
+    const startHold = (ms) => {
+      holdStart = Date.now();
+      timer = setTimeout(restart, ms);
+    };
+    const run = () => {
+      el.dataset.anim = 'play';
+      phase = 'play';
+      Promise.all(el.getAnimations({ subtree: true }).map((a) => a.finished))
+        .then(() => {
+          if (phase !== 'play') return;
+          finalize();
+          if (!paused()) startHold(HOLD);
+        })
+        .catch(() => {});
+    };
+    function restart() {
+      timer = 0;
+      phase = 'out';
+      el.dataset.anim = 'out';
+      timer = setTimeout(() => {
+        timer = 0;
+        el.dataset.anim = 'pre';
+        void el.offsetWidth;
+        run();
+      }, OUT);
+    }
+    const update = () => {
+      const p = paused();
+      el.toggleAttribute('data-paused', p);
+      if (phase === 'pre') {
+        if (!visible) return;
+        if (userPaused) finalize();
+        else run();
+        return;
+      }
+      if (p) {
+        if (phase === 'hold' && timer) {
+          clear();
+          holdLeft = Math.max(0, holdLeft - (Date.now() - holdStart));
+        } else if (phase === 'out') {
+          clear();
+          finalize();
+        }
+      } else if (phase === 'hold' && !timer) {
+        startHold(holdLeft);
+      }
+    };
+
+    el.dataset.anim = 'pre';
+    if (btn) {
+      btn.hidden = false;
+      btn.addEventListener('click', () => {
+        userPaused = !userPaused;
+        btn.toggleAttribute('data-user-paused', userPaused);
+        btn.setAttribute('aria-label', userPaused ? btn.dataset.labelPlay : btn.dataset.labelPause);
+        update();
+      });
+    }
+    if (!('IntersectionObserver' in window)) {
+      visible = true;
+      return update();
+    }
+    new IntersectionObserver(
+      (entries) => {
+        visible = entries[entries.length - 1].isIntersecting;
+        update();
+      },
+      { threshold: 0.35 },
+    ).observe(el);
+  })();
+</script>
+
+<style is:global>
+  .hb-stage {
+    position: relative;
+    aspect-ratio: 854 / 548;
+    container-type: inline-size;
+    /* container-type 會自成一層，圖片的 multiply 只會和這層混色，所以這裡補上 Hero 的底色 */
+    background: var(--bg-2);
+  }
+  .hb-labels {
+    --f: clamp(11px, 2.3cqw, 19px);
+    --lx: 78.2;
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @container (max-width: 480px) {
+    .hb-labels {
+      --lx: 72.5;
+    }
+  }
+  .hb-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70.26%;
+    height: 100%;
+    border-radius: 0.5rem;
+    /* 裁切處（右緣）淡出，不留硬邊；原圖引線的殘段由 HTML 引線蓋住 */
+    mask-image: linear-gradient(to right, #000 86%, transparent);
+  }
+  .hb-wire {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .hb-wire path {
+    fill: none;
+    stroke: var(--blue);
+    stroke-width: 1.3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .hb-wire .hb-floors path {
+    fill: color-mix(in srgb, var(--blue) 5%, transparent);
+  }
+  .hb-wire .hb-back {
+    stroke-opacity: 0.35;
+  }
+  .hb-label {
+    position: absolute;
+    left: calc(var(--x1) * 1%);
+    top: calc(var(--y) * 1%);
+    display: flex;
+    align-items: flex-start;
+    margin-top: calc(var(--f) * -0.6);
+  }
+  .hb-lead {
+    position: relative;
+    flex: none;
+    width: calc((var(--lx) - var(--x1)) * 1cqw);
+    height: calc(var(--f) * 1.2);
+  }
+  .hb-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: color-mix(in srgb, var(--blue) 60%, transparent);
+    transform-origin: left center;
+  }
+  .hb-dot {
+    position: absolute;
+    top: 50%;
+    width: max(6px, calc(var(--f) * 0.5));
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--blue);
+    translate: -50% -50%;
+  }
+  .hb-dot-in {
+    left: 0;
+  }
+  .hb-dot-out {
+    left: 100%;
+  }
+  .hb-text {
+    display: flex;
+    flex-direction: column;
+    padding-left: calc(var(--f) * 0.9);
+    white-space: nowrap;
+  }
+  .hb-en {
+    font-size: var(--f);
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--navy);
+  }
+  .hb-zh {
+    margin-top: 0.25em;
+    font-size: calc(var(--f) * 0.9);
+    line-height: 1.4;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  .hb-toggle {
+    position: absolute;
+    left: 0.5rem;
+    bottom: 0.5rem;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 1px solid var(--line-2);
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.9);
+    color: var(--navy);
+    cursor: pointer;
+  }
+  .hb-toggle[hidden] {
+    display: none;
+  }
+  .hb-toggle:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+  .hb-toggle:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+  .hb-toggle svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+  .hb-toggle .hb-i-play,
+  .hb-toggle[data-user-paused] .hb-i-pause {
+    display: none;
+  }
+  .hb-toggle[data-user-paused] .hb-i-play {
+    display: block;
+  }
+
+  /* 動畫：只在使用者沒有要求減少動態效果時才生效 */
+  @media (prefers-reduced-motion: no-preference) {
+    .hb[data-anim] .hb-wire {
+      opacity: 1;
+    }
+    .hb[data-anim] .hb-wire path {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      fill-opacity: 0;
+    }
+    .hb[data-anim='pre'] .hb-img,
+    .hb[data-anim='pre'] .hb-text,
+    .hb[data-anim='pre'] .hb-dot {
+      opacity: 0;
+    }
+    .hb[data-anim='pre'] .hb-line {
+      scale: 0 1;
+    }
+
+    .hb[data-anim='play'] .hb-wire {
+      animation: hb-out 1.4s ease 6.8s both;
+    }
+    .hb[data-anim='play'] .hb-wire path {
+      animation: hb-draw 1.2s ease-out var(--t) both;
+    }
+    .hb[data-anim='play'] .hb-cols path {
+      animation-duration: 2.8s;
+    }
+    .hb[data-anim='play'] .hb-floors path {
+      animation-duration: 0.8s;
+    }
+    .hb[data-anim='play'] .hb-img {
+      animation: hb-reveal 2.2s cubic-bezier(0.3, 0.7, 0.3, 1) 5.4s both;
+    }
+    .hb[data-anim='play'] .hb-dot-in {
+      animation: hb-pop 0.4s ease-out var(--t) both;
+    }
+    .hb[data-anim='play'] .hb-line {
+      animation: hb-grow 0.7s ease-out calc(var(--t) + 0.3s) both;
+    }
+    .hb[data-anim='play'] .hb-dot-out {
+      animation: hb-pop 0.4s ease-out calc(var(--t) + 1s) both;
+    }
+    .hb[data-anim='play'] .hb-text {
+      animation: hb-rise 0.7s ease-out calc(var(--t) + 1.1s) both;
+    }
+
+    /* 重播前：最終畫面淡出 */
+    .hb[data-anim='out'] .hb-img,
+    .hb[data-anim='out'] .hb-text,
+    .hb[data-anim='out'] .hb-dot,
+    .hb[data-anim='out'] .hb-line {
+      opacity: 0;
+      transition: opacity 0.7s ease;
+    }
+    /* 暫停（按鈕或捲出畫面） */
+    .hb[data-paused] * {
+      animation-play-state: paused !important;
+    }
+  }
+  @keyframes hb-draw {
+    from {
+      stroke-dashoffset: 1;
+      fill-opacity: 0;
+    }
+    to {
+      stroke-dashoffset: 0;
+      fill-opacity: 1;
+    }
+  }
+  @keyframes hb-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes hb-reveal {
+    from {
+      opacity: 0.2;
+      clip-path: inset(100% 0 0 0);
+    }
+    to {
+      opacity: 1;
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes hb-pop {
+    from {
+      opacity: 0;
+      scale: 0;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+  @keyframes hb-grow {
+    from {
+      scale: 0 1;
+    }
+    to {
+      scale: 1 1;
+    }
+  }
+  @keyframes hb-rise {
+    from {
+      opacity: 0;
+      translate: 0 0.4em;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+</style>
