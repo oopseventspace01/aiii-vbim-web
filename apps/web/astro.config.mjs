@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import { REDIRECTS, SHORTCUTS } from './redirects.mjs';
 import siteFont from './integrations/site-font.mjs';
+import sitemapNoindex from './integrations/sitemap-noindex.mjs';
 import '../../scripts/load-root-env.mjs';
 
 // https://docs.astro.build/en/reference/configuration-reference/
@@ -47,6 +48,8 @@ export default defineConfig({
         };
       },
     }),
+    // 網站地圖產生後，拿掉不收錄（noindex）的頁面；必須排在 sitemap() 後面
+    sitemapNoindex(),
   ],
   // 表單（P5）：執行時才讀取的環境變數，值放在 .env／Vercel，絕不寫進程式碼
   env: {

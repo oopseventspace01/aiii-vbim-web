@@ -37,6 +37,8 @@ export interface RawNewsFull extends RawNews {
 export interface NewsEntry extends RawNewsFull {
   /** 這個語言沒有翻譯，顯示的是另一個語言的版本 */
   fallback: boolean;
+  /** 這則消息實際有哪些語言版本（判斷另一語言頁要不要標 hreflang） */
+  languages: string[];
 }
 
 /**
@@ -53,7 +55,8 @@ export function pickForLocale(items: RawNewsFull[], locale: Locale): NewsEntry[]
   for (const versions of groups.values()) {
     const own = versions.find((v) => v.language === locale);
     const chosen = own ?? versions[0];
-    if (chosen) picked.push({ ...chosen, fallback: !own });
+    const languages = [...new Set(versions.map((v) => v.language).filter((l): l is string => Boolean(l)))];
+    if (chosen) picked.push({ ...chosen, fallback: !own, languages });
   }
   return picked.sort((a, b) => Date.parse(b.publishedAt ?? '') - Date.parse(a.publishedAt ?? ''));
 }

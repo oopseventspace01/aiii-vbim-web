@@ -160,4 +160,36 @@ test('網站地圖（建置後）：中英文頁面互相對應，不含開發�
   }
   expect(xml).toContain('hreflang="en" href="https://aiiivbim.com/en/platform"');
   expect(xml).not.toMatch(/\/dev\/|\/404/);
+  // 不收錄的頁面（隱私權政策）不列入網站地圖
+  expect(xml).not.toContain('/privacy</loc>');
+});
+
+test('還沒翻譯的消息：備援頁不收錄、另一語言頁不標 hreflang', async ({ page, request }) => {
+  // 從英文列表找出顯示「即將推出英文版」的消息（內容是中文版）
+  const list = await (await request.get('/en/news')).text();
+  const slugs = [...new Set([...list.matchAll(/href="\/en\/news\/([a-z0-9-]+)"/g)].map((m) => m[1]))]
+    .filter((s) => s !== 'page' && s !== 'category');
+  let checked = 0;
+  for (const slug of slugs) {
+    await page.goto(`/en/news/${slug}`);
+    const lang = await page.locator('[data-news-detail]').getAttribute('lang');
+    const robots = page.locator('meta[name="robots"]');
+    if (lang && lang !== 'en') {
+      // 備援頁：不收錄、沒有 canonical 與 hreflang
+      await expect(robots).toHaveAttribute('content', /noindex/);
+      await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
+      await expect(page.locator('link[hreflang]')).toHaveCount(0);
+      // 中文原文頁照常收錄，但不用 hreflang 指向英文備援頁
+      await page.goto(`/news/${slug}`);
+      await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+      await expect(page.locator('link[rel="canonical"]')).toHaveCount(1);
+      await expect(page.locator('link[hreflang]')).toHaveCount(0);
+      checked++;
+    } else {
+      await expect(robots).toHaveCount(0);
+      await expect(page.locator('link[hreflang]')).toHaveCount(3);
+    }
+  }
+  test.skip(slugs.length === 0, '目前沒有消息內頁');
+  test.info().annotations.push({ type: '未翻譯消息', description: String(checked) });
 });

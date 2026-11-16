@@ -61,6 +61,13 @@ describe('pickForLocale（語言備援）', () => {
     expect(pickForLocale(items, 'zh-Hant').every((x) => !x.fallback)).toBe(true);
   });
 
+  it('記錄每則消息實際有哪些語言版本（決定要不要標 hreflang）', () => {
+    const byTitle = (l: 'en' | 'zh-Hant') =>
+      Object.fromEntries(pickForLocale(items, l).map((x) => [x.title, x.languages]));
+    expect(byTitle('en')).toEqual({ 'A English': ['zh-Hant', 'en'], 'B 只有中文': ['zh-Hant'] });
+    expect(byTitle('zh-Hant')['B 只有中文']).toEqual(['zh-Hant']);
+  });
+
   it('沒有翻譯連結資料的文件各自獨立', () => {
     expect(pickForLocale([n({ _id: 'x' }), n({ _id: 'y' })], 'zh-Hant')).toHaveLength(2);
   });
