@@ -123,11 +123,10 @@ export const SOLUTIONS_COPY: Record<
 };
 
 /** 各場域分頁的延伸閱讀（2026-10-20 文案精簡決定：以站內頁面連結取代 Land & Expand 說明） */
-export const SECTOR_RELATED: Record<string, ('vbim' | 'platform' | 'energy' | 'edge' | 'cases')[]> =
-  {
-    hospital: ['energy', 'edge', 'cases'],
-    retail: ['energy', 'platform', 'cases'],
-    factory: ['platform', 'energy', 'cases'],
-    office: ['platform', 'vbim', 'cases'],
-    energy: ['energy', 'edge', 'cases'],
-  };
+export const SECTOR_RELATED: Record<string, ('vbim' | 'platform' | 'energy' | 'edge')[]> = {
+  hospital: ['energy', 'edge'],
+  retail: ['energy', 'platform'],
+  factory: ['platform', 'energy'],
+  office: ['platform', 'vbim'],
+  energy: ['energy', 'edge'],
+};

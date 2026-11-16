@@ -30,13 +30,13 @@ const results = (entry.results ?? []).filter((r) => r.metric && r.value);
   title={entry.title ?? ui.metaTitle}
   description={entry.pain ?? undefined}
   locale={locale}
-  active="cases"
+  active="solutions"
 >
   <ComingSoonNotice show={locale === 'en' && entry.fallback} />
   <article lang={entry.fallback ? (entry.language ?? undefined) : undefined}>
     <header class="border-b border-line bg-bg-2">
       <div class="container-site flex max-w-[960px] flex-col gap-4 py-12 md:py-16">
-        <a href={L('/cases')} class="self-start font-bold no-underline">
+        <a href={L('/solutions#cases')} class="self-start font-bold no-underline">
           {ui.back}
         </a>
         {entry.solution?.name && (

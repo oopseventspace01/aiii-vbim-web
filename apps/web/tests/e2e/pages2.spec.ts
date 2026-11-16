@@ -1,4 +1,4 @@
-// P4 第二批：最新消息、案例、生態夥伴、認證學院、聯絡我們、隱私權
+// P4 第二批：最新消息、生態夥伴、認證學院、聯絡我們、隱私權（案例 2026-11-16 併入五大領域）
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
@@ -9,7 +9,6 @@ const PAGES = [
     path: '/news/category/media',
     h1: { 'zh-Hant': '最新消息與媒體報導', en: 'News & Media Coverage' },
   },
-  { path: '/cases', h1: { 'zh-Hant': '實績與示範場景', en: 'Track record and demo scenarios' } },
   { path: '/partners', h1: { 'zh-Hant': 'Build on Aiii VBIM', en: 'Build on Aiii VBIM' } },
   { path: '/academy', h1: { 'zh-Hant': 'VBIM 認證學院', en: 'VBIM Certification Academy' } },
   { path: '/contact', h1: { 'zh-Hant': '告訴我們你是誰', en: 'Tell us who you are' } },
@@ -103,15 +102,33 @@ test.describe('最新消息', () => {
 });
 
 test.describe('其他頁面', () => {
-  test('案例：設計稿的 3 個實績、6 個示範場景；沒有公開案例時不顯示「導入案例」', async ({
+  test('案例併入五大領域：實績與示範場景分到醫院、工廠、能源分頁；共用段落在 #cases', async ({
     page,
   }) => {
-    await page.goto('/cases');
-    await expect(page.locator('main h2').filter({ hasText: '2025 台灣醫療科技展' })).toHaveCount(1);
+    await page.goto('/solutions');
+    const cards = (id: string) => page.locator(`[data-sector-cases="${id}"] > ul > li`);
+    await expect(cards('hospital')).toHaveCount(1);
+    await expect(page.locator('[data-sector-cases="hospital"]')).toContainText(
+      '2025 台灣醫療科技展',
+    );
+    await expect(cards('factory')).toHaveCount(4);
+    await expect(cards('energy')).toHaveCount(4);
+    // 商場、辦公沒有對應案例，不顯示（不編造）
     await expect(
-      page.locator('section', { has: page.locator('#cases-demos') }).locator('li'),
-    ).toHaveCount(6);
+      page.locator('[data-sector-cases="retail"], [data-sector-cases="office"]'),
+    ).toHaveCount(0);
+    await expect(page.locator('#cases')).toContainText('我們如何衡量成效');
     await expect(page.locator('[data-cms-cases]')).toHaveCount(0);
+  });
+
+  test('舊的 /cases 網址轉到五大領域的 #cases', async ({ page }) => {
+    for (const [from, to] of [
+      ['/cases', '/solutions#cases'],
+      ['/en/cases', '/en/solutions#cases'],
+    ]) {
+      await page.goto(from!);
+      await expect(page).toHaveURL(new RegExp(`${to!.replace('#', '\\#')}$`));
+    }
   });
 
   test('夥伴：中文頁有招募海報，英文頁沒有（圖內文字為中文）', async ({ page }) => {
@@ -171,7 +188,7 @@ test('截圖：第二批頁面（供人工檢查）', async ({ page }, testInfo)
   test.setTimeout(240_000);
   // 表單上的 Turnstile 會持續連線，網路永遠不會「靜下來」；截圖時擋掉
   await page.route('https://challenges.cloudflare.com/**', (route) => route.abort());
-  for (const path of ['/news', '/cases', '/partners', '/academy', '/contact']) {
+  for (const path of ['/news', '/partners', '/academy', '/contact']) {
     await page.goto(path);
     for (let y = 0; y < 12000; y += 700) await page.evaluate((top) => window.scrollTo(0, top), y);
     await page.waitForLoadState('networkidle');

@@ -75,11 +75,11 @@ test.describe('回到頂部按鈕', () => {
 test.describe('桌機導覽列', () => {
   test.skip(({ viewport }) => (viewport?.width ?? 0) < 1024, '只在桌機寬度執行');
 
-  test('10 個頁面連結、語言切換與預約 Demo 都在', async ({ page }) => {
+  test('9 個頁面連結、語言切換與預約 Demo 都在', async ({ page }) => {
     await page.goto(SHOWCASE);
     const nav = page.getByRole('navigation', { name: '主選單' });
     // 下拉選單裡的連結不算（要展開才看得到）
-    await expect(nav.locator('[data-nav-item] > a')).toHaveCount(10);
+    await expect(nav.locator('[data-nav-item] > a')).toHaveCount(9);
     await expect(nav.getByRole('link', { name: '預約 Demo' })).toBeVisible();
     await expect(page.locator('[data-menu-toggle]')).toBeHidden();
   });
@@ -133,9 +133,9 @@ test.describe('手機漢堡選單', () => {
     // 背景鎖住捲動
     expect(await page.evaluate(() => document.documentElement.style.overflow)).toBe('hidden');
 
-    // 14 個連結（10 頁＋PMIS＋2 個產品頁＋常見問題）＋中文／EN＋預約 Demo，捲到每一個都看得到
+    // 13 個連結（9 頁＋PMIS＋2 個產品頁＋常見問題）＋中文／EN＋預約 Demo，捲到每一個都看得到（2026-11-16 案例併入五大領域）
     const items = panel.locator('a');
-    await expect(items).toHaveCount(17);
+    await expect(items).toHaveCount(16);
     for (const item of await items.all()) {
       await item.scrollIntoViewIfNeeded();
       await expect(item).toBeInViewport();

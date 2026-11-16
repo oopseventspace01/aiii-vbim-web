@@ -168,7 +168,8 @@ test.describe('文案精簡決定（2026-10-20）', () => {
     await page.goto('/solutions');
     const panel = page.locator('[data-sector-panel="hospital"]');
     const links = panel.locator('[data-sector-related] a');
-    await expect(links).toHaveCount(3);
+    // 2026-11-16 案例併入本頁，「案例」連結拿掉
+    await expect(links).toHaveCount(2);
     await expect(links.first()).toHaveAttribute('href', '/energy');
     await expect(panel).not.toContainText('Land & Expand');
     await expect(panel).not.toContainText('建立基準值');

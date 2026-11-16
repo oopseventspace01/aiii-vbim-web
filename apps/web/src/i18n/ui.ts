@@ -10,7 +10,6 @@ export const NAV_ITEMS = [
   { key: 'energy', path: '/energy', label: { 'zh-Hant': '能源 × 空調', en: 'Energy & HVAC' } },
   { key: 'edge', path: '/edge-ai', label: { 'zh-Hant': '地端 AI', en: 'Edge AI' } },
   { key: 'solutions', path: '/solutions', label: { 'zh-Hant': '五大領域', en: 'Sectors' } },
-  { key: 'cases', path: '/cases', label: { 'zh-Hant': '案例', en: 'Cases' } },
   { key: 'partners', path: '/partners', label: { 'zh-Hant': '生態夥伴', en: 'Partners' } },
   { key: 'academy', path: '/academy', label: { 'zh-Hant': '認證學院', en: 'Academy' } },
   { key: 'about', path: '/about', label: { 'zh-Hant': '關於我們', en: 'About' } },
@@ -51,7 +50,7 @@ export const MENU_GROUPS: { title: Label; links: MenuLink[] }[] = (() => {
     },
     {
       title: { 'zh-Hant': '應用與案例', en: 'Sectors & Cases' },
-      links: [nav('solutions'), nav('cases')],
+      links: [nav('solutions')],
     },
     {
       title: { 'zh-Hant': '生態與學院', en: 'Ecosystem & Academy' },
@@ -159,7 +158,7 @@ export const UI: Record<Locale, Dict> = {
         links: [
           { label: '成為夥伴', path: '/partners' },
           { label: '認證學院', path: '/academy' },
-          { label: '案例', path: '/cases' },
+          { label: '案例', path: '/solutions#cases' },
         ],
       },
       {
@@ -215,7 +214,7 @@ export const UI: Record<Locale, Dict> = {
         links: [
           { label: 'Become a Partner', path: '/partners' },
           { label: 'VBIM Academy', path: '/academy' },
-          { label: 'Cases', path: '/cases' },
+          { label: 'Cases', path: '/solutions#cases' },
         ],
       },
       {

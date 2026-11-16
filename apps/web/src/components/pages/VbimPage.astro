@@ -12,7 +12,8 @@ import InfoCard from '../cards/InfoCard.astro';
 import ShowcaseGrid from '../blocks/ShowcaseGrid.astro';
 import { LIFECYCLE_SHOWCASE } from '../../content/pages/showcase';
 import digitalTwin from '../../assets/illustrations/vbim-digital-twin.jpg';
-import realDemo from '../../assets/illustrations/real-demo.jpg';
+import netZeroEvent from '../../assets/illustrations/field-net-zero-event.jpg';
+import casesDesign from '../../content/design/Cases.json';
 import realScreens from '../../assets/illustrations/real-screens.jpg';
 import clashBefore from '../../assets/illustrations/pmis-clash-before.jpg';
 import clashAfter from '../../assets/illustrations/pmis-clash-after.jpg';
@@ -32,6 +33,7 @@ interface Props {
 const { locale } = Astro.props;
 const copy = VBIM_COPY[locale];
 const pmis = PMIS_COPY[locale];
+const eventName = casesDesign[locale].cases[2].name;
 const data = design[locale] as {
   pillars: { no: string; t: string; d: string }[];
   down: string[];
@@ -314,7 +316,8 @@ const stores = [
         lead={copy.field.lead}
       />
       <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] gap-[18px]">
-        <MediaFigure src={realDemo} alt={copy.field.demoAlt} caption={copy.field.demoAlt} />
+        {/* 2026-11-16 依業主指示改放智慧節能減碳推廣活動照；說明取自案例設計稿的活動名稱 */}
+        <MediaFigure src={netZeroEvent} alt={eventName} caption={eventName} />
         <MediaFigure
           src={realScreens}
           alt={copy.field.screensAlt}

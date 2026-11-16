@@ -3,7 +3,6 @@
 import type { APIRoute } from 'astro';
 import { ABOUT_COPY } from '../content/pages/about';
 import { ACADEMY_COPY } from '../content/pages/academy';
-import { CASES_COPY } from '../content/pages/cases';
 import { CONTACT_COPY } from '../content/pages/contact';
 import { EDGE_COPY } from '../content/pages/edge-ai';
 import { FAQ_COPY } from '../content/pages/faq';
@@ -26,7 +25,6 @@ function descriptions(l: Locale): Record<string, string> {
     solutions: SOLUTIONS_COPY[l].lead,
     energy: ENERGY_COPY[l].subtitle,
     edge: EDGE_COPY[l].subtitle,
-    cases: CASES_COPY[l].lead,
     partners: PARTNERS_COPY[l].subtitle,
     academy: ACADEMY_COPY[l].lead,
     news: NEWS_COPY[l].lead,

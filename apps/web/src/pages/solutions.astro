@@ -1,5 +1,8 @@
 ---
 import SolutionsPage from '../components/pages/SolutionsPage.astro';
+import { getPublicCases, pickCases } from '../lib/cms-pages';
+
+const cmsCases = pickCases(await getPublicCases(), 'zh-Hant');
 ---
 
-<SolutionsPage locale="zh-Hant" />
+<SolutionsPage locale="zh-Hant" cmsCases={cmsCases} />

@@ -9,7 +9,6 @@ const PAGES = [
   '/solutions',
   '/energy',
   '/edge-ai',
-  '/cases',
   '/partners',
   '/academy',
   '/news',
