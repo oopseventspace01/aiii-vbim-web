@@ -106,7 +106,9 @@ const structured = [
     <meta name="description" content={metaDescription} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     {!noindex && <link rel="canonical" href={canonical} />}
-    {!noindex && hreflang && hreflangs.map((l) => <link rel="alternate" hreflang={l.hreflang} href={l.href} />)}
+    {!noindex &&
+      hreflang &&
+      hreflangs.map((l) => <link rel="alternate" hreflang={l.hreflang} href={l.href} />)}
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="Aiii VBIM" />
     <meta property="og:title" content={fullTitle} />
