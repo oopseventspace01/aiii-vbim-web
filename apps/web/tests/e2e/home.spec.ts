@@ -221,6 +221,28 @@ for (const [locale, path] of [
       else await expect(label).toHaveText(locale === 'en' ? 'Illustrative mockup' : '示意畫面');
     });
 
+    test('戰情室七個管理層級可以點選切換，內容取自網站原文', async ({ page }) => {
+      await page.goto(path);
+      const root = page.locator('[data-command-layers]');
+      const tabs = root.getByRole('tab');
+      await expect(tabs).toHaveCount(7);
+      await expect(root.getByRole('tabpanel')).toHaveCount(1);
+      await tabs.nth(3).click();
+      await expect(tabs.nth(3)).toHaveAttribute('aria-selected', 'true');
+      const panel = root.getByRole('tabpanel');
+      await expect(panel).toHaveCount(1);
+      await expect(panel).toContainText(
+        locale === 'en' ? 'Building spaces, floors' : '建築空間、樓層、上方設備',
+      );
+      await expect(panel.locator('img')).toBeVisible();
+      // 鍵盤左右鍵切換
+      await page.keyboard.press('ArrowRight');
+      await expect(tabs.nth(4)).toBeFocused();
+      await expect(root.getByRole('tabpanel')).toContainText(
+        locale === 'en' ? 'Power, plumbing, fire' : '電力、給排水、消防',
+      );
+    });
+
     test('無障礙：沒有嚴重問題', async ({ page }) => {
       await page.goto(path);
       const results = await new AxeBuilder({ page })

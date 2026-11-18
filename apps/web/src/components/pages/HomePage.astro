@@ -11,7 +11,7 @@ import Hero from '../blocks/Hero.astro';
 import StoreButtons from '../blocks/StoreButtons.astro';
 import ProofStrip from '../blocks/ProofStrip.astro';
 import FlowStrip from '../blocks/FlowStrip.astro';
-import PathTrail from '../blocks/PathTrail.astro';
+import CommandLayers from '../blocks/CommandLayers.astro';
 import CtaBand from '../blocks/CtaBand.astro';
 import MediaFigure from '../blocks/MediaFigure.astro';
 import HeroBuilding from '../blocks/HeroBuilding.astro';
@@ -242,7 +242,12 @@ const newsGroups = [
           )}
         </div>
       </div>
-      <PathTrail items={copy.command.path} label={copy.command.pathLabel} />
+      <CommandLayers
+        items={copy.command.path}
+        label={copy.command.pathLabel}
+        locale={locale}
+        mockupLabel={t.mockupLabel}
+      />
       <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-3.5 p-0">
         {copy.command.features.map((f) => (
           <li class="flex">

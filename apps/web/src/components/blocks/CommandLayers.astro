@@ -1,0 +1,98 @@
+---
+// 首頁戰情室的七個管理層級（Global › … › Sensor）：點層級按鈕，下方換成該層的說明與圖片
+// 內容見 content/command-layers.ts（皆為網站既有原文與圖片）；沒有 JavaScript 時七層全部依序顯示
+import MediaFigure from './MediaFigure.astro';
+import { commandLayers } from '../../content/command-layers';
+import type { Locale } from '../../lib/i18n';
+
+interface Props {
+  items: { en: string; zh?: string }[];
+  label: string;
+  locale: Locale;
+  mockupLabel: string;
+}
+
+const { items, label, locale, mockupLabel } = Astro.props;
+const layers = commandLayers(locale);
+---
+
+<div class="flex flex-col gap-5" data-command-layers>
+  <div role="tablist" aria-label={label} class="flex flex-wrap gap-1.5 font-display text-sm">
+    {items.map((item, i) => (
+      <button
+        type="button"
+        role="tab"
+        id={`layer-tab-${i}`}
+        aria-controls={`layer-panel-${i}`}
+        aria-selected={i === 0 ? 'true' : 'false'}
+        tabindex={i === 0 ? 0 : -1}
+        class="layer-tab flex min-h-11 min-w-[84px] cursor-pointer flex-col items-center rounded-[10px] border border-white/16 bg-white/8 px-3.5 py-2 text-white"
+        data-layer-tab={i}
+      >
+        <span class="font-semibold">{item.en}</span>
+        {item.zh && <span class="layer-zh font-sans text-xs text-[#aebdd6]">{item.zh}</span>}
+      </button>
+    ))}
+  </div>
+  {layers.map((l, i) => (
+    <div
+      role="tabpanel"
+      id={`layer-panel-${i}`}
+      aria-labelledby={`layer-tab-${i}`}
+      class="flex flex-wrap items-center gap-6 rounded-[16px] border border-white/16 bg-white/6 p-5 md:p-6"
+      data-layer-panel={i}
+    >
+      <div class="flex min-w-0 flex-[1_1_260px] flex-col gap-2">
+        <p class="m-0 font-display text-sm font-bold tracking-[0.12em] text-blue-on-navy">
+          {items[i]?.en}
+          {items[i]?.zh && ` · ${items[i]?.zh}`}
+        </p>
+        <p class="m-0 text-lg font-bold">{l.text}</p>
+      </div>
+      <div class="min-w-0 flex-[1.4_1_360px]">
+        <MediaFigure
+          src={l.src}
+          alt={l.alt}
+          framed
+          mockupLabel={l.mockup ? mockupLabel : undefined}
+        />
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .layer-tab[aria-selected='true'] {
+    border-color: #fff;
+    background: #fff;
+    color: var(--color-navy);
+  }
+  .layer-tab[aria-selected='true'] .layer-zh {
+    color: var(--color-text-2);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-command-layers]').forEach((root) => {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-layer-tab]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-layer-panel]')];
+    const show = (i: number, focus = false) => {
+      tabs.forEach((t, j) => {
+        t.setAttribute('aria-selected', String(i === j));
+        t.tabIndex = i === j ? 0 : -1;
+      });
+      panels.forEach((p, j) => (p.hidden = i !== j));
+      if (focus) tabs[i]?.focus();
+    };
+    show(0);
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => show(i));
+      t.addEventListener('keydown', (e) => {
+        const step = { ArrowRight: 1, ArrowLeft: tabs.length - 1 }[e.key];
+        if (step === undefined) return;
+        e.preventDefault();
+        show((i + step) % tabs.length, true);
+      });
+    });
+  });
+</script>
