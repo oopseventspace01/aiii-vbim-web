@@ -2,7 +2,6 @@
 // 內容全部取自網站已核准的文案與後台「全站設定」，不另外撰寫新說法；頁面文案更新後會自動跟著變
 import type { APIRoute } from 'astro';
 import { ABOUT_COPY } from '../content/pages/about';
-import { ACADEMY_COPY } from '../content/pages/academy';
 import { CONTACT_COPY } from '../content/pages/contact';
 import { EDGE_COPY } from '../content/pages/edge-ai';
 import { FAQ_COPY } from '../content/pages/faq';
@@ -27,7 +26,6 @@ function descriptions(l: Locale): Record<string, string> {
     energy: seoDescription('energy', l, ENERGY_COPY[l].subtitle),
     edge: seoDescription('edge', l, EDGE_COPY[l].subtitle),
     partners: seoDescription('partners', l, PARTNERS_COPY[l].subtitle),
-    academy: seoDescription('academy', l, ACADEMY_COPY[l].lead),
     news: NEWS_COPY[l].lead,
     about: seoDescription('about', l, ABOUT_COPY[l].lead),
   };

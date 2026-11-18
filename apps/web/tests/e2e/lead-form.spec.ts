@@ -6,7 +6,10 @@ import { expect, test, type Page } from '@playwright/test';
 const CODE = /^L-\d{6}-[A-HJ-NP-Z2-9]{4}$/;
 
 async function expectSuccess(page: Page, message: string) {
-  const form = page.locator('form[data-lead-form]');
+  // 夥伴頁有兩份表單（夥伴申請、首期招生），取剛送出成功的那一份
+  const form = page
+    .locator('form[data-lead-form]')
+    .filter({ has: page.locator('[data-success]:not([hidden])') });
   await expect(form.locator('[data-success] [role="status"]')).toHaveText(message);
   await expect(form.locator('[data-form-body]')).toBeHidden();
   const code = (await form.locator('[data-lead-code]').textContent()) ?? '';
@@ -61,7 +64,7 @@ test('聯絡我們：切換成夥伴，訊息改為必填，空白送出會提�
 
 test('生態夥伴：申請送出成功', async ({ page }) => {
   await page.goto('/partners');
-  const form = page.locator('form[data-lead-form]');
+  const form = page.locator('form[data-lead-form][data-variant="partner"]');
   await form.locator('[name="company"]').fill('測試空調');
   await form.locator('[name="partnerType"]').selectOption('hvac');
   await form.locator('[name="name"]').fill('李小華');
@@ -74,9 +77,10 @@ test('生態夥伴：申請送出成功', async ({ page }) => {
   await expect(form.locator('[data-checklist]')).toBeHidden();
 });
 
-test('認證學院（英文）：登記送出成功', async ({ page }) => {
-  await page.goto('/en/academy');
-  const form = page.locator('form[data-lead-form]');
+test('認證學院（英文，已併入夥伴頁）：登記送出成功', async ({ page }) => {
+  await page.goto('/en/partners#register');
+  const form = page.locator('form[data-lead-form][data-variant="academy"]');
+  await expect(form).toBeVisible();
   await form.locator('[name="name"]').fill('Chen Test');
   await form.locator('[name="email"]').fill('talent@example.com');
   await form.locator('[name="organization"]').fill('Test Studio');
@@ -97,7 +101,7 @@ test('送出失敗時顯示錯誤與備用 Email，不會顯示成功', async ({
     }),
   );
   await page.goto('/partners');
-  const form = page.locator('form[data-lead-form]');
+  const form = page.locator('form[data-lead-form][data-variant="partner"]');
   await form.locator('[name="company"]').fill('測試');
   await form.locator('[name="partnerType"]').selectOption('si');
   await form.locator('[name="name"]').fill('測試');
@@ -118,7 +122,7 @@ test('API：欄位錯誤回 400', async ({ request }) => {
 });
 
 test('表單頁沒有橫向捲動，且無障礙沒有嚴重問題', async ({ page }) => {
-  for (const path of ['/contact', '/partners', '/en/academy']) {
+  for (const path of ['/contact', '/partners', '/en/partners#register']) {
     await page.goto(path);
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth > document.documentElement.clientWidth,

@@ -133,7 +133,7 @@ export const FAQ_COPY: Record<
             id: 'academy',
             q: 'VBIM 認證學院是什麼？',
             a: 'AI-Ready Building 需要懂建築、懂設備、也懂 AI 的人。VBIM 認證學院培育能把 BIM、能源、空調、影像、AIoT 與地端 AI 落地到真實場域的工程師與夥伴，流程是培訓、考核、認證、媒合。首期課程開放前可先登記。',
-            link: { path: '/academy', label: '認證學院' },
+            link: { path: '/partners#academy', label: '認證學院' },
           },
           {
             id: 'demo',
@@ -254,7 +254,7 @@ export const FAQ_COPY: Record<
             id: 'academy',
             q: 'What is VBIM Academy?',
             a: 'AI-Ready Buildings need people who understand buildings, equipment and AI. VBIM Academy develops engineers and partners who can bring BIM, energy, HVAC, video, AIoT and Edge AI to life on real sites, through training, assessment, certification and matching. You can register your interest before the first cohort opens.',
-            link: { path: '/academy', label: 'Academy' },
+            link: { path: '/partners#academy', label: 'Academy' },
           },
           {
             id: 'demo',

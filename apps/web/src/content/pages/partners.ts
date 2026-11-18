@@ -19,6 +19,8 @@ export const PARTNERS_COPY: Record<
     form: { eyebrow: string; title: string; lead: string };
     ui: {
       metaTitle: string;
+      /** 2026-11-18 夥伴＋學院合併後的頁面標題（新文案草稿，待業主確認） */
+      pageTitle: string;
       logosTitle: string;
       postersTitle: string;
       posterAlt: { medical: string; tool: string };
@@ -60,7 +62,8 @@ export const PARTNERS_COPY: Record<
       lead: '送出後，我們會與你聯繫並安排技術對接會議。',
     },
     ui: {
-      metaTitle: '生態夥伴',
+      metaTitle: '生態夥伴與認證學院',
+      pageTitle: '生態夥伴與認證學院',
       logosTitle: '生態系夥伴',
       postersTitle: '歡迎各類設備商加入',
       posterAlt: {
@@ -112,7 +115,8 @@ export const PARTNERS_COPY: Record<
       lead: 'We’ll get in touch to set up a technical integration meeting.',
     },
     ui: {
-      metaTitle: 'Partners',
+      metaTitle: 'Partners & VBIM Academy',
+      pageTitle: 'Partners & VBIM Academy',
       logosTitle: 'Ecosystem partners',
       postersTitle: '',
       posterAlt: { medical: '', tool: '' },

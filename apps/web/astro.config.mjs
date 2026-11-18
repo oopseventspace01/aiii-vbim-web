@@ -29,7 +29,11 @@ export default defineConfig({
     // 中文字型瘦身：建置後只取網站用到的字（見 integrations/site-font.mjs）
     siteFont(),
     sitemap({
-      filter: (page) => !/\/(dev|404)(\/|$)/.test(new URL(page).pathname),
+      // 開發頁、404、已 301 轉走的舊列表頁（/cases、/academy；案例內頁 /cases/{代稱} 仍保留）不放進網站地圖
+      filter: (page) => {
+        const path = new URL(page).pathname.replace(/\/+$/, '');
+        return !/\/(dev|404)(\/|$)/.test(path) && !/^(\/en)?\/(cases|academy)$/.test(path);
+      },
       serialize(item) {
         const url = new URL(item.url);
         const path = url.pathname.replace(/\/+$/, '') || '/';

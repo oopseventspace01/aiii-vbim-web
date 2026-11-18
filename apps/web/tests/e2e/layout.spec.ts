@@ -75,11 +75,11 @@ test.describe('回到頂部按鈕', () => {
 test.describe('桌機導覽列', () => {
   test.skip(({ viewport }) => (viewport?.width ?? 0) < 1024, '只在桌機寬度執行');
 
-  test('9 個頁面連結、語言切換與預約 Demo 都在', async ({ page }) => {
+  test('8 個頁面連結、語言切換與預約 Demo 都在', async ({ page }) => {
     await page.goto(SHOWCASE);
     const nav = page.getByRole('navigation', { name: '主選單' });
     // 下拉選單裡的連結不算（要展開才看得到）
-    await expect(nav.locator('[data-nav-item] > a')).toHaveCount(9);
+    await expect(nav.locator('[data-nav-item] > a')).toHaveCount(8);
     await expect(nav.getByRole('link', { name: '預約 Demo' })).toBeVisible();
     await expect(page.locator('[data-menu-toggle]')).toBeHidden();
   });

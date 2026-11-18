@@ -58,7 +58,7 @@ test('捲動後導覽列固定在頂部，回到頂部按鈕可用', async ({ pa
 test('表單可以填寫送出（本機模擬送出）', async ({ page }) => {
   await page.route('https://challenges.cloudflare.com/**', (route) => route.abort());
   await page.goto('/partners');
-  const form = page.locator('form[data-lead-form]');
+  const form = page.locator('form[data-lead-form][data-variant="partner"]');
   await form.locator('[name="company"]').fill('瀏覽器測試');
   await form.locator('[name="partnerType"]').selectOption('si');
   await form.locator('[name="name"]').fill('測試');

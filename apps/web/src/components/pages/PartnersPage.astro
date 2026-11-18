@@ -1,11 +1,17 @@
 ---
-// /partners（design/pages/Partners.dc.html）：夥伴類型、五種加入方式、規範通路、加入流程、申請表（P5）
+// /partners（design/pages/Partners.dc.html＋Academy.dc.html）
+// 2026-11-18 業主指示：生態夥伴與認證學院合併成一頁（remix，不是上下拼接）——
+// 認識生態系 → 選加入方式（Certified Partner 連到學院段落）→ 規範通路 → 學院（四步認證、課程、誰適合、梯次、標準）
+// → 海報／Logo → 加入流程 → 申請區（夥伴申請／首期招生兩個分頁）。文案逐字沿用兩份設計稿；頁面標題為新文案草稿。
+// /academy 301 → /partners#academy
 // 夥伴招募海報圖內為中文，只在中文頁顯示（P4 決定④）；Logo 牆只顯示後台「Logo 已取得授權」的夥伴
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../ui/Section.astro';
 import SectionHeader from '../ui/SectionHeader.astro';
 import Button from '../ui/Button.astro';
+import Pill from '../ui/Pill.astro';
+import InfoCard from '../cards/InfoCard.astro';
 import PageHero from '../blocks/PageHero.astro';
 import MediaFigure from '../blocks/MediaFigure.astro';
 import CompareTable from '../blocks/CompareTable.astro';
@@ -15,10 +21,13 @@ import ecosystem from '../../assets/illustrations/ecosystem.jpg';
 import posterMedical from '../../assets/reference/partner-medical-equipment.jpg';
 import posterTool from '../../assets/reference/partner-tool-equipment.jpg';
 import design from '../../content/design/Partners.json';
+import academyDesign from '../../content/design/Academy.json';
+import { ACADEMY_COPY } from '../../content/pages/academy';
 import { PARTNERS_COPY } from '../../content/pages/partners';
-import { localizePath, type Locale } from '../../lib/i18n';
+import type { Locale } from '../../lib/i18n';
 import { getFooterInfo } from '../../lib/site';
-import { getApprovedPartners } from '../../lib/cms-pages';
+import { getApprovedPartners, getCourses } from '../../lib/cms-pages';
+import { isExternalUrl } from '../../lib/rich-text';
 import { imageUrl } from '../../lib/sanity';
 import { seoDescription } from '../../content/seo-descriptions';
 
@@ -32,7 +41,18 @@ const data = design[locale] as {
   types: { n: string; c: string; m: string }[];
   tiers: { n: string; who: string; what: string }[];
 };
-const L = (path: string) => localizePath(path, locale);
+const ac = ACADEMY_COPY[locale];
+const acData = academyDesign[locale] as {
+  steps: { no: string; t: string; d: string }[];
+  mods: { no: string; en: string; zh?: string; t?: string; d: string }[];
+  tracks: { en: string; zh?: string; t?: string; d: string; focus: string }[];
+};
+const courses = await getCourses(locale);
+const dateFmt = new Intl.DateTimeFormat(locale === 'en' ? 'en-US' : 'zh-TW', {
+  dateStyle: 'medium',
+  timeZone: 'Asia/Taipei',
+});
+const fmt = (d?: string) => (d ? dateFmt.format(new Date(d)) : '');
 const footer = await getFooterInfo(locale);
 const partners = await getApprovedPartners(locale);
 const logos = partners.map((p) => ({
@@ -55,10 +75,15 @@ const posters =
   locale={locale}
   active="partners"
 >
-  <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} lead={copy.body}>
+  <PageHero
+    eyebrow={copy.eyebrow}
+    title={copy.ui.pageTitle}
+    subtitle={copy.subtitle}
+    lead={copy.body}
+  >
     <div class="flex flex-wrap gap-3">
       <Button href="#apply">{copy.apply}</Button>
-      <Button href={L('/academy')} variant="outline">
+      <Button href="#academy" variant="outline">
         {copy.academy}
       </Button>
     </div>
@@ -68,12 +93,199 @@ const posters =
   <!-- 夥伴類型 -->
   <Section tone="soft" labelledby="pt-types">
     <div class="flex flex-col gap-7">
-      <SectionHeader id="pt-types" title={copy.types.title} lead={copy.types.lead} />
+      <SectionHeader
+        id="pt-types"
+        eyebrow={copy.title}
+        title={copy.types.title}
+        lead={copy.types.lead}
+      />
       <CompareTable
         caption={copy.types.title}
         columns={copy.types.columns.map((label) => ({ label }))}
         rows={data.types.map((t) => ({ head: t.n, cells: [t.c, t.m] }))}
       />
+    </div>
+  </Section>
+
+  <!-- 五種加入方式＋規範通路 -->
+  <Section labelledby="pt-tiers">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="pt-tiers" title={copy.tiers.title} />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-3 p-0">
+        {data.tiers.map((r) => (
+          <li class="flex flex-col gap-1.5 rounded-md border border-line bg-white p-6">
+            <span class="font-display text-lg font-bold text-blue-dark">{r.n}</span>
+            <span class="font-black">{r.who}</span>
+            <span class="text-sm text-text-2">{r.what}</span>
+            {r.n === 'Certified Partner' && (
+              <a href="#academy" class="mt-1 text-sm font-bold text-blue-dark" data-tier-academy>
+                {copy.academy} →
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+      <div class="flex flex-wrap items-center gap-6 rounded-lg bg-blue p-8 text-white md:p-10">
+        <div class="flex min-w-0 flex-[2_1_460px] flex-col gap-2">
+          <span class="font-display text-sm font-bold tracking-[0.14em] text-[#eef3ff]">
+            {copy.spec.eyebrow}
+          </span>
+          <h2 class="m-0 text-[clamp(1.5rem,2.6vw,2.1rem)] leading-[1.25] font-black">
+            {copy.spec.title}
+          </h2>
+          <p class="m-0 text-[#eef3ff]">{copy.spec.text}</p>
+        </div>
+        <p class="m-0 flex-[1_1_260px] rounded-[16px] bg-blue-dark p-5 text-lg font-black">
+          {copy.spec.revenue}
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- 認證學院（原 /academy 頁首，改成本頁的段落） -->
+  <section id="academy" aria-labelledby="ac-title" class="scroll-mt-24 bg-blue text-white">
+    <div class="container-site flex flex-wrap items-end justify-between gap-8 py-14 md:py-[72px]">
+      <div class="flex max-w-[820px] flex-col gap-4">
+        <p class="m-0 font-display text-sm font-bold tracking-[0.16em] text-[#eef3ff]">
+          {ac.eyebrow}
+        </p>
+        <h2 id="ac-title" class="m-0 text-[clamp(2rem,3.6vw,3rem)] leading-[1.15] font-black">
+          {ac.title}
+        </h2>
+        <p class="m-0 text-xl font-bold">{ac.flow}</p>
+        <p class="m-0 text-[1.1rem] text-[#eef3ff]">{ac.lead}</p>
+      </div>
+      <Button href="#register" variant="white">
+        {ac.register}
+      </Button>
+    </div>
+  </section>
+
+  <!-- 四步取得認證 -->
+  <Section labelledby="ac-steps">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="ac-steps" title={ac.steps.title} />
+      <ol class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3 p-0">
+        {acData.steps.map((s) => (
+          <li class="flex">
+            <InfoCard tone="soft" kicker={s.no} title={s.t} text={s.d} class="w-full" />
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <!-- 六大課程模組 -->
+  <Section tone="soft" labelledby="ac-mods">
+    <div class="flex flex-col gap-7">
+      <SectionHeader
+        id="ac-mods"
+        eyebrow={ac.mods.eyebrow}
+        title={ac.mods.title}
+        lead={ac.mods.lead}
+      />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-3.5 p-0">
+        {acData.mods.map((m) => (
+          <li class="flex flex-col gap-2 rounded-md border border-line bg-white p-6">
+            <span class="flex items-baseline gap-2">
+              <span class="font-display font-bold text-blue">{m.no}</span>
+              <span class="font-display text-lg font-bold text-blue-dark">{m.en}</span>
+            </span>
+            <span class="font-black">{m.zh ?? m.t}</span>
+            <span class="text-[15px] text-text-2">{m.d}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- 誰適合加入 -->
+  <Section labelledby="ac-tracks">
+    <div class="flex flex-col gap-7">
+      <SectionHeader id="ac-tracks" title={ac.tracks.title} />
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-3.5 p-0">
+        {acData.tracks.map((t) => (
+          <li class="flex flex-col gap-2 rounded-md bg-navy p-6 text-white">
+            <span class="font-display text-sm font-semibold text-blue-on-navy">{t.en}</span>
+            <span class="text-xl font-black">{t.zh ?? t.t}</span>
+            <span class="text-[15px] text-[#cfdcf0]">{t.d}</span>
+            <span class="text-sm font-bold">
+              {ac.tracks.focusLabel}
+              {t.focus}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- 課程與梯次（後台有課程才顯示） -->
+  {courses.length > 0 && (
+    <Section tone="soft" labelledby="ac-courses">
+      <div class="flex flex-col gap-6" data-courses>
+        <SectionHeader id="ac-courses" title={ac.ui.coursesTitle} />
+        <ul class="m-0 flex list-none flex-col gap-4 p-0">
+          {courses.map((c) => (
+            <li class="flex flex-col gap-3 rounded-md border border-line bg-white p-6">
+              <div class="flex flex-wrap items-center gap-2">
+                {c.level && <Pill tone="soft">{ac.ui.levels[c.level] ?? c.level}</Pill>}
+                <h3 class="m-0 text-xl font-black">{c.title}</h3>
+              </div>
+              {c.summary && <p class="m-0 text-text-2">{c.summary}</p>}
+              {(c.sessions?.length ?? 0) > 0 && (
+                <ul class="m-0 flex list-none flex-col gap-2 p-0">
+                  {c.sessions!.map((s) => (
+                    <li class="flex flex-wrap items-center gap-x-4 gap-y-1 rounded-[12px] bg-bg-2 px-4 py-3 text-sm">
+                      <span class="font-bold">
+                        {fmt(s.startDate)}
+                        {s.endDate ? ` – ${fmt(s.endDate)}` : ''}
+                      </span>
+                      {s.location && <span>{s.location}</span>}
+                      {typeof s.seats === 'number' && (
+                        <span>
+                          {ac.ui.seats} {s.seats}
+                        </span>
+                      )}
+                      {s.price && <span>{s.price}</span>}
+                      {s.status && (
+                        <span class="ml-auto rounded-pill bg-white px-3 py-1 font-bold text-blue-dark">
+                          {ac.ui.sessionStatus[s.status] ?? s.status}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {c.registerMode === 'external' && c.externalUrl ? (
+                <Button
+                  href={c.externalUrl}
+                  external={isExternalUrl(c.externalUrl)}
+                  class="self-start"
+                >
+                  {ac.ui.registerExternal}
+                </Button>
+              ) : (
+                <Button href="#register" variant="outline" class="self-start">
+                  {ac.register}
+                </Button>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Section>
+  )}
+
+  <!-- 認證標準（SPEC 3.7：內容待業主提供） -->
+  <Section labelledby="ac-standards" class="pb-0">
+    <div
+      class="flex flex-col gap-4 rounded-md border border-line bg-bg-2 p-6 md:p-8"
+      data-standards
+    >
+      <h2 id="ac-standards" class="m-0 text-[1.6rem] font-black">
+        {ac.ui.standardsTitle}
+      </h2>
+      <p class="m-0 text-text-2">{ac.ui.standardsPending}</p>
     </div>
   </Section>
 
@@ -96,36 +308,6 @@ const posters =
       </div>
     </Section>
   )}
-
-  <!-- 五種加入方式＋規範通路 -->
-  <Section labelledby="pt-tiers" class={posters.length > 0 ? 'pt-0' : undefined}>
-    <div class="flex flex-col gap-7">
-      <SectionHeader id="pt-tiers" title={copy.tiers.title} />
-      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-3 p-0">
-        {data.tiers.map((r) => (
-          <li class="flex flex-col gap-1.5 rounded-md border border-line bg-white p-6">
-            <span class="font-display text-lg font-bold text-blue-dark">{r.n}</span>
-            <span class="font-black">{r.who}</span>
-            <span class="text-sm text-text-2">{r.what}</span>
-          </li>
-        ))}
-      </ul>
-      <div class="flex flex-wrap items-center gap-6 rounded-lg bg-blue p-8 text-white md:p-10">
-        <div class="flex min-w-0 flex-[2_1_460px] flex-col gap-2">
-          <span class="font-display text-sm font-bold tracking-[0.14em] text-[#eef3ff]">
-            {copy.spec.eyebrow}
-          </span>
-          <h2 class="m-0 text-[clamp(1.5rem,2.6vw,2.1rem)] leading-[1.25] font-black">
-            {copy.spec.title}
-          </h2>
-          <p class="m-0 text-[#eef3ff]">{copy.spec.text}</p>
-        </div>
-        <p class="m-0 flex-[1_1_260px] rounded-[16px] bg-blue-dark p-5 text-lg font-black">
-          {copy.spec.revenue}
-        </p>
-      </div>
-    </div>
-  </Section>
 
   <!-- 後台已授權的夥伴 Logo（沒有時不顯示這個區塊） -->
   {logos.length > 0 && (
@@ -153,16 +335,115 @@ const posters =
     </div>
   </Section>
 
-  <!-- 申請表（LeadForm） -->
-  <Section id="apply" labelledby="pt-apply">
-    <div class="flex max-w-[820px] flex-col gap-6">
-      <SectionHeader
-        id="pt-apply"
-        eyebrow={copy.form.eyebrow}
-        title={copy.form.title}
-        lead={copy.form.lead}
-      />
-      <LeadForm variant="partner" locale={locale} fallbackEmail={footer.email} />
+  <!-- 申請區：夥伴申請／首期招生兩個分頁（沒有 JavaScript 時兩份表單都直接顯示） -->
+  <Section labelledby="pt-apply-area">
+    <div class="flex max-w-[820px] flex-col gap-6" data-apply-tabs>
+      <h2 id="pt-apply-area" class="sr-only">
+        {copy.form.title}／{ac.form.title}
+      </h2>
+      <div role="tablist" class="flex flex-wrap gap-2" hidden data-tablist>
+        <button
+          type="button"
+          role="tab"
+          id="tab-apply"
+          aria-controls="apply"
+          aria-selected="true"
+          class="tab-btn"
+          data-tab="apply"
+        >
+          {copy.form.title}
+        </button>
+        <button
+          type="button"
+          role="tab"
+          id="tab-register"
+          aria-controls="register"
+          aria-selected="false"
+          tabindex="-1"
+          class="tab-btn"
+          data-tab="register"
+        >
+          {ac.form.title}
+        </button>
+      </div>
+      <div id="apply" class="flex scroll-mt-24 flex-col gap-6" data-panel="apply">
+        <SectionHeader
+          id="pt-apply"
+          eyebrow={copy.form.eyebrow}
+          title={copy.form.title}
+          lead={copy.form.lead}
+        />
+        <LeadForm variant="partner" locale={locale} fallbackEmail={footer.email} />
+      </div>
+      <div id="register" class="flex scroll-mt-24 flex-col gap-6" data-panel="register">
+        <SectionHeader id="ac-register" title={ac.form.title} lead={ac.form.lead} />
+        <LeadForm variant="academy" locale={locale} fallbackEmail={footer.email} />
+      </div>
     </div>
   </Section>
 </BaseLayout>
+
+<style>
+  .tab-btn {
+    min-height: 44px;
+    border-radius: 9999px;
+    border: 1px solid var(--color-line);
+    background: #fff;
+    padding: 0.5rem 1.25rem;
+    font-weight: 800;
+    color: var(--color-text-2);
+    cursor: pointer;
+  }
+  .tab-btn[aria-selected='true'] {
+    border-color: var(--color-blue-dark);
+    background: var(--color-blue-dark);
+    color: #fff;
+  }
+</style>
+
+<script>
+  // 申請區分頁：#apply／#register（頁內連結、網址錨點）會切到對應的表單
+  const root = document.querySelector<HTMLElement>('[data-apply-tabs]');
+  if (root) {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')];
+    const show = (name: string, focus = false) => {
+      tabs.forEach((t) => {
+        const on = t.dataset.tab === name;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        if (on && focus) t.focus();
+      });
+      panels.forEach((p) => {
+        p.hidden = p.dataset.panel !== name;
+      });
+    };
+    panels.forEach((p) => {
+      p.setAttribute('role', 'tabpanel');
+      p.setAttribute('aria-labelledby', `tab-${p.dataset.panel}`);
+    });
+    root.querySelector<HTMLElement>('[data-tablist]')!.hidden = false;
+    const fromHash = () => {
+      const h = location.hash.slice(1);
+      if (h === 'apply' || h === 'register') {
+        show(h);
+        document.getElementById(h)?.scrollIntoView();
+      }
+    };
+    show('apply');
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
+    // 頁內按鈕連到目前網址同一個錨點時不會觸發 hashchange，另外處理
+    document
+      .querySelectorAll<HTMLAnchorElement>('a[href="#apply"], a[href="#register"]')
+      .forEach((a) => a.addEventListener('click', () => show(a.getAttribute('href')!.slice(1))));
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => show(t.dataset.tab!));
+      t.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        const step = e.key === 'ArrowRight' ? 1 : tabs.length - 1;
+        show(tabs[(i + step) % tabs.length]!.dataset.tab!, true);
+      });
+    });
+  }
+</script>

@@ -1,4 +1,4 @@
-// P4 第二批：最新消息、生態夥伴、認證學院、聯絡我們、隱私權（案例 2026-11-16 併入五大領域）
+// P4 第二批：最新消息、生態夥伴、聯絡我們、隱私權（案例 2026-11-16 併入五大領域；認證學院 2026-11-18 併入生態夥伴）
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
@@ -9,8 +9,7 @@ const PAGES = [
     path: '/news/category/media',
     h1: { 'zh-Hant': '最新消息與媒體報導', en: 'News & Media Coverage' },
   },
-  { path: '/partners', h1: { 'zh-Hant': 'Build on Aiii VBIM', en: 'Build on Aiii VBIM' } },
-  { path: '/academy', h1: { 'zh-Hant': 'VBIM 認證學院', en: 'VBIM Certification Academy' } },
+  { path: '/partners', h1: { 'zh-Hant': '生態夥伴與認證學院', en: 'Partners & VBIM Academy' } },
   { path: '/contact', h1: { 'zh-Hant': '告訴我們你是誰', en: 'Tell us who you are' } },
   { path: '/privacy', h1: { 'zh-Hant': '隱私權政策', en: 'Privacy Policy' } },
 ] as const;
@@ -140,8 +139,38 @@ test.describe('其他頁面', () => {
     await expect(page.locator('[data-partner-posters]')).toHaveCount(0);
   });
 
+  test('夥伴＋學院合併：學院段落、Certified Partner 連到學院、申請區兩個分頁', async ({ page }) => {
+    await page.goto('/partners');
+    await expect(page.locator('#academy h2')).toHaveText('VBIM 認證學院');
+    await expect(page.locator('#academy ~ section').first()).toContainText('四步取得認證');
+    await expect(page.locator('[data-tier-academy]')).toHaveAttribute('href', '#academy');
+    const tabs = page.getByRole('tab');
+    await expect(tabs).toHaveCount(2);
+    await expect(page.locator('#apply')).toBeVisible();
+    await expect(page.locator('#register')).toBeHidden();
+    await tabs.nth(1).click();
+    await expect(page.locator('#register form[data-lead-form]')).toBeVisible();
+    await expect(page.locator('#apply')).toBeHidden();
+    // 學院段落的「登記首期招生」按鈕會切到招生表單
+    await tabs.nth(0).click();
+    await page.locator('#academy').getByRole('link').click();
+    await expect(page.locator('#register')).toBeVisible();
+  });
+
+  test('舊的 /academy 網址轉到夥伴頁的 #academy', async ({ page }) => {
+    for (const [from, to] of [
+      ['/academy', '/partners#academy'],
+      ['/academy/', '/partners#academy'],
+      ['/en/academy', '/en/partners#academy'],
+      ['/en/academy/', '/en/partners#academy'],
+    ]) {
+      await page.goto(from!);
+      await expect(page).toHaveURL(new RegExp(`${to!.replace('#', '\\#')}$`));
+    }
+  });
+
   test('學院：認證標準顯示「制定中」，沒有課程時不顯示梯次區塊', async ({ page }) => {
-    await page.goto('/academy');
+    await page.goto('/partners');
     await expect(page.locator('[data-standards]')).toContainText('認證標準制定中，歡迎先登記');
     await expect(page.locator('[data-courses]')).toHaveCount(0);
   });
@@ -153,9 +182,9 @@ test.describe('其他頁面', () => {
   });
 
   test('表單：聯絡、夥伴、學院都已換成正式表單（沒有預留區）', async ({ page }) => {
-    for (const path of ['/contact', '/partners', '/academy', '/en/contact']) {
+    for (const path of ['/contact', '/partners', '/en/contact']) {
       await page.goto(path);
-      await expect(page.locator('form[data-lead-form]')).toBeVisible();
+      await expect(page.locator('form[data-lead-form]').first()).toBeVisible();
       await expect(page.locator('[data-form-pending]')).toHaveCount(0);
     }
   });
@@ -190,7 +219,7 @@ test('截圖：第二批頁面（供人工檢查）', async ({ page }, testInfo)
   test.setTimeout(240_000);
   // 表單上的 Turnstile 會持續連線，網路永遠不會「靜下來」；截圖時擋掉
   await page.route('https://challenges.cloudflare.com/**', (route) => route.abort());
-  for (const path of ['/news', '/partners', '/academy', '/contact']) {
+  for (const path of ['/news', '/partners', '/contact']) {
     await page.goto(path);
     for (let y = 0; y < 12000; y += 700) await page.evaluate((top) => window.scrollTo(0, top), y);
     await page.waitForLoadState('networkidle');
