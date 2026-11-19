@@ -109,8 +109,8 @@ describe('子集字型取字', () => {
 });
 
 describe('舊網址轉址', () => {
-  it('舊網站的英文頁轉到 /en；其餘舊網址新網站本來就有', () => {
-    expect(REDIRECTS).toEqual({ '/aiiivbim-en': '/en' });
+  it('對照表目前是空的：舊網址都改由伺服器端 301 頁面處理（結尾斜線也會轉）', () => {
+    expect(REDIRECTS).toEqual({});
     for (const [from, to] of Object.entries(REDIRECTS)) {
       expect(from.startsWith('/')).toBe(true);
       expect(to.startsWith('/')).toBe(true);

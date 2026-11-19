@@ -1,0 +1,8 @@
+---
+// 舊網站（Gamma）英文版網址 /aiiivbim-en → 新網站英文首頁 /en（301 永久轉址）
+// 用伺服器端轉址（不預先產生），/aiiivbim-en 與 /aiiivbim-en/ 都會轉，不會 404
+// （Astro 設定檔的 redirects 不接受結尾斜線，見 redirects.mjs 說明）
+export const prerender = false;
+
+return Astro.redirect('/en', 301);
+---

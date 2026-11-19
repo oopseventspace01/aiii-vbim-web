@@ -131,10 +131,12 @@ test('robots.txt 允許收錄並指向網站地圖', async ({ request }) => {
   expect(body).toContain('Sitemap: https://aiiivbim.com/sitemap-index.xml');
 });
 
-test('舊網址 /aiiivbim-en 301 轉到 /en', async ({ request }) => {
-  const res = await request.get('/aiiivbim-en', { maxRedirects: 0 });
-  expect(res.status()).toBe(301);
-  expect(res.headers()['location']).toMatch(/\/en$/);
+test('舊網址 /aiiivbim-en（有沒有結尾斜線都一樣）301 轉到 /en', async ({ request }) => {
+  for (const path of ['/aiiivbim-en', '/aiiivbim-en/']) {
+    const res = await request.get(path, { maxRedirects: 0 });
+    expect(res.status(), path).toBe(301);
+    expect(res.headers()['location'], path).toMatch(/\/en$/);
+  }
 });
 
 test('/admin 轉到後台（正式環境為 302，本機開發伺服器一律回 301）', async ({ request }) => {
@@ -149,7 +151,6 @@ test('/admin 轉到後台（正式環境為 302，本機開發伺服器一律回
       status?: number;
     }[];
     expect(routes.find((r) => r.src === '^/admin$')?.status).toBe(302);
-    expect(routes.find((r) => r.src === '^/aiiivbim-en$')?.status).toBe(301);
   }
 });
 
@@ -162,8 +163,17 @@ test('網站地圖（建置後）：中英文頁面互相對應，不含開發�
   }
   expect(xml).toContain('hreflang="en" href="https://aiiivbim.com/en/platform"');
   expect(xml).not.toMatch(/\/dev\/|\/404/);
-  // 不收錄的頁面（隱私權政策）不列入網站地圖
-  expect(xml).not.toContain('/privacy</loc>');
+  // 伺服器端轉址的舊網址不列入網站地圖
+  expect(xml).not.toMatch(/\/(aiiivbim-en|cases)<\/loc>/);
+  // 每個網址都要有實際頁面，而且不能是不收錄（noindex）的頁面
+  for (const [, loc] of xml.matchAll(/<loc>https:\/\/aiiivbim\.com([^<]*)<\/loc>/g)) {
+    const dir = loc.replace(/^\/|\/$/g, '');
+    const page = new URL(`../../dist/client/${dir ? `${dir}/` : ''}index.html`, import.meta.url);
+    expect(existsSync(page), `${loc} 沒有實際頁面`).toBe(true);
+    expect(readFileSync(page, 'utf-8'), `${loc} 設了 noindex`).not.toMatch(
+      /<meta name="robots" content="[^"]*noindex/,
+    );
+  }
 });
 
 test('還沒翻譯的消息：備援頁不收錄、另一語言頁不標 hreflang', async ({ page, request }) => {
