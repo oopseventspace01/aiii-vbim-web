@@ -6,16 +6,7 @@
 import type { Locale } from '../lib/i18n';
 
 export type SeoPageKey =
-  | 'vbim'
-  | 'platform'
-  | 'energy'
-  | 'edge'
-  | 'partners'
-  | 'solutions'
-  | 'about'
-  | 'academy'
-  | 'rms'
-  | 'mms';
+  'vbim' | 'platform' | 'energy' | 'edge' | 'partners' | 'solutions' | 'about' | 'rms' | 'mms';
 
 export const SEO_DESCRIPTIONS: Partial<Record<SeoPageKey, Partial<Record<Locale, string>>>> = {
   vbim: {
@@ -35,19 +26,17 @@ export const SEO_DESCRIPTIONS: Partial<Record<SeoPageKey, Partial<Record<Locale,
     'zh-Hant':
       '讓 AI 不只看見資料，更能理解場域並協助決策。Aiii Edge AI 把推論、文件問答與 AI Agent 部署在企業現場，直接結合 VBIM 的空間、設備、影像與能源資料。',
   },
+  // 2026-11-18 認證學院併入生態夥伴頁：描述改成夥伴＋學院各一句（取自兩頁原有導言）
   partners: {
     'zh-Hant':
-      '你的設備、技術與服務，都可以接進 Aiii VBIM。任何能源設備、空調系統、AI Edge、攝影機與感測器，都能透過標準介面納入 Aiii VBIM。',
-    en: 'Your equipment, technology and services can all connect to Aiii VBIM. Energy, HVAC, AI edge hardware, cameras and sensors join through standard interfaces.',
+      '你的設備、技術與服務，都可以接進 Aiii VBIM。VBIM 認證學院培育能把 BIM、能源、空調、影像、AIoT 與地端 AI 落地到真實場域的工程師與夥伴。',
+    en: 'Your equipment, technology and services can all connect to Aiii VBIM. VBIM Academy develops engineers and partners who bring BIM and Edge AI to real sites.',
   },
   solutions: {
     en: 'Building at the core, extended into hospitals, retail, factories, offices and energy. Each sector starts with one clear pain point, then expands platform-wide.',
   },
   about: {
     en: 'With buildings and space at its core, Aiii VBIM integrates engineering, equipment, energy, video and Edge AI into a cross-border, multi-site operating platform.',
-  },
-  academy: {
-    en: 'VBIM Academy develops engineers and partners who can bring BIM, energy, HVAC, video, AIoT and Edge AI to life on real sites.',
   },
   rms: {
     en: 'Aiii RMS builds consumer behavior analysis, store layout, traffic flow and product display into a digital twin, combining AI image recognition with POS data.',
