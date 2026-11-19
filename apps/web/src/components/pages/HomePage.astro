@@ -18,6 +18,7 @@ import HeroBuilding from '../blocks/HeroBuilding.astro';
 import InfoCard from '../cards/InfoCard.astro';
 import FeatureCard from '../cards/FeatureCard.astro';
 import NewsGrid from '../blocks/NewsGrid.astro';
+import HomeLatestNews from '../blocks/HomeLatestNews.astro';
 import heroBuilding from '../../assets/illustrations/hero-building.jpg';
 import commandCenter from '../../assets/illustrations/command-center.jpg';
 import energy from '../../assets/illustrations/energy.jpg';
@@ -33,6 +34,12 @@ import { toFooterInfo, toHomeData, type ImageRef, type RawHome } from '../../lib
 import { FOOTER_FALLBACK } from '../../data/site-fallback';
 import { UI } from '../../i18n/ui';
 import { VISUAL_ALT } from '../../content/visuals';
+import {
+  HOME_LATEST_NEWS_QUERY,
+  HOME_LATEST_NEWS_SLUG,
+  pickLatestNews,
+  type LatestNewsResult,
+} from '../../content/home-latest-news';
 
 interface Props {
   locale: Locale;
@@ -46,6 +53,12 @@ const L = (path: string) => localizePath(path, locale);
 const raw = await sanityClient().fetch<RawHome>(HOME_QUERY, { lang: locale });
 const data = toHomeData(raw, locale);
 const footer = toFooterInfo(raw.settings, FOOTER_FALLBACK[locale]);
+const latestNews = pickLatestNews(
+  await sanityClient().fetch<LatestNewsResult>(HOME_LATEST_NEWS_QUERY, {
+    slug: HOME_LATEST_NEWS_SLUG,
+  }),
+  locale,
+);
 
 const capabilityImages = { energy, hvac, edge };
 const remote = (img: ImageRef, width: number) => ({
@@ -101,6 +114,9 @@ const newsGroups = [
       )}
     </div>
   </Hero>
+
+  <!-- 2b. 最新消息（業主要求放在 Hero 正下方最顯眼的位置） -->
+  {latestNews && <HomeLatestNews news={latestNews} locale={locale} />}
 
   <!-- 3. 背書條 -->
   {data.proofItems.length > 0 && <ProofStrip label={copy.proofLabel} items={data.proofItems} />}

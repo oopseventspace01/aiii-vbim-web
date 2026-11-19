@@ -2,6 +2,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 import '../../../../scripts/load-root-env.mjs';
+import newsDesign from '../../src/content/design/News.json' with { type: 'json' };
 
 const projectId = process.env.PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.PUBLIC_SANITY_DATASET || 'production';
@@ -16,6 +17,7 @@ async function sanity<T>(query: string, params: Record<string, string>): Promise
 
 const SECTIONS = {
   'zh-Hant': [
+    '最新消息',
     '核心定位',
     '三大能力模組',
     '五大應用場域',
@@ -27,6 +29,7 @@ const SECTIONS = {
     'From Data to a Better Physical World.',
   ],
   en: [
+    'Latest News',
     'Not another system',
     'Three capability modules',
     'five sectors in reach',
@@ -219,6 +222,53 @@ for (const [locale, path] of [
       const label = page.locator('[data-command-image] figure span');
       if (hasImage) await expect(label).toHaveCount(0);
       else await expect(label).toHaveText(locale === 'en' ? 'Illustrative mockup' : '示意畫面');
+    });
+
+    test('Hero 正下方的最新消息大卡片：原文、照片、外部連結（新分頁）與看全部連結', async ({
+      page,
+    }) => {
+      await page.goto(path);
+      const block = page.locator('[data-home-latest-news]');
+      await expect(block).toBeVisible();
+      // 緊接在 Hero 後面
+      const prevIsHero = await block.evaluate(
+        (el) => !!el.previousElementSibling?.querySelector('h1'),
+      );
+      expect(prevIsHero).toBe(true);
+      await expect(block.locator('h2')).toHaveText(locale === 'en' ? 'Latest News' : '最新消息');
+      // 文字和設計稿 News.json 的媒體報導原文一致
+      const item = (
+        newsDesign[locale] as unknown as {
+          shown: { src: string; date: string; t: string; d: string; href?: string }[];
+        }
+      ).shown.find((m) => m.href?.includes('abri.gov.tw'))!;
+      await expect(block.locator('[data-latest-meta]')).toHaveText(`${item.src} · ${item.date}`);
+      const link = block.locator('[data-latest-link]');
+      await expect(link).toContainText(item.t);
+      await expect(block).toContainText(item.d);
+      await expect(link).toHaveAttribute('href', item.href!);
+      await expect(link).toHaveAttribute('target', '_blank');
+      await expect(link).toHaveAttribute('rel', /noopener/);
+      await expect(link.locator('svg')).toHaveCount(1);
+      const img = block.locator('img');
+      await expect(img).toHaveCount(1);
+      expect(await img.getAttribute('alt')).toBeTruthy();
+      // 照片是重點：桌機佔卡片 6 成以上寬度，手機在最上面且滿寬；不裁切（維持原比例）
+      await img.evaluate((el: HTMLImageElement) => el.decode());
+      const card = (await block.locator('[data-latest-card]').boundingBox())!;
+      const photo = (await img.boundingBox())!;
+      const wide = (page.viewportSize()?.width ?? 0) >= 768;
+      expect(photo.width / card.width).toBeGreaterThan(wide ? 0.6 : 0.95);
+      if (!wide) expect(photo.y - card.y).toBeLessThan(4);
+      const ratio = await img.evaluate((el: HTMLImageElement) => ({
+        shown: el.clientWidth / el.clientHeight,
+        natural: el.naturalWidth / el.naturalHeight,
+      }));
+      expect(Math.abs(ratio.shown - ratio.natural)).toBeLessThan(0.05);
+      await expect(block.locator('[data-latest-all]')).toHaveAttribute(
+        'href',
+        locale === 'en' ? '/en/news' : '/news',
+      );
     });
 
     test('戰情室七個管理層級可以點選切換，內容取自網站原文', async ({ page }) => {
