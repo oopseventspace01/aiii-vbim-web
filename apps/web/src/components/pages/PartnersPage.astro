@@ -6,6 +6,7 @@
 // /academy 301 → /partners#academy
 // 夥伴招募海報圖內為中文，只在中文頁顯示（P4 決定④）；Logo 牆只顯示後台「Logo 已取得授權」的夥伴
 import { Image } from 'astro:assets';
+import Zoomable from '../ui/Zoomable.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../ui/Section.astro';
 import SectionHeader from '../ui/SectionHeader.astro';
@@ -296,13 +297,15 @@ const posters =
         <SectionHeader id="pt-posters" title={copy.ui.postersTitle} />
         <div class="grid grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] gap-5">
           {posters.map((p) => (
-            <Image
-              src={p.src}
-              alt={p.alt}
-              widths={[400, 640, 900]}
-              sizes="(min-width: 1024px) 600px, 100vw"
-              class="h-auto w-full rounded-lg border border-line"
-            />
+            <Zoomable src={p.src}>
+              <Image
+                src={p.src}
+                alt={p.alt}
+                widths={[400, 640, 900]}
+                sizes="(min-width: 1024px) 600px, 100vw"
+                class="h-auto w-full rounded-lg border border-line"
+              />
+            </Zoomable>
           ))}
         </div>
       </div>

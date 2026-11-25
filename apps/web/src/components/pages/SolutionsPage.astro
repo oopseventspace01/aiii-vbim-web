@@ -3,6 +3,7 @@
 // 醫院、工廠分頁附上業主提供的儀表板截圖，一律標示「示意畫面」（圖上數字非真實營運數據）
 // 2026-11-16 業主指示：「案例」頁併入本頁——實績與示範場景放進對應領域分頁，共用段落放在 #cases，/cases 301 轉來這裡
 import { Image } from 'astro:assets';
+import Zoomable from '../ui/Zoomable.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../ui/Section.astro';
 import SectionHeader from '../ui/SectionHeader.astro';
@@ -132,7 +133,12 @@ const dashboards: Partial<
               </div>
             </div>
             {dash && (
-              <MediaFigure src={dash.src} alt={dash.alt} mockupLabel={UI[locale].mockupLabel} />
+              <MediaFigure
+                src={dash.src}
+                alt={dash.alt}
+                mockupLabel={UI[locale].mockupLabel}
+                zoom
+              />
             )}
             {locale === 'zh-Hant' && SECTOR_SHOWCASE[s.id as keyof typeof SECTOR_SHOWCASE] && (
               <ShowcaseGrid
@@ -153,13 +159,15 @@ const dashboards: Partial<
                     return (
                       <li class="flex">
                         <article class="flex w-full flex-col overflow-hidden rounded-md border border-line bg-white">
-                          <Image
-                            src={CASE_IMAGES[i]!.src}
-                            alt={CASE_IMAGES[i]!.alt}
-                            widths={[400, 640, 800]}
-                            sizes="(min-width: 1024px) 400px, 100vw"
-                            class="block aspect-[16/10] w-full object-cover"
-                          />
+                          <Zoomable src={CASE_IMAGES[i]!.src} class="rounded-none">
+                            <Image
+                              src={CASE_IMAGES[i]!.src}
+                              alt={CASE_IMAGES[i]!.alt}
+                              widths={[400, 640, 800]}
+                              sizes="(min-width: 1024px) 400px, 100vw"
+                              class="block aspect-[16/10] w-full object-cover"
+                            />
+                          </Zoomable>
                           <div class="flex flex-col gap-2 p-5">
                             <span class="text-[13px] font-bold text-blue">{c.scene}</span>
                             <h4 class="m-0 text-lg font-black">{c.name}</h4>

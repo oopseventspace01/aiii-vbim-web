@@ -103,6 +103,8 @@ const jsonLd = [articleJsonLd(seoInput), ...(event ? [event] : [])];
           height={cover.height}
           eager
           sizes="(min-width: 960px) 912px, 100vw"
+          zoom
+          zoomSrc={imageUrl(cover.source, 2400)}
         />
       )}
 

@@ -1,6 +1,7 @@
 ---
 // 實際圖片格狀排列（含圖說），用於 Aiii VBIM／五大領域／平台 OS 頁
 import { Image } from 'astro:assets';
+import Zoomable from '../ui/Zoomable.astro';
 import type { ShowcaseItem } from '../../content/pages/showcase';
 
 interface Props {
@@ -20,14 +21,16 @@ const { items, min = 300, class: className } = Astro.props;
 >
   {items.map((f) => (
     <figure class="m-0 flex flex-col gap-2">
-      <Image
-        src={f.src}
-        alt={f.caption}
-        widths={[480, 800, 1200]}
-        sizes={`(min-width: 1024px) ${min + 100}px, 100vw`}
-        class="h-auto w-full rounded-[14px] border border-line bg-navy"
-        loading="lazy"
-      />
+      <Zoomable src={f.src}>
+        <Image
+          src={f.src}
+          alt={f.caption}
+          widths={[480, 800, 1200]}
+          sizes={`(min-width: 1024px) ${min + 100}px, 100vw`}
+          class="h-auto w-full rounded-[14px] border border-line bg-navy"
+          loading="lazy"
+        />
+      </Zoomable>
       <figcaption class="text-[13px] leading-snug text-muted">{f.caption}</figcaption>
     </figure>
   ))}

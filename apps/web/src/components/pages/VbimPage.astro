@@ -1,6 +1,7 @@
 ---
 // /vbim（design/pages/VBIM.dc.html）：第六代智慧建築、六大核心價值、生命週期、競爭優勢、產品家族、真實畫面、媒體報導
 import { Image } from 'astro:assets';
+import Zoomable from '../ui/Zoomable.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../ui/Section.astro';
 import SectionHeader from '../ui/SectionHeader.astro';
@@ -87,6 +88,7 @@ const stores = [
       alt={VISUAL_ALT[locale].digitalTwin}
       mockupLabel={UI[locale].mockupLabel}
       eager
+      zoom
     />
   </PageHero>
 
@@ -230,13 +232,15 @@ const stores = [
             { src: clashAfter, label: pmis.figures.after, tone: 'bg-[#1b7a43]' },
           ].map((f) => (
             <div class="relative overflow-hidden rounded-[14px] bg-black">
-              <Image
-                src={f.src}
-                alt={`${pmis.figures.title}${locale === 'en' ? ': ' : '：'}${f.label}`}
-                widths={[480, 590]}
-                sizes="(min-width: 1024px) 590px, 100vw"
-                class="block aspect-[2/1] w-full object-contain"
-              />
+              <Zoomable src={f.src}>
+                <Image
+                  src={f.src}
+                  alt={`${pmis.figures.title}${locale === 'en' ? ': ' : '：'}${f.label}`}
+                  widths={[480, 590]}
+                  sizes="(min-width: 1024px) 590px, 100vw"
+                  class="block aspect-[2/1] w-full object-contain"
+                />
+              </Zoomable>
               <span
                 class:list={[
                   'absolute top-3 left-3 rounded-pill px-3 py-1 text-sm font-bold text-white shadow',
@@ -323,11 +327,12 @@ const stores = [
       />
       <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] gap-[18px]">
         {/* 2026-11-16 依業主指示改放智慧節能減碳推廣活動照；說明取自案例設計稿的活動名稱 */}
-        <MediaFigure src={netZeroEvent} alt={eventName} caption={eventName} />
+        <MediaFigure src={netZeroEvent} alt={eventName} caption={eventName} zoom />
         <MediaFigure
           src={realScreens}
           alt={copy.field.screensAlt}
           caption={copy.field.screensAlt}
+          zoom
         />
       </div>
     </div>

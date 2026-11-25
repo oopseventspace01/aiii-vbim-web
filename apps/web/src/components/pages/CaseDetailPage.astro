@@ -107,6 +107,8 @@ const results = (entry.results ?? []).filter((r) => r.metric && r.value);
               alt={p.alt}
               width={p.width}
               height={p.height}
+              zoom
+              zoomSrc={imageUrl(p.source, 2400)}
             />
           ))}
         </div>

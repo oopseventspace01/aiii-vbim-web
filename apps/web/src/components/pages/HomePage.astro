@@ -247,12 +247,18 @@ const newsGroups = [
         </div>
         <div class="min-w-0 flex-[1.2_1_480px]" data-command-image>
           {data.commandCenterImage ? (
-            <MediaFigure {...remote(data.commandCenterImage, 1280)} framed />
+            <MediaFigure
+              {...remote(data.commandCenterImage, 1280)}
+              framed
+              zoom
+              zoomSrc={imageUrl(data.commandCenterImage.source, 2400)}
+            />
           ) : (
             <MediaFigure
               src={commandCenter}
               alt={VISUAL_ALT[locale].commandCenter}
               framed
+              zoom
               mockupLabel={t.mockupLabel}
             />
           )}

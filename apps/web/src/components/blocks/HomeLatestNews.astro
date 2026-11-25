@@ -39,11 +39,13 @@ const meta = [card.source, card.dateLabel].filter(Boolean).join(' · ');
       data-latest-card
     >
       {card.cover && (
-        <div class="min-w-0" data-latest-photo>
+        <div class="relative z-10 min-w-0" data-latest-photo>
           <MediaFigure
             src={imageUrl(card.cover.source, 1600)}
             sizes="(min-width: 1280px) 820px, (min-width: 768px) 66vw, 100vw"
             eager
+            zoom
+            zoomSrc={imageUrl(card.cover.source, 2400)}
             alt={card.cover.alt}
             width={card.cover.width}
             height={card.cover.height}
