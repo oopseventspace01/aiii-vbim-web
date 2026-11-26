@@ -19,6 +19,8 @@ import InfoCard from '../cards/InfoCard.astro';
 import FeatureCard from '../cards/FeatureCard.astro';
 import NewsGrid from '../blocks/NewsGrid.astro';
 import HomeLatestNews from '../blocks/HomeLatestNews.astro';
+import YouTubeEmbed from '../blocks/YouTubeEmbed.astro';
+import { videoFor } from '../../content/videos';
 import heroBuilding from '../../assets/illustrations/hero-building.jpg';
 import commandCenter from '../../assets/illustrations/command-center.jpg';
 import energy from '../../assets/illustrations/energy.jpg';
@@ -61,6 +63,8 @@ const latestNews = pickLatestNews(
 );
 
 const capabilityImages = { energy, hvac, edge };
+// YouTube 影片（content/videos.ts 的 ID 空白時不顯示）
+const video = videoFor('home', locale);
 const remote = (img: ImageRef, width: number) => ({
   src: imageUrl(img.source, width),
   alt: img.alt,
@@ -117,6 +121,20 @@ const newsGroups = [
 
   <!-- 2b. 最新消息（業主要求放在 Hero 正下方最顯眼的位置） -->
   {latestNews && <HomeLatestNews news={latestNews} locale={locale} />}
+
+  <!-- 2c. YouTube 影片（最新消息下方；沒有設定影片 ID 時不顯示） -->
+  {video && (
+    <section aria-label={video.title} class="border-b border-line" data-home-video>
+      <div class="container-site py-14">
+        <YouTubeEmbed
+          id={video.id}
+          title={video.title}
+          locale={locale}
+          class="mx-auto max-w-[1040px]"
+        />
+      </div>
+    </section>
+  )}
 
   <!-- 3. 背書條 -->
   {data.proofItems.length > 0 && <ProofStrip label={copy.proofLabel} items={data.proofItems} />}

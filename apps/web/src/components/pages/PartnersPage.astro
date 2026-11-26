@@ -31,6 +31,8 @@ import { getApprovedPartners, getCourses } from '../../lib/cms-pages';
 import { isExternalUrl } from '../../lib/rich-text';
 import { imageUrl } from '../../lib/sanity';
 import { seoDescription } from '../../content/seo-descriptions';
+import YouTubeEmbed from '../blocks/YouTubeEmbed.astro';
+import { videoFor } from '../../content/videos';
 
 interface Props {
   locale: Locale;
@@ -43,6 +45,8 @@ const data = design[locale] as {
   tiers: { n: string; who: string; what: string }[];
 };
 const ac = ACADEMY_COPY[locale];
+// 認證學院開頭的 YouTube 影片（content/videos.ts 的 ID 空白時不顯示）
+const academyVideo = videoFor('academy', locale);
 const acData = academyDesign[locale] as {
   steps: { no: string; t: string; d: string }[];
   mods: { no: string; en: string; zh?: string; t?: string; d: string }[];
@@ -159,6 +163,11 @@ const posters =
       <Button href="#register" variant="white">
         {ac.register}
       </Button>
+      {academyVideo && (
+        <div class="w-full max-w-[1040px]" data-academy-video>
+          <YouTubeEmbed id={academyVideo.id} title={academyVideo.title} locale={locale} />
+        </div>
+      )}
     </div>
   </section>
 

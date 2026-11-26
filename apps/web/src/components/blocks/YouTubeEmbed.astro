@@ -1,0 +1,65 @@
+---
+// YouTube 影片（點擊才載入）：先顯示封面圖＋播放鍵，按下去才換成 youtube-nocookie.com 的播放器
+// 設定與換影片方式見 content/videos.ts
+import { VIDEO_COPY, embedUrl, posterUrl } from '../../content/videos';
+import type { Locale } from '../../lib/i18n';
+
+interface Props {
+  id: string;
+  title: string;
+  locale: Locale;
+  class?: string;
+}
+
+const { id, title, locale, class: className } = Astro.props;
+---
+
+<div
+  class:list={['relative aspect-video w-full overflow-hidden rounded-lg bg-navy', className]}
+  data-youtube
+  data-youtube-src={embedUrl(id)}
+  data-youtube-title={title}
+>
+  <button
+    type="button"
+    class="group absolute inset-0 block h-full w-full cursor-pointer border-0 bg-transparent p-0"
+    aria-label={VIDEO_COPY[locale].play(title)}
+    data-youtube-play
+  >
+    <img
+      src={posterUrl(id)}
+      alt=""
+      width="480"
+      height="360"
+      loading="lazy"
+      decoding="async"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+    <span
+      aria-hidden="true"
+      class="absolute top-1/2 left-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-navy/85 text-white shadow-lg transition-colors group-hover:bg-blue group-focus-visible:bg-blue md:h-20 md:w-20"
+    >
+      <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+        <path d="M8 5.5v13l11-6.5z"></path>
+      </svg>
+    </span>
+  </button>
+</div>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-youtube-play]');
+    const box = btn?.closest<HTMLElement>('[data-youtube]');
+    if (!btn || !box) return;
+    const iframe = document.createElement('iframe');
+    iframe.src = box.dataset.youtubeSrc ?? '';
+    iframe.title = box.dataset.youtubeTitle ?? '';
+    iframe.allow =
+      'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.className = 'absolute inset-0 h-full w-full border-0';
+    btn.replaceWith(iframe);
+    iframe.focus();
+  });
+</script>

@@ -17,6 +17,7 @@ import Tabs from '../../components/blocks/Tabs.astro';
 import CompareTable from '../../components/blocks/CompareTable.astro';
 import LogoWall from '../../components/blocks/LogoWall.astro';
 import VideoPlaceholder from '../../components/blocks/VideoPlaceholder.astro';
+import YouTubeEmbed from '../../components/blocks/YouTubeEmbed.astro';
 import InfoCard from '../../components/cards/InfoCard.astro';
 import FeatureCard from '../../components/cards/FeatureCard.astro';
 import NewsCard from '../../components/cards/NewsCard.astro';
@@ -203,6 +204,10 @@ const L = (path: string) => localizePath(path, locale);
   <Section labelledby="sc-media">
     <div class="flex flex-col gap-8">
       <SectionHeader id="sc-media" eyebrow="COMPONENTS · MEDIA" title="Video & Logo wall" />
+      {/* YouTube 點擊才載入（測試用公開範例影片 ID，只在開發頁出現） */}
+      <div class="max-w-[640px]" data-dev-youtube>
+        <YouTubeEmbed id="M7lc1UVf-VE" title="[MOCK] YouTube" locale={locale} />
+      </div>
       <div class="max-w-[640px]">
         <VideoPlaceholder
           poster={heroBuilding}
