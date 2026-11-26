@@ -14,15 +14,20 @@ import type { Locale } from '../lib/i18n';
 export type VideoKey = 'home' | 'academy';
 
 export const VIDEOS: Record<VideoKey, { id: string; title: Record<Locale, string> }> = {
-  // 首頁「最新消息」下方
+  // 首頁「最新消息」下方：介紹影片（2026-11-26 業主提供）
+  // 中文標題取自 YouTube 影片名稱；英文標題為草稿，待業主確認
   home: {
-    id: '',
-    title: { 'zh-Hant': '[TBD: 影片標題]', en: '[TBD: video title]' },
+    id: 'ovWzLG7Qhhc',
+    title: { 'zh-Hant': 'Aiii VBIM 介紹', en: 'Aiii VBIM Introduction' },
   },
-  // /partners 認證學院段落開頭
+  // /partners 認證學院段落開頭：教育認證影片（2026-11-26 業主提供）
+  // 中文標題取自 YouTube 影片名稱（「2 0」修正為「2.0」）；英文標題為草稿，待業主確認
   academy: {
-    id: '',
-    title: { 'zh-Hant': '[TBD: 影片標題]', en: '[TBD: video title]' },
+    id: 'yq54sYUH6j4',
+    title: {
+      'zh-Hant': 'Aiii VBIM OS 2.0 教育認證',
+      en: 'Aiii VBIM OS 2.0 Education & Certification',
+    },
   },
 };
 

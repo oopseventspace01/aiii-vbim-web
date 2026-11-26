@@ -63,11 +63,35 @@ for (const [path, selector, key] of [
   ['/partners', '[data-academy-video]', 'academy'],
   ['/en/partners', '[data-academy-video]', 'academy'],
 ] as const) {
-  test(`${path}：影片 ID ${VIDEOS[key].id ? '已設定時顯示' : '空白時不顯示'}`, async ({ page }) => {
+  test(`${path}：影片 ID ${VIDEOS[key].id ? '已設定：點擊播放後載入播放器' : '空白時不顯示'}`, async ({
+    page,
+  }) => {
     await page.goto(path);
     if (VIDEOS[key].id) {
-      await expect(page.locator(selector)).toBeVisible();
-      await expect(page.locator(`${selector} iframe`)).toHaveCount(0);
+      await page.route('https://www.youtube-nocookie.com/**', (r) =>
+        r.fulfill({
+          status: 200,
+          contentType: 'text/html',
+          body: '<html><body>video</body></html>',
+        }),
+      );
+      const id = VIDEOS[key].id;
+      const title = VIDEOS[key].title[path.startsWith('/en') ? 'en' : 'zh-Hant'];
+      const block = page.locator(selector);
+      await block.scrollIntoViewIfNeeded();
+      await expect(block).toBeVisible();
+      await expect(block.locator('iframe')).toHaveCount(0);
+      await expect(block.locator('img')).toHaveAttribute(
+        'src',
+        `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+      );
+      const label = path.startsWith('/en') ? `Play video: ${title}` : `播放影片：${title}`;
+      await block.getByRole('button', { name: label }).click();
+      await expect(block.locator('iframe')).toHaveAttribute(
+        'src',
+        `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`,
+      );
+      await expect(block.locator('iframe')).toHaveAttribute('title', title);
     } else {
       await expect(page.locator(selector)).toHaveCount(0);
     }
