@@ -58,7 +58,7 @@ Aiii VBIM（以下稱「本公司」）重視您的隱私。本政策說明您�
 4. 請求停止蒐集、處理或利用。
 5. 請求刪除。
 
-請來信 nickleo051216@gmail.com 提出。查詢、閱覽或製給複製本的請求，我們會在 15 日內回覆；補充、更正、停止或刪除的請求，會在 30 日內回覆。
+請來信 support@aiiivbim.com 提出。查詢、閱覽或製給複製本的請求，我們會在 15 日內回覆；補充、更正、停止或刪除的請求，會在 30 日內回覆。
 
 ### 五、不提供資料的影響
 
@@ -81,7 +81,7 @@ Aiii VBIM（以下稱「本公司」）重視您的隱私。本政策說明您�
 Aiii VBIM
 地址：台北市松山區敦化北路 100 號 15 樓
 電話：02-2712-3339
-Email：nickleo051216@gmail.com
+Email：support@aiiivbim.com
 
 ---
 
@@ -97,7 +97,7 @@ Aiii VBIM ("we") respects your privacy. This policy explains how we collect, pro
 
 **3. Retention, location, recipients and methods** — Data is kept until 1 year after the purpose is fulfilled or as required by law, and you may request deletion at any time. Data is processed in Taiwan and in the regions where our service providers operate: Vercel (hosting), Cloudflare Turnstile (spam protection), n8n (self-hosted form processing), Google Sheets (storage), Gmail (confirmation emails) and YouTube (embedded videos, loaded only when you press play). Recipients are limited to our staff responsible for handling your request. We contact you by email or phone.
 
-**4. Your rights** — Under Taiwan's Personal Data Protection Act, you may request to access, obtain a copy of, correct, stop the processing of, or delete your personal data by emailing nickleo051216@gmail.com. We will respond to access and copy requests within 15 days, and to correction, suspension or deletion requests within 30 days.
+**4. Your rights** — Under Taiwan's Personal Data Protection Act, you may request to access, obtain a copy of, correct, stop the processing of, or delete your personal data by emailing support@aiiivbim.com. We will respond to access and copy requests within 15 days, and to correction, suspension or deletion requests within 30 days.
 
 **5. If you choose not to provide data** — Providing data is voluntary, but we cannot respond without the required fields (such as name and email).
 
@@ -107,4 +107,4 @@ Aiii VBIM ("we") respects your privacy. This policy explains how we collect, pro
 
 **8. Changes** — Updates will be posted on this page with a new "Last updated" date.
 
-**9. Contact** — Aiii VBIM, 15F, No. 100, Dunhua N. Rd., Songshan Dist., Taipei City · +886-2-2712-3339 · nickleo051216@gmail.com
+**9. Contact** — Aiii VBIM, 15F, No. 100, Dunhua N. Rd., Songshan Dist., Taipei City · +886-2-2712-3339 · support@aiiivbim.com
