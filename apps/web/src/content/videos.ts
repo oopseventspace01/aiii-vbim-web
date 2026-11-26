@@ -1,4 +1,4 @@
-// 首頁與「夥伴與學院」頁的 YouTube 影片設定（2026-11-26 業主選用 YouTube）
+// 首頁與「夥伴與學院」頁首的 YouTube 影片設定（2026-11-26 業主選用 YouTube）
 //
 // 怎麼換影片：
 //   1. 在 YouTube 打開影片，網址長得像 https://www.youtube.com/watch?v=XXXXXXXXXXX
@@ -20,7 +20,7 @@ export const VIDEOS: Record<VideoKey, { id: string; title: Record<Locale, string
     id: 'ovWzLG7Qhhc',
     title: { 'zh-Hant': 'Aiii VBIM 介紹', en: 'Aiii VBIM Introduction' },
   },
-  // /partners 認證學院段落開頭：教育認證影片（2026-11-26 業主提供）
+  // /partners 頁首（Hero）右側：教育認證影片（2026-11-26 業主提供）
   // 中文標題取自 YouTube 影片名稱（「2 0」修正為「2.0」）；英文標題為草稿，待業主確認
   academy: {
     id: 'yq54sYUH6j4',

@@ -9,9 +9,11 @@ interface Props {
   title: string;
   locale: Locale;
   class?: string;
+  /** 放在頁首（第一屏）時封面立即載入 */
+  eager?: boolean;
 }
 
-const { id, title, locale, class: className } = Astro.props;
+const { id, title, locale, class: className, eager = false } = Astro.props;
 ---
 
 <div
@@ -31,7 +33,8 @@ const { id, title, locale, class: className } = Astro.props;
       alt=""
       width="480"
       height="360"
-      loading="lazy"
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : undefined}
       decoding="async"
       class="absolute inset-0 h-full w-full object-cover"
     />

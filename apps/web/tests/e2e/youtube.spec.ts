@@ -60,8 +60,8 @@ test('375px：影片區塊沒有橫向捲動', async ({ page }) => {
 for (const [path, selector, key] of [
   ['/', '[data-home-video]', 'home'],
   ['/en', '[data-home-video]', 'home'],
-  ['/partners', '[data-academy-video]', 'academy'],
-  ['/en/partners', '[data-academy-video]', 'academy'],
+  ['/partners', 'header [data-academy-video]', 'academy'],
+  ['/en/partners', 'header [data-academy-video]', 'academy'],
 ] as const) {
   test(`${path}：影片 ID ${VIDEOS[key].id ? '已設定：點擊播放後載入播放器' : '空白時不顯示'}`, async ({
     page,
@@ -95,5 +95,29 @@ for (const [path, selector, key] of [
     } else {
       await expect(page.locator(selector)).toHaveCount(0);
     }
+  });
+}
+
+for (const path of ['/partners', '/en/partners']) {
+  test(`${path}：教育認證影片在頁首右側取代圓環圖，整頁只出現一次`, async ({ page }) => {
+    test.skip(!VIDEOS.academy.id, '影片 ID 空白時頁首顯示圓環圖');
+    await page.goto(path);
+    const hero = page.locator('main header').first();
+    await expect(hero.locator('[data-academy-video] [data-youtube]')).toBeVisible();
+    await expect(hero.locator('figure img')).toHaveCount(0);
+    await expect(page.locator('[data-youtube]')).toHaveCount(1);
+    // 桌機：影片在文字右側；手機：在文字下方且滿寬
+    const h1 = (await hero.locator('h1').boundingBox())!;
+    const video = (await hero.locator('[data-youtube]').boundingBox())!;
+    const width = page.viewportSize()!.width;
+    if (width >= 1024) expect(video.x).toBeGreaterThan(h1.x + h1.width / 2);
+    else {
+      expect(video.y).toBeGreaterThan(h1.y + h1.height);
+      expect(video.width).toBeGreaterThan(width - 64);
+    }
+    const overflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    );
+    expect(overflow).toBeLessThanOrEqual(1);
   });
 }

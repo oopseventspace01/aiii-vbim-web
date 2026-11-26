@@ -45,7 +45,7 @@ const data = design[locale] as {
   tiers: { n: string; who: string; what: string }[];
 };
 const ac = ACADEMY_COPY[locale];
-// 認證學院開頭的 YouTube 影片（content/videos.ts 的 ID 空白時不顯示）
+// 頁首右側的教育認證 YouTube 影片（content/videos.ts 的 ID 空白時改顯示生態系圓環圖）
 const academyVideo = videoFor('academy', locale);
 const acData = academyDesign[locale] as {
   steps: { no: string; t: string; d: string }[];
@@ -92,7 +92,14 @@ const posters =
         {copy.academy}
       </Button>
     </div>
-    <MediaFigure slot="media" src={ecosystem} alt={copy.heroAlt} eager />
+    {/* 2026-11-26 業主要求：頁首右側放教育認證影片（取代生態系圓環圖）；影片 ID 空白時改回圓環圖 */}
+    {academyVideo ? (
+      <div slot="media" data-academy-video>
+        <YouTubeEmbed id={academyVideo.id} title={academyVideo.title} locale={locale} eager />
+      </div>
+    ) : (
+      <MediaFigure slot="media" src={ecosystem} alt={copy.heroAlt} eager />
+    )}
   </PageHero>
 
   <!-- 夥伴類型 -->
@@ -163,11 +170,6 @@ const posters =
       <Button href="#register" variant="white">
         {ac.register}
       </Button>
-      {academyVideo && (
-        <div class="w-full max-w-[1040px]" data-academy-video>
-          <YouTubeEmbed id={academyVideo.id} title={academyVideo.title} locale={locale} />
-        </div>
-      )}
     </div>
   </section>
 
