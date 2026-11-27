@@ -5,13 +5,14 @@
 > - 已放進後台「一般頁」中英文草稿（網址代稱 `privacy`）。業主在 Studio 按「發布」後，網站重建就會顯示。
 > - 之後若啟用 GA、LINE OA 通知或 Telegram 失敗通知（會轉送表單內容），要回來更新第三節的服務列表。
 > - 2026-11-26 首頁與夥伴頁加入 YouTube 影片（點擊才載入、隱私強化模式），第三節服務列表與第六節 Cookie 已補上 YouTube，後台中英文頁已同步發布。
+> - 2026-11-27 首頁影片改為進入畫面時自動靜音播放，第三節與第六節的影片說明已更新，後台中英文頁已同步發布。
 > - 本文件依個人資料保護法第 8 條應告知事項的架構撰寫，**不構成法律意見**；公司全名確定後請替換「Aiii VBIM」。
 
 ---
 
 ## 中文版
 
-最後更新日期：2026 年 11 月 26 日
+最後更新日期：2026 年 11 月 27 日
 
 Aiii VBIM（以下稱「本公司」）重視您的隱私。本政策說明您使用 Aiii VBIM 官方網站（aiiivbim.com，以下稱「本網站」）時，我們如何蒐集、處理與利用您的個人資料。
 
@@ -46,7 +47,7 @@ Aiii VBIM（以下稱「本公司」）重視您的隱私。本政策說明您�
 - **n8n（本公司自行架設）**：表單資料轉送與通知。
 - **Google 試算表（Google Sheets）**：表單資料儲存。
 - **Gmail（Google）**：寄送確認信與聯繫。
-- **YouTube（Google）**：網站內嵌影片播放，僅在您按下播放後載入。
+- **YouTube（Google）**：網站內嵌影片播放。首頁影片在出現在畫面上時自動靜音播放，其他頁面的影片在您按下播放後才載入。
 
 ### 四、您的權利
 
@@ -66,7 +67,7 @@ Aiii VBIM（以下稱「本公司」）重視您的隱私。本政策說明您�
 
 ### 六、Cookie
 
-本網站不使用廣告或分析用途的追蹤 Cookie。表單的防垃圾驗證（Cloudflare Turnstile）可能使用維持驗證功能所需的技術性資料。本網站內嵌的影片由 YouTube（Google）提供，並使用 YouTube 隱私強化模式：只有在您按下播放後才會載入；播放時，YouTube 可能依其隱私權政策使用 Cookie 或類似技術。
+本網站不使用廣告或分析用途的追蹤 Cookie。表單的防垃圾驗證（Cloudflare Turnstile）可能使用維持驗證功能所需的技術性資料。本網站內嵌的影片由 YouTube（Google）提供，並使用 YouTube 隱私強化模式：首頁影片在出現在畫面上時會自動靜音播放，其他頁面的影片只有在您按下播放後才會載入；影片載入後，YouTube 可能依其隱私權政策使用 Cookie 或類似技術。
 
 ### 七、資料安全
 
@@ -87,7 +88,7 @@ Email：support@aiiivbim.com
 
 ## English version
 
-Last updated: November 26, 2026
+Last updated: November 27, 2026
 
 Aiii VBIM ("we") respects your privacy. This policy explains how we collect, process and use your personal data when you use the Aiii VBIM website (aiiivbim.com).
 
@@ -95,13 +96,13 @@ Aiii VBIM ("we") respects your privacy. This policy explains how we collect, pro
 
 **2. Data we collect** — Name, email, phone (optional), company or organization; your role (owner/enterprise, vendor/SI/technology partner, professional), your message, partner type, courses or modules of interest and any other optional details you provide; the page you submitted from, site language, tracking parameters (such as UTM) and submission time. Forms are protected by Cloudflare Turnstile. Please do not submit sensitive data such as national ID or financial account numbers.
 
-**3. Retention, location, recipients and methods** — Data is kept until 1 year after the purpose is fulfilled or as required by law, and you may request deletion at any time. Data is processed in Taiwan and in the regions where our service providers operate: Vercel (hosting), Cloudflare Turnstile (spam protection), n8n (self-hosted form processing), Google Sheets (storage), Gmail (confirmation emails) and YouTube (embedded videos, loaded only when you press play). Recipients are limited to our staff responsible for handling your request. We contact you by email or phone.
+**3. Retention, location, recipients and methods** — Data is kept until 1 year after the purpose is fulfilled or as required by law, and you may request deletion at any time. Data is processed in Taiwan and in the regions where our service providers operate: Vercel (hosting), Cloudflare Turnstile (spam protection), n8n (self-hosted form processing), Google Sheets (storage), Gmail (confirmation emails) and YouTube (embedded videos; the homepage video plays muted automatically when it scrolls into view, others load only when you press play). Recipients are limited to our staff responsible for handling your request. We contact you by email or phone.
 
 **4. Your rights** — Under Taiwan's Personal Data Protection Act, you may request to access, obtain a copy of, correct, stop the processing of, or delete your personal data by emailing support@aiiivbim.com. We will respond to access and copy requests within 15 days, and to correction, suspension or deletion requests within 30 days.
 
 **5. If you choose not to provide data** — Providing data is voluntary, but we cannot respond without the required fields (such as name and email).
 
-**6. Cookies** — This website does not use advertising or analytics tracking cookies. The spam protection on our forms (Cloudflare Turnstile) may use technical data needed for verification. Videos embedded on this website are provided by YouTube (Google) in privacy-enhanced mode and load only when you press play; once playing, YouTube may use cookies or similar technologies under its own privacy policy.
+**6. Cookies** — This website does not use advertising or analytics tracking cookies. The spam protection on our forms (Cloudflare Turnstile) may use technical data needed for verification. Videos embedded on this website are provided by YouTube (Google) in privacy-enhanced mode. The homepage video plays muted automatically when it scrolls into view; other videos load only when you press play. Once a video loads, YouTube may use cookies or similar technologies under its own privacy policy.
 
 **7. Security** — We use reasonable technical and organizational measures, including HTTPS encryption and access controls; form data is never written to the database directly from the browser.
 
