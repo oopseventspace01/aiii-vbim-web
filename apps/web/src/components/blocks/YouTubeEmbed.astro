@@ -1,7 +1,8 @@
 ---
 // YouTube 影片（點擊才載入）：先顯示封面圖＋播放鍵，按下去才換成 youtube-nocookie.com 的播放器
+// autoplay：捲到影片約一半進入畫面時自動靜音播放（只有首頁用）；「減少動態效果」時不自動播
 // 設定與換影片方式見 content/videos.ts
-import { VIDEO_COPY, embedUrl, posterUrl } from '../../content/videos';
+import { VIDEO_COPY, autoplayEmbedUrl, embedUrl, posterUrl } from '../../content/videos';
 import type { Locale } from '../../lib/i18n';
 
 interface Props {
@@ -11,15 +12,18 @@ interface Props {
   class?: string;
   /** 放在頁首（第一屏）時封面立即載入 */
   eager?: boolean;
+  /** 進入畫面時自動靜音播放 */
+  autoplay?: boolean;
 }
 
-const { id, title, locale, class: className, eager = false } = Astro.props;
+const { id, title, locale, class: className, eager = false, autoplay = false } = Astro.props;
 ---
 
 <div
   class:list={['relative aspect-video w-full overflow-hidden rounded-lg bg-navy', className]}
   data-youtube
   data-youtube-src={embedUrl(id)}
+  data-youtube-autoplay-src={autoplay ? autoplayEmbedUrl(id) : undefined}
   data-youtube-title={title}
 >
   <button
@@ -50,12 +54,14 @@ const { id, title, locale, class: className, eager = false } = Astro.props;
 </div>
 
 <script>
-  document.addEventListener('click', (e) => {
-    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-youtube-play]');
-    const box = btn?.closest<HTMLElement>('[data-youtube]');
-    if (!btn || !box) return;
+  /** 把封面換成播放器；同一個區塊只建立一次 */
+  function load(box: HTMLElement, src: string, focus: boolean) {
+    if (box.dataset.youtubeLoaded) return;
+    const btn = box.querySelector('[data-youtube-play]');
+    if (!btn || !src) return;
+    box.dataset.youtubeLoaded = 'true';
     const iframe = document.createElement('iframe');
-    iframe.src = box.dataset.youtubeSrc ?? '';
+    iframe.src = src;
     iframe.title = box.dataset.youtubeTitle ?? '';
     iframe.allow =
       'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
@@ -63,6 +69,31 @@ const { id, title, locale, class: className, eager = false } = Astro.props;
     iframe.referrerPolicy = 'strict-origin-when-cross-origin';
     iframe.className = 'absolute inset-0 h-full w-full border-0';
     btn.replaceWith(iframe);
-    iframe.focus();
+    if (focus) iframe.focus();
+  }
+
+  // 點擊封面：有聲播放
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-youtube-play]');
+    const box = btn?.closest<HTMLElement>('[data-youtube]');
+    if (box) load(box, box.dataset.youtubeSrc ?? '', true);
   });
+
+  // 自動播放：約一半進入畫面才載入（不是一進頁面就載入）；減少動態效果時不自動播
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const autoplayBoxes = document.querySelectorAll<HTMLElement>('[data-youtube-autoplay-src]');
+  if (!reduce && autoplayBoxes.length > 0 && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const box = entry.target as HTMLElement;
+          observer.unobserve(box);
+          load(box, box.dataset.youtubeAutoplaySrc ?? '', false);
+        }
+      },
+      { threshold: 0.5 },
+    );
+    autoplayBoxes.forEach((box) => observer.observe(box));
+  }
 </script>

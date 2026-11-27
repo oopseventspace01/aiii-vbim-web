@@ -9,6 +9,8 @@
 //
 // 播放方式：一開始只顯示 YouTube 封面圖＋播放鍵，按下去才載入 youtube-nocookie.com 的播放器
 // （按之前不會連到 YouTube 播放器，也不會放追蹤 Cookie）。
+// 例外：首頁影片（2026-11-27 業主要求「只有首頁自動播」）捲到影片區塊約一半進入畫面時，
+// 自動以靜音播放（autoplay＋mute）；使用者開了「減少動態效果」時不自動播放，維持點擊才播。
 import type { Locale } from '../lib/i18n';
 
 export type VideoKey = 'home' | 'academy';
@@ -62,6 +64,9 @@ export function youtubeId(input: string | null | undefined): string {
 
 export const embedUrl = (id: string) =>
   `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+/** 自動播放用：瀏覽器只允許靜音自動播放，所以加 mute=1；playsinline 讓 iPhone 不跳全螢幕 */
+export const autoplayEmbedUrl = (id: string) =>
+  `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&rel=0`;
 export const posterUrl = (id: string) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 
 /** 這個位置要顯示的影片；ID 空白或不合法時回傳 undefined（整個區塊不顯示） */

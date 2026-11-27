@@ -58,12 +58,10 @@ test('375px：影片區塊沒有橫向捲動', async ({ page }) => {
 });
 
 for (const [path, selector, key] of [
-  ['/', '[data-home-video]', 'home'],
-  ['/en', '[data-home-video]', 'home'],
   ['/partners', 'header [data-academy-video]', 'academy'],
   ['/en/partners', 'header [data-academy-video]', 'academy'],
 ] as const) {
-  test(`${path}：影片 ID ${VIDEOS[key].id ? '已設定：點擊播放後載入播放器' : '空白時不顯示'}`, async ({
+  test(`${path}：影片 ID ${VIDEOS[key].id ? '已設定：不自動播放，點擊後才載入播放器' : '空白時不顯示'}`, async ({
     page,
   }) => {
     await page.goto(path);
@@ -80,6 +78,8 @@ for (const [path, selector, key] of [
       const block = page.locator(selector);
       await block.scrollIntoViewIfNeeded();
       await expect(block).toBeVisible();
+      // 夥伴頁不自動播放：在畫面上停一下仍然沒有播放器
+      await page.waitForTimeout(800);
       await expect(block.locator('iframe')).toHaveCount(0);
       await expect(block.locator('img')).toHaveAttribute(
         'src',
@@ -119,5 +119,62 @@ for (const path of ['/partners', '/en/partners']) {
       () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
     );
     expect(overflow).toBeLessThanOrEqual(1);
+  });
+}
+
+// 首頁影片：捲到約一半進入畫面時自動靜音播放（只有首頁）
+const fakePlayer = (page: import('@playwright/test').Page) =>
+  page.route('https://www.youtube-nocookie.com/**', (r) =>
+    r.fulfill({ status: 200, contentType: 'text/html', body: '<html><body>video</body></html>' }),
+  );
+
+for (const path of ['/', '/en']) {
+  const locale = path === '/en' ? 'en' : 'zh-Hant';
+  const id = VIDEOS.home.id;
+
+  test(`${path}：首頁影片捲到畫面中才自動靜音播放，只建立一次`, async ({ page }) => {
+    test.skip(!id, '首頁影片 ID 空白');
+    await fakePlayer(page);
+    await page.goto(path);
+    const block = page.locator('[data-home-video] [data-youtube]');
+    // 一進頁面（影片還在畫面外）不載入
+    await page.waitForTimeout(500);
+    await expect(block.locator('iframe')).toHaveCount(0);
+
+    await block.scrollIntoViewIfNeeded();
+    const iframe = block.locator('iframe');
+    await expect(iframe).toHaveCount(1);
+    await expect(iframe).toHaveAttribute(
+      'src',
+      `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&rel=0`,
+    );
+    await expect(iframe).toHaveAttribute('title', VIDEOS.home.title[locale]);
+    await expect(iframe).toHaveAttribute('allow', /autoplay/);
+
+    // 捲走再捲回來：不重複建立
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForTimeout(300);
+    await block.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(300);
+    await expect(page.locator('[data-home-video] iframe')).toHaveCount(1);
+  });
+
+  test(`${path}：開啟「減少動態效果」時不自動播放，點擊才播（有聲）`, async ({ page }) => {
+    test.skip(!id, '首頁影片 ID 空白');
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await fakePlayer(page);
+    await page.goto(path);
+    const block = page.locator('[data-home-video] [data-youtube]');
+    await block.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(800);
+    await expect(block.locator('iframe')).toHaveCount(0);
+
+    const title = VIDEOS.home.title[locale];
+    const label = locale === 'en' ? `Play video: ${title}` : `播放影片：${title}`;
+    await block.getByRole('button', { name: label }).click();
+    await expect(block.locator('iframe')).toHaveAttribute(
+      'src',
+      `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`,
+    );
   });
 }

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   VIDEOS,
   VIDEO_COPY,
+  autoplayEmbedUrl,
   embedUrl,
   posterUrl,
   videoFor,
@@ -27,6 +28,10 @@ describe('YouTube 影片設定', () => {
   it('播放器用 youtube-nocookie、自動播放、不推薦其他頻道；封面用 i.ytimg.com', () => {
     expect(embedUrl('abc')).toBe('https://www.youtube-nocookie.com/embed/abc?autoplay=1&rel=0');
     expect(posterUrl('abc')).toBe('https://i.ytimg.com/vi/abc/hqdefault.jpg');
+    // 自動播放一定要靜音（瀏覽器規定），iPhone 不跳全螢幕
+    expect(autoplayEmbedUrl('abc')).toBe(
+      'https://www.youtube-nocookie.com/embed/abc?autoplay=1&mute=1&playsinline=1&rel=0',
+    );
   });
 
   it('播放鍵文字：中文「播放影片：標題」、英文「Play video: title」', () => {
